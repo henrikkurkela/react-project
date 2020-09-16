@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Grid, Header, Divider } from 'semantic-ui-react'
+import { useSelector } from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const NewsItem = ({ headline, content }) => {
+	return (<div>
+		<Header as='h3'>{headline}</Header>
+		<p>{content}</p>
+		<Divider />
+	</div>)
 }
 
-export default App;
+const App = () => {
+
+  	const news = useSelector(state => state)
+
+	const renderNews = () => {
+		return (<>
+			{news.map(item => <NewsItem key={item.id} headline={item.headline} content={item.content} />)}
+		</>
+		)
+	}
+
+	return (
+		<Grid columns='equal' padded>
+			<Grid.Column />
+			<Grid.Column width={8}>
+				<Header as='h1' textAlign='center'>News Site</Header>
+				{renderNews()}
+			</Grid.Column>
+			<Grid.Column />
+		</Grid>
+	)
+}
+
+export default App

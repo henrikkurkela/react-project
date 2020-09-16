@@ -1,0 +1,14 @@
+{
+    "news": [
+        {
+            "id": 1,
+            "headline": "First News Story",
+            "content": "This is the first story that has been added to this news site!"
+        },
+        {
+            "id": 2,
+            "headline": "Second News Story",
+            "content": "This is the second news story that has beenadded to this news site!"
+        }
+    ]
+}
