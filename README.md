@@ -14,3 +14,4 @@ Implement simple back end:
 # Work Log
 
 2020-09-16: Project Started, Begin Work on Frontend, Implement Simple Backend 2h (Total 2h)
+2020-09-17: Continue Work on Frontend 2h (Total 4h)

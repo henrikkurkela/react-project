@@ -20,7 +20,8 @@ axios
 			data: {
 				id: parseInt(item.id),
 				headline: item.headline,
-				content: item.content
+				content: item.content,
+				category: parseInt(item.category)
 			}
 		})
 		)
