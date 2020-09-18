@@ -9,7 +9,7 @@ const NewsItem = ({ headline, content }) => {
 	return (
 		<div style={{ cursor: 'pointer' }}>
 			<Header as='h3'>{headline}</Header>
-			{paragraphs.map((paragraph, key) => <p style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
+			{paragraphs.map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
 			<Divider />
 		</div>)
 }
@@ -43,8 +43,8 @@ const App = () => {
 					<Grid.Row style={{ backgroundColor: 'blue' }}>
 						<Header as='h1' style={{ textAlign: 'center', color: 'white' }}>News Site</Header>
 					</Grid.Row>
-					<Grid.Row style={{ background: 'blue' }}>
-						{categories.map((category, index) => <Button onClick={() => setCategory(index)}>{category}</Button>)}
+					<Grid.Row style={{ backgroundColor: 'blue' }}>
+						{categories.map((category, index) => <Button key={index} style={{ backgroundColor: 'blue', color: 'white' }} onClick={() => setCategory(index)}>{category}</Button>)}
 					</Grid.Row>
 					<Grid.Row>
 						<Divider />
@@ -57,3 +57,6 @@ const App = () => {
 }
 
 export default App
+
+/* Extra Exports for Testing Purposes */
+export const ExportNewsItem = NewsItem
