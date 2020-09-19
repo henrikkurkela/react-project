@@ -6,26 +6,24 @@ import 'semantic-ui-css/semantic.min.css'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import newsReducer from './reducers/newsReducer'
-import axios from 'axios'
+import getAllNews from './services/newsService'
 
+/* Setup and fill news redux store */
 const store = createStore(newsReducer)
 
-
-axios
-	.get('http://localhost:3001/news')
-	.then(response => {
-		const items = response.data
-		items.map(item => store.dispatch({
-			type: "NEW_ITEM",
-			data: {
-				id: parseInt(item.id),
-				headline: item.headline,
-				content: item.content,
-				category: parseInt(item.category)
-			}
-		})
-		)
+getAllNews().then(response => {
+	const items = response.data
+	items.map(item => store.dispatch({
+		type: "NEW_ITEM",
+		data: {
+			id: parseInt(item.id),
+			headline: item.headline,
+			content: item.content,
+			category: parseInt(item.category)
+		}
 	})
+	)
+})
 
 ReactDOM.render(
 	<Provider store={store}>
