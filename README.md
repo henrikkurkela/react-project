@@ -36,3 +36,5 @@ Implement simple tests:
 2020-09-18: Begin Work on Tests 2h (Total 6h)
 
 2020-09-19: Refactoring, Cleanup, First Iteration Goals Met 1h (Total 7h)
+
+2020-09-20: News Item Modals 1h (Total 8h)

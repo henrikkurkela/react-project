@@ -19,6 +19,7 @@ getAllNews().then(response => {
 			id: parseInt(item.id),
 			headline: item.headline,
 			content: item.content,
+			picture: item.picture,
 			category: parseInt(item.category)
 		}
 	})
