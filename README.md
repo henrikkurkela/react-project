@@ -25,7 +25,7 @@ Implement simple back end:
 
 Implement simple tests:
 
-- Simple reducer Tests
+- Simple reducer tests
 
 # Work Log
 
@@ -38,3 +38,5 @@ Implement simple tests:
 2020-09-19: Refactoring, Cleanup, First Iteration Goals Met 1h (Total 7h)
 
 2020-09-20: News Item Modals 1h (Total 8h)
+
+2020-09-21: Refactoring, Categories With React Router 2h (Total 10h)

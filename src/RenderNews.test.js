@@ -1,9 +1,9 @@
-import { NewsItem } from './App'
+import { NewsItem } from './RenderNews'
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 
-describe('App', () => {
+describe('RenderNews', () => {
     test('news item being rendered correctly', () => {
         const headline = "A News Story"
         const content = "From a Buggy Galaxy Far, Far Away..."

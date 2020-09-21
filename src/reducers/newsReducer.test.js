@@ -9,6 +9,7 @@ describe('newsReducer', () => {
             data: {
                 id: 1,
                 category: 1,
+                picture: "Bug Wars Logo.png",
                 headline: "A News Story",
                 content: "From a Buggy Galaxy Far, Far Away..."
             }
