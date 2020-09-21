@@ -2,6 +2,11 @@
 
 A simple news site for a press company.
 
+To start the application, type:
+```
+npm run dev
+```
+
 # TODO
 
 Second Iteration:
@@ -39,4 +44,4 @@ Implement simple tests:
 
 2020-09-20: News Item Modals 1h (Total 8h)
 
-2020-09-21: Refactoring, Categories With React Router 2h (Total 10h)
+2020-09-21: Refactoring, Categories With React Router, Install Concurrently 2h (Total 10h)
