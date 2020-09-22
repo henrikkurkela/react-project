@@ -4,17 +4,25 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import 'semantic-ui-css/semantic.min.css'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import newsReducer from './reducers/newsReducer'
 import getAllNews from './services/newsService'
+import adsReducer from './reducers/adsReducer'
+import getAllAds from './services/adsService'
 
 /* Setup and fill news redux store */
-const store = createStore(newsReducer)
+const reducer = combineReducers({
+	news: newsReducer,
+	ads: adsReducer,
+  })
+
+const store = createStore(reducer, composeWithDevTools())
 
 getAllNews().then(response => {
-	const items = response.data
-	items.map(item => store.dispatch({
-		type: "NEW_ITEM",
+	const news = response.data
+	news.map(item => store.dispatch({
+		type: "NEW_NEWS",
 		data: {
 			id: parseInt(item.id),
 			headline: item.headline,
@@ -26,12 +34,26 @@ getAllNews().then(response => {
 	)
 })
 
+getAllAds().then(response => {
+	const ads = response.data
+	ads.map(item => store.dispatch({
+		type: "NEW_AD",
+		data: {
+			id: parseInt(item.id),
+			picture: item.picture,
+			href: item.href
+		}
+	}))
+})
+
 ReactDOM.render(
 	<Provider store={store}>
 		<App />
 	</Provider>,
 	document.getElementById('root')
 );
+
+document.body.style = 'background-color: lightgray'
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

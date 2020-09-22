@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch db.json",
+    "server": "node src/server.js",
     "dev": "concurrently \"npm start\" \"npm run server\""
   },
   "eslintConfig": {
@@ -42,6 +42,7 @@
     "@testing-library/react": "^9.5.0",
     "concurrently": "^5.3.0",
     "deep-freeze": "0.0.1",
-    "json-server": "^0.16.1"
+    "json-server": "^0.16.1",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

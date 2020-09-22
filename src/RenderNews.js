@@ -35,7 +35,7 @@ const NewsItem = ({ headline, content, picture = null, selected = false }) => {
 
 const RenderNews = () => {
 
-	const news = useSelector(state => state)
+	const news = useSelector(state => state.news)
     let { category, story } = useParams()
 
 	switch (category) {

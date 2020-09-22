@@ -2,42 +2,38 @@ import React from 'react'
 import { Grid, Header, Divider, Container } from 'semantic-ui-react'
 import RenderNews from './RenderNews'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import RenderAds from './RenderAds'
 
 const App = () => {
 
 	let categories = ['All News', 'Domestic', 'Foreign']
 
 	return (
-		<Container>
-			<Grid columns='equal' padded>
+		<Container style={{ backgroundColor: 'white' }}>
+			<Grid columns='equal'>
 				<Grid.Column>
 					<Grid.Row style={{ backgroundColor: 'blue' }}>
-						<Header as='h1' style={{ textAlign: 'center', color: 'white' }}>News Site</Header>
+						<Header as='h1' style={{ textAlign: 'center', color: 'white', padding: '1.5em' }}>News Site</Header>
 					</Grid.Row>
 					<Router>
 						<Grid.Row style={{ backgroundColor: 'blue' }}>
-							{categories.map((category, index) => <Link key={index} to={`/${index}`} style={{ backgroundColor: 'blue', color: 'white' }}>{category}</Link>)}
+							{categories.map((category, index) => <Link key={index} to={`/${index}`} style={{ display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>{category}</Link>)}
 						</Grid.Row>
-						<Switch>
-							<Route path="/:category/:story">
-								<Grid.Row>
-									<Divider />
+						<Grid.Row style={{ padding: '1rem' }}>
+							<Divider />
+							<RenderAds />
+							<Switch>
+								<Route path="/:category/:story">
 									<RenderNews />
-								</Grid.Row>
-							</Route>
-							<Route path="/:category">
-								<Grid.Row>
-									<Divider />
+								</Route>
+								<Route path="/:category">
 									<RenderNews />
-								</Grid.Row>
-							</Route>
-							<Route path="/">
-								<Grid.Row>
-									<Divider />
+								</Route>
+								<Route path="/">
 									<RenderNews />
-								</Grid.Row>
-							</Route>
-						</Switch>
+								</Route>
+							</Switch>
+						</Grid.Row>
 					</Router>
 				</Grid.Column>
 			</Grid>
