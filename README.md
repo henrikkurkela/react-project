@@ -11,8 +11,10 @@ npm run dev
 
 Third Iteration:
 
-- Simple News Story Likes
-- Simple News Story Commments
+Implement anonymous user interaction:
+
+- Simple news story likes
+- Simple news story commments
 
 # DONE
 
@@ -58,4 +60,6 @@ Implement simple tests:
 
 2020-09-21: Refactoring, Categories With React Router, Install Concurrently 2h (Total 10h)
 
-2020-09-22: Simple json-server Module, Simple Banner Ads, Second Iteration Goals Med 3h (Total 13h)
+2020-09-22: Simple json-server Module, Simple Banner Ads, Second Iteration Goals Met 3h (Total 13h)
+
+2020-09-23: Simple News Story Likes 2h (Total 15h)

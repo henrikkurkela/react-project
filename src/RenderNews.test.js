@@ -8,7 +8,7 @@ describe('RenderNews', () => {
         const headline = "A News Story"
         const content = "From a Buggy Galaxy Far, Far Away..."
         const component = render(
-            <NewsItem headline={headline} content={content} />
+            <NewsItem item={{ content: content, headline: headline }} />
         )
 
         expect(component.container).toHaveTextContent(

@@ -28,6 +28,7 @@ getAllNews().then(response => {
 			headline: item.headline,
 			content: item.content,
 			picture: item.picture,
+			likes: item.likes,
 			category: parseInt(item.category)
 		}
 	})
@@ -53,7 +54,8 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
-document.body.style = 'background-color: lightgray'
+document.body.style.backgroundColor = 'lightgray'
+document.body.style.overflowY = 'scroll'
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

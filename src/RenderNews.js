@@ -1,12 +1,39 @@
-import React from 'react'
-import { Header, Divider, Modal, Image } from 'semantic-ui-react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { Header, Divider, Modal, Image, Button, Icon } from 'semantic-ui-react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { likeStory } from './services/newsService'
 
-const NewsItem = ({ headline, content, picture = null, selected = false }) => {
+const NewsItem = ({ item, selected = false }) => {
 
-	const paragraphs = content.split('<br/>')
-	const [open, setOpen] = React.useState(selected)
+	const paragraphs = item.content.split('<br/>')
+	const dispatch = useDispatch()
+	const [open, setOpen] = useState(selected)
+	const [liked, setLiked] = useState(false)
+
+	const like = (news) => {
+		if (liked === false) {
+			setLiked(true)
+			likeStory({...news, likes: news.likes + 1})
+			dispatch({
+				type: "LIKE_NEWS",
+				data: {
+					id: news.id,
+					like: true
+				}
+			})
+		} else if (liked === true) {
+			setLiked(false)
+			likeStory({...news, likes: news.likes - 1})
+			dispatch({
+				type: "LIKE_NEWS",
+				data: {
+					id: news.id,
+					like: false
+				}
+			})
+		}
+	}
 
 	return (
 		<div style={{ cursor: 'pointer' }}>
@@ -18,17 +45,25 @@ const NewsItem = ({ headline, content, picture = null, selected = false }) => {
 				onOpen={() => setOpen(true)}
 				trigger={
 					<div>
-						<Header as='h3'>{headline}</Header>
+						<Header as='h3'>{item.headline}</Header>
 						{paragraphs.map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
 						<Divider />
 					</div>
 				}
 			>
-				<Modal.Header>{headline}</Modal.Header>
+				<Modal.Header>{item.headline}</Modal.Header>
 				<Modal.Content>
-					{picture ? <Image fluid bordered style={{ marginBottom: '1.5rem' }} src={picture} /> : null}
+					{item.picture ? <Image fluid bordered style={{ marginBottom: '1.5rem' }} src={item.picture} /> : null}
 					{paragraphs.map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
 				</Modal.Content>
+				<Modal.Actions>
+					<Button animated onClick={() => like(item)} color={liked ? 'green' : null}>
+						<Button.Content visible>
+							{item.likes} <Icon name='heart' />
+						</Button.Content>
+						<Button.Content hidden>{liked ? 'Liked' : 'Like'}</Button.Content>
+					</Button>
+				</Modal.Actions>
 			</Modal>
 		</div >)
 }
@@ -36,23 +71,23 @@ const NewsItem = ({ headline, content, picture = null, selected = false }) => {
 const RenderNews = () => {
 
 	const news = useSelector(state => state.news)
-    let { category, story } = useParams()
+	let { category, story } = useParams()
 
 	switch (category) {
-        case undefined:
+		case undefined:
 		case "0":
 			return (<>
 				{
-					news.map(item => <NewsItem key={item.id} headline={item.headline} picture={item.picture} content={item.content} selected={parseInt(story) === item.id ? true : false} />)
+					news.map(item => <NewsItem key={item.id} item={item} selected={parseInt(story) === item.id ? true : false} />)
 				}
 			</>
-            )
+			)
 		default:
 			return (<>
 				{
 					news
 						.filter(item => item.category === parseInt(category))
-						.map(item => <NewsItem key={item.id} headline={item.headline} picture={item.picture} content={item.content} selected={parseInt(story) === item.id ? true : false} />)
+						.map(item => <NewsItem key={item.id} item={item} selected={parseInt(story) === item.id ? true : false} />)
 				}
 			</>
 			)
