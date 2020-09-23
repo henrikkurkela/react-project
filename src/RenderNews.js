@@ -1,43 +1,30 @@
 import React, { useState } from 'react'
 import { Header, Divider, Modal, Image, Button, Icon } from 'semantic-ui-react'
-import { useSelector, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { likeStory } from './services/newsService'
+import { patchStoryLikes } from './services/newsService'
+import { likeNews } from './actions'
 
 const NewsItem = ({ item, selected = false }) => {
 
 	const paragraphs = item.content.split('<br/>')
-	const dispatch = useDispatch()
 	const [open, setOpen] = useState(selected)
 	const [liked, setLiked] = useState(false)
 
 	const like = (news) => {
 		if (liked === false) {
 			setLiked(true)
-			likeStory({...news, likes: news.likes + 1})
-			dispatch({
-				type: "LIKE_NEWS",
-				data: {
-					id: news.id,
-					like: true
-				}
-			})
+			patchStoryLikes({ ...news, likes: news.likes + 1 })
+			likeNews(news, true)
 		} else if (liked === true) {
 			setLiked(false)
-			likeStory({...news, likes: news.likes - 1})
-			dispatch({
-				type: "LIKE_NEWS",
-				data: {
-					id: news.id,
-					like: false
-				}
-			})
+			patchStoryLikes({ ...news, likes: news.likes - 1 })
+			likeNews(news, false)
 		}
 	}
 
 	return (
 		<div style={{ cursor: 'pointer' }}>
-
 			<Modal
 				closeIcon
 				open={open}
@@ -68,9 +55,8 @@ const NewsItem = ({ item, selected = false }) => {
 		</div >)
 }
 
-const RenderNews = () => {
+const RenderNews = ({ news }) => {
 
-	const news = useSelector(state => state.news)
 	let { category, story } = useParams()
 
 	switch (category) {
@@ -94,6 +80,13 @@ const RenderNews = () => {
 	}
 }
 
-export default RenderNews
+const mapStateToProps = (state) => {
+	return {
+		news: state.news
+	}
+}
+
+const ConnectedRenderNews = connect(mapStateToProps)(RenderNews)
+export default ConnectedRenderNews
 
 export { NewsItem }

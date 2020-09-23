@@ -3,8 +3,21 @@ import { Grid, Header, Divider, Container } from 'semantic-ui-react'
 import RenderNews from './RenderNews'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RenderAds from './RenderAds'
+import getAllNews from './services/newsService'
+import getAllAds from './services/adsService'
+import { addNews, addAd } from './actions'
 
 const App = () => {
+
+	getAllNews().then(response => {
+		const news = response.data
+		news.map(item => addNews(item))
+	})
+	
+	getAllAds().then(response => {
+		const ads = response.data
+		ads.map(item => addAd(item))
+	})
 
 	let categories = ['All News', 'Domestic', 'Foreign']
 
