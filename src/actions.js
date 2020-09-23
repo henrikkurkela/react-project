@@ -5,7 +5,7 @@ const likeNews = (news, like = true) => {
         type: "LIKE_NEWS",
         data: {
             id: news.id,
-            like: true
+            like: like
         }
     })
 }
