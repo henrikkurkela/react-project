@@ -11,7 +11,7 @@ ReactDOM.render(
 		<App />
 	</Provider>,
 	document.getElementById('root')
-);
+)
 
 document.body.style.backgroundColor = 'lightgray'
 document.body.style.overflowY = 'scroll'

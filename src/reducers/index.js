@@ -5,7 +5,7 @@ import adsReducer from './adsReducer'
 
 const reducer = combineReducers({
 	news: newsReducer,
-	ads: adsReducer,
+	ads: adsReducer
 })
 
 const store = createStore(reducer, composeWithDevTools())

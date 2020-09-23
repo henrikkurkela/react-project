@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Header, Divider, Modal, Image, Button, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { patchStoryLikes } from './services/newsService'
-import { likeNews } from './actions'
+import { patchNews } from './services/newsService'
+import { updateNews } from './actions'
 
 const NewsItem = ({ item, selected = false }) => {
 
@@ -14,12 +14,10 @@ const NewsItem = ({ item, selected = false }) => {
 	const like = (news) => {
 		if (liked === false) {
 			setLiked(true)
-			patchStoryLikes({ ...news, likes: news.likes + 1 })
-			likeNews(news, true)
+			patchNews(news.id, { likes: news.likes + 1 }).then((response) => updateNews(response.data))
 		} else if (liked === true) {
 			setLiked(false)
-			patchStoryLikes({ ...news, likes: news.likes - 1 })
-			likeNews(news, false)
+			patchNews(news.id, { likes: news.likes - 1 }).then((response) => updateNews(response.data))
 		}
 	}
 
@@ -52,7 +50,8 @@ const NewsItem = ({ item, selected = false }) => {
 					</Button>
 				</Modal.Actions>
 			</Modal>
-		</div >)
+		</div>
+	)
 }
 
 const RenderNews = ({ news }) => {
@@ -62,20 +61,22 @@ const RenderNews = ({ news }) => {
 	switch (category) {
 		case undefined:
 		case "0":
-			return (<>
-				{
-					news.map(item => <NewsItem key={item.id} item={item} selected={parseInt(story) === item.id ? true : false} />)
-				}
-			</>
+			return (
+				<>
+					{
+						news.map(item => <NewsItem key={item.id} item={item} selected={parseInt(story) === item.id ? true : false} />)
+					}
+				</>
 			)
 		default:
-			return (<>
-				{
-					news
-						.filter(item => item.category === parseInt(category))
-						.map(item => <NewsItem key={item.id} item={item} selected={parseInt(story) === item.id ? true : false} />)
-				}
-			</>
+			return (
+				<>
+					{
+						news
+							.filter(item => item.category === parseInt(category))
+							.map(item => <NewsItem key={item.id} item={item} selected={parseInt(story) === item.id ? true : false} />)
+					}
+				</>
 			)
 	}
 }

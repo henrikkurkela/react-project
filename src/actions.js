@@ -1,11 +1,15 @@
 import store from './reducers'
 
-const likeNews = (news, like = true) => {
+const updateNews = (news) => {
     store.dispatch({
-        type: "LIKE_NEWS",
-        data: {
-            id: news.id,
-            like: like
+        type: "UPDATE_NEWS",
+        data : {
+            id: parseInt(news.id),
+            headline: news.headline,
+            content: news.content,
+            picture: news.picture,
+            likes: news.likes,
+            category: parseInt(news.category)
         }
     })
 }
@@ -35,4 +39,4 @@ const addAd = (item) => {
     })
 }
 
-export { likeNews, addNews, addAd }
+export { updateNews, addNews, addAd }
