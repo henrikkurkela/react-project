@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RenderAds from './RenderAds'
 import getAllNews from './services/newsService'
 import getAllAds from './services/adsService'
-import { addNews, addAd } from './actions'
+import getAllComments from './services/commentsService'
+import { addNews, addAd, addComment } from './actions'
 
 const App = () => {
 
@@ -17,6 +18,11 @@ const App = () => {
 	getAllAds().then(response => {
 		const ads = response.data
 		ads.map(item => addAd(item))
+	})
+
+	getAllComments().then(response => {
+		const comments = response.data
+		comments.map(item => addComment(item))
 	})
 
 	let categories = ['All News', 'Domestic', 'Foreign']

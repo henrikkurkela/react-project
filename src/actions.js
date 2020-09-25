@@ -39,4 +39,15 @@ const addAd = (item) => {
     })
 }
 
-export { updateNews, addNews, addAd }
+const addComment = (comment) => {
+    store.dispatch({
+        type: "NEW_COMMENT",
+        data: {
+            id: parseInt(comment.id),
+            newsid: parseInt(comment.newsid),
+            content: comment.content
+        }
+    })
+}
+
+export { updateNews, addNews, addAd, addComment }
