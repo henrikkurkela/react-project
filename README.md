@@ -63,3 +63,5 @@ Implement simple tests:
 2020-09-22: Simple json-server Module, Simple Banner Ads, Second Iteration Goals Met 3h (Total 13h)
 
 2020-09-23: Simple News Story Likes, Refactoring 3h (Total 16h)
+
+2020-09-25: Simple News Story Comments 2h (Total 18h)
