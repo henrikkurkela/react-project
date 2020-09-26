@@ -133,4 +133,4 @@ const mapStateToProps = (state) => {
 const ConnectedRenderNews = connect(mapStateToProps)(RenderNews)
 export default ConnectedRenderNews
 
-export { NewsItem }
+export { NewsItem, RenderComments }

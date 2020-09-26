@@ -9,14 +9,21 @@ npm run dev
 
 # TODO
 
+Fourth Iteration:
+
+Implement registered user interaction:
+
+- Create/delete account ability
+- Registered user comments
+
+# DONE
+
 Third Iteration:
 
 Implement anonymous user interaction:
 
 - Simple news story likes
 - Simple news story commments
-
-# DONE
 
 Second Iteration:
 
@@ -65,3 +72,5 @@ Implement simple tests:
 2020-09-23: Simple News Story Likes, Refactoring 3h (Total 16h)
 
 2020-09-25: Simple News Story Comments 2h (Total 18h)
+
+2020-09-06: Update Tests 1h, Third Iteration Goals Met (Total 19h)
