@@ -73,4 +73,6 @@ Implement simple tests:
 
 2020-09-25: Simple News Story Comments 2h (Total 18h)
 
-2020-09-06: Update Tests 1h, Third Iteration Goals Met (Total 19h)
+2020-09-26: Update Tests 1h, Third Iteration Goals Met (Total 19h)
+
+2020-09-29: Start Working on User Accounts 3h (Total 22h)

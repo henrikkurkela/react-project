@@ -50,4 +50,19 @@ const addComment = (comment) => {
     })
 }
 
-export { updateNews, addNews, addAd, addComment }
+const loginToken = (auth) => {
+    store.dispatch({
+        type: "LOGIN",
+        data: {
+            auth: auth
+        }
+    })
+}
+
+const logoutToken = () => {
+    store.dispatch({
+        type: "LOGOUT"
+    })
+}
+
+export { updateNews, addNews, addAd, addComment, loginToken, logoutToken }
