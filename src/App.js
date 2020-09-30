@@ -3,6 +3,7 @@ import { Grid, Header, Divider, Container } from 'semantic-ui-react'
 import RenderNews from './RenderNews'
 import Login from './Login'
 import Logout from './Logout'
+import ConnectedAccount from './Account'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RenderAds from './RenderAds'
 import getAllNews from './services/newsService'
@@ -38,15 +39,18 @@ const App = () => {
 		<Container style={{ backgroundColor: 'white' }}>
 			<Grid columns='equal'>
 				<Grid.Column>
-					<Grid.Row style={{ backgroundColor: 'blue' }}>
-						<Header as='h1' style={{ textAlign: 'center', color: 'white', padding: '1.5em' }}>News Site</Header>
+					<Grid.Row style={{ background: 'blue' }}>
+						<Header as='h1' style={{ textAlign: 'center', color: 'white', padding: '1.5em', fontFamily: 'stencil' }}>News Site</Header>
 					</Grid.Row>
 					<Router>
 						<Grid.Row style={{ backgroundColor: 'blue' }}>
 							{categories.map((category, index) => <Link key={index} to={`/${index}`} style={{ display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>{category}</Link>)}
 							{
 								auth ?
-									<Link to="/logout" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>Logout</Link> :
+									<>
+										<Link to="/logout" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>Logout</Link>
+										<Link to="/account" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>Account</Link>
+									</> :
 									<Link to="/login" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>Login</Link>
 							}
 						</Grid.Row>
@@ -54,6 +58,9 @@ const App = () => {
 							<Divider />
 							<RenderAds />
 							<Switch>
+								<Route path="/account">
+									<ConnectedAccount />
+								</Route>
 								<Route path="/login">
 									<Login />
 								</Route>

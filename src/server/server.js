@@ -5,7 +5,7 @@ let db = {
 			category: 1,
 			likes: 128,
 			headline: "First News Story",
-			picture: "https://via.placeholder.com/150x75",
+			picture: "/assets/img/photo1.jpg",
 			content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
 		},
 		{
@@ -13,6 +13,7 @@ let db = {
 			category: 2,
 			likes: 256,
 			headline: "Second News Story",
+			picture: "/assets/img/photo3.jpg",
 			content: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.<br/>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
 		},
 		{
@@ -34,19 +35,19 @@ let db = {
 			category: 1,
 			likes: 640,
 			headline: "Fifth News Story",
-			picture: "https://via.placeholder.com/150x150",
+			picture: "/assets/img/photo2.jpg",
 			content: "Integer tincidunt vitae sem vitae efficitur. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris dapibus lectus est, vulputate blandit justo elementum cursus. Maecenas ligula sem, malesuada nec gravida nec, dictum id risus. Integer eros massa, hendrerit sed luctus eget, sagittis sagittis leo. Phasellus aliquam tellus sit amet dui gravida ultricies et non ex. Quisque varius at mi sit amet rutrum. Fusce ultricies erat augue, eu lobortis odio viverra sit amet. Mauris maximus pulvinar lorem eu ullamcorper.<br/>Maecenas consequat lectus viverra, ullamcorper ligula vel, placerat leo. Duis at tempor tellus. Pellentesque euismod orci vitae lectus porttitor mattis. Pellentesque vel sem non nisl iaculis mollis. Curabitur dapibus dolor purus, at placerat lectus lacinia et. Morbi eget feugiat ex, quis blandit risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque non efficitur massa. Donec faucibus pharetra enim, at rutrum nisl rutrum non. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
 		}
 	],
 	ads: [
 		{
 			id: 1,
-			picture: "https://via.placeholder.com/750x1500?text=Banner+Ad",
+			picture: "/assets/img/img4.jpg",
 			href: "http://www.google.com"
 		},
 		{
 			id: 2,
-			picture: "https://via.placeholder.com/750x1500?text=Advertisement",
+			picture: "/assets/img/img5.jpg",
 			href: "http://www.bing.com"
 		}
 	],
@@ -60,9 +61,22 @@ let db = {
 			id: 2,
 			newsid: 1,
 			content: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain."
+		},
+		{
+			id: 3,
+			newsid: 3,
+			user: "demo@user.com",
+			content: "Interesting article indeed."
+
 		}
 	],
-	users: []
+	users: [
+		{
+			id: 1,
+			email: "demo@user.com",
+			password: "$2a$10$Q8wGUXlwMCrDjput.309CeIDkKw2/NpdgBRDlUVNRpDGNFjJEVkSq"
+		}
+	]
 }
 
 const jsonServer = require('json-server')

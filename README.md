@@ -7,6 +7,8 @@ To start the application, type:
 npm run dev
 ```
 
+Stock photos downloaded from unsplash.com
+
 # TODO
 
 Fourth Iteration:
@@ -73,6 +75,8 @@ Implement simple tests:
 
 2020-09-25: Simple News Story Comments 2h (Total 18h)
 
-2020-09-26: Update Tests 1h, Third Iteration Goals Met (Total 19h)
+2020-09-26: Update Tests, Third Iteration Goals Met 1h (Total 19h)
 
 2020-09-29: Start Working on User Accounts 3h (Total 22h)
+
+2020-09-30: Continue Working on User Accounts, Refactoring 3h (Total 25h)

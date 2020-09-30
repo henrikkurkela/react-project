@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Header, Form, Message } from 'semantic-ui-react'
+import axios from 'axios'
+import { Header, Form, Message, Button } from 'semantic-ui-react'
 import { postLogin, postSignup } from './services/authService'
 import { loginToken } from './actions'
 
@@ -22,8 +23,9 @@ const Login = () => {
         setNewUserError(false)
         postLogin({ email: user, password: password })
             .then((response) => {
-                window.localStorage.setItem('auth', response.data.accessToken)
-                loginToken(response.data.accessToken)
+                window.sessionStorage.setItem('auth', response.data.accessToken)
+                loginToken({ auth: response.data.accessToken, user: user })
+                axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.accessToken}`
             })
             .catch((error) => {
                 if (error.response.status === 400) {
@@ -38,12 +40,30 @@ const Login = () => {
         setUserError(false)
         setNewUserError(false)
         postSignup({ email: newuser, password: newpassword })
-            .catch((error) => {
+            .catch(error => {
                 if (error.response.status === 400) {
                     setNewUserError(true)
                     setErrorMessage(error.response.data)
                 }
             })
+    }
+
+    async function demoLogin() {
+        try {
+            await postSignup({ email: "demo@user.com", password: "demouser" })
+        } catch (error) {
+            console.log(error.message)
+        }
+
+        try {
+            let response = await postLogin({ email: "demo@user.com", password: "demouser" })
+
+            loginToken({ auth: response.data.accessToken, user: "demo@user.com" })
+            window.sessionStorage.setItem('auth', response.data.accessToken)
+            axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.accessToken}`
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
     return (
@@ -62,6 +82,8 @@ const Login = () => {
                 <Form.Input placeholder='Password' type='password' onChange={(event) => setNewPassword(event.target.value)} />
                 <Form.Button content='Sign Up' onClick={signup} />
             </Form>
+            <Header as='h3'>Demo User</Header>
+            <Button onClick={demoLogin}>Login</Button>
         </>
     )
 }

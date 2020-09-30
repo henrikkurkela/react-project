@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Header } from 'semantic-ui-react'
 import { logoutToken } from './actions'
 
 const Logout = () => {
 
-    window.localStorage.removeItem('auth')
-    logoutToken()
+    useEffect(() => {
+        logoutToken()
+    },[])
 
     return (
         <>

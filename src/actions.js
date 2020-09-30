@@ -1,4 +1,5 @@
 import store from './reducers'
+import axios from 'axios'
 
 const updateNews = (news) => {
     store.dispatch({
@@ -45,17 +46,23 @@ const addComment = (comment) => {
         data: {
             id: parseInt(comment.id),
             newsid: parseInt(comment.newsid),
+            user: comment.user,
             content: comment.content
         }
+    })
+}
+
+const removeComment = (comment) => {
+    store.dispatch({
+        type: "REMOVE_COMMENT",
+        data: comment
     })
 }
 
 const loginToken = (auth) => {
     store.dispatch({
         type: "LOGIN",
-        data: {
-            auth: auth
-        }
+        data: auth
     })
 }
 
@@ -63,6 +70,9 @@ const logoutToken = () => {
     store.dispatch({
         type: "LOGOUT"
     })
+
+    window.sessionStorage.removeItem('auth')
+    axios.defaults.headers.post['Authorization'] = null
 }
 
-export { updateNews, addNews, addAd, addComment, loginToken, logoutToken }
+export { updateNews, addNews, addAd, addComment, loginToken, logoutToken, removeComment }

@@ -4,8 +4,8 @@ const getAll = () => {
     return axios.get('http://localhost:3001/news')
 }
 
-const patchNews = (id, item) => {
-    return axios.patch(`http://localhost:3001/news/${id}`, { ...item })
+const patchNews = (item) => {
+    return axios.patch(`http://localhost:3001/news/${item.id}`, { ...item })
 }
 
 export default getAll
