@@ -1,19 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Header, Comment, Button, Icon } from 'semantic-ui-react'
-import { deleteUser } from './services/authService'
-import { deleteComment } from './services/commentsService'
+import { deleteRequest } from './services/httpService'
 import { logoutToken, removeComment } from './actions'
 
 const Account = ({ auth, comments }) => {
 
     const unregister = () => {
-        deleteUser(auth)
+        deleteRequest(`users/${auth.id}`)
         logoutToken()
     }
 
     const destroyComment = (comment) => {
-        deleteComment(comment).then(
+        deleteRequest(`comments/${comment.id}`).then(
             removeComment(comment)
         )
     }
@@ -50,4 +49,3 @@ const ConnectedAccount = connect(mapStateToProps)(Account)
 export default ConnectedAccount
 
 export { Account }
-

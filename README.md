@@ -80,3 +80,5 @@ Implement simple tests:
 2020-09-29: Start Working on User Accounts 3h (Total 22h)
 
 2020-09-30: Continue Working on User Accounts, Refactoring 3h (Total 25h)
+
+2020-10-01: Refactor HTTP Requests and Login 2h (Total 27h)

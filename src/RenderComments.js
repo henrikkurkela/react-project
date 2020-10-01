@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Comment, Divider, Header, Form, Button, Icon } from 'semantic-ui-react'
-import { patchNews } from './services/newsService'
-import { postComment } from './services/commentsService'
+import { postRequest, patchRequest } from './services/httpService'
 import { addComment, updateNews } from './actions'
 
 const RenderComments = ({ id, comments, news, auth }) => {
@@ -19,7 +18,7 @@ const RenderComments = ({ id, comments, news, auth }) => {
 	const commentForm = (event) => {
 		event.preventDefault()
 		if (newComment !== null && newComment !== "") {
-			postComment({ content: newComment, newsid: id, user: auth ? auth.user : null }).then((response) => addComment(response.data))
+			postRequest("comments" , { content: newComment, newsid: id, user: auth ? auth.user : null }).then((response) => addComment(response.data))
 		}
 		setNewComment('')
 	}
@@ -28,11 +27,11 @@ const RenderComments = ({ id, comments, news, auth }) => {
 		if (liked === false) {
 			setLiked(true)
 			window.sessionStorage.setItem(id, true)
-			patchNews({ id: id, likes: news.find(item => item.id === id).likes + 1 }).then((response) => updateNews(response.data))
+			patchRequest(`news/${id}`, { id: id, likes: news.find(item => item.id === id).likes + 1 }).then((response) => updateNews(response.data))
 		} else if (liked === true) {
 			setLiked(false)
 			window.sessionStorage.setItem(id, false)
-			patchNews({ id: id, likes: news.find(item => item.id === id).likes - 1 }).then((response) => updateNews(response.data))
+			patchRequest(`news/${id}`, { id: id, likes: news.find(item => item.id === id).likes - 1 }).then((response) => updateNews(response.data))
 		}
 	}
 

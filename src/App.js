@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
 import { Grid, Header, Divider, Container } from 'semantic-ui-react'
 import RenderNews from './RenderNews'
-import Login from './Login'
+import ConnectedLogin from './Login'
+import Signup from './Signup'
 import Logout from './Logout'
 import ConnectedAccount from './Account'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RenderAds from './RenderAds'
-import getAllNews from './services/newsService'
-import getAllAds from './services/adsService'
-import getAllComments from './services/commentsService'
+import { getRequest } from './services/httpService'
 import { addNews, addAd, addComment } from './actions'
 import { useSelector } from 'react-redux'
 
@@ -17,17 +16,17 @@ const App = () => {
 	const auth = useSelector(state => state.auth)
 
 	useEffect(() => {
-		getAllNews().then(response => {
+		getRequest("news").then(response => {
 			const news = response.data
 			news.map(item => addNews(item))
 		})
 
-		getAllAds().then(response => {
+		getRequest("ads").then(response => {
 			const ads = response.data
 			ads.map(item => addAd(item))
 		})
 
-		getAllComments().then(response => {
+		getRequest("comments").then(response => {
 			const comments = response.data
 			comments.map(item => addComment(item))
 		})
@@ -62,7 +61,10 @@ const App = () => {
 									<ConnectedAccount />
 								</Route>
 								<Route path="/login">
-									<Login />
+									<ConnectedLogin />
+								</Route>
+								<Route path="/signup">
+									<Signup />
 								</Route>
 								<Route path="/logout">
 									<Logout />

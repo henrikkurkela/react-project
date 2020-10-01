@@ -1,91 +1,65 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import { Header, Form, Message, Button } from 'semantic-ui-react'
-import { postLogin, postSignup } from './services/authService'
+import { postRequest, getRequest } from './services/httpService'
 import { loginToken } from './actions'
 
-const Login = () => {
-
-
+const Login = ({ auth }) => {
     const [userError, setUserError] = useState(false)
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
 
-    const [newUserError, setNewUserError] = useState(false)
-    const [newuser, setNewUser] = useState('')
-    const [newpassword, setNewPassword] = useState('')
-
     const [errorMessage, setErrorMessage] = useState('')
 
-    const login = (event) => {
+    async function login(event, username, userpass) {
         event.preventDefault()
         setUserError(false)
-        setNewUserError(false)
-        postLogin({ email: user, password: password })
-            .then((response) => {
-                window.sessionStorage.setItem('auth', response.data.accessToken)
-                loginToken({ auth: response.data.accessToken, user: user })
-                axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.accessToken}`
-            })
-            .catch((error) => {
-                if (error.response.status === 400) {
-                    setUserError(true)
-                    setErrorMessage(error.response.data)
-                }
-            })
-    }
-
-    const signup = (event) => {
-        event.preventDefault()
-        setUserError(false)
-        setNewUserError(false)
-        postSignup({ email: newuser, password: newpassword })
-            .catch(error => {
-                if (error.response.status === 400) {
-                    setNewUserError(true)
-                    setErrorMessage(error.response.data)
-                }
-            })
-    }
-
-    async function demoLogin() {
-        try {
-            await postSignup({ email: "demo@user.com", password: "demouser" })
-        } catch (error) {
-            console.log(error.message)
-        }
 
         try {
-            let response = await postLogin({ email: "demo@user.com", password: "demouser" })
+            let response = await postRequest("login", { email: username, password: userpass })
+            let userdata = await getRequest(`users/?email=${username}`)
 
-            loginToken({ auth: response.data.accessToken, user: "demo@user.com" })
+            loginToken({ auth: response.data.accessToken, user: username, id: userdata.data[0].id })
             window.sessionStorage.setItem('auth', response.data.accessToken)
             axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.accessToken}`
         } catch (error) {
-            console.log(error.message)
+            if (error.response.status === 400) {
+                setUserError(true)
+                setErrorMessage(error.response.data)
+            }
         }
     }
 
-    return (
+    async function demoLogin(event) {
+        postRequest("signup", { email: "demo@user.com", password: "demouser" })
+        login(event, "demo@user.com", "demouser")
+    }
+
+    return (auth ? <Header as='h3'>Welcome!</Header> :
         <>
             <Header as='h3'>Login</Header>
             <Form error={userError} style={{ display: 'inline-block' }}>
                 <Message error header='Error' content={errorMessage} />
                 <Form.Input placeholder='Email' onChange={(event) => setUser(event.target.value)} />
                 <Form.Input placeholder='Password' type='password' onChange={(event) => setPassword(event.target.value)} />
-                <Form.Button content='Login' onClick={login} />
+                <Form.Button content='Login' onClick={(event) => login(event, user, password)} />
             </Form>
-            <Header as='h3'>Sign Up</Header>
-            <Form error={newUserError} style={{ display: 'inline-block' }}>
-                <Message error header='Error' content={errorMessage} />
-                <Form.Input placeholder='Email' onChange={(event) => setNewUser(event.target.value)} />
-                <Form.Input placeholder='Password' type='password' onChange={(event) => setNewPassword(event.target.value)} />
-                <Form.Button content='Sign Up' onClick={signup} />
-            </Form>
+            <p>No account yet? sign up <a href="/signup">here</a>.</p>
             <Header as='h3'>Demo User</Header>
             <Button onClick={demoLogin}>Login</Button>
         </>
     )
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+const ConnectedLogin = connect(mapStateToProps)(Login)
+
+export default ConnectedLogin
+
+export { Login }
