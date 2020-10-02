@@ -11,14 +11,22 @@ Stock photos downloaded from unsplash.com
 
 # TODO
 
+Fifth Iteration:
+
+Enhance user experience:
+
+- Delete user/comment confirmations
+- Display nickname instead of email
+- Implement simple avatars
+
+# DONE
+
 Fourth Iteration:
 
 Implement registered user interaction:
 
 - Create/delete account ability
 - Registered user comments
-
-# DONE
 
 Third Iteration:
 
@@ -82,3 +90,5 @@ Implement simple tests:
 2020-09-30: Continue Working on User Accounts, Refactoring 3h (Total 25h)
 
 2020-10-01: Refactor HTTP Requests and Login 2h (Total 27h)
+
+2020-10-02: Code Cleanup, Fourth Iteration Goals Met 1h (Total 28h)

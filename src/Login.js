@@ -32,8 +32,12 @@ const Login = ({ auth }) => {
     }
 
     async function demoLogin(event) {
-        postRequest("signup", { email: "demo@user.com", password: "demouser" })
-        login(event, "demo@user.com", "demouser")
+        try {
+            await postRequest("signup", { email: "demo@user.com", password: "demouser" })
+        } catch (error) {
+            console.log(error.response.data)
+        }
+        await login(event, "demo@user.com", "demouser")
     }
 
     return (auth ? <Header as='h3'>Welcome!</Header> :
