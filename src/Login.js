@@ -12,8 +12,7 @@ const Login = ({ auth }) => {
 
     const [errorMessage, setErrorMessage] = useState('')
 
-    async function login(event, username, userpass) {
-        event.preventDefault()
+    async function login(username, userpass) {
         setUserError(false)
 
         try {
@@ -37,7 +36,7 @@ const Login = ({ auth }) => {
         } catch (error) {
             console.log(error.response.data)
         }
-        await login(event, "demo@user.com", "demouser")
+        await login("demo@user.com", "demouser")
     }
 
     return (auth ? <Header as='h3'>Welcome!</Header> :
@@ -47,7 +46,7 @@ const Login = ({ auth }) => {
                 <Message error header='Error' content={errorMessage} />
                 <Form.Input placeholder='Email' onChange={(event) => setUser(event.target.value)} />
                 <Form.Input placeholder='Password' type='password' onChange={(event) => setPassword(event.target.value)} />
-                <Form.Button content='Login' onClick={(event) => login(event, user, password)} />
+                <Form.Button content='Login' onClick={(event) => login(user, password)} />
             </Form>
             <p>No account yet? sign up <a href="/signup">here</a>.</p>
             <Header as='h3'>Demo User</Header>

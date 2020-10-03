@@ -5,6 +5,7 @@ import ConnectedLogin from './Login'
 import Signup from './Signup'
 import Logout from './Logout'
 import ConnectedAccount from './Account'
+import ConnectedUnregister from './Unregister'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RenderAds from './RenderAds'
 import { getRequest } from './services/httpService'
@@ -65,6 +66,9 @@ const App = () => {
 								</Route>
 								<Route path="/signup">
 									<Signup />
+								</Route>
+								<Route path="/unregister">
+									<ConnectedUnregister />
 								</Route>
 								<Route path="/logout">
 									<Logout />
