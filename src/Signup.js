@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Header, Form, Message } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom'
 import { postRequest } from './services/httpService'
 
 const Signup = ({ auth }) => {
@@ -9,10 +10,17 @@ const Signup = ({ auth }) => {
 
     const [errorMessage, setErrorMessage] = useState('')
 
+    const history = useHistory()
+
     const signup = (event, username, userpass) => {
         event.preventDefault()
         setNewUserError(false)
         postRequest("signup", { email: username, password: userpass })
+            .then(response => {
+                if (response.status !== 400) {
+                    history.push('/login')
+                }
+            })
             .catch(error => {
                 if (error.response.status === 400) {
                     setNewUserError(true)
