@@ -79,18 +79,81 @@ let db = {
 	]
 }
 
-const jsonServer = require('json-server')
-const auth = require('json-server-auth')
+require('dotenv').config()
+const express = require('express')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const cors = require('cors')
+const app = express()
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded())
 
-const server = jsonServer.create()
-const router = jsonServer.router(db)
-const middlewares = jsonServer.defaults()
+app.get('/news', (request, response) => {
+	response.json(db.news)
+})
 
-server.db = router.db
+app.patch('/news/:id', (request, response) => {
+	let index = db.news.findIndex(item => item.id === Number(request.params.id))
+	db.news[index].likes = request.body.likes
+	response.json(db.news[index])
+})
 
-server.use(middlewares)
-server.use(auth)
-server.use(router)
-server.listen(3001, () => {
-	console.log('JSON Server is running')
+app.get('/ads', (request, response) => {
+	response.json(db.ads)
+})
+
+app.get('/comments', (request, response) => {
+	response.json(db.comments)
+})
+
+app.delete('/comments/:id', (request, response) => {
+	db.comments = db.comments.filter(item => item.id !== Number(request.params.id))
+	response.status(609).end()
+})
+
+app.post('/comments', (request, response) => {
+	const largestid = db.comments.reduce((prev, current) => { return (prev.id > current.id) ? prev : current }).id
+	db.comments = db.comments.concat({ ...request.body, id: largestid + 1 })
+	response.json({ ...request.body, id: largestid + 1 })
+})
+
+app.get('/users', (request, response) => {
+	response.json(db.users)
+})
+
+app.post('/login', async (request, response) => {
+	const user = db.users.find((item) => item.email === request.body.email)
+	if (user != null) {
+		let correctpassword = await bcrypt.compare(request.body.password, user.password)
+		if (correctpassword) {
+			const token = jwt.sign(request.body.email, process.env.SECRET)
+			response
+				.status(200)
+				.send({ auth: token, email: user.email, id: user.id })
+		} else {
+			response.status(400).end()
+		}
+	} else {
+		response.status(400).end()
+	}
+})
+
+app.post('/signup', async (request, response) => {
+	const user = db.users.find((item) => item.email === request.body.email)
+	const largestid = db.users.reduce((prev, current) => { return (prev.id > current.id) ? prev : current }).id
+	if (!user) {
+		let newuser = {
+			id: largestid + 1,
+			email: request.body.email,
+			password: await bcrypt.hash(request.body.password, 10)
+		}
+		db.users = db.users.concat(newuser)
+		response.json({ id: newuser.id, email: newuser.email })
+	}
+	response.status(400).end()
+})
+
+app.listen(3001, () => {
+	console.log("Express Backend Running")
 })

@@ -19,9 +19,9 @@ const Login = ({ auth }) => {
             let response = await postRequest("login", { email: username, password: userpass })
             let userdata = await getRequest(`users/?email=${username}`)
 
-            loginToken({ auth: response.data.accessToken, user: username, id: userdata.data[0].id })
-            window.sessionStorage.setItem('auth', response.data.accessToken)
-            axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.accessToken}`
+            loginToken({ auth: response.data.auth, user: username, id: userdata.data[0].id })
+            window.sessionStorage.setItem('auth', response.data.auth)
+            axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.auth}`
         } catch (error) {
             if (error.response.status === 400) {
                 setUserError(true)
