@@ -46,7 +46,7 @@ const addComment = (comment) => {
         data: {
             id: parseInt(comment.id),
             newsid: parseInt(comment.newsid),
-            user: comment.user,
+            email: comment.email,
             content: comment.content
         }
     })
@@ -64,6 +64,7 @@ const loginToken = (auth) => {
         type: "LOGIN",
         data: auth
     })
+    axios.defaults.headers['Authorization'] = `Bearer ${auth.auth}`
 }
 
 const logoutToken = () => {
@@ -72,7 +73,7 @@ const logoutToken = () => {
     })
 
     window.sessionStorage.removeItem('auth')
-    axios.defaults.headers.post['Authorization'] = null
+    axios.defaults.headers['Authorization'] = null
 }
 
 export { updateNews, addNews, addAd, addComment, loginToken, logoutToken, removeComment }

@@ -12,27 +12,60 @@ let comments = [
     {
         id: 3,
         newsid: 3,
-        user: "demo@user.com",
+        email: "demo@user.com",
         content: "Interesting article indeed."
 
     }
 ]
 
+const jwt = require('jsonwebtoken')
 const commentsRouter = require('express').Router()
 
+const getToken = request => {
+    const authorization = request.get('authorization')
+
+    if (authorization && RegExp('Bearer ').test(authorization)) {
+        return authorization.substring(7)
+    }
+
+    return null
+}
+
 commentsRouter.get('/', (request, response) => {
-	response.json(comments)
+    response.json(comments)
 })
 
 commentsRouter.delete('/:id', (request, response) => {
-	comments = comments.filter(item => item.id !== Number(request.params.id))
-	response.status(200).end()
+    const token = getToken(request)
+
+    if (token) {
+        const decodedToken = jwt.verify(token, process.env.SECRET)
+        if (decodedToken.email === comments.find(item => item.id === Number(request.params.id)).email) {
+            comments = comments.filter(item => item.id !== Number(request.params.id))
+            response.status(200).end()
+        }
+    }
+
+    response.status(401).end()
 })
 
 commentsRouter.post('/', (request, response) => {
-	const largestid = comments.reduce((prev, current) => { return (prev.id > current.id) ? prev : current }).id
-	comments = comments.concat({ ...request.body, id: largestid + 1 })
-	response.json({ ...request.body, id: largestid + 1 })
+    const largestid = comments.reduce((prev, current) => { return (prev.id > current.id) ? prev : current }).id
+    const token = getToken(request)
+
+    if ('email' in request.body) {
+        if (token) {
+            const decodedToken = jwt.verify(token, process.env.SECRET)
+            if (decodedToken.email !== request.body.email) {
+                delete request.body.email
+            }
+        } else {
+            delete request.body.email
+        }
+    }
+
+    comments = comments.concat({ ...request.body, id: largestid + 1 })
+    response.json({ ...request.body, id: largestid + 1 })
 })
 
 module.exports = commentsRouter

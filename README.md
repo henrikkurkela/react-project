@@ -96,3 +96,5 @@ Implement simple tests:
 2020-10-03: Delete User/Comment Confirmations, Minor Refactoring 2h (Total 30h)
 
 2020-10-05: Start Working on Express Backend 2h (Total 32h)
+
+2020-10-06: Continue Work on Express Backend 2h (Total 34h)

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Header, Form, Message, Button } from 'semantic-ui-react'
-import { postRequest, getRequest } from './services/httpService'
+import { postRequest } from './services/httpService'
 import { loginToken } from './actions'
 
 const Login = ({ auth }) => {
@@ -17,9 +17,8 @@ const Login = ({ auth }) => {
 
         try {
             let response = await postRequest("login", { email: username, password: userpass })
-            let userdata = await getRequest(`users/?email=${username}`)
 
-            loginToken({ auth: response.data.auth, user: username, id: userdata.data[0].id })
+            loginToken({ auth: response.data.auth, email: response.data.email, id: response.data.id })
             window.sessionStorage.setItem('auth', response.data.auth)
             axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.auth}`
         } catch (error) {

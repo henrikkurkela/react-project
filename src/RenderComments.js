@@ -18,7 +18,7 @@ const RenderComments = ({ id, comments, news, auth }) => {
 	const commentForm = (event) => {
 		event.preventDefault()
 		if (newComment !== null && newComment !== "") {
-			postRequest("comments" , { content: newComment, newsid: id, user: auth ? auth.user : null }).then((response) => addComment(response.data))
+			postRequest("comments" , { content: newComment, newsid: id, email: auth ? auth.email : null }).then((response) => addComment(response.data))
 		}
 		setNewComment('')
 	}
@@ -44,7 +44,7 @@ const RenderComments = ({ id, comments, news, auth }) => {
 			{comments.filter(item => item.newsid === id).map((comment, key) =>
 				<Comment key={key}><Comment.Avatar src='https://via.placeholder.com/75x75?text=Anon' />
 					<Comment.Content>
-						<Comment.Author>{comment.user ? comment.user : 'Anonymous'}</Comment.Author>
+						<Comment.Author>{comment.email ? comment.email : 'Anonymous'}</Comment.Author>
 						<Comment.Text>{comment.content}</Comment.Text>
 					</Comment.Content>
 				</Comment>

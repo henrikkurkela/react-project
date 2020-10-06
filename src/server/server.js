@@ -37,7 +37,7 @@ app.post('/login', async (request, response) => {
 	if (user != null) {
 		let correctpassword = await bcrypt.compare(request.body.password, user.password)
 		if (correctpassword) {
-			const token = jwt.sign(request.body.email, process.env.SECRET)
+			const token = jwt.sign(user, process.env.SECRET)
 			response
 				.status(200)
 				.send({ auth: token, email: user.email, id: user.id })
@@ -64,6 +64,4 @@ app.post('/signup', async (request, response) => {
 	response.status(400).end()
 })
 
-app.listen(3001, () => {
-	console.log("Express Backend Running")
-})
+app.listen(3001)

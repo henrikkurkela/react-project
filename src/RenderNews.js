@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ConnectedRenderComments from './RenderComments'
 
-const NewsItem = ({ item, comments = null, selected = false }) => {
+const NewsItem = ({ item, selected = false }) => {
 
 	const paragraphs = item.content.split('<br/>')
 	const [open, setOpen] = useState(selected)
@@ -28,7 +28,7 @@ const NewsItem = ({ item, comments = null, selected = false }) => {
 				<Modal.Content>
 					{item.picture ? <Image fluid bordered style={{ marginBottom: '1.5rem' }} src={item.picture} /> : null}
 					{paragraphs.map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
-					{comments ? <ConnectedRenderComments id={item.id} /> : null}
+					<ConnectedRenderComments id={item.id} />
 				</Modal.Content>
 			</Modal>
 		</div>
@@ -45,7 +45,7 @@ const RenderNews = ({ news, comments }) => {
 			return (
 				<>
 					{
-						news.map(item => <NewsItem key={item.id} item={item} comments={comments.filter(comment => comment.newsid === item.id)} selected={parseInt(story) === item.id ? true : false} />)
+						news.map(item => <NewsItem key={item.id} item={item} selected={parseInt(story) === item.id ? true : false} />)
 					}
 				</>
 			)
