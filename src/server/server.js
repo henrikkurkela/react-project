@@ -1,15 +1,10 @@
-let users = [
-		{
-			id: 1,
-			email: "demo@user.com",
-			password: "$2b$10$BKpTs33V6xEVNG6mahZS/e5va7u5aZ9Ec994rqSOp7sPIjnrMXrFa"
-		}
-	]
-
+let users = require('./models/usersModel')
 require('dotenv').config()
-const newsRouter = require('./controllers/news')
-const adsRouter = require('./controllers/ads')
-const commentsRouter = require('./controllers/comments')
+
+const newsRouter = require('./controllers/newsController')
+const adsRouter = require('./controllers/adsController')
+const commentsRouter = require('./controllers/commentsController')
+const usersRouter = require('./controllers/usersController')
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -23,14 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/news', newsRouter)
 app.use('/ads', adsRouter)
 app.use('/comments', commentsRouter)
-
-app.get('/users', (request, response) => {
-	response.json(users)
-})
-
-app.delete('/users/:id', (request, response) => {
-	users = users.filter(item => item.id !== Number(request.params.id))
-})
+app.use('/users', usersRouter)
 
 app.post('/login', async (request, response) => {
 	const user = users.find((item) => item.email === request.body.email)
