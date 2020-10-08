@@ -22,32 +22,43 @@ app.use('/users', usersRouter)
 
 app.post('/login', async (request, response) => {
 	const user = users.find((item) => item.email === request.body.email)
-	if (user != null) {
-		let correctpassword = await bcrypt.compare(request.body.password, user.password)
-		if (correctpassword) {
-			const token = jwt.sign(user, process.env.SECRET)
-			response
-				.status(200)
-				.send({ auth: token, email: user.email, id: user.id })
-		} else {
-			response.status(400).end()
+	if (user) {
+		try {
+			let correctpassword = await bcrypt.compare(request.body.password, user.password)
+			if (correctpassword) {
+				const token = jwt.sign(user, process.env.SECRET)
+				response
+					.status(200)
+					.send({ auth: token, email: user.email, id: user.id, username: user.username, avatar: user.avatar })
+			} else {
+				response.status(401).send('Incorrect email or password')
+			}
+		} catch (error) {
+			console.log(error)
+			response.status(500).send('Internal server error')
 		}
 	} else {
-		response.status(400).end()
+		response.status(400).send('Incorrect email or password')
 	}
 })
 
 app.post('/signup', async (request, response) => {
-	const user = users.find((item) => item.email === request.body.email)
+	const user = users.find((item) => (item.email === request.body.email || item.username === request.body.username))
 	const largestid = users.length > 0 ? users.reduce((prev, current) => { return (prev.id > current.id) ? prev : current }).id : 0
-	if (!user && request.body.email && request.body.password) {
+	if (!user && request.body.email && request.body.password && request.body.username) {
 		let newuser = {
 			id: largestid + 1,
 			email: request.body.email,
+			username: request.body.username,
+			avatar: `https://via.placeholder.com/75x75?text=${request.body.username}`,
 			password: await bcrypt.hash(request.body.password, 10)
 		}
-		users = users.concat(newuser)
-		response.json({ id: newuser.id, email: newuser.email })
+		users.push(newuser)
+		response.json({ id: newuser.id, email: newuser.email, username: newuser.username, avatar: newuser.avatar })
+	} else if (user) {
+		response.status(400).send('User already exists')
+	} else {
+		response.status(400).send('Please fill out all the fields')
 	}
 	response.status(400).end()
 })

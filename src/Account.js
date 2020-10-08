@@ -24,14 +24,15 @@ const Account = ({ auth, comments }) => {
             </Link>
             <Header as='h3'>Recent Activity</Header>
             <Comment.Group>
-                {comments.filter(item => item.email === auth.email).map((comment, key) =>
-                    <Comment key={key}><Comment.Avatar src='https://via.placeholder.com/75x75?text=Anon' />
+                {comments.filter(item => item.userid === auth.id).map((comment, key) =>
+                    <Comment key={key}>
+                        <Comment.Avatar src={auth.avatar} />
                         <Comment.Content>
                             <Icon style={{ float: 'right', display: 'inline-block', cursor: 'pointer' }} name='delete' onClick={() => {
                                 setOpen(true)
                                 setSelectedComment(comment)
                             }}></Icon>
-                            <Comment.Author>{comment.email ? comment.email : 'Anonymous'}</Comment.Author>
+                            <Comment.Author>{auth.username}</Comment.Author>
                             <Comment.Text>{comment.content}</Comment.Text>
                         </Comment.Content>
                     </Comment>

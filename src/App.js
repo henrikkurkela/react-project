@@ -9,7 +9,7 @@ import ConnectedUnregister from './Unregister'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RenderAds from './RenderAds'
 import { getRequest } from './services/httpService'
-import { addNews, addAd, addComment } from './actions'
+import { addNews, addAd, addComment, addUser, resetContent } from './actions'
 import { useSelector } from 'react-redux'
 
 const App = () => {
@@ -17,6 +17,9 @@ const App = () => {
 	const auth = useSelector(state => state.auth)
 
 	useEffect(() => {
+
+		resetContent()
+
 		getRequest("news").then(response => {
 			const news = response.data
 			news.map(item => addNews(item))
@@ -31,7 +34,12 @@ const App = () => {
 			const comments = response.data
 			comments.map(item => addComment(item))
 		})
-	}, [])
+
+		getRequest("users").then(response => {
+			const users = response.data
+			users.map(item => addUser(item))
+		})
+	})
 
 	let categories = ['All News', 'Domestic', 'Foreign']
 

@@ -4,7 +4,7 @@ import { Comment, Divider, Header, Form, Button, Icon } from 'semantic-ui-react'
 import { postRequest, patchRequest } from './services/httpService'
 import { addComment, updateNews } from './actions'
 
-const RenderComments = ({ id, comments, news, auth }) => {
+const RenderComments = ({ id, comments, news, users, auth }) => {
 
 	const [newComment, setNewComment] = useState('')
 	const [liked, setLiked] = useState(() => {
@@ -18,7 +18,7 @@ const RenderComments = ({ id, comments, news, auth }) => {
 	const commentForm = (event) => {
 		event.preventDefault()
 		if (newComment !== null && newComment !== "") {
-			postRequest("comments" , { content: newComment, newsid: id, email: auth ? auth.email : null }).then((response) => addComment(response.data))
+			postRequest("comments" , { content: newComment, newsid: id, userid: auth ? auth.id : null }).then((response) => addComment(response.data))
 		}
 		setNewComment('')
 	}
@@ -27,11 +27,20 @@ const RenderComments = ({ id, comments, news, auth }) => {
 		if (liked === false) {
 			setLiked(true)
 			window.sessionStorage.setItem(id, true)
-			patchRequest(`news/${id}`, { id: id, likes: news.find(item => item.id === id).likes + 1 }).then((response) => updateNews(response.data))
+			patchRequest(`news/${id}`, { id: id, action: 'like' }).then((response) => updateNews(response.data))
 		} else if (liked === true) {
 			setLiked(false)
 			window.sessionStorage.setItem(id, false)
-			patchRequest(`news/${id}`, { id: id, likes: news.find(item => item.id === id).likes - 1 }).then((response) => updateNews(response.data))
+			patchRequest(`news/${id}`, { id: id, action: 'unlike' }).then((response) => updateNews(response.data))
+		}
+	}
+
+	const commenterDetails = (userid = null) => {
+		let user = users.find(item => item.id === userid)
+		if (user) {
+			return user
+		} else {
+			return { username: 'Anonymous', avatar: 'https://via.placeholder.com/75x75?text=Anon' }
 		}
 	}
 
@@ -42,9 +51,10 @@ const RenderComments = ({ id, comments, news, auth }) => {
     		</Header>
 			<Divider />
 			{comments.filter(item => item.newsid === id).map((comment, key) =>
-				<Comment key={key}><Comment.Avatar src='https://via.placeholder.com/75x75?text=Anon' />
+				<Comment key={key}>
+					<Comment.Avatar src={commenterDetails(comment.userid).avatar} />
 					<Comment.Content>
-						<Comment.Author>{comment.email ? comment.email : 'Anonymous'}</Comment.Author>
+						<Comment.Author>{commenterDetails(comment.userid).username}</Comment.Author>
 						<Comment.Text>{comment.content}</Comment.Text>
 					</Comment.Content>
 				</Comment>
@@ -67,6 +77,7 @@ const mapStateToRenderCommentsProps = (state) => {
 	return {
 		comments: state.comments,
 		news: state.news,
+		users: state.users,
 		auth: state.auth
 	}
 }

@@ -5,24 +5,25 @@ import { postRequest } from './services/httpService'
 
 const Signup = ({ auth }) => {
     const [newUserError, setNewUserError] = useState(false)
-    const [newuser, setNewUser] = useState('')
+    const [newemail, setNewEmail] = useState('')
+    const [newusername, setNewUsername] = useState('')
     const [newpassword, setNewPassword] = useState('')
 
     const [errorMessage, setErrorMessage] = useState('')
 
     const history = useHistory()
 
-    const signup = (event, username, userpass) => {
+    const signup = (event, email, username, userpass) => {
         event.preventDefault()
         setNewUserError(false)
-        postRequest("signup", { email: username, password: userpass })
+        postRequest("signup", { email: email, username: username, password: userpass })
             .then(response => {
                 if (response.status !== 400) {
                     history.push('/login')
                 }
             })
             .catch(error => {
-                if (error.response.status === 400) {
+                if (error.response.data) {
                     setNewUserError(true)
                     setErrorMessage(error.response.data)
                 }
@@ -34,9 +35,10 @@ const Signup = ({ auth }) => {
             <Header as='h3'>Sign Up</Header>
             <Form error={newUserError} style={{ display: 'inline-block' }}>
                 <Message error header='Error' content={errorMessage} />
-                <Form.Input placeholder='Email' onChange={(event) => setNewUser(event.target.value)} />
+                <Form.Input placeholder='Email' onChange={(event) => setNewEmail(event.target.value)} />
+                <Form.Input placeholder='Username' onChange={(event) => setNewUsername(event.target.value)} />
                 <Form.Input placeholder='Password' type='password' onChange={(event) => setNewPassword(event.target.value)} />
-                <Form.Button content='Sign Up' onClick={(event) => signup(event, newuser, newpassword)} />
+                <Form.Button content='Sign Up' onClick={(event) => signup(event, newemail, newusername, newpassword)} />
             </Form>
         </>
     )

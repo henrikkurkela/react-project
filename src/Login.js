@@ -18,11 +18,11 @@ const Login = ({ auth }) => {
         try {
             let response = await postRequest("login", { email: username, password: userpass })
 
-            loginToken({ auth: response.data.auth, email: response.data.email, id: response.data.id })
+            loginToken(response.data)
             window.sessionStorage.setItem('auth', response.data.auth)
             axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.auth}`
         } catch (error) {
-            if (error.response.status === 400) {
+            if (error.response.data) {
                 setUserError(true)
                 setErrorMessage(error.response.data)
             }
@@ -31,11 +31,12 @@ const Login = ({ auth }) => {
 
     async function demoLogin(event) {
         try {
-            await postRequest("signup", { email: "demo@user.com", password: "demouser" })
+            await postRequest("signup", { email: "demo@user.com", username: 'DemoUser', password: "demouser" })
         } catch (error) {
             console.log(error.response.data)
+        } finally {
+            await login("demo@user.com", "demouser")
         }
-        await login("demo@user.com", "demouser")
     }
 
     return (auth ? <Header as='h3'>Welcome!</Header> :

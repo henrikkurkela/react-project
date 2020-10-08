@@ -9,7 +9,7 @@ commentsRouter.get('/', (request, response) => {
 
 commentsRouter.delete('/:id', auth, (request, response) => {
     if (request.auth !== null) {
-        if (request.auth.email === comments.find(item => item.id === Number(request.params.id)).email) {
+        if (request.auth.id === comments.find(item => item.id === Number(request.params.id)).userid) {
             comments = comments.filter(item => item.id !== Number(request.params.id))
             response.status(200).end()
         }
@@ -22,12 +22,12 @@ commentsRouter.post('/', auth, (request, response) => {
     const largestid = comments.reduce((prev, current) => { return (prev.id > current.id) ? prev : current }).id
 
     if (request.auth !== null) {
-        if (request.auth.email !== request.body.email) {
-            delete request.body.email
+        if (request.auth.id !== request.body.userid) {
+            delete request.body.userid
         }
     }
 
-    comments = comments.concat({ ...request.body, id: largestid + 1 })
+    comments.push({ ...request.body, id: largestid + 1 })
     response.json({ ...request.body, id: largestid + 1 })
 })
 

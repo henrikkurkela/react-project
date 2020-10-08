@@ -46,7 +46,7 @@ const addComment = (comment) => {
         data: {
             id: parseInt(comment.id),
             newsid: parseInt(comment.newsid),
-            email: comment.email,
+            userid: comment.userid,
             content: comment.content
         }
     })
@@ -56,6 +56,13 @@ const removeComment = (comment) => {
     store.dispatch({
         type: "REMOVE_COMMENT",
         data: comment
+    })
+}
+
+const addUser = (user) => {
+    store.dispatch({
+        type: "NEW_USER",
+        data: user
     })
 }
 
@@ -76,4 +83,10 @@ const logoutToken = () => {
     axios.defaults.headers['Authorization'] = null
 }
 
-export { updateNews, addNews, addAd, addComment, loginToken, logoutToken, removeComment }
+const resetContent = () => {
+    store.dispatch({
+        type: "RESET_KEEP_AUTH"
+    })
+}
+
+export { updateNews, addNews, addAd, addComment, loginToken, logoutToken, removeComment, addUser, resetContent }
