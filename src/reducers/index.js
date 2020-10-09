@@ -1,5 +1,6 @@
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+
 import newsReducer from './newsReducer'
 import adsReducer from './adsReducer'
 import commentsReducer from './commentsReducer'

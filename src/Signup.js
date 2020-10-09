@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import { Header, Form, Message } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
+
 import { postRequest } from './services/httpService'
 
-const Signup = ({ auth }) => {
-    const [newUserError, setNewUserError] = useState(false)
+const Signup = () => {
+
+    const [signupError, setSignupError] = useState(false)
     const [newemail, setNewEmail] = useState('')
     const [newusername, setNewUsername] = useState('')
     const [newpassword, setNewPassword] = useState('')
-
     const [errorMessage, setErrorMessage] = useState('')
 
     const history = useHistory()
 
     const signup = (event, email, username, userpass) => {
         event.preventDefault()
-        setNewUserError(false)
+        setSignupError(false)
         postRequest("signup", { email: email, username: username, password: userpass })
             .then(response => {
                 if (response.status !== 400) {
@@ -24,16 +25,19 @@ const Signup = ({ auth }) => {
             })
             .catch(error => {
                 if (error.response.data) {
-                    setNewUserError(true)
+                    setSignupError(true)
                     setErrorMessage(error.response.data)
+                } else {
+                    setSignupError(true)
+                    setErrorMessage('Something went wrong, try again later')
                 }
             })
     }
 
-    return (auth ? <Header as='h3'>Welcome!</Header> :
+    return (
         <>
             <Header as='h3'>Sign Up</Header>
-            <Form error={newUserError} style={{ display: 'inline-block' }}>
+            <Form error={signupError} style={{ display: 'inline-block' }}>
                 <Message error header='Error' content={errorMessage} />
                 <Form.Input placeholder='Email' onChange={(event) => setNewEmail(event.target.value)} />
                 <Form.Input placeholder='Username' onChange={(event) => setNewUsername(event.target.value)} />

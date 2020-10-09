@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Header, Divider, Modal, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
+
 import ConnectedRenderComments from './RenderComments'
 
 const NewsItem = ({ item, selected = false }) => {
@@ -70,6 +71,7 @@ const mapStateToProps = (state) => {
 }
 
 const ConnectedRenderNews = connect(mapStateToProps)(RenderNews)
+
 export default ConnectedRenderNews
 
 export { NewsItem }

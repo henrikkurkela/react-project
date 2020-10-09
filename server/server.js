@@ -45,7 +45,12 @@ app.post('/login', async (request, response) => {
 app.post('/signup', async (request, response) => {
 	const user = users.find((item) => (item.email === request.body.email || item.username === request.body.username))
 	const largestid = users.length > 0 ? users.reduce((prev, current) => { return (prev.id > current.id) ? prev : current }).id : 0
-	if (!user && request.body.email && request.body.password && request.body.username) {
+
+	if (!RegExp('^[a-zA-Z0-9.]+@[a-zA-Z]+[.]{1}[a-zA-Z]+$').test(request.body.email)) {
+		response.status(400).send('Invalid email')
+	} else if (!RegExp('^[a-zA-Z0-9]{8,16}$').test(request.body.username)) {
+		response.status(400).send('Invalid username')
+	} else if (!user && request.body.email && request.body.password && request.body.username) {
 		let newuser = {
 			id: largestid + 1,
 			email: request.body.email,

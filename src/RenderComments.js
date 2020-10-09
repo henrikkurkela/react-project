@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Comment, Divider, Header, Form, Button, Icon } from 'semantic-ui-react'
+
 import { postRequest, patchRequest } from './services/httpService'
 import { addComment, updateNews } from './actions'
 

@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Header, Form, Message, Button } from 'semantic-ui-react'
+
 import { postRequest } from './services/httpService'
 import { loginToken } from './actions'
 
 const Login = ({ auth }) => {
+    
     const [userError, setUserError] = useState(false)
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
-
     const [errorMessage, setErrorMessage] = useState('')
 
     async function login(username, userpass) {
@@ -25,6 +26,9 @@ const Login = ({ auth }) => {
             if (error.response.data) {
                 setUserError(true)
                 setErrorMessage(error.response.data)
+            } else {
+                setUserError(true)
+                setErrorMessage('Something went wrong, try again later')
             }
         }
     }

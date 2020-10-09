@@ -102,3 +102,5 @@ Implement simple tests:
 2020-10-07: Continue Work on Express Backend 2h (Total 36h)
 
 2020-10-08: Continue Work on Express Backend, Minor Frontend Changes, API Documentation 4h (Total 40h)
+
+2020-10-09: Implement Login RegExp Tests, Improve Code Readability 1h (Total 41h)

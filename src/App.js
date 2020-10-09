@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
 import { Grid, Header, Divider, Container } from 'semantic-ui-react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+import { getRequest } from './services/httpService'
+import { addNews, addAd, addComment, addUser, resetContent } from './actions'
+
 import RenderNews from './RenderNews'
 import ConnectedLogin from './Login'
 import Signup from './Signup'
 import Logout from './Logout'
 import ConnectedAccount from './Account'
 import ConnectedUnregister from './Unregister'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RenderAds from './RenderAds'
-import { getRequest } from './services/httpService'
-import { addNews, addAd, addComment, addUser, resetContent } from './actions'
-import { useSelector } from 'react-redux'
 
 const App = () => {
 

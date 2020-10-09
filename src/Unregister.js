@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { Header, Button } from 'semantic-ui-react'
+
 import { deleteRequest } from './services/httpService'
 import { logoutToken } from './actions'
 
