@@ -2,7 +2,9 @@ const reducer = (state = null, action) => {
 	
 	switch (action.type) {
 		case "LOGIN":
-            return state = action.data
+			return state = action.data
+		case "UPDATE_AUTH":
+			return state = { ...state, ...action.data }
         case "LOGOUT":
             return state = null
 		default:

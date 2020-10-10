@@ -9,7 +9,7 @@ npm run dev
 
 Stock photos downloaded from unsplash.com
 
-# TODO
+## TODO
 
 Fifth Iteration:
 
@@ -19,7 +19,7 @@ Enhance user experience:
 - Display nickname instead of email
 - Implement simple avatars
 
-# DONE
+## DONE
 
 Fourth Iteration:
 
@@ -63,7 +63,7 @@ Implement simple tests:
 
 - Simple reducer tests
 
-# Work Log
+## Work Log
 
 2020-09-16: Project Started, Begin Work on Frontend, Implement Simple Backend 2h (Total 2h)
 
@@ -104,3 +104,5 @@ Implement simple tests:
 2020-10-08: Continue Work on Express Backend, Minor Frontend Changes, API Documentation 4h (Total 40h)
 
 2020-10-09: Implement Login RegExp Tests, Improve Code Readability 1h (Total 41h)
+
+2020-10-10: Implement Simple Avatars 2h (Total 43h)

@@ -41,7 +41,7 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 		if (user) {
 			return user
 		} else {
-			return { username: 'Anonymous', avatar: 'https://via.placeholder.com/75x75?text=Anon' }
+			return { username: 'Anonymous', avatar: '/assets/avatar/anon.jpg' }
 		}
 	}
 

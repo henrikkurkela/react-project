@@ -38,7 +38,7 @@ app.post('/login', async (request, response) => {
 			response.status(500).send('Internal server error')
 		}
 	} else {
-		response.status(400).send('Incorrect email or password')
+		response.status(401).send('Incorrect email or password')
 	}
 })
 
@@ -55,7 +55,7 @@ app.post('/signup', async (request, response) => {
 			id: largestid + 1,
 			email: request.body.email,
 			username: request.body.username,
-			avatar: `https://via.placeholder.com/75x75?text=${request.body.username}`,
+			avatar: '/assets/avatar/default.jpg',
 			password: await bcrypt.hash(request.body.password, 10)
 		}
 		users.push(newuser)

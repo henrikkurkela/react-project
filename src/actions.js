@@ -66,6 +66,20 @@ const addUser = (user) => {
     })
 }
 
+const updateUser = (user) => {
+    store.dispatch({
+        type: 'UPDATE_USER',
+        data: user
+    })
+}
+
+const updateToken = (auth) => {
+    store.dispatch({
+        type: "UPDATE_AUTH",
+        data: auth
+    })
+}
+
 const loginToken = (auth) => {
     store.dispatch({
         type: "LOGIN",
@@ -89,4 +103,4 @@ const resetContent = () => {
     })
 }
 
-export { updateNews, addNews, addAd, addComment, loginToken, logoutToken, removeComment, addUser, resetContent }
+export { updateNews, addNews, addAd, addComment, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, resetContent }

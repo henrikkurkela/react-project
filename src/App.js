@@ -13,6 +13,7 @@ import Logout from './Logout'
 import ConnectedAccount from './Account'
 import ConnectedUnregister from './Unregister'
 import RenderAds from './RenderAds'
+import ConnectedAvatar from './Avatar'
 
 const App = () => {
 
@@ -70,6 +71,9 @@ const App = () => {
 							<Switch>
 								<Route path="/account">
 									<ConnectedAccount />
+								</Route>
+								<Route path="/avatar">
+									<ConnectedAvatar />
 								</Route>
 								<Route path="/login">
 									<ConnectedLogin />

@@ -20,6 +20,9 @@ const Account = ({ auth, comments }) => {
     return (<>
         <Header as='h3'>Account Management</Header>
         {auth ? <>
+            <Link to='/avatar'>
+                <Button to='/unregister'>Choose Avatar</Button>
+            </Link>
             <Link to='/unregister'>
                 <Button to='/unregister'>Delete Account</Button>
             </Link>
