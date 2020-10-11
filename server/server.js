@@ -1,15 +1,17 @@
-let users = require('./models/usersModel')
 require('dotenv').config()
-
-const newsRouter = require('./controllers/newsController')
-const adsRouter = require('./controllers/adsController')
-const commentsRouter = require('./controllers/commentsController')
-const usersRouter = require('./controllers/usersController')
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const cors = require('cors')
 const app = express()
+
+const newsRouter = require('./controllers/newsController')
+const adsRouter = require('./controllers/adsController')
+const commentsRouter = require('./controllers/commentsController')
+const usersRouter = require('./controllers/usersController')
+const avatarsRouter = require('./controllers/avatarsController')
+
+let users = require('./models/usersModel')
 
 app.use(cors())
 app.use(express.json())
@@ -19,6 +21,7 @@ app.use('/news', newsRouter)
 app.use('/ads', adsRouter)
 app.use('/comments', commentsRouter)
 app.use('/users', usersRouter)
+app.use('/avatars', avatarsRouter)
 
 app.post('/login', async (request, response) => {
 	const user = users.find((item) => item.email === request.body.email)

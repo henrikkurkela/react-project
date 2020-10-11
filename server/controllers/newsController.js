@@ -1,6 +1,6 @@
-let news = require('../models/newsModel')
-
 const newsRouter = require('express').Router()
+
+let news = require('../models/newsModel')
 
 newsRouter.get('/', (request, response) => {
 	response.json(news)

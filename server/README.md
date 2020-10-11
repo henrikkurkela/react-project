@@ -141,3 +141,11 @@ Accepts DELETE:
 (*) The JSON Web Token for the user.
 
 Responds 200
+
+## /avatars
+
+Accepts GET
+
+Responds 200:
+
+- avatars [ARRAY]

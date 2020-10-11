@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Header, Image } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 
-import { patchRequest } from './services/httpService'
+import { getRequest, patchRequest } from './services/httpService'
 import { updateUser, updateToken } from './actions'
 
 const Avatar = ({ auth }) => {
 
-    const avatars = ['default.jpg', '1.jpg', '2.jpg', '3.jpg']
+    const [avatars, setAvatars] = useState(['default.jpg'])
     const history = useHistory()
+
+    useEffect(() => {
+        getRequest('/avatars').then((response) => {
+            setAvatars(response.data.avatars)
+        })
+    },[])
 
     const chooseAvatar = (avatar) => {
         patchRequest(`/users/${auth.id}`, {

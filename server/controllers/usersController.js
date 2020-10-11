@@ -1,7 +1,8 @@
+const usersRouter = require('express').Router()
+
 let users = require('../models/usersModel')
 
 const auth = require('../middlewares/authMiddleware')
-const usersRouter = require('express').Router()
 
 usersRouter.get('/', (request, response) => {
 	response.json(users.map(item => { return { id: item.id, username: item.username, avatar: item.avatar } }))

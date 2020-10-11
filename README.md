@@ -106,3 +106,5 @@ Implement simple tests:
 2020-10-09: Implement Login RegExp Tests, Improve Code Readability 1h (Total 41h)
 
 2020-10-10: Implement Simple Avatars 2h (Total 43h)
+
+2020-10-11: Backend Avatar List, Code Cleanup 2h (Total 45h)
