@@ -24,7 +24,7 @@
 - userid int [FK: users.id]
 - content varchar
 
-# ads
+## ads
 
 - id int [PK]
 - picture varchar
