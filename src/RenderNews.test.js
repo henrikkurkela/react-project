@@ -1,7 +1,8 @@
-import { NewsItem } from './RenderNews'
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
+
+import { NewsItem } from './RenderNews'
 
 describe('RenderNews', () => {
     test('news item being rendered correctly', () => {

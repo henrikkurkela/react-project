@@ -11,6 +11,13 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
+Sixth Iteration:
+
+- Implement permanent DB solution
+- Implement simple /development route with DB reset options
+
+## DONE
+
 Fifth Iteration:
 
 Enhance user experience:
@@ -18,8 +25,6 @@ Enhance user experience:
 - Delete user/comment confirmations
 - Display nickname instead of email
 - Implement simple avatars
-
-## DONE
 
 Fourth Iteration:
 
@@ -108,3 +113,5 @@ Implement simple tests:
 2020-10-10: Implement Simple Avatars 2h (Total 43h)
 
 2020-10-11: Backend Avatar List, Code Cleanup 2h (Total 45h)
+
+2020-10-15: Code Cleanup, Fifth Iteration Goals Met, Planning 3h (Total 48h)

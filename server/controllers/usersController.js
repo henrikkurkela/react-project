@@ -9,6 +9,7 @@ usersRouter.get('/', (request, response) => {
 })
 
 usersRouter.patch('/:id', auth, (request, response) => {
+	
 	if (request.auth != null) {
 		if (request.auth.id === Number(request.params.id)) {
 			let index = users.findIndex(item => item.id === Number(request.params.id))
@@ -21,20 +22,24 @@ usersRouter.patch('/:id', auth, (request, response) => {
 					}
 					break
 				default:
+					response.status(400).end()
 			}
 			response.json({ id: users[index].id, username: users[index].username, avatar: users[index].avatar })
 		}
 	}
+
 	response.status(400)
 })
 
 usersRouter.delete('/:id', auth, (request, response) => {
+
 	if (request.auth !== null) {
 		if (request.auth.id === Number(request.params.id)) {
 			users.splice(users.findIndex(item => item.id === Number(request.params.id)), 1)
 			response.status(200).end()
 		}
 	}
+	
 	response.status(401)
 })
 

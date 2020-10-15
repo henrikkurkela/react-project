@@ -9,6 +9,7 @@ commentsRouter.get('/', (request, response) => {
 })
 
 commentsRouter.delete('/:id', auth, (request, response) => {
+
     if (request.auth !== null) {
         if (request.auth.id === comments.find(item => item.id === Number(request.params.id)).userid) {
             comments = comments.filter(item => item.id !== Number(request.params.id))

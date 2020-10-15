@@ -29,7 +29,7 @@ app.post('/login', async (request, response) => {
 		try {
 			let correctpassword = await bcrypt.compare(request.body.password, user.password)
 			if (correctpassword) {
-				const token = jwt.sign(user, process.env.SECRET)
+				const token = jwt.sign(user, process.env.BACKEND_SECRET)
 				response
 					.status(200)
 					.send({ auth: token, email: user.email, id: user.id, username: user.username, avatar: user.avatar })
@@ -71,4 +71,4 @@ app.post('/signup', async (request, response) => {
 	response.status(400).end()
 })
 
-app.listen(3001)
+app.listen(process.env.BACKEND_PORT)

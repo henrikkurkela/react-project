@@ -1,5 +1,4 @@
 const fs = require('fs')
-const { CommentAvatar } = require('semantic-ui-react')
 
 const avatarFolder = './public/assets/avatar/'
 

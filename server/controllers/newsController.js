@@ -8,6 +8,7 @@ newsRouter.get('/', (request, response) => {
 
 newsRouter.patch('/:id', (request, response) => {
 	let index = news.findIndex(item => item.id === Number(request.params.id))
+
 	switch (request.body.action) {
 		case 'like':
 			news[index].likes = news[index].likes + 1
@@ -17,6 +18,7 @@ newsRouter.patch('/:id', (request, response) => {
 			break
 		default:
 	}
+	
 	response.json(news[index])
 })
 
