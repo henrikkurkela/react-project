@@ -11,6 +11,7 @@ const commentsRouter = require('./controllers/commentsController')
 const usersRouter = require('./controllers/usersController')
 const avatarsRouter = require('./controllers/avatarsController')
 
+const connection = require('./models/database')
 let users = require('./models/usersModel')
 
 app.use(cors())
@@ -69,6 +70,20 @@ app.post('/signup', async (request, response) => {
 		response.status(400).send('Please fill out all the fields')
 	}
 	response.status(400).end()
+})
+
+app.get('/reset', async (request, response) => {
+
+	try {
+		await connection.query('DELETE FROM ads')
+		await connection.query('INSERT INTO ads (picture, href) VALUES ("/assets/img/photo4.jpg", "http://www.google.com")')
+		await connection.query('INSERT INTO ads (picture, href) VALUES ("/assets/img/photo5.jpg", "http://www.bing.com")')
+	} catch (error) {
+		console.log(error)
+		response.status(500).end()
+	}
+	response.status(200).end()
+
 })
 
 app.listen(process.env.BACKEND_PORT)

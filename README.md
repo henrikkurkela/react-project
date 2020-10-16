@@ -7,6 +7,8 @@ To start the application, type:
 npm run dev
 ```
 
+The backend requires a MySQL server to function.
+
 Stock photos downloaded from unsplash.com
 
 ## TODO
@@ -14,7 +16,7 @@ Stock photos downloaded from unsplash.com
 Sixth Iteration:
 
 - Implement permanent DB solution
-- Implement simple /development route with DB reset options
+- Implement simple development routes with DB manipulation options
 
 ## DONE
 
@@ -115,3 +117,5 @@ Implement simple tests:
 2020-10-11: Backend Avatar List, Code Cleanup 2h (Total 45h)
 
 2020-10-15: Code Cleanup, Fifth Iteration Goals Met, Planning 3h (Total 48h)
+
+2020-10-16: Implement Ads in MySQL Database, Begin Work on /reset Route 4h (Total 52h)
