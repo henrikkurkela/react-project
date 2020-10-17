@@ -1,16 +1,18 @@
 const connection = require('./database')
 
-function ads () {
+class AdsModel {
 
-    return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM ads', (error, result) => {
-            if (error) { 
-                reject(error)
-            } else {
-                resolve(result)
-            }
+    getAll = () => {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM ads', (error, result) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(result)
+                }
+            })
         })
-    })
+    }
 }
 
-module.exports = ads
+module.exports = AdsModel

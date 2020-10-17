@@ -119,3 +119,5 @@ Implement simple tests:
 2020-10-15: Code Cleanup, Fifth Iteration Goals Met, Planning 3h (Total 48h)
 
 2020-10-16: Implement Ads in MySQL Database, Begin Work on /reset Route 4h (Total 52h)
+
+2020-10-17: AdsModel as Class 1h (Total 53h)

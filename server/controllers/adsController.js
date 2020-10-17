@@ -1,10 +1,12 @@
 const adsRouter = require('express').Router()
 
-let ads = require('../models/adsModel')
+const AdsModel = require('../models/adsModel')
+
+const Ads = new AdsModel
 
 adsRouter.get('/', (request, response) => {
 
-	ads().then((result) => {
+	Ads.getAll().then((result) => {
 		response.json(result)
 	}).catch((error) => {
 		console.log(error)
