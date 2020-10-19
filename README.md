@@ -121,3 +121,5 @@ Implement simple tests:
 2020-10-16: Implement Ads in MySQL Database, Begin Work on /reset Route 4h (Total 52h)
 
 2020-10-17: AdsModel as Class 1h (Total 53h)
+
+2020-10-19: Start Working on Users MySQL Model 2h (Total 55h)

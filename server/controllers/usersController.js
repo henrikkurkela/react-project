@@ -1,22 +1,32 @@
 const usersRouter = require('express').Router()
 
-let users = require('../models/usersModel')
+let UsersModel = require('../models/usersModel')
+
+let Users = new UsersModel
 
 const auth = require('../middlewares/authMiddleware')
 
 usersRouter.get('/', (request, response) => {
-	response.json(users.map(item => { return { id: item.id, username: item.username, avatar: item.avatar } }))
+
+	Users.getAll().then((result) => {
+		response.json(result)
+	}).catch((error) => {
+		console.log(error)
+		response.status(500).end()
+	})
 })
 
 usersRouter.patch('/:id', auth, (request, response) => {
 	
 	if (request.auth != null) {
 		if (request.auth.id === Number(request.params.id)) {
-			let index = users.findIndex(item => item.id === Number(request.params.id))
 			switch (request.body.action) {
 				case 'avatar':
 					if (RegExp('/assets/avatar/[a-zA-Z0-9.]+').test(request.body.avatar)) {
-						users[index].avatar = request.body.avatar
+						Users.updateAvatarOfId(request.body.avatar, request.auth.id).then((updated) => {
+							delete updated.password
+							response.json(updated)
+						})
 					} else {
 						response.status(400).end()
 					}
@@ -24,18 +34,17 @@ usersRouter.patch('/:id', auth, (request, response) => {
 				default:
 					response.status(400).end()
 			}
-			response.json({ id: users[index].id, username: users[index].username, avatar: users[index].avatar })
 		}
+	} else {
+		response.status(400).end()
 	}
-
-	response.status(400)
 })
 
 usersRouter.delete('/:id', auth, (request, response) => {
 
 	if (request.auth !== null) {
 		if (request.auth.id === Number(request.params.id)) {
-			users.splice(users.findIndex(item => item.id === Number(request.params.id)), 1)
+			Users.deleteById(request.auth.id)
 			response.status(200).end()
 		}
 	}

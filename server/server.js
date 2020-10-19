@@ -11,8 +11,10 @@ const commentsRouter = require('./controllers/commentsController')
 const usersRouter = require('./controllers/usersController')
 const avatarsRouter = require('./controllers/avatarsController')
 
+const UsersModel = require('./models/usersModel')
 const connection = require('./models/database')
-let users = require('./models/usersModel')
+
+let Users = new UsersModel
 
 app.use(cors())
 app.use(express.json())
@@ -25,7 +27,13 @@ app.use('/users', usersRouter)
 app.use('/avatars', avatarsRouter)
 
 app.post('/login', async (request, response) => {
-	const user = users.find((item) => item.email === request.body.email)
+
+	let user = null
+
+	if (await Users.getByEmail(request.body.email) != []) {
+		user = await Users.getByEmail(request.body.email)
+	}
+
 	if (user) {
 		try {
 			let correctpassword = await bcrypt.compare(request.body.password, user.password)
@@ -47,22 +55,21 @@ app.post('/login', async (request, response) => {
 })
 
 app.post('/signup', async (request, response) => {
-	const user = users.find((item) => (item.email === request.body.email || item.username === request.body.username))
-	const largestid = users.length > 0 ? users.reduce((prev, current) => { return (prev.id > current.id) ? prev : current }).id : 0
+
+	let user = null
+
+	if (await Users.getByUsername(request.body.username) != []) {
+		user = await Users.getByUsername(request.body.username)
+	} else if (await Users.getByEmail(request.body.email) != []) {
+		user = await Users.getByEmail(request.body.email)
+	}
 
 	if (!RegExp('^[a-zA-Z0-9.]+@[a-zA-Z]+[.]{1}[a-zA-Z]+$').test(request.body.email)) {
 		response.status(400).send('Invalid email')
 	} else if (!RegExp('^[a-zA-Z0-9]{8,16}$').test(request.body.username)) {
 		response.status(400).send('Invalid username')
-	} else if (!user && request.body.email && request.body.password && request.body.username) {
-		let newuser = {
-			id: largestid + 1,
-			email: request.body.email,
-			username: request.body.username,
-			avatar: '/assets/avatar/default.jpg',
-			password: await bcrypt.hash(request.body.password, 10)
-		}
-		users.push(newuser)
+	} else if (user && request.body.email && request.body.password && request.body.username) {
+		let newuser = Users.addUser(request.body.email, request.body.username, '/assets/avatar/default.jpg', await bcrypt.hash(request.body.password, 10))
 		response.json({ id: newuser.id, email: newuser.email, username: newuser.username, avatar: newuser.avatar })
 	} else if (user) {
 		response.status(400).send('User already exists')
@@ -78,6 +85,8 @@ app.get('/reset', async (request, response) => {
 		await connection.query('DELETE FROM ads')
 		await connection.query('INSERT INTO ads (picture, href) VALUES ("/assets/img/photo4.jpg", "http://www.google.com")')
 		await connection.query('INSERT INTO ads (picture, href) VALUES ("/assets/img/photo5.jpg", "http://www.bing.com")')
+
+		await connection.query('DELETE FROM users')
 	} catch (error) {
 		console.log(error)
 		response.status(500).end()
