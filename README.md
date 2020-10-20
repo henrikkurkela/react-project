@@ -124,4 +124,4 @@ Implement simple tests:
 
 2020-10-19: Start Working on Users MySQL Model 2h (Total 55h)
 
-2020-10-20: Start Working on News MySQL Model 1h (Total 56h)
+2020-10-20: Start Working on News and Comments MySQL Models 2h (Total 57h)

@@ -1,8 +1,8 @@
 const newsRouter = require('express').Router()
 
-let NewsModel = require('../models/newsModel')
+const NewsModel = require('../models/newsModel')
 
-let News = new NewsModel()
+const News = new NewsModel()
 
 newsRouter.get('/', (request, response) => {
 
@@ -12,6 +12,7 @@ newsRouter.get('/', (request, response) => {
 		console.log(error)
 		response.status(500).end()
 	})
+
 })
 
 newsRouter.patch('/:id', async (request, response) => {
@@ -32,6 +33,7 @@ newsRouter.patch('/:id', async (request, response) => {
 		console.log(error)
 		response.status(500).end()
 	})
+
 })
 
 module.exports = newsRouter

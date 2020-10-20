@@ -20,9 +20,9 @@
 ## comments
 
 - id int [PK]
-- newsid int [FK: news.id]
-- userid int [FK: users.id]
-- content varchar
+- newsid int
+- userid int
+- content text
 
 ## ads
 
@@ -37,3 +37,5 @@
 - CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(255) NOT NULL UNIQUE, avatar VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL);
 
 - CREATE TABLE news (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, category INT NOT NULL, likes INT NOT NULL, headline VARCHAR(255) NOT NULL, content TEXT NOT NULL, picture VARCHAR(255));
+
+- CREATE TABLE comments (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, newsid INT NOT NULL, userid INT, content TEXT NOT NULL)

@@ -2,7 +2,7 @@ const usersRouter = require('express').Router()
 
 let UsersModel = require('../models/usersModel')
 
-let Users = new UsersModel
+let Users = new UsersModel()
 
 const auth = require('../middlewares/authMiddleware')
 
