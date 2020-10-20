@@ -2,7 +2,7 @@ const adsRouter = require('express').Router()
 
 const AdsModel = require('../models/adsModel')
 
-const Ads = new AdsModel
+const Ads = new AdsModel()
 
 adsRouter.get('/', (request, response) => {
 

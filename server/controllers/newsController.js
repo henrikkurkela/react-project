@@ -1,25 +1,37 @@
 const newsRouter = require('express').Router()
 
-let news = require('../models/newsModel')
+let NewsModel = require('../models/newsModel')
+
+let News = new NewsModel()
 
 newsRouter.get('/', (request, response) => {
-	response.json(news)
+
+	News.getAll().then((result) => {
+		response.json(result)
+	}).catch((error) => {
+		console.log(error)
+		response.status(500).end()
+	})
 })
 
-newsRouter.patch('/:id', (request, response) => {
-	let index = news.findIndex(item => item.id === Number(request.params.id))
+newsRouter.patch('/:id', async (request, response) => {
 
 	switch (request.body.action) {
 		case 'like':
-			news[index].likes = news[index].likes + 1
+			await News.likeStory(request.params.id)
 			break
 		case 'unlike':
-			news[index].likes = news[index].likes - 1
+			await News.dislikeStory(request.params.id)
 			break
 		default:
 	}
 	
-	response.json(news[index])
+	News.getAll().then((result) => {
+		response.json(result.find((item) => item.id === Number(request.params.id)))
+	}).catch((error) => {
+		console.log(error)
+		response.status(500).end()
+	})
 })
 
 module.exports = newsRouter
