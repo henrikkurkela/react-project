@@ -86,7 +86,7 @@ app.post('/signup', async (request, response) => {
 	response.status(400).end()
 })
 
-app.get('/reset', async (request, response) => {
+app.post('/reset', async (request, response) => {
 
 	const ads = [
 		{
@@ -118,12 +118,14 @@ app.get('/reset', async (request, response) => {
 			category: 2,
 			likes: 384,
 			headline: "Third News Story",
+			picture: "",
 			content: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."
 		},
 		{
 			category: 2,
 			likes: 512,
 			headline: "Fourth News Story",
+			picture: "",
 			content: "Nullam interdum mi et est rutrum, non vulputate orci convallis. Sed augue nisl, commodo nec fringilla sed, auctor sit amet justo. Suspendisse vel consectetur quam. Sed sem massa, pulvinar at eros et, pretium tempus odio. Mauris dapibus fringilla nunc id finibus. Vivamus eget volutpat eros, vel iaculis ex. Duis vel pulvinar leo. Nulla cursus tellus a tempor blandit. Aenean eget tincidunt lorem. Donec blandit massa ipsum, quis tristique risus aliquam accumsan. In hac habitasse platea dictumst. Nam ac libero nisi. Sed luctus congue risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec a nisl ut ligula ultricies malesuada.<br/>Mauris eu purus tincidunt tortor cursus feugiat at eget ex. Vivamus pellentesque quam eget ultrices lacinia. Cras in dictum enim. Nam tellus orci, faucibus id molestie non, tempor eu elit. In magna nunc, feugiat et accumsan non, semper ac ex. Praesent accumsan tempor placerat. Pellentesque convallis condimentum massa ac aliquam. Duis ut fermentum dui. Cras fermentum urna diam, in dictum diam posuere in. Donec dictum, quam ac aliquet fermentum, ligula mi aliquam sapien, eget tincidunt neque purus in tortor. Donec pharetra egestas arcu, non dignissim sem iaculis quis. Sed elementum metus ac augue gravida ultricies. Cras pretium turpis ut dapibus iaculis. Donec ac augue quis nisi blandit tempus. Aenean lobortis lacus in mattis aliquet. Sed mattis vel neque ac ullamcorper.<br/>Sed feugiat dapibus tempor. Maecenas id magna ornare, euismod risus non, imperdiet justo. Nam id varius tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent quis augue et erat ornare pretium nec ut sem. Duis tristique mauris orci, et imperdiet ipsum pretium ac. Nulla ut interdum risus, eget laoreet lacus. Donec et consequat enim. Morbi tempus eu velit nec pellentesque. Nulla eu sodales mi. In fermentum facilisis finibus."
 		},
 		{
@@ -143,7 +145,7 @@ app.get('/reset', async (request, response) => {
 
 		connection.query('DELETE FROM news')
 		news.map((item) =>
-			connection.query(`INSERT INTO news (category, likes, headline, content, picture) VALUES (${item.category}, ${item.likes}, "${item.headline}", "${item.content}", "${item.picture ? item.picture : ""}")`)
+			connection.query(`INSERT INTO news (category, likes, headline, content, picture) VALUES (${item.category}, ${item.likes}, "${item.headline}", "${item.content}", "${item.picture}")`)
 		)
 
 		connection.query('DELETE FROM ads')

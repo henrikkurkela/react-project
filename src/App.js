@@ -14,6 +14,7 @@ import ConnectedAccount from './Account'
 import ConnectedUnregister from './Unregister'
 import RenderAds from './RenderAds'
 import ConnectedAvatar from './Avatar'
+import Development from './Development'
 
 const App = () => {
 
@@ -69,6 +70,9 @@ const App = () => {
 							<Divider />
 							<RenderAds />
 							<Switch>
+								<Route path="/development">
+									<Development />
+								</Route>
 								<Route path="/account">
 									<ConnectedAccount />
 								</Route>
