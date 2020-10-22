@@ -3,6 +3,7 @@ import { Header, Form, Message } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 
 import { postRequest } from './services/httpService'
+import { addUser } from './actions'
 
 const Signup = () => {
 
@@ -20,6 +21,8 @@ const Signup = () => {
         postRequest("signup", { email: email, username: username, password: userpass })
             .then(response => {
                 if (response.status !== 400) {
+                    console.log(response.data)
+                    addUser(response.data)
                     history.push('/login')
                 }
             })

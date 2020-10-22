@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const getAuth = (request, response, next) => {
+    
     let token = null
     
     try {

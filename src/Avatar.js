@@ -30,7 +30,7 @@ const Avatar = ({ auth }) => {
 
     return (
         <>
-            <Header as='h1'>Choose Avatar</Header>
+            <Header as='h3'>Choose Avatar</Header>
             {avatars.map((item, key) => {
                 return <Image 
                     src={`/assets/avatar/${item}`}

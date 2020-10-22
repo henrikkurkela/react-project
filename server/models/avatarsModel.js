@@ -4,7 +4,7 @@ const avatarFolder = './public/assets/avatar/'
 
 const avatars = () => {
 
-    let files = fs.readdirSync(avatarFolder)
+    const files = fs.readdirSync(avatarFolder)
     return { avatars: files }
 
 }

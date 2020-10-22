@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 import { postRequest } from './services/httpService'
 
-const Development = () => {
+const Development = ({ requestReset }) => {
 
     const history = useHistory()
 
@@ -12,6 +12,7 @@ const Development = () => {
         postRequest("reset")
             .then((response) => {
                 if (response.status === 200) {
+                    requestReset(true)
                     history.push('/')
                 }
             })

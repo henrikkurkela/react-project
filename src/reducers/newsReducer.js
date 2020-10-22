@@ -12,7 +12,7 @@ const reducer = (state = [], action) => {
 			return state.map(item =>
 				item.id !== id ? item : changedNews
 			)
-		case "RESET_KEEP_AUTH":
+		case "RESET":
 			return state = []
 		default:
 			return state

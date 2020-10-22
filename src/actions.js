@@ -100,7 +100,7 @@ const logoutToken = () => {
 
 const resetContent = () => {
     store.dispatch({
-        type: "RESET_KEEP_AUTH"
+        type: "RESET"
     })
 }
 

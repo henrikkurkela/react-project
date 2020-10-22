@@ -16,11 +16,11 @@ class NewsModel {
 
     likeStory = (id) => {
         return new Promise((resolve, reject) => {
-            connection.query(`UPDATE news SET likes = likes + 1 WHERE id = ${id}`, (error, result) => {
+            connection.query(`UPDATE news SET likes = likes + 1 WHERE id = ${id} AND LAST_INSERT_ID(id)`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
-                    connection.query(`SELECT * FROM news WHERE id = "${id}"`, (error, result) => {
+                    connection.query(`SELECT * FROM news WHERE id = LAST_INSERT_ID()`, (error, result) => {
                         if (error) {
                             reject(error)
                         } else {
@@ -34,11 +34,11 @@ class NewsModel {
 
     dislikeStory = (id) => {
         return new Promise((resolve, reject) => {
-            connection.query(`UPDATE news SET likes = likes - 1 WHERE id = ${id}`, (error, result) => {
+            connection.query(`UPDATE news SET likes = likes - 1 WHERE id = ${id} AND LAST_INSERT_ID(id)`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
-                    connection.query(`SELECT * FROM news WHERE id = "${id}"`, (error, result) => {
+                    connection.query(`SELECT * FROM news WHERE id = LAST_INSERT_ID()`, (error, result) => {
                         if (error) {
                             reject(error)
                         } else {

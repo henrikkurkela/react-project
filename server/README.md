@@ -149,3 +149,9 @@ Accepts GET
 Responds 200:
 
 - avatars [ARRAY]
+
+## /reset
+
+Accepts POST
+
+Responds 200

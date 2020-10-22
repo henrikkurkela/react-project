@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Header, Divider, Container } from 'semantic-ui-react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -19,31 +19,37 @@ import Development from './Development'
 const App = () => {
 
 	const auth = useSelector(state => state.auth)
+	const [requestReset, setRequestReset] = useState(true)
 
 	useEffect(() => {
 
-		resetContent()
+		if (requestReset) {
+			resetContent()
 
-		getRequest("news").then(response => {
-			const news = response.data
-			news.map(item => addNews(item))
-		})
+			getRequest("news").then(response => {
+				const news = response.data
+				news.map(item => addNews(item))
+			})
 
-		getRequest("ads").then(response => {
-			const ads = response.data
-			ads.map(item => addAd(item))
-		})
+			getRequest("ads").then(response => {
+				const ads = response.data
+				ads.map(item => addAd(item))
+			})
 
-		getRequest("comments").then(response => {
-			const comments = response.data
-			comments.map(item => addComment(item))
-		})
+			getRequest("comments").then(response => {
+				const comments = response.data
+				comments.map(item => addComment(item))
+			})
 
-		getRequest("users").then(response => {
-			const users = response.data
-			users.map(item => addUser(item))
-		})
-	})
+			getRequest("users").then(response => {
+				const users = response.data
+				users.map(item => addUser(item))
+			})
+
+			setRequestReset(false)
+		}
+
+	}, [requestReset])
 
 	let categories = ['All News', 'Domestic', 'Foreign']
 
@@ -57,6 +63,7 @@ const App = () => {
 					<Router>
 						<Grid.Row style={{ backgroundColor: 'blue' }}>
 							{categories.map((category, index) => <Link key={index} to={`/${index}`} style={{ display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>{category}</Link>)}
+							<Link to="/development" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'orange' }}>Development</Link>
 							{
 								auth ?
 									<>
@@ -71,7 +78,7 @@ const App = () => {
 							<RenderAds />
 							<Switch>
 								<Route path="/development">
-									<Development />
+									<Development requestReset={setRequestReset} />
 								</Route>
 								<Route path="/account">
 									<ConnectedAccount />

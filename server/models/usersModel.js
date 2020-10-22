@@ -56,7 +56,7 @@ class UsersModel {
                 if (error) {
                     reject(error)
                 } else {
-                    connection.query(`SELECT * FROM users WHERE username = "${username}"`, (error, result) => {
+                    connection.query(`SELECT * FROM users WHERE id = LAST_INSERT_ID()`, (error, result) => {
                         if (error) {
                             reject(error)
                         } else {
@@ -70,11 +70,11 @@ class UsersModel {
 
     updateAvatarOfId = (avatar, id) => {
         return new Promise((resolve, reject) => {
-            connection.query(`UPDATE users SET avatar = "${avatar}" WHERE id = ${id}`, (error, result) => {
+            connection.query(`UPDATE users SET avatar = "${avatar}" WHERE id = ${id} AND LAST_INSERT_ID(id)`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
-                    connection.query(`SELECT * FROM users WHERE id = "${id}"`, (error, result) => {
+                    connection.query(`SELECT * FROM users WHERE id = LAST_INSERT_ID()`, (error, result) => {
                         if (error) {
                             reject(error)
                         } else {

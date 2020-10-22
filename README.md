@@ -13,12 +13,20 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
+Seventh Iteration:
+
+Simple moderator panel:
+
+- Add news story
+- Delete news story
+- Delete any comment
+
+## DONE
+
 Sixth Iteration:
 
 - Implement permanent DB solution
 - Implement simple development routes with DB manipulation options
-
-## DONE
 
 Fifth Iteration:
 
@@ -127,3 +135,5 @@ Implement simple tests:
 2020-10-20: Start Working on News and Comments MySQL Models 2h (Total 57h)
 
 2020-10-21: Start Working on /development Route 1h (Total 58h)
+
+2020-10-22: Sixth Iteration Goals Met 1h (Total 59h)

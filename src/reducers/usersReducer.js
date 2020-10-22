@@ -6,7 +6,7 @@ const reducer = (state = [], action) => {
 		case "UPDATE_USER":
 			const newState = state.map(item => item.id === action.data.id ? action.data : item)
 			return newState
-		case "RESET_KEEP_AUTH":
+		case "RESET":
 			return state = []
 		default:
 			return state
