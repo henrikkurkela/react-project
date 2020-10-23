@@ -4,6 +4,8 @@ const NewsModel = require('../models/newsModel')
 
 const News = new NewsModel()
 
+const auth = require('../middlewares/authMiddleware')
+
 newsRouter.get('/', (request, response) => {
 
 	News.getAll().then((result) => {
@@ -13,6 +15,20 @@ newsRouter.get('/', (request, response) => {
 		response.status(500).end()
 	})
 
+})
+
+newsRouter.delete('/:id', auth, async (request, response) => {
+
+	if (request.auth !== null) {
+		if (request.auth.type === 'admin') {
+			News.deleteById(request.params.id)
+			response.status(200).end()
+		} else {
+			response.status(401).send()
+		}
+	} else {
+		response.status(401).end()
+	}
 })
 
 newsRouter.patch('/:id', async (request, response) => {
@@ -26,7 +42,7 @@ newsRouter.patch('/:id', async (request, response) => {
 			break
 		default:
 	}
-	
+
 	News.getAll().then((result) => {
 		response.json(result.find((item) => item.id === Number(request.params.id)))
 	}).catch((error) => {

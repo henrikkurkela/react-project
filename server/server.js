@@ -137,11 +137,20 @@ app.post('/reset', async (request, response) => {
 		}
 	]
 
+	const adminUser = {
+		email: "admin@localhost.com",
+		username: "administrator",
+		avatar: "/assets/avatar/default.jpg",
+		password: await bcrypt.hash(process.env.BACKEND_PASSWORD, 10),
+		type: "admin"
+	}
+
 	try {
 
 		connection.query('DELETE FROM comments')
 
 		connection.query('DELETE FROM users')
+		connection.query(`INSERT INTO users (email, username, avatar, password, type) VALUES ("${adminUser.email}", "${adminUser.username}", "${adminUser.avatar}", "${adminUser.password}", "${adminUser.type}")`)
 
 		connection.query('DELETE FROM news')
 		news.map((item) =>

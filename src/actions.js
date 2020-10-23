@@ -30,6 +30,13 @@ const addNews = (news) => {
     })
 }
 
+const removeNews = (news) => {
+    store.dispatch({
+        type: "REMOVE_NEWS",
+        data: news
+    })
+}
+
 const addAd = (item) => {
     store.dispatch({
         type: "NEW_AD",
@@ -104,4 +111,4 @@ const resetContent = () => {
     })
 }
 
-export { updateNews, addNews, addAd, addComment, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, resetContent }
+export { updateNews, addNews, removeNews, addAd, addComment, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, resetContent }

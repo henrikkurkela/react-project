@@ -21,7 +21,7 @@ commentsRouter.delete('/:id', auth, (request, response) => {
 
     if (request.auth !== null) {
         Comments.getAll().then((result) => {
-            if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid) {
+            if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid || request.auth.type === 'admin') {
                 Comments.deleteById(request.params.id)
                 response.status(200).end()
             }

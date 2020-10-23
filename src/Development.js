@@ -21,8 +21,13 @@ const Development = ({ requestReset }) => {
             })
     }
 
+    const moderate = () => {
+        history.push('/moderation')
+    }
+
     return (<>
         <Header as='h3'>Development Tools</Header>
+        <Button onClick={moderate}>Moderator Panel</Button>
         <Button onClick={reset}>Reset Database</Button>
     </>)
 }

@@ -50,6 +50,18 @@ class NewsModel {
         })
     }
 
+    deleteById = (id) => {
+        return new Promise((resolve, reject) => {
+            connection.query(`DELETE FROM news WHERE id = "${id}"`, (error, result) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(result)
+                }
+            })
+        })
+    }
+
 }
 
 module.exports = NewsModel

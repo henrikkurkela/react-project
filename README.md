@@ -137,3 +137,5 @@ Implement simple tests:
 2020-10-21: Start Working on /development Route 1h (Total 58h)
 
 2020-10-22: Sixth Iteration Goals Met 1h (Total 59h)
+
+2020-10-23: Begin Work on Moderator Panel 1h (Total 60h)

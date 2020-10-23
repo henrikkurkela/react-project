@@ -12,6 +12,8 @@ const reducer = (state = [], action) => {
 			return state.map(item =>
 				item.id !== id ? item : changedNews
 			)
+		case "REMOVE_NEWS":
+			return state.filter(item => item.id !== action.data.id)
 		case "RESET":
 			return state = []
 		default:
