@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Route, useHistory } from 'react-router-dom';
-import { Header, Comment, Modal, Button, Icon, Divider, Image, Confirm } from 'semantic-ui-react'
+import { Header, Comment, Modal, Button, Icon, Divider, Image, Confirm, Form } from 'semantic-ui-react'
 
-import { deleteRequest } from './services/httpService'
-import { removeComment, removeNews } from './actions'
+import { postRequest, deleteRequest } from './services/httpService'
+import { removeComment, removeNews, addNews } from './actions'
 
 const Moderation = ({ users, news, comments }) => {
 
@@ -12,19 +12,44 @@ const Moderation = ({ users, news, comments }) => {
     const [selectedComment, setSelectedComment] = useState(null)
     const [openConfrim, setOpenConfirm] = useState(false)
     const [selectedNews, setSelectedNews] = useState(null)
+    const [newNews, setNewNews] = useState({ content: "", headline: "" })
 
     const history = useHistory()
 
     const destroyComment = (comment) => {
-        deleteRequest(`comments/${comment.id}`).then(
-            removeComment(comment)
-        )
+        deleteRequest(`comments/${comment.id}`).then((response) => {
+            if (response.status === 200) {
+                removeComment(comment)
+            }
+        }).catch((error) => {
+            console.log(error.response.status)
+        })
+    }
+
+    const postNews = (news) => {
+
+        news.picture = news.picture ? news.picture : ""
+        news.category = news.category ? news.category : 0
+        news.likes = 0
+
+        postRequest(`news`, news).then((response) => {
+            if (response.status === 200) {
+                addNews(response.data)
+                setNewNews({ content: "", headline: "" })
+            }
+        }).catch((error) => {
+            console.log(error.response.status)
+        })
     }
 
     const destroyNews = (news) => {
-        deleteRequest(`news/${news.id}`).then(
-            removeNews(news)
-        )
+        deleteRequest(`news/${news.id}`).then((response) => {
+            if (response.status === 200) {
+                removeNews(news)
+            }
+        }).catch((error) => {
+            console.log(error.response.status)
+        })
     }
 
     const commenterDetails = (userid = null) => {
@@ -88,6 +113,11 @@ const Moderation = ({ users, news, comments }) => {
         </Route>
         <Route path="/moderation/news">
             <Header as="h3">News</Header>
+            <Form style={{ display: 'inline-block' }}>
+                <Form.Input placeholder='Headline' value={newNews.headline} onChange={(event) => setNewNews({ ...newNews, headline: event.target.value })} />
+                <Form.TextArea placeholder='Content' value={newNews.content} onChange={(event) => setNewNews({ ...newNews, content: event.target.value })} />
+                <Form.Button content='Post' onClick={() => postNews(newNews)} />
+            </Form>
             <div>
                 {news.map((item, key) =>
                     <div key={key}>

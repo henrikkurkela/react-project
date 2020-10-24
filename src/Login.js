@@ -4,10 +4,10 @@ import axios from 'axios'
 import { Header, Form, Message, Button } from 'semantic-ui-react'
 
 import { postRequest } from './services/httpService'
-import { loginToken } from './actions'
+import { loginToken, addUser } from './actions'
 
 const Login = ({ auth }) => {
-    
+
     const [userError, setUserError] = useState(false)
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
@@ -17,7 +17,7 @@ const Login = ({ auth }) => {
         setUserError(false)
 
         try {
-            let response = await postRequest("login", { email: username, password: userpass })
+            const response = await postRequest("login", { email: username, password: userpass })
 
             loginToken(response.data)
             window.sessionStorage.setItem('auth', response.data.auth)
@@ -35,9 +35,12 @@ const Login = ({ auth }) => {
 
     async function demoLogin(event) {
         try {
-            await postRequest("signup", { email: "demo@user.com", username: 'DemoUser', password: "demouser" })
+            const response = await postRequest("signup", { email: "demo@user.com", username: 'DemoUser', password: "demouser" })
+            if (response.status !== 400) {
+                addUser(response.data)
+            }
         } catch (error) {
-            console.log(error.response.data)
+            console.log(error.response.status)
         } finally {
             await login("demo@user.com", "demouser")
         }

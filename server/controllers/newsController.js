@@ -17,7 +17,23 @@ newsRouter.get('/', (request, response) => {
 
 })
 
-newsRouter.delete('/:id', auth, async (request, response) => {
+newsRouter.post('/', auth, (request, response) => {
+
+	if (request.auth !== null) {
+		if (request.auth.type === 'admin') {
+			News.addStory(request.body).then((result) => {
+				response.json(result)
+			})
+		} else {
+			response.status(401).end()
+		}
+	} else {
+		response.status(401).end()
+	}
+
+})
+
+newsRouter.delete('/:id', auth, (request, response) => {
 
 	if (request.auth !== null) {
 		if (request.auth.type === 'admin') {
