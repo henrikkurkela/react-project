@@ -12,6 +12,7 @@ const adsRouter = require('./controllers/adsController')
 const commentsRouter = require('./controllers/commentsController')
 const usersRouter = require('./controllers/usersController')
 const avatarsRouter = require('./controllers/avatarsController')
+const picturesRouter = require('./controllers/picturesController')
 
 const UsersModel = require('./models/usersModel')
 const connection = require('./models/database')
@@ -27,6 +28,7 @@ app.use('/ads', adsRouter)
 app.use('/comments', commentsRouter)
 app.use('/users', usersRouter)
 app.use('/avatars', avatarsRouter)
+app.use('/pictures', picturesRouter)
 
 app.post('/login', async (request, response) => {
 

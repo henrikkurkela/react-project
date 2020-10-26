@@ -141,3 +141,5 @@ Implement simple tests:
 2020-10-23: Begin Work on Moderator Panel 1h (Total 60h)
 
 2020-10-24: Continue Work on Moderator Panel 1h (Total 61h)
+
+2020-10-25: Moderator Panel 2h (Total 63h)

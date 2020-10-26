@@ -21,9 +21,13 @@ newsRouter.post('/', auth, (request, response) => {
 
 	if (request.auth !== null) {
 		if (request.auth.type === 'admin') {
-			News.addStory(request.body).then((result) => {
-				response.json(result)
-			})
+			if (request.body.headline === "" || request.body.content === "") {
+				response.status(400).end()
+			} else {
+				News.addStory(request.body).then((result) => {
+					response.json(result)
+				})
+			}
 		} else {
 			response.status(401).end()
 		}

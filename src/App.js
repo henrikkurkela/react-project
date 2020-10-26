@@ -15,7 +15,7 @@ import ConnectedUnregister from './Unregister'
 import RenderAds from './RenderAds'
 import ConnectedAvatar from './Avatar'
 import Development from './Development'
-import ConnectedModeration from './Moderation'
+import Moderation from './Moderation'
 
 const App = () => {
 
@@ -82,7 +82,7 @@ const App = () => {
 									<Development requestReset={setRequestReset} />
 								</Route>
 								<Route path="/moderation">
-									<ConnectedModeration />
+									<Moderation />
 								</Route>
 								<Route path="/account">
 									<ConnectedAccount />
