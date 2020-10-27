@@ -2,41 +2,41 @@
 
 ## users
 
-- id int [PK]
+- id int primary key
 - email varchar unique
 - username varchar unique
-- avatar varchar
-- password varchar
+- avatar text
+- password text
 - type varchar
 
 ## news
 
-- id int [PK]
+- id int primary key
 - category int
 - likes int
-- headline varchar
-- picture varchar
-- content varchar
+- headline text
+- picture text
+- content text
 
 ## comments
 
-- id int [PK]
+- id int primary key
 - newsid int
 - userid int
 - content text
 
 ## ads
 
-- id int [PK]
-- picture varchar
-- href varchar
+- id int primary key
+- picture text
+- href text
 
 # DB Table Creation Queries
 
-- CREATE TABLE ads (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, href VARCHAR(255) NOT NULL, picture VARCHAR(255) NOT NULL);
+- CREATE TABLE ads (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, href TEXT NOT NULL, picture TEXT NOT NULL);
 
-- CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(255) NOT NULL UNIQUE, avatar VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, type VARCHAR(255) DEFAULT 'user');
+- CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(255) NOT NULL UNIQUE, avatar TEXT NOT NULL, password TEXT NOT NULL, type VARCHAR(255) DEFAULT 'user');
 
-- CREATE TABLE news (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, category INT NOT NULL, likes INT NOT NULL, headline VARCHAR(255) NOT NULL, content TEXT NOT NULL, picture VARCHAR(255));
+- CREATE TABLE news (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, category INT NOT NULL, likes INT NOT NULL, headline TEXT NOT NULL, content TEXT NOT NULL, picture TEXT);
 
-- CREATE TABLE comments (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, newsid INT NOT NULL, userid INT, content TEXT NOT NULL)
+- CREATE TABLE comments (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, newsid INT NOT NULL, userid INT, content TEXT NOT NULL);

@@ -52,7 +52,7 @@ const App = () => {
 
 	}, [requestReset])
 
-	let categories = ['All News', 'Domestic', 'Foreign']
+	const categories = ['All News', 'Domestic', 'Foreign']
 
 	return (
 		<Container style={{ backgroundColor: 'white' }}>

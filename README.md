@@ -7,11 +7,20 @@ To start the application, type:
 npm run dev
 ```
 
-The backend requires a MySQL server to function.
+The backend requires a MySQL server to function. Table creation queries can be found in the [server readme](/server/models/README.md) file. Database details should be added to the [example.env](example.env) file, which should then be renamed to .env
 
 Stock photos downloaded from unsplash.com
 
 ## TODO
+
+Eighth Iteration:
+
+Modernize user interface:
+
+- Investigate modern news sites
+- Update design
+
+## DONE
 
 Seventh Iteration:
 
@@ -20,8 +29,6 @@ Simple moderator panel:
 - Add news story
 - Delete news story
 - Delete any comment
-
-## DONE
 
 Sixth Iteration:
 
@@ -143,3 +150,5 @@ Implement simple tests:
 2020-10-24: Continue Work on Moderator Panel 1h (Total 61h)
 
 2020-10-26: Moderator Panel 2h (Total 63h)
+
+2020-10-27: Seventh Iteration Goals Met, MVC Controller Error Check Rework 4h (Total 67h)

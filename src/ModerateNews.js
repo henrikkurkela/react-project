@@ -39,7 +39,7 @@ const ModerateNews = ({ news }) => {
                     />
                     <Header as='h3'>{item.headline}</Header>
                     {item.picture ? <Image fluid bordered style={{ marginBottom: '1.5rem', maxWidth: '50%' }} src={item.picture} /> : null}
-                    {item.content.split('<br/>').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
+                    {item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
                     < Divider />
                 </ div>)}
         </ div>

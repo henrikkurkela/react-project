@@ -7,7 +7,7 @@ import ConnectedRenderComments from './RenderComments'
 
 const NewsItem = ({ item, selected = false }) => {
 
-	const paragraphs = item.content.split('<br/>')
+	const paragraphs = item.content.split('\n\n')
 	const [open, setOpen] = useState(selected)
 
 	return (
@@ -38,7 +38,7 @@ const NewsItem = ({ item, selected = false }) => {
 
 const RenderNews = ({ news, comments }) => {
 
-	let { category, story } = useParams()
+	const { category, story } = useParams()
 
 	switch (category) {
 		case undefined:

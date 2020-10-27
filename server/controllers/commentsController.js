@@ -11,25 +11,30 @@ commentsRouter.get('/', (request, response) => {
     Comments.getAll().then((result) => {
         response.json(result)
     }).catch((error) => {
-		console.log(error)
-		response.status(500).end()
+        console.log(error)
+        response.status(500).end()
     })
-    
 })
 
 commentsRouter.delete('/:id', auth, (request, response) => {
 
-    if (request.auth !== null) {
-        Comments.getAll().then((result) => {
-            if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid || request.auth.type === 'admin') {
-                Comments.deleteById(request.params.id)
+    Comments.getAll().then((result) => {
+        if (request.auth === null) {
+            response.status(401).end()
+        } else if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid || request.auth.type === 'admin') {
+            Comments.deleteById(request.params.id).then((result) => {
                 response.status(200).end()
-            }
-        }) 
-    } else {
-        response.status(401).end()
-    }
-
+            }).catch((error) => {
+                console.log(error)
+                response.status(500).end()
+            })
+        } else {
+            response.status(401).end()
+        }
+    }).catch((error) => {
+        console.log(error)
+        response.status(500).end()
+    })
 })
 
 commentsRouter.post('/', auth, (request, response) => {
@@ -43,8 +48,8 @@ commentsRouter.post('/', auth, (request, response) => {
     Comments.addComment(request.body.newsid, request.body.userid, request.body.content).then((result) => {
         response.json(result)
     }).catch((error) => {
-		console.log(error)
-		response.status(500).end()
+        console.log(error)
+        response.status(500).end()
     })
 })
 

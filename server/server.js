@@ -32,15 +32,11 @@ app.use('/pictures', picturesRouter)
 
 app.post('/login', async (request, response) => {
 
-	let user = null
+	const user = await Users.getByEmail(request.body.email)
 
-	if (await Users.getByEmail(request.body.email) !== []) {
-		user = await Users.getByEmail(request.body.email)
-	}
-
-	if (user) {
+	if ("password" in user) {
 		try {
-			let correctpassword = await bcrypt.compare(request.body.password, user.password)
+			const correctpassword = await bcrypt.compare(request.body.password, user.password)
 			if (correctpassword) {
 				const token = jwt.sign(user, process.env.BACKEND_SECRET)
 				response
@@ -60,27 +56,17 @@ app.post('/login', async (request, response) => {
 
 app.post('/signup', async (request, response) => {
 
-	let user = null
-
-	if (await Users.getByUsername(request.body.username) !== []) {
-		user = await Users.getByUsername(request.body.username)
-	} else if (await Users.getByEmail(request.body.email) !== []) {
-		user = await Users.getByEmail(request.body.email)
-	}
-
 	if (!RegExp('^[a-zA-Z0-9.]+@[a-zA-Z]+[.]{1}[a-zA-Z]+$').test(request.body.email)) {
 		response.status(400).send('Invalid email')
 	} else if (!RegExp('^[a-zA-Z0-9]{8,16}$').test(request.body.username)) {
 		response.status(400).send('Invalid username')
-	} else if (user && request.body.email && request.body.password && request.body.username) {
+	} else if (request.body.email && request.body.password && request.body.username) {
 		try {
-			let newuser = await Users.addUser(request.body.email, request.body.username, '/assets/avatar/default.jpg', await bcrypt.hash(request.body.password, 10))
+			const newuser = await Users.addUser(request.body.email, request.body.username, '/assets/avatar/default.jpg', await bcrypt.hash(request.body.password, 10))
 			response.json({ id: newuser.id, email: newuser.email, username: newuser.username, avatar: newuser.avatar })
 		} catch (error) {
-			response.status(500).end()
+			response.status(400).send('User already exists')
 		}
-	} else if (user) {
-		response.status(400).send('User already exists')
 	} else {
 		response.status(400).send('Please fill out all the fields')
 	}
@@ -114,7 +100,7 @@ app.post('/reset', async (request, response) => {
 			likes: 256,
 			headline: "Second News Story",
 			picture: "/assets/img/photo3.jpg",
-			content: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.<br/>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+			content: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.\n\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
 		},
 		{
 			category: 2,
@@ -128,14 +114,14 @@ app.post('/reset', async (request, response) => {
 			likes: 512,
 			headline: "Fourth News Story",
 			picture: "",
-			content: "Nullam interdum mi et est rutrum, non vulputate orci convallis. Sed augue nisl, commodo nec fringilla sed, auctor sit amet justo. Suspendisse vel consectetur quam. Sed sem massa, pulvinar at eros et, pretium tempus odio. Mauris dapibus fringilla nunc id finibus. Vivamus eget volutpat eros, vel iaculis ex. Duis vel pulvinar leo. Nulla cursus tellus a tempor blandit. Aenean eget tincidunt lorem. Donec blandit massa ipsum, quis tristique risus aliquam accumsan. In hac habitasse platea dictumst. Nam ac libero nisi. Sed luctus congue risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec a nisl ut ligula ultricies malesuada.<br/>Mauris eu purus tincidunt tortor cursus feugiat at eget ex. Vivamus pellentesque quam eget ultrices lacinia. Cras in dictum enim. Nam tellus orci, faucibus id molestie non, tempor eu elit. In magna nunc, feugiat et accumsan non, semper ac ex. Praesent accumsan tempor placerat. Pellentesque convallis condimentum massa ac aliquam. Duis ut fermentum dui. Cras fermentum urna diam, in dictum diam posuere in. Donec dictum, quam ac aliquet fermentum, ligula mi aliquam sapien, eget tincidunt neque purus in tortor. Donec pharetra egestas arcu, non dignissim sem iaculis quis. Sed elementum metus ac augue gravida ultricies. Cras pretium turpis ut dapibus iaculis. Donec ac augue quis nisi blandit tempus. Aenean lobortis lacus in mattis aliquet. Sed mattis vel neque ac ullamcorper.<br/>Sed feugiat dapibus tempor. Maecenas id magna ornare, euismod risus non, imperdiet justo. Nam id varius tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent quis augue et erat ornare pretium nec ut sem. Duis tristique mauris orci, et imperdiet ipsum pretium ac. Nulla ut interdum risus, eget laoreet lacus. Donec et consequat enim. Morbi tempus eu velit nec pellentesque. Nulla eu sodales mi. In fermentum facilisis finibus."
+			content: "Nullam interdum mi et est rutrum, non vulputate orci convallis. Sed augue nisl, commodo nec fringilla sed, auctor sit amet justo. Suspendisse vel consectetur quam. Sed sem massa, pulvinar at eros et, pretium tempus odio. Mauris dapibus fringilla nunc id finibus. Vivamus eget volutpat eros, vel iaculis ex. Duis vel pulvinar leo. Nulla cursus tellus a tempor blandit. Aenean eget tincidunt lorem. Donec blandit massa ipsum, quis tristique risus aliquam accumsan. In hac habitasse platea dictumst. Nam ac libero nisi. Sed luctus congue risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec a nisl ut ligula ultricies malesuada.\n\nMauris eu purus tincidunt tortor cursus feugiat at eget ex. Vivamus pellentesque quam eget ultrices lacinia. Cras in dictum enim. Nam tellus orci, faucibus id molestie non, tempor eu elit. In magna nunc, feugiat et accumsan non, semper ac ex. Praesent accumsan tempor placerat. Pellentesque convallis condimentum massa ac aliquam. Duis ut fermentum dui. Cras fermentum urna diam, in dictum diam posuere in. Donec dictum, quam ac aliquet fermentum, ligula mi aliquam sapien, eget tincidunt neque purus in tortor. Donec pharetra egestas arcu, non dignissim sem iaculis quis. Sed elementum metus ac augue gravida ultricies. Cras pretium turpis ut dapibus iaculis. Donec ac augue quis nisi blandit tempus. Aenean lobortis lacus in mattis aliquet. Sed mattis vel neque ac ullamcorper.\n\nSed feugiat dapibus tempor. Maecenas id magna ornare, euismod risus non, imperdiet justo. Nam id varius tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent quis augue et erat ornare pretium nec ut sem. Duis tristique mauris orci, et imperdiet ipsum pretium ac. Nulla ut interdum risus, eget laoreet lacus. Donec et consequat enim. Morbi tempus eu velit nec pellentesque. Nulla eu sodales mi. In fermentum facilisis finibus."
 		},
 		{
 			category: 1,
 			likes: 640,
 			headline: "Fifth News Story",
 			picture: "/assets/img/photo2.jpg",
-			content: "Integer tincidunt vitae sem vitae efficitur. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris dapibus lectus est, vulputate blandit justo elementum cursus. Maecenas ligula sem, malesuada nec gravida nec, dictum id risus. Integer eros massa, hendrerit sed luctus eget, sagittis sagittis leo. Phasellus aliquam tellus sit amet dui gravida ultricies et non ex. Quisque varius at mi sit amet rutrum. Fusce ultricies erat augue, eu lobortis odio viverra sit amet. Mauris maximus pulvinar lorem eu ullamcorper.<br/>Maecenas consequat lectus viverra, ullamcorper ligula vel, placerat leo. Duis at tempor tellus. Pellentesque euismod orci vitae lectus porttitor mattis. Pellentesque vel sem non nisl iaculis mollis. Curabitur dapibus dolor purus, at placerat lectus lacinia et. Morbi eget feugiat ex, quis blandit risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque non efficitur massa. Donec faucibus pharetra enim, at rutrum nisl rutrum non. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+			content: "Integer tincidunt vitae sem vitae efficitur. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris dapibus lectus est, vulputate blandit justo elementum cursus. Maecenas ligula sem, malesuada nec gravida nec, dictum id risus. Integer eros massa, hendrerit sed luctus eget, sagittis sagittis leo. Phasellus aliquam tellus sit amet dui gravida ultricies et non ex. Quisque varius at mi sit amet rutrum. Fusce ultricies erat augue, eu lobortis odio viverra sit amet. Mauris maximus pulvinar lorem eu ullamcorper.\n\nMaecenas consequat lectus viverra, ullamcorper ligula vel, placerat leo. Duis at tempor tellus. Pellentesque euismod orci vitae lectus porttitor mattis. Pellentesque vel sem non nisl iaculis mollis. Curabitur dapibus dolor purus, at placerat lectus lacinia et. Morbi eget feugiat ex, quis blandit risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque non efficitur massa. Donec faucibus pharetra enim, at rutrum nisl rutrum non. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
 		}
 	]
 
@@ -148,7 +134,6 @@ app.post('/reset', async (request, response) => {
 	}
 
 	try {
-
 		connection.query('DELETE FROM comments')
 
 		connection.query('DELETE FROM users')

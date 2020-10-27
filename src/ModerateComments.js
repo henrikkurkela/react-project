@@ -21,7 +21,7 @@ const ModerateComments = ({ users, comments }) => {
     }
 
     const commenterDetails = (userid = null) => {
-        let user = users.find(item => item.id === userid)
+        const user = users.find(item => item.id === userid)
         if (user) {
             return user
         } else {

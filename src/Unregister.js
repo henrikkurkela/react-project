@@ -8,7 +8,7 @@ import { logoutToken } from './actions'
 
 const Unregister = ({ auth }) => {
 
-    let history = useHistory()
+    const history = useHistory()
 
     const unregister = () => {
         deleteRequest(`users/${auth.id}`)
