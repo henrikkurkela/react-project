@@ -46,7 +46,7 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 	}
 
 	return (
-		<Comment.Group>
+		<Comment.Group style={{ minWidth: '100%' }}>
 			<Header as='h3'>
 				Comments
     		</Header>
@@ -60,7 +60,7 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 					</Comment.Content>
 				</Comment>
 			)}
-			<Form reply>
+			<Form reply style={{ float: 'left', minWidth: '100%' }}>
 				<Form.TextArea value={newComment} onChange={(event) => setNewComment(event.target.value)} />
 				<Button content='Comment' labelPosition='left' icon='edit' primary onClick={commentForm} />
 				<Button animated onClick={like} color={liked ? 'green' : null}>

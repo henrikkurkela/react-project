@@ -31,7 +31,7 @@ const ModerateComments = ({ users, comments }) => {
 
     return (<>
         <Header as='h3'>Comments</Header>
-        <Comment.Group>
+        <Comment.Group style={{ minWidth: '100%' }}>
             {comments.map((comment, key) =>
                 <Comment key={key}>
                     <Comment.Avatar src={commenterDetails(comment.userid).avatar} />

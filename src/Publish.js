@@ -3,17 +3,12 @@ import { Form, Header, Divider, Image } from 'semantic-ui-react'
 
 import { postRequest, getRequest } from './services/httpService'
 import { addNews } from './actions'
+import { categories } from './constants'
 
 const Publish = () => {
 
     const [newNews, setNewNews] = useState({ content: "", headline: "", picture: "", category: 0, likes: 0 })
     const [pictures, setPictures] = useState([])
-
-    const categories = [
-        { key: 0, value: 0, text: "Unspecified" },
-        { key: 1, value: 1, text: "Domestic" },
-        { key: 2, value: 2, text: "Foreign" }
-    ]
 
     useEffect(() => {
         getRequest('/pictures').then((response) => {
@@ -34,7 +29,7 @@ const Publish = () => {
     }
 
     return (<>
-        <Form style={{ float: 'left', minWidth: 'calc(75% - 1em)', paddingBottom: '1em' }}>
+        <Form style={{ float: 'left', minWidth: '100%', paddingBottom: '1em' }}>
             <Form.Input placeholder='Headline' value={newNews.headline} onChange={(event) => setNewNews({ ...newNews, headline: event.target.value })} />
             <Form.Dropdown placeholder='Picture' options={pictures} selection clearable onChange={(event, data) => setNewNews({ ...newNews, picture: `${data.value}` })} />
             <Form.Dropdown placeholder='Category' options={categories} selection clearable onChange={(event, data) => setNewNews({ ...newNews, category: data.value })} />
@@ -43,7 +38,7 @@ const Publish = () => {
         </Form>
         <Divider style={{ clear: 'left' }} />
         <Header as='h3'>{newNews.headline}</Header>
-        {newNews.picture ? <Image fluid bordered style={{ marginBottom: '1.5rem', maxWidth: '50%' }} src={newNews.picture} /> : null}
+        {newNews.picture ? <Image fluid bordered style={{ marginBottom: '1.5rem' }} src={newNews.picture} /> : null}
         {newNews.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
     </>)
 }

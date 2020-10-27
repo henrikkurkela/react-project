@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Header, Divider, Container } from 'semantic-ui-react'
+import { Grid, Header, Container } from 'semantic-ui-react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { getRequest } from './services/httpService'
 import { addNews, addAd, addComment, addUser, resetContent } from './actions'
+import { categories } from './constants'
 
-import RenderNews from './RenderNews'
+import ConnectedRenderNews from './RenderNews'
 import ConnectedLogin from './Login'
 import Signup from './Signup'
 import Logout from './Logout'
@@ -52,70 +53,81 @@ const App = () => {
 
 	}, [requestReset])
 
-	const categories = ['All News', 'Domestic', 'Foreign']
-
 	return (
-		<Container style={{ backgroundColor: 'white' }}>
+		<Container>
 			<Grid columns='equal'>
 				<Grid.Column>
-					<Grid.Row style={{ background: 'blue' }}>
-						<Header as='h1' style={{ textAlign: 'center', color: 'white', padding: '1.5em', fontFamily: 'stencil' }}>News Site</Header>
-					</Grid.Row>
 					<Router>
-						<Grid.Row style={{ backgroundColor: 'blue' }}>
-							{categories.map((category, index) => <Link key={index} to={`/${index}`} style={{ display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>{category}</Link>)}
-							<Link to="/development" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'orange' }}>Development</Link>
+						<Grid.Row>
+							<Header as='h1' style={{ color: 'white', textAlign: 'center', paddingTop: '1.5em', margin: '0', fontSize: '3em' }}>News Site</Header>
+							<p style={{ textAlign: 'center', color: 'white', fontSize: '1em' }}>The Best News in Town!</p>
+							<Link to={'/'} style={{ display: 'inline-block', padding: '1em', color: 'white' }}>All News</Link>
+							{categories.filter(item => item.key !== 0).map((item) => <Link key={item.key} to={`/${item.value}`} style={{ display: 'inline-block', padding: '1em', color: 'white' }}>{item.text}</Link>)}
+							<Link to="/development" style={{ float: 'right', display: 'inline-block', padding: '1em', color: 'orange' }}>Development</Link>
 							{
 								auth ?
 									<>
-										<Link to="/logout" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>Logout</Link>
-										<Link to="/account" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>Account</Link>
+										<Link to="/logout" style={{ float: 'right', display: 'inline-block', padding: '1em', color: 'white' }}>Logout</Link>
+										<Link to="/account" style={{ float: 'right', display: 'inline-block', padding: '1em', color: 'white' }}>Account</Link>
 									</> :
-									<Link to="/login" style={{ float: 'right', display: 'inline-block', padding: '1em', backgroundColor: 'blue', color: 'white' }}>Login</Link>
+									<Link to="/login" style={{ float: 'right', display: 'inline-block', padding: '1em', color: 'white' }}>Login</Link>
 							}
 						</Grid.Row>
-						<Grid.Row style={{ padding: '1rem' }}>
-							<Divider />
-							<RenderAds />
-							<Switch>
-								<Route path="/development">
-									<Development requestReset={setRequestReset} />
-								</Route>
-								<Route path="/moderation">
-									<Moderation />
-								</Route>
-								<Route path="/account">
-									<ConnectedAccount />
-								</Route>
-								<Route path="/avatar">
-									<ConnectedAvatar />
-								</Route>
-								<Route path="/login">
-									<ConnectedLogin />
-								</Route>
-								<Route path="/signup">
-									<Signup />
-								</Route>
-								<Route path="/unregister">
-									<ConnectedUnregister />
-								</Route>
-								<Route path="/logout">
-									<Logout />
-								</Route>
-								<Route path="/:category/:story">
-									<RenderNews />
-								</Route>
-								<Route path="/:category">
-									<RenderNews />
-								</Route>
-								<Route path="/">
-									<RenderNews />
-								</Route>
-							</Switch>
+						<Grid.Row style={{ backgroundColor: 'white', padding: '2em', borderRadius: '0.5em', overflow: 'auto' }}>
+							<Grid>
+								<Grid.Column width={12}>
+									<Switch>
+										<Route path="/development">
+											<Development requestReset={setRequestReset} />
+										</Route>
+										<Route path="/moderation">
+											<Moderation />
+										</Route>
+										<Route path="/account">
+											<ConnectedAccount />
+										</Route>
+										<Route path="/avatar">
+											<ConnectedAvatar />
+										</Route>
+										<Route path="/login">
+											<ConnectedLogin />
+										</Route>
+										<Route path="/signup">
+											<Signup />
+										</Route>
+										<Route path="/unregister">
+											<ConnectedUnregister />
+										</Route>
+										<Route path="/logout">
+											<Logout />
+										</Route>
+										<Route path="/:category/:story">
+											<ConnectedRenderNews />
+										</Route>
+										<Route path="/:category">
+											<ConnectedRenderNews />
+										</Route>
+										<Route path="/">
+											<ConnectedRenderNews />
+										</Route>
+									</Switch>
+								</ Grid.Column>
+								<Grid.Column width={4} style={{ borderLeft: 'solid 1px rgba(34,36,38,.15)' }}>
+									<RenderAds />
+								</ Grid.Column>
+							</Grid>
 						</Grid.Row>
 					</Router>
 				</Grid.Column>
 			</Grid>
+			<Grid.Row>
+				<div style={{ padding: '2em' }}>
+					<p style={{ textAlign: 'center', color: 'white', fontSize: '1em' }}>
+						Copyright © 1970 News Site Company, LLC. All rights reserved.<br />
+						Any questions? Contact us via <a style={{ textAlign: 'center', fontSize: '1em', color: 'orange' }} href="mailto: admin@localhost.com">email</a>.
+					</p>
+				</div>
+			</Grid.Row>
 		</Container>
 	)
 }

@@ -47,18 +47,18 @@ const Login = ({ auth }) => {
     }
 
     return (auth ? <Header as='h3'>Welcome!</Header> :
-        <>
+        <div style={{textAlign: 'center'}}>
             <Header as='h3'>Login</Header>
-            <Form error={userError} style={{ display: 'inline-block' }}>
+            <Form error={userError} style={{ display: 'inline-block', width: '33%' }}>
                 <Message error header='Error' content={errorMessage} />
                 <Form.Input placeholder='Email' onChange={(event) => setUser(event.target.value)} />
                 <Form.Input placeholder='Password' type='password' onChange={(event) => setPassword(event.target.value)} />
                 <Form.Button content='Login' onClick={(event) => login(user, password)} />
             </Form>
-            <p>No account yet? sign up <a href="/signup">here</a>.</p>
+            <p style={{ paddingTop: '1em' }}>No account yet? Sign up <a href="/signup">here</a>.</p>
             <Header as='h3'>Demo User</Header>
             <Button onClick={demoLogin}>Login</Button>
-        </>
+        </div>
     )
 }
 

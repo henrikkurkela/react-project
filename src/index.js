@@ -15,7 +15,7 @@ ReactDOM.render(
 	document.getElementById('root')
 )
 
-document.body.style.backgroundColor = 'lightgray'
+document.body.style.background = 'linear-gradient(0deg, rgba(0,0,255,1) 0%, rgba(0,0,255,1) 50%, rgba(0,255,255,1) 100%) no-repeat fixed'
 document.body.style.overflowY = 'scroll'
 
 // If you want your app to work offline and load faster, you can change

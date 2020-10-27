@@ -22,7 +22,7 @@ Modernize user interface:
 
 ## DONE
 
-Seventh Iteration:
+Seventh Iteration (8h):
 
 Simple moderator panel:
 
@@ -30,12 +30,12 @@ Simple moderator panel:
 - Delete news story
 - Delete any comment
 
-Sixth Iteration:
+Sixth Iteration (11h):
 
 - Implement permanent DB solution
 - Implement simple development routes with DB manipulation options
 
-Fifth Iteration:
+Fifth Iteration (20h):
 
 Enhance user experience:
 
@@ -43,21 +43,21 @@ Enhance user experience:
 - Display nickname instead of email
 - Implement simple avatars
 
-Fourth Iteration:
+Fourth Iteration (9h):
 
 Implement registered user interaction:
 
 - Create/delete account ability
 - Registered user comments
 
-Third Iteration:
+Third Iteration (6h):
 
 Implement anonymous user interaction:
 
 - Simple news story likes
 - Simple news story commments
 
-Second Iteration:
+Second Iteration (6h):
 
 Front end:
 
@@ -69,7 +69,7 @@ Back end:
 
 - Implement simple json-server module
 
-First Iteration:
+First Iteration (7h):
 
 Implement simple front end:
 
@@ -152,3 +152,5 @@ Implement simple tests:
 2020-10-26: Moderator Panel 2h (Total 63h)
 
 2020-10-27: Seventh Iteration Goals Met, MVC Controller Error Check Rework 4h (Total 67h)
+
+2020-10-28: Begin Work on Updating Design 5h (Total 72h)

@@ -27,7 +27,7 @@ const Account = ({ auth, comments }) => {
                 <Button to='/unregister'>Delete Account</Button>
             </Link>
             <Header as='h3'>Recent Activity</Header>
-            <Comment.Group>
+            <Comment.Group style={{ minWidth: '100%' }}>
                 {comments.filter(item => item.userid === auth.id).map((comment, key) =>
                     <Comment key={key}>
                         <Comment.Avatar src={auth.avatar} />

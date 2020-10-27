@@ -38,16 +38,17 @@ const Signup = () => {
     }
 
     return (
-        <>
+        <div style={{textAlign: 'center'}}>
             <Header as='h3'>Sign Up</Header>
-            <Form error={signupError} style={{ display: 'inline-block' }}>
+            <Form error={signupError} style={{ display: 'inline-block', width: '33%' }}>
                 <Message error header='Error' content={errorMessage} />
                 <Form.Input placeholder='Email' onChange={(event) => setNewEmail(event.target.value)} />
                 <Form.Input placeholder='Username' onChange={(event) => setNewUsername(event.target.value)} />
                 <Form.Input placeholder='Password' type='password' onChange={(event) => setNewPassword(event.target.value)} />
                 <Form.Button content='Sign Up' onClick={(event) => signup(event, newemail, newusername, newpassword)} />
             </Form>
-        </>
+            <p style={{ paddingTop: '1em' }}>Already have an account? Log in <a href="/login">here</a>.</p>
+        </div>
     )
 }
 
