@@ -4,16 +4,24 @@ import { Link, useHistory } from 'react-router-dom'
 import { Header, Button } from 'semantic-ui-react'
 
 import { deleteRequest } from './services/httpService'
-import { logoutToken } from './actions'
+import { logoutToken, removeComment } from './actions'
 
-const Unregister = ({ auth }) => {
+const Unregister = ({ auth, comments }) => {
 
     const history = useHistory()
 
     const unregister = () => {
-        deleteRequest(`users/${auth.id}`)
-        logoutToken()
-        history.push('/')
+        deleteRequest(`users/${auth.id}`).then((response) => {
+            comments.filter((item) => item.userid === auth.id).map((item) =>
+                removeComment(item)
+            )
+
+            logoutToken()
+
+            history.push('/')
+        }).catch((error) => {
+            console.log(error.response.status)
+        })
     }
 
     return (<>
@@ -33,6 +41,7 @@ const Unregister = ({ auth }) => {
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
+        comments: state.comments
     }
 }
 

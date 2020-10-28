@@ -21,8 +21,8 @@
 ## comments
 
 - id int primary key
-- newsid int
-- userid int
+- newsid int foreign key
+- userid int foreign key
 - content text
 
 ## ads
@@ -39,4 +39,4 @@
 
 - CREATE TABLE news (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, category INT NOT NULL, likes INT NOT NULL, headline TEXT NOT NULL, content TEXT NOT NULL, picture TEXT);
 
-- CREATE TABLE comments (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, newsid INT NOT NULL, userid INT, content TEXT NOT NULL);
+- CREATE TABLE comments (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, newsid INT NOT NULL, userid INT, content TEXT NOT NULL, FOREIGN KEY (newsid) REFERENCES news(id) ON DELETE CASCADE, FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE);
