@@ -22,6 +22,7 @@ const Users = new UsersModel()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static('build'))
 
 app.use('/news', newsRouter)
 app.use('/ads', adsRouter)
@@ -157,4 +158,5 @@ app.post('/reset', async (request, response) => {
 
 })
 
+app.use('*', express.static('build'))
 app.listen(process.env.BACKEND_PORT)

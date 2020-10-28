@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = `http://localhost:3001/`
+import { backendUrl } from '../constants'
+
+axios.defaults.baseURL = backendUrl
 
 const getRequest = (url) => {
     return axios.get(url)

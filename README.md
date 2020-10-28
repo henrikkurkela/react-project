@@ -7,6 +7,13 @@ To start the application, type:
 npm run dev
 ```
 
+If desired, the backend can also be used to serve a production build of the frontend:
+```
+npm run build
+
+npm run server
+```
+
 The backend requires a MySQL server to function. Table creation queries can be found in the [server readme](/server/models/README.md) file. Database details should be added to the [example.env](example.env) file, which should then be renamed to .env
 
 Stock photos downloaded from unsplash.com

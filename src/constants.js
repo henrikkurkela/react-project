@@ -4,4 +4,6 @@ const categories = [
     { key: 2, value: 2, text: "Foreign" }
 ]
 
-export { categories }
+const backendUrl = 'http://localhost:3001'
+
+export { categories, backendUrl }
