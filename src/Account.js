@@ -82,5 +82,3 @@ const mapStateToProps = (state) => {
 const ConnectedAccount = connect(mapStateToProps)(Account)
 
 export default ConnectedAccount
-
-export { Account }

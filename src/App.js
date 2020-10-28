@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Header, Container } from 'semantic-ui-react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Grid, Container } from 'semantic-ui-react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { getRequest } from './services/httpService'
 import { addNews, addAd, addComment, addUser, resetContent } from './actions'
-import { categories } from './constants'
 
+import ConnectedSiteHeader from './SiteHeader'
 import ConnectedRenderNews from './RenderNews'
 import ConnectedLogin from './Login'
 import Signup from './Signup'
@@ -17,10 +16,11 @@ import RenderAds from './RenderAds'
 import ConnectedAvatar from './Avatar'
 import Development from './Development'
 import Moderation from './Moderation'
+import About from './About'
+import SiteFooter from './SiteFooter'
 
 const App = () => {
 
-	const auth = useSelector(state => state.auth)
 	const [requestReset, setRequestReset] = useState(true)
 
 	useEffect(() => {
@@ -54,24 +54,12 @@ const App = () => {
 	}, [requestReset])
 
 	return (
-		<Container>
-			<Grid columns='equal'>
-				<Grid.Column>
-					<Router>
+		<Router>
+			<Container>
+				<Grid columns='equal'>
+					<Grid.Column>
 						<Grid.Row>
-							<Header as='h1' style={{ color: 'white', textAlign: 'center', paddingTop: '1.5em', margin: '0', fontSize: '3em' }}>News Site</Header>
-							<p style={{ textAlign: 'center', color: 'white', fontSize: '1em' }}>The Best News in Town!</p>
-							<Link to={'/'} style={{ display: 'inline-block', padding: '1em', color: 'white' }}>All News</Link>
-							{categories.filter(item => item.key !== 0).map((item) => <Link key={item.key} to={`/${item.value}`} style={{ display: 'inline-block', padding: '1em', color: 'white' }}>{item.text}</Link>)}
-							<Link to="/development" style={{ float: 'right', display: 'inline-block', padding: '1em', color: 'orange' }}>Development</Link>
-							{
-								auth ?
-									<>
-										<Link to="/logout" style={{ float: 'right', display: 'inline-block', padding: '1em', color: 'white' }}>Logout</Link>
-										<Link to="/account" style={{ float: 'right', display: 'inline-block', padding: '1em', color: 'white' }}>Account</Link>
-									</> :
-									<Link to="/login" style={{ float: 'right', display: 'inline-block', padding: '1em', color: 'white' }}>Login</Link>
-							}
+							<ConnectedSiteHeader />
 						</Grid.Row>
 						<Grid.Row style={{ backgroundColor: 'white', padding: '2em', borderRadius: '0.5em', overflow: 'auto' }}>
 							<Grid>
@@ -101,6 +89,9 @@ const App = () => {
 										<Route path="/logout">
 											<Logout />
 										</Route>
+										<Route path="/about">
+											<About />
+										</Route>
 										<Route path="/:category/:story">
 											<ConnectedRenderNews />
 										</Route>
@@ -117,18 +108,13 @@ const App = () => {
 								</ Grid.Column>
 							</Grid>
 						</Grid.Row>
-					</Router>
-				</Grid.Column>
-			</Grid>
-			<Grid.Row>
-				<div style={{ padding: '2em' }}>
-					<p style={{ textAlign: 'center', color: 'white', fontSize: '1em' }}>
-						Copyright © 1970 News Site Company, LLC. All rights reserved.<br />
-						Any questions? Contact us via <a style={{ textAlign: 'center', fontSize: '1em', color: 'orange' }} href="mailto: admin@localhost.com">email</a>.
-					</p>
-				</div>
-			</Grid.Row>
-		</Container>
+					</Grid.Column>
+				</Grid>
+				<Grid.Row>
+					<SiteFooter />
+				</Grid.Row>
+			</Container>
+		</Router>
 	)
 }
 
