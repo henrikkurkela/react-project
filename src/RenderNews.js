@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Image, Divider } from 'semantic-ui-react'
+import { Header, Image, Divider, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 
@@ -18,7 +18,11 @@ const RenderNews = ({ news }) => {
 			if (item !== undefined) {
 				return (<div>
 					<Header as='h3'>{item.headline}</Header>
-					{item.picture ? <Image style={{ marginBottom: '1.5rem' }} src={item.picture} /> : null}
+					<p style={{ color: 'gray' }}><Icon name='clock outline'></Icon>{item.time}</p>
+					{item.picture ? <div style={{ marginBottom: '1em' }}>
+						<Image style={{ marginBottom: '0.5em' }} src={item.picture} />
+						{item.caption ? <b>{item.caption}</b> : null}
+					</div> : null}
 					{item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
 					<ConnectedRenderComments id={item.id} />
 				</div>)

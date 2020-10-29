@@ -161,3 +161,5 @@ Implement simple tests:
 2020-10-27: Seventh Iteration Goals Met, MVC Controller Error Check Rework 4h (Total 67h)
 
 2020-10-28: Begin Work on Updating Design 5h (Total 72h)
+
+2020-10-29: Continue Work on Updating Design 2h (Total 74h)

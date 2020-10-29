@@ -6,12 +6,12 @@ const updateNews = (news) => {
     store.dispatch({
         type: "UPDATE_NEWS",
         data : {
-            id: parseInt(news.id),
+            id: Number(news.id),
             headline: news.headline,
             content: news.content,
             picture: news.picture,
             likes: news.likes,
-            category: parseInt(news.category)
+            category: Number(news.category)
         }
     })
 }
@@ -20,12 +20,14 @@ const addNews = (news) => {
     store.dispatch({
         type: "NEW_NEWS",
         data: {
-            id: parseInt(news.id),
+            id: Number(news.id),
             headline: news.headline,
             content: news.content,
             picture: news.picture,
-            likes: news.likes,
-            category: parseInt(news.category)
+            caption: news.caption,
+            likes: Number(news.likes),
+            category: Number(news.category),
+            time: Date(news.time).toString()
         }
     })
 }
@@ -41,7 +43,7 @@ const addAd = (item) => {
     store.dispatch({
         type: "NEW_AD",
         data: {
-            id: parseInt(item.id),
+            id: Number(item.id),
             picture: item.picture,
             href: item.href
         }
@@ -52,8 +54,8 @@ const addComment = (comment) => {
     store.dispatch({
         type: "NEW_COMMENT",
         data: {
-            id: parseInt(comment.id),
-            newsid: parseInt(comment.newsid),
+            id: Number(comment.id),
+            newsid: Number(comment.newsid),
             userid: comment.userid,
             content: comment.content
         }

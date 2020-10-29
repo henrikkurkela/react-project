@@ -16,7 +16,7 @@ class NewsModel {
 
     addStory = (news) => {
         return new Promise((resolve, reject) => {
-            connection.query(`INSERT INTO news (category, likes, headline, content, picture) VALUES (${news.category}, ${news.likes}, "${news.headline}", "${news.content}", "${news.picture}")`, (error, result) => {
+            connection.query(`INSERT INTO news (category, likes, headline, content, picture, caption) VALUES (${news.category}, ${news.likes}, "${news.headline}", "${news.content}", "${news.picture}", "${news.caption}")`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {

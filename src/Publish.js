@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Form, Header, Divider, Image } from 'semantic-ui-react'
 
 import { postRequest, getRequest } from './services/httpService'
@@ -7,8 +8,10 @@ import { categories } from './constants'
 
 const Publish = () => {
 
-    const [newNews, setNewNews] = useState({ content: "", headline: "", picture: "", category: 0, likes: 0 })
+    const [newNews, setNewNews] = useState({ content: "", headline: "", picture: "", caption: "", category: 0, likes: 0 })
     const [pictures, setPictures] = useState([])
+
+    const history = useHistory()
 
     useEffect(() => {
         getRequest('/pictures').then((response) => {
@@ -21,7 +24,8 @@ const Publish = () => {
         postRequest(`news`, { ...news, likes: 0 }).then((response) => {
             if (response.status === 200) {
                 addNews(response.data)
-                setNewNews({ content: "", headline: "", picture: "", category: 0, likes: 0 })
+                setNewNews({ content: "", headline: "", picture: "", caption: "", category: 0, likes: 0 })
+                history.push(`/${response.data.category}/${response.data.id}`)
             }
         }).catch((error) => {
             console.log(error.response.status)
@@ -31,8 +35,9 @@ const Publish = () => {
     return (<>
         <Form style={{ float: 'left', minWidth: '100%', paddingBottom: '1em' }}>
             <Form.Input placeholder='Headline' value={newNews.headline} onChange={(event) => setNewNews({ ...newNews, headline: event.target.value })} />
-            <Form.Dropdown placeholder='Picture' options={pictures} selection clearable onChange={(event, data) => setNewNews({ ...newNews, picture: `${data.value}` })} />
             <Form.Dropdown placeholder='Category' options={categories} selection clearable onChange={(event, data) => setNewNews({ ...newNews, category: data.value })} />
+            <Form.Dropdown placeholder='Picture' options={pictures} selection clearable onChange={(event, data) => setNewNews({ ...newNews, picture: `${data.value}` })} />
+            <Form.Input placeholder='Caption' value={newNews.caption} onChange={(event) => setNewNews({ ...newNews, caption: event.target.value })} />
             <Form.TextArea placeholder='Content' value={newNews.content} onChange={(event) => setNewNews({ ...newNews, content: event.target.value })} />
             <Form.Button content='Post' onClick={() => postNews(newNews)} />
         </Form>
