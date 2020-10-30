@@ -16,7 +16,6 @@ const Signup = () => {
     const history = useHistory()
 
     const signup = (event, email, username, userpass) => {
-        event.preventDefault()
         setSignupError(false)
         postRequest("signup", { email: email, username: username, password: userpass })
             .then(response => {

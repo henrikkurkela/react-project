@@ -13,11 +13,11 @@ const RenderAds = () => {
         const interval = setInterval(() => {
             setRandomAd(ads[Math.floor(Math.random() * ads.length)])
         }, 10000)
-        
+
         return () => clearInterval(interval)
     }, [ads])
 
-    return (<div>
+    return (<div style={{ position: 'sticky', top: '1em' }}>
         <Header as='h3' color={'orange'}>Sponsored</Header>
         <Image src={randomAd ? randomAd.picture : null}
             as='a'

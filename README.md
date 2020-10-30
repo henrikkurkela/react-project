@@ -163,3 +163,5 @@ Implement simple tests:
 2020-10-28: Begin Work on Updating Design 5h (Total 72h)
 
 2020-10-29: Continue Work on Updating Design 2h (Total 74h)
+
+2020-10-30: Continue Work on Updating Design 1h (Total 75h)

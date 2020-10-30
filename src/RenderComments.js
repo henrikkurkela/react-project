@@ -17,11 +17,16 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 	})
 
 	const commentForm = (event) => {
-		event.preventDefault()
 		if (newComment !== null && newComment !== "") {
 			postRequest("comments" , { content: newComment, newsid: id, userid: auth ? auth.id : null }).then((response) => addComment(response.data))
 		}
 		setNewComment('')
+	}
+
+	const commentOnKeyDown = (event) => {
+		if (event.keyCode === 13) {
+			commentForm(event)
+		}
 	}
 
 	const like = () => {
@@ -61,7 +66,7 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 				</Comment>
 			)}
 			<Form reply style={{ float: 'left', minWidth: '100%' }}>
-				<Form.TextArea value={newComment} onChange={(event) => setNewComment(event.target.value)} />
+				<Form.TextArea value={newComment} onChange={(event) => setNewComment(event.target.value)} onKeyDown={commentOnKeyDown} />
 				<Button content='Comment' labelPosition='left' icon='edit' primary onClick={commentForm} />
 				<Button animated onClick={like} color={liked ? 'green' : null}>
 					<Button.Content visible>

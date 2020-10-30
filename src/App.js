@@ -61,7 +61,7 @@ const App = () => {
 						<Grid.Row>
 							<ConnectedSiteHeader />
 						</Grid.Row>
-						<Grid.Row style={{ backgroundColor: 'white', padding: '2em', borderRadius: '0.5em', overflow: 'auto' }}>
+						<Grid.Row style={{ backgroundColor: 'white', padding: '2em', borderRadius: '0.5em' }}>
 							<Grid>
 								<Grid.Column width={12}>
 									<Switch>
