@@ -17,13 +17,12 @@ const RenderAds = () => {
         return () => clearInterval(interval)
     }, [ads])
 
-    return (<div style={{ position: 'sticky', top: '1em' }}>
+    return (<div style={{ position: 'sticky', top: '1em', textAlign: 'center' }}>
         <Header as='h3' color={'orange'}>Sponsored</Header>
         <Image src={randomAd ? randomAd.picture : null}
             as='a'
             href={randomAd ? randomAd.href : null}
             target='_blank'
-            style={{ transition: '.35s ease-in-out' }}
         />
     </div>)
 }

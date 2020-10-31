@@ -24,14 +24,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('build'))
 
-app.use('/news', newsRouter)
-app.use('/ads', adsRouter)
-app.use('/comments', commentsRouter)
-app.use('/users', usersRouter)
-app.use('/avatars', avatarsRouter)
-app.use('/pictures', picturesRouter)
+app.use('/api/news', newsRouter)
+app.use('/api/ads', adsRouter)
+app.use('/api/comments', commentsRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/avatars', avatarsRouter)
+app.use('/api/pictures', picturesRouter)
 
-app.post('/login', async (request, response) => {
+app.post('/api/login', async (request, response) => {
 
 	const user = await Users.getByEmail(request.body.email)
 
@@ -55,7 +55,7 @@ app.post('/login', async (request, response) => {
 	}
 })
 
-app.post('/signup', async (request, response) => {
+app.post('/api/signup', async (request, response) => {
 
 	if (!RegExp('^[a-zA-Z0-9.]+@[a-zA-Z]+[.]{1}[a-zA-Z]+$').test(request.body.email)) {
 		response.status(400).send('Invalid email')
@@ -75,7 +75,7 @@ app.post('/signup', async (request, response) => {
 	response.status(400).end()
 })
 
-app.post('/reset', async (request, response) => {
+app.post('/api/reset', async (request, response) => {
 
 	const ads = [
 		{

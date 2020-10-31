@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Comment, Divider, Header, Form, Button, Icon } from 'semantic-ui-react'
 
 import { postRequest, patchRequest } from './services/httpService'
@@ -15,6 +16,7 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 			return false
 		}
 	})
+	const history = useHistory()
 
 	const commentForm = (event) => {
 		if (newComment !== null && newComment !== "") {
@@ -60,7 +62,7 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 				<Comment key={key}>
 					<Comment.Avatar src={commenterDetails(comment.userid).avatar} />
 					<Comment.Content>
-						<Comment.Author>{commenterDetails(comment.userid).username}</Comment.Author>
+						<Comment.Author style={{ cursor: 'pointer' }} onClick={() => history.push(`/users/${comment.userid}`)}>{commenterDetails(comment.userid).username}</Comment.Author>
 						<Comment.Text>{comment.content}</Comment.Text>
 					</Comment.Content>
 				</Comment>

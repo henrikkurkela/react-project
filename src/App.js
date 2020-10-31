@@ -12,6 +12,7 @@ import Signup from './Signup'
 import Logout from './Logout'
 import ConnectedAccount from './Account'
 import ConnectedUnregister from './Unregister'
+import User from './User'
 import RenderAds from './RenderAds'
 import ConnectedAvatar from './Avatar'
 import Development from './Development'
@@ -91,6 +92,9 @@ const App = () => {
 										</Route>
 										<Route path="/about">
 											<About />
+										</Route>
+										<Route path="/users/:user">
+											<User />
 										</Route>
 										<Route path="/:category/:story">
 											<ConnectedRenderNews />
