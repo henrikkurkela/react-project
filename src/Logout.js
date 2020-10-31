@@ -10,9 +10,9 @@ const Logout = () => {
     },[])
 
     return (
-        <>
+        <div style={{ margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Header as='h3'>Good Bye!</Header>
-        </>
+        </div>
     )
 }
 

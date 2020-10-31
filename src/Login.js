@@ -46,8 +46,11 @@ const Login = ({ auth }) => {
         }
     }
 
-    return (auth ? <Header as='h3'>Welcome!</Header> :
-        <div style={{textAlign: 'center'}}>
+    return (auth ?
+        <div style={{ margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Header as='h3'>Welcome!</Header>
+        </div> :
+        <div style={{ textAlign: 'center' }}>
             <Header as='h3'>Login</Header>
             <Form error={userError} style={{ display: 'inline-block', width: '33%' }}>
                 <Message error header='Error' content={errorMessage} />

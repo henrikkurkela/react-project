@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 
 import ConnectedRenderComments from './RenderComments'
+import NotFound from './NotFound'
 
 const RenderNews = ({ news }) => {
 
@@ -26,6 +27,10 @@ const RenderNews = ({ news }) => {
 					{item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
 					<ConnectedRenderComments id={item.id} />
 				</div>)
+			} else {
+				return (<div>
+					<NotFound type='article' />
+				</div>)
 			}
 	}
 
@@ -33,9 +38,11 @@ const RenderNews = ({ news }) => {
 		case undefined:
 			return (<div>
 				{news.map((item, key) => {
-					return (<div style={{ cursor: 'pointer', marginBottom: '1.5rem' }} key={key} onClick={() => history.push(`/${item.category}/${item.id}`)}>
+					return (<div style={{ cursor: 'pointer', overflow: 'auto' }} key={key} onClick={() => history.push(`/${item.category}/${item.id}`)}>
 						<Header as='h3'>{item.headline}</Header>
+						<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
 						{item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
+						<div style={{ clear: 'both' }} />
 						<Divider />
 					</div>)
 				})}
@@ -43,9 +50,11 @@ const RenderNews = ({ news }) => {
 		default:
 			return (<div>
 				{news.filter((item) => item.category === Number(category)).map((item, key) => {
-					return (<div style={{ cursor: 'pointer', marginBottom: '1.5rem' }} key={key} onClick={() => history.push(`/${item.category}/${item.id}`)}>
+					return (<div style={{ cursor: 'pointer', overflow: 'auto' }} key={key} onClick={() => history.push(`/${item.category}/${item.id}`)}>
 						<Header as='h3'>{item.headline}</Header>
+						<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
 						{item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
+						<div style={{ clear: 'both' }} />
 						<Divider />
 					</div>)
 				})}

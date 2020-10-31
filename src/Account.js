@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Header, Comment, Button, Icon, Modal } from 'semantic-ui-react'
+import { Header, Comment, Button, Icon, Modal, Image } from 'semantic-ui-react'
 
 import { deleteRequest } from './services/httpService'
 import { removeComment } from './actions'
@@ -18,13 +18,20 @@ const Account = ({ auth, comments }) => {
     }
 
     return (<>
-        <Header as='h3'>Account Management</Header>
         {auth ? <>
+            <div style={{ margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1em' }}>
+                <Image
+                    src={auth.avatar}
+                    style={{ borderRadius: '1em', float: 'left' }}
+                ></Image>
+                <Header as='h3' style={{ margin: '1em' }}>{auth.username}</Header>
+            </div>
+            <Header as='h3'>Actions</Header>
             <Link to='/avatar'>
                 <Button to='/unregister'>Choose Avatar</Button>
             </Link>
             <Link to='/unregister'>
-                <Button to='/unregister'>Delete Account</Button>
+                <Button color='red' to='/unregister'>Delete Account</Button>
             </Link>
             <Header as='h3'>Recent Activity</Header>
             <Comment.Group style={{ minWidth: '100%' }}>
@@ -68,7 +75,10 @@ const Account = ({ auth, comments }) => {
                     </Button>
                 </Modal.Actions>
             </Modal>
-        </> : null}
+        </> : <>
+        <Header as='h3'>Not Logged In</Header>
+        <p><Link to='/login'>Log in</Link> to manage your account.</p>
+        </>}
     </>)
 }
 

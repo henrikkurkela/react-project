@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Header, Comment, Image } from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
 
+import NotFound from './NotFound'
 
 const User = () => {
 
@@ -22,7 +23,7 @@ const User = () => {
     switch (user) {
         case undefined:
             return (<div>
-                <Header as='h3'>User Overview</Header>
+                <NotFound type='user' />
             </div>)
         default:
 
@@ -30,7 +31,7 @@ const User = () => {
 
             if (selectedUser === undefined) {
                 return (<div>
-                    <Header as='h3'>No User Found</Header>
+                    <NotFound type='user' />
                 </div>)
             } else {
                 return (<div>

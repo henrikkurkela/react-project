@@ -93,16 +93,10 @@ const App = () => {
 										<Route path="/about">
 											<About />
 										</Route>
-										<Route path="/users/:user">
+										<Route path={["/users/:user", "/users"]}>
 											<User />
 										</Route>
-										<Route path="/:category/:story">
-											<ConnectedRenderNews />
-										</Route>
-										<Route path="/:category">
-											<ConnectedRenderNews />
-										</Route>
-										<Route path="/">
+										<Route path={["/:category/:story", "/:category", "/"]}>
 											<ConnectedRenderNews />
 										</Route>
 									</Switch>
