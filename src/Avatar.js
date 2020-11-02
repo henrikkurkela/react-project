@@ -53,5 +53,3 @@ const mapStateToProps = (state) => {
 const ConnectedAvatar = connect(mapStateToProps)(Avatar)
 
 export default ConnectedAvatar
-
-export { Avatar }

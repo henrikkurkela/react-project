@@ -74,5 +74,3 @@ const mapStateToProps = (state) => {
 const ConnectedLogin = connect(mapStateToProps)(Login)
 
 export default ConnectedLogin
-
-export { Login }

@@ -48,5 +48,3 @@ const mapStateToProps = (state) => {
 const ConnectedUnregister = connect(mapStateToProps)(Unregister)
 
 export default ConnectedUnregister
-
-export { Unregister }

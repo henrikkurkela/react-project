@@ -167,3 +167,5 @@ Implement simple tests:
 2020-10-30: Continue Work on Updating Design 1h (Total 75h)
 
 2020-10-31: Users Overview Route, 404 Route, Design Updates 3h (Total 78h)
+
+2020-11-02: Share Button, RenderComments Design Updates 1h (Total 79h)
