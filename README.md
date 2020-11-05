@@ -20,14 +20,22 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
-Eighth Iteration:
+Ninth Iteration:
+
+Economics Section:
+
+- Stock index graph
+- Individual stock prices bar
+- Economics news stories
+
+## DONE
+
+Eighth Iteration (13h):
 
 Modernize user interface:
 
 - Investigate modern news sites
 - Update design
-
-## DONE
 
 Seventh Iteration (8h):
 
@@ -169,3 +177,5 @@ Implement simple tests:
 2020-10-31: Users Overview Route, 404 Route, Design Updates 3h (Total 78h)
 
 2020-11-02: Share Button, RenderComments Design Updates 1h (Total 79h)
+
+2020-11-05: Eighth Iteration Goals Met, Planning 1h (Total 80h)
