@@ -13,6 +13,7 @@ const commentsRouter = require('./controllers/commentsController')
 const usersRouter = require('./controllers/usersController')
 const avatarsRouter = require('./controllers/avatarsController')
 const picturesRouter = require('./controllers/picturesController')
+const marketRouter = require('./controllers/marketController')
 
 const UsersModel = require('./models/usersModel')
 const connection = require('./models/database')
@@ -30,6 +31,7 @@ app.use('/api/comments', commentsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/avatars', avatarsRouter)
 app.use('/api/pictures', picturesRouter)
+app.use('/api/market', marketRouter)
 
 app.post('/api/login', async (request, response) => {
 

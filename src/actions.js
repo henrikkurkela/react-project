@@ -69,6 +69,13 @@ const removeComment = (comment) => {
     })
 }
 
+const updateMarket = (market) => {
+    store.dispatch({
+        type: "NEW_MARKET",
+        data: market
+    })
+}
+
 const addUser = (user) => {
     store.dispatch({
         type: "NEW_USER",
@@ -113,4 +120,4 @@ const resetContent = () => {
     })
 }
 
-export { updateNews, addNews, removeNews, addAd, addComment, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, resetContent }
+export { updateNews, addNews, removeNews, addAd, addComment, updateMarket, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, resetContent }

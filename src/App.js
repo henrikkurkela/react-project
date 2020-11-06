@@ -3,7 +3,7 @@ import { Grid, Container } from 'semantic-ui-react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { getRequest } from './services/httpService'
-import { addNews, addAd, addComment, addUser, resetContent } from './actions'
+import { addNews, addAd, addComment, addUser, updateMarket, resetContent } from './actions'
 
 import ConnectedSiteHeader from './SiteHeader'
 import ConnectedRenderNews from './RenderNews'
@@ -47,6 +47,11 @@ const App = () => {
 			getRequest("users").then(response => {
 				const users = response.data
 				users.map(item => addUser(item))
+			})
+
+			getRequest("market").then(response => {
+				const market = response.data
+				updateMarket(market)
 			})
 
 			setRequestReset(false)

@@ -6,12 +6,14 @@ import adsReducer from './adsReducer'
 import commentsReducer from './commentsReducer'
 import authReducer from  './authReducer'
 import usersReducer from './usersReducer'
+import marketReducer from './marketReducer'
 
 const reducer = combineReducers({
 	news: newsReducer,
 	ads: adsReducer,
 	comments: commentsReducer,
 	users: usersReducer,
+	market: marketReducer,
 	auth: authReducer
 })
 
