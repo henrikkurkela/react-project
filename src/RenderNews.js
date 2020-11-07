@@ -52,7 +52,6 @@ const RenderNews = ({ news }) => {
 		default:
 			return (<div>
 				{Number(category) === 3 ? <>
-					<Header as='h3'>Market Tracker</Header>
 					<RenderMarket />
 				</> : null}
 				{news.filter((item) => item.category === Number(category)).map((item, key) => {

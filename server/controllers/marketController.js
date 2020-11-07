@@ -1,21 +1,26 @@
 const marketRouter = require('express').Router()
 
+const marketValues = []
+let newValue = Math.floor(Math.random() * 100)
+for (let i = 0; i < 100; i++) {
+    marketValues.push({ x: i, y: newValue })
+    newValue = newValue + Math.floor(Math.random() * 5) - 2
+}
+
+const updateValues = setInterval(() => {
+    marketValues.shift()
+    marketValues.forEach((value) => value.x = value.x - 1)
+    newValue = newValue + Math.floor(Math.random() * 5) - 2
+    if (newValue > 100) {
+        newValue = 100
+    } else if (newValue < 0) {
+        newValue = 0
+    }
+    marketValues.push({ x: marketValues.length, y: newValue })
+}, 1000)
+
 marketRouter.get('/', (request, response) => {
-
-    const data = [
-        { x: 0, y: 8 },
-        { x: 1, y: 5 },
-        { x: 2, y: 4 },
-        { x: 3, y: 9 },
-        { x: 4, y: 1 },
-        { x: 5, y: 7 },
-        { x: 6, y: 6 },
-        { x: 7, y: 3 },
-        { x: 8, y: 2 },
-        { x: 9, y: 0 }
-    ]
-
-    response.json(data)
+    response.json(marketValues)
 })
 
 module.exports = marketRouter

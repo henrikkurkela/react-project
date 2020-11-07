@@ -181,3 +181,5 @@ Implement simple tests:
 2020-11-05: Eighth Iteration Goals Met, Planning 1h (Total 80h)
 
 2020-11-06: Begin Work on Stock Index Graph 2h (Total 82h)
+
+2020-11-07: Continue Work on Stock Index Graph 2h (Total 84h)
