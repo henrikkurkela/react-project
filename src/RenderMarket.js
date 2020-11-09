@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis } from 'react-vis'
-import { Header, Divider } from 'semantic-ui-react'
+import { Header, Divider, Label, Icon } from 'semantic-ui-react'
 
 import { getRequest } from './services/httpService'
 import { updateMarket } from './actions'
@@ -41,10 +41,20 @@ const RenderMarket = () => {
     })
 
     return (<div onClick={() => setShowPlot(!showPlot)} style={{ cursor: 'pointer', backgroundImage: 'url(/assets/img/photo7.jpg)' }}>
-        <Header as='h3' style={{ textAlign: 'center', paddingTop: '0.5em' }}>Market Tracker</Header>
+        <Label style={{ float: 'left' }} color='gray'>
+            <Icon name={showPlot ? 'compress' : 'expand'} />
+            {showPlot ? 'Minimize' : 'Expand'}
+        </Label>
+        <Header as='h3' style={{
+            textAlign: 'center', padding: '0 0.5em 0.25em 0.5em',
+            backgroundColor: 'white', borderRadius: ' 0 0 0.5em 0.5em',
+            width: 'fit-content', margin: '-2.571px auto 0.5em auto'
+        }}>
+            Market Tracker
+        </Header>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ display: showPlot ? 'block' : 'none', background: 'white', borderRadius: '0.5em', padding: '1em', marginRight: '1em' }}>
-                <XYPlot width={300} height={300}>
+                <XYPlot width={300} height={300} yDomain={[0, 100]}>
                     <VerticalGridLines />
                     <HorizontalGridLines />
                     <XAxis hideTicks />

@@ -183,4 +183,4 @@ Implement simple tests:
 
 2020-11-07: Continue Work on Stock Index Graph 2h (Total 84h)
 
-2020-11-09: Stock Index Graph Styling 1h (Total 85h)
+2020-11-09: Stock Index Graph Styling 2h (Total 86h)
