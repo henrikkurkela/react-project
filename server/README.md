@@ -1,6 +1,6 @@
 # Server REST API Documentation
 
-## /login
+## /api/login
 
 Accepts POST:
 
@@ -17,7 +17,7 @@ Responds 200:
 
 (*) The JSON Web Token for the user.
  
-## /signup
+## /api/signup
 
 Accepts POST:
 
@@ -32,7 +32,7 @@ Responds 200:
 - username
 - avatar
 
-## /ads
+## /api/ads
 
 Accepts GET:
 
@@ -42,7 +42,7 @@ Responds 200 [ARRAY]:
 - picture
 - href
 
-## /news
+## /api/news
 
 Accepts GET:
 
@@ -55,7 +55,7 @@ Responds 200 [ARRAY]:
 - picture
 - content
 
-## /news/:id
+## /api/news/:id
 
 Accepts PATCH:
 
@@ -70,7 +70,7 @@ Responds 200
 - picture
 - content
 
-## /users
+## /api/users
 
 Accepts GET:
 
@@ -80,7 +80,7 @@ Responds 200 [ARRAY]:
 - username
 - avatar
 
-## /users/:id
+## /api/users/:id
 
 Accepts PATCH:
 
@@ -104,7 +104,7 @@ Accepts DELETE:
 
 Responds 200
 
-## /comments
+## /api/comments
 
 Accepts GET:
 
@@ -132,7 +132,7 @@ Responds 200:
 - userid
 - content
 
-## /comments/:id
+## /api/comments/:id
 
 Accepts DELETE:
 
@@ -142,7 +142,7 @@ Accepts DELETE:
 
 Responds 200
 
-## /avatars
+## /api/avatars
 
 Accepts GET
 
@@ -150,7 +150,16 @@ Responds 200:
 
 - avatars [ARRAY]
 
-## /reset
+## /api/market
+
+Accepts GET
+
+Responds 200 [ARRAY]:
+
+- x
+- y
+
+## /api/reset
 
 Accepts POST
 

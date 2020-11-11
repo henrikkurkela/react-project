@@ -20,14 +20,26 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
-Ninth Iteration:
+Tenth Iteration:
 
-Business Section:
+News story overhaul:
+
+- Multiple pictures in story
+- YouTube embed links
+- Author credit
+
+## DONE
+
+Ninth Iteration (7h):
+
+Business section:
 
 - Stock index graph
 - Business news stories
 
-## DONE
+Back end:
+
+- Random generated market data
 
 Eighth Iteration (13h):
 
@@ -184,3 +196,5 @@ Implement simple tests:
 2020-11-07: Continue Work on Stock Index Graph 2h (Total 84h)
 
 2020-11-09: Stock Index Graph Styling 2h (Total 86h)
+
+2020-11-11: Ninth Iteration Goals Met, Planning 1h (Total 87h)
