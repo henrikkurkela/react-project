@@ -199,4 +199,4 @@ Implement simple tests:
 
 2020-11-11: Ninth Iteration Goals Met, Planning 1h (Total 87h)
 
-2020-11-13: Start Work on News Template 1h (Total 88h)
+2020-11-13: Start Work on News Template 2h (Total 89h)

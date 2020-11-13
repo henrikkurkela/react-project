@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Header, Image, Divider, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
@@ -7,6 +7,15 @@ import '../node_modules/react-vis/dist/style.css'
 import ConnectedRenderComments from './RenderComments'
 import NotFound from './NotFound'
 import RenderMarket from './RenderMarket'
+
+const ParseContent = ({ content }) => {
+
+	const parsedItems = content.split('\n\n').map((item, key) => {
+		return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item}</p>)
+	})
+
+	return parsedItems
+}
 
 const ParseArticle = ({ item }) => {
 
@@ -34,11 +43,7 @@ const ParseArticle = ({ item }) => {
 	}
 
 	if (item.content) {
-		const rawItems = item.content.split('\n\n')
-		const parsedItems = rawItems.map((item, key) => {
-			return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item}</p>)
-		})
-		parsedArticle.push(parsedItems)
+		parsedArticle.push(<ParseContent key='content' content={item.content} />)
 	}
 
 	return (<div>
@@ -50,19 +55,19 @@ const ParseArticle = ({ item }) => {
 const ParseArticlePreview = ({ item }) => {
 
 	const history = useHistory()
-	const parseContent = (content) => {
-		const rawItems = content.split('\n\n')
-		const parsedItems = rawItems.map((item, key) => {
-			return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item}</p>)
-		})
-		return parsedItems
-	}
+	const [hovered, setHovered] = useState('')
 
-	return (<div style={{ cursor: 'pointer', overflow: 'auto' }} onClick={() => history.push(`/${item.category}/${item.id}`)}>
-		<Header as='h3'>{item.headline}</Header>
-		<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
-		{parseContent(item.content)}
-		<div style={{ clear: 'both' }} />
+	return (<div style={{ boxShadow: hovered }}>
+		<div style={{ cursor: 'pointer', overflow: 'auto' }}
+			onClick={() => history.push(`/${item.category}/${item.id}`)}
+			onMouseEnter={() => setHovered('0 4px 8px 8px rgba(0, 0, 0, 0.2)')}
+			onMouseLeave={() => setHovered('')}
+		>
+			<Header as='h3'>{item.headline}</Header>
+			<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
+			<ParseContent content={item.content} />
+			<div style={{ clear: 'both' }} />
+		</div>
 		<Divider />
 	</div>)
 }
