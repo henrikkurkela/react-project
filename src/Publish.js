@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Form, Header, Divider, Image } from 'semantic-ui-react'
+import { useSelector } from 'react-redux'
+import { Form, Divider } from 'semantic-ui-react'
 
 import { postRequest, getRequest } from './services/httpService'
 import { addNews } from './actions'
 import { categories } from './constants'
+import { ParseArticle } from './RenderNews'
 
 const Publish = () => {
 
-    const [newNews, setNewNews] = useState({ content: "", headline: "", picture: "", caption: "", category: 0, likes: 0 })
+    const auth = useSelector(state => state.auth)
+    const defaultState = { content: "", headline: "", picture: "", caption: "", category: 0, likes: 0, author: auth ? auth.id : null }
+
+    const [newNews, setNewNews] = useState(defaultState)
     const [pictures, setPictures] = useState([])
 
     const history = useHistory()
@@ -24,7 +29,7 @@ const Publish = () => {
         postRequest(`news`, { ...news, likes: 0 }).then((response) => {
             if (response.status === 200) {
                 addNews(response.data)
-                setNewNews({ content: "", headline: "", picture: "", caption: "", category: 0, likes: 0 })
+                setNewNews(defaultState)
                 history.push(`/${response.data.category}/${response.data.id}`)
             }
         }).catch((error) => {
@@ -42,9 +47,7 @@ const Publish = () => {
             <Form.Button content='Post' onClick={() => postNews(newNews)} />
         </Form>
         <Divider style={{ clear: 'left' }} />
-        <Header as='h3'>{newNews.headline}</Header>
-        {newNews.picture ? <Image fluid bordered style={{ marginBottom: '1.5rem' }} src={newNews.picture} /> : null}
-        {newNews.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
+        <ParseArticle item={newNews} showComments={false} />
     </>)
 }
 

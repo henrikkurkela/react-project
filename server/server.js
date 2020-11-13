@@ -154,11 +154,14 @@ app.post('/api/reset', async (request, response) => {
 
 		connection.query('DELETE FROM users')
 		connection.query(`INSERT INTO users (email, username, avatar, password, type) VALUES ("${adminUser.email}", "${adminUser.username}", "${adminUser.avatar}", "${adminUser.password}", "${adminUser.type}")`)
+		connection.query('SELECT LAST_INSERT_ID()', (error, result) => {
+			const adminId = result[0]['LAST_INSERT_ID()']
 
-		connection.query('DELETE FROM news')
-		news.map((item) =>
-			connection.query(`INSERT INTO news (category, likes, headline, content, picture, caption) VALUES (${item.category}, ${item.likes}, "${item.headline}", "${item.content}", "${item.picture}", "${item.caption}")`)
-		)
+			connection.query('DELETE FROM news')
+			news.map((item) =>
+				connection.query(`INSERT INTO news (category, likes, headline, content, picture, caption, author) VALUES (${item.category}, ${item.likes}, "${item.headline}", "${item.content}", "${item.picture}", "${item.caption}", ${adminId})`)
+			)
+		})
 
 		connection.query('DELETE FROM ads')
 		ads.map((item) =>

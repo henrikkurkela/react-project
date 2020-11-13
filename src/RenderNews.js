@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Header, Image, Divider, Icon } from 'semantic-ui-react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import '../node_modules/react-vis/dist/style.css'
 
@@ -17,9 +17,10 @@ const ParseContent = ({ content }) => {
 	return parsedItems
 }
 
-const ParseArticle = ({ item }) => {
+const ParseArticle = ({ item, showComments = true }) => {
 
 	const parsedArticle = []
+	const users = useSelector(state => state.users)
 
 	if (item.headline) {
 		parsedArticle.push(
@@ -46,9 +47,26 @@ const ParseArticle = ({ item }) => {
 		parsedArticle.push(<ParseContent key='content' content={item.content} />)
 	}
 
+	if (item.author) {
+		const author = users.find(user => user.id === item.author)
+		if (author) {
+			parsedArticle.push(
+				<div key='author'>
+					<Header as='h3'>Author</Header>
+					<Image style={{ float: 'left', width: '50px', marginRight: '1em' }} circular src={author.avatar} />
+					<p>
+						{author.username}<br />
+						<a href={`mailto: ${author.email}`}>{author.email}</a>
+					</p>
+					<div style={{ clear: 'both' }} />
+				</div>
+			)
+		}
+	}
+
 	return (<div>
 		{parsedArticle}
-		<ConnectedRenderComments id={item.id} />
+		{showComments ? <ConnectedRenderComments id={item.id} /> : null}
 	</div>)
 }
 
@@ -118,3 +136,5 @@ const mapStateToProps = (state) => {
 const ConnectedRenderNews = connect(mapStateToProps)(RenderNews)
 
 export default ConnectedRenderNews
+
+export { ParseArticle }

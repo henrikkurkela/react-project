@@ -9,6 +9,10 @@ const auth = require('../middlewares/authMiddleware')
 usersRouter.get('/', (request, response) => {
 
 	Users.getAll().then((result) => {
+		result = result.map((user) => {
+			delete user.password
+			return user
+		})
 		response.json(result)
 	}).catch((error) => {
 		console.log(error)

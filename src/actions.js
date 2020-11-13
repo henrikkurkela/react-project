@@ -27,6 +27,7 @@ const addNews = (news) => {
             caption: news.caption,
             likes: Number(news.likes),
             category: Number(news.category),
+            author: Number(news.author),
             time: Date(news.time).toString()
         }
     })
