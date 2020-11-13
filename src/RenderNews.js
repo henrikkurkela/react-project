@@ -8,10 +8,68 @@ import ConnectedRenderComments from './RenderComments'
 import NotFound from './NotFound'
 import RenderMarket from './RenderMarket'
 
+const ParseArticle = ({ item }) => {
+
+	const parsedArticle = []
+
+	if (item.headline) {
+		parsedArticle.push(
+			<Header key='headline' as='h3'>{item.headline}</Header>
+		)
+	}
+
+	if (item.time) {
+		parsedArticle.push(
+			<p key='time' style={{ color: 'gray' }}><Icon name='clock outline'></Icon>{item.time}</p>
+		)
+	}
+
+	if (item.picture) {
+		parsedArticle.push(
+			<div key='picture' style={{ marginBottom: '1em' }}>
+				<Image style={{ marginBottom: '0.5em' }} src={item.picture} />
+				{item.caption ? <b>{item.caption}</b> : null}
+			</div>
+		)
+	}
+
+	if (item.content) {
+		const rawItems = item.content.split('\n\n')
+		const parsedItems = rawItems.map((item, key) => {
+			return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item}</p>)
+		})
+		parsedArticle.push(parsedItems)
+	}
+
+	return (<div>
+		{parsedArticle}
+		<ConnectedRenderComments id={item.id} />
+	</div>)
+}
+
+const ParseArticlePreview = ({ item }) => {
+
+	const history = useHistory()
+	const parseContent = (content) => {
+		const rawItems = content.split('\n\n')
+		const parsedItems = rawItems.map((item, key) => {
+			return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item}</p>)
+		})
+		return parsedItems
+	}
+
+	return (<div style={{ cursor: 'pointer', overflow: 'auto' }} onClick={() => history.push(`/${item.category}/${item.id}`)}>
+		<Header as='h3'>{item.headline}</Header>
+		<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
+		{parseContent(item.content)}
+		<div style={{ clear: 'both' }} />
+		<Divider />
+	</div>)
+}
+
 const RenderNews = ({ news }) => {
 
 	const { category, story } = useParams()
-	const history = useHistory()
 
 	switch (story) {
 		case undefined:
@@ -19,16 +77,7 @@ const RenderNews = ({ news }) => {
 		default:
 			const item = news.find((item) => item.id === Number(story))
 			if (item !== undefined) {
-				return (<div>
-					<Header as='h3'>{item.headline}</Header>
-					<p style={{ color: 'gray' }}><Icon name='clock outline'></Icon>{item.time}</p>
-					{item.picture ? <div style={{ marginBottom: '1em' }}>
-						<Image style={{ marginBottom: '0.5em' }} src={item.picture} />
-						{item.caption ? <b>{item.caption}</b> : null}
-					</div> : null}
-					{item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
-					<ConnectedRenderComments id={item.id} />
-				</div>)
+				return (<ParseArticle item={item} />)
 			} else {
 				return (<div>
 					<NotFound type='article' />
@@ -39,30 +88,18 @@ const RenderNews = ({ news }) => {
 	switch (category) {
 		case undefined:
 			return (<div>
-				{news.map((item, key) => {
-					return (<div style={{ cursor: 'pointer', overflow: 'auto' }} key={key} onClick={() => history.push(`/${item.category}/${item.id}`)}>
-						<Header as='h3'>{item.headline}</Header>
-						<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
-						{item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
-						<div style={{ clear: 'both' }} />
-						<Divider />
-					</div>)
-				})}
+				{news.map((item, key) =>
+					<ParseArticlePreview item={item} key={key} />
+				)}
 			</div>)
 		default:
 			return (<div>
 				{Number(category) === 3 ? <>
 					<RenderMarket />
 				</> : null}
-				{news.filter((item) => item.category === Number(category)).map((item, key) => {
-					return (<div style={{ cursor: 'pointer', overflow: 'auto' }} key={key} onClick={() => history.push(`/${item.category}/${item.id}`)}>
-						<Header as='h3'>{item.headline}</Header>
-						<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
-						{item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
-						<div style={{ clear: 'both' }} />
-						<Divider />
-					</div>)
-				})}
+				{news.filter((item) => item.category === Number(category)).map((item, key) =>
+					<ParseArticlePreview item={item} key={key} />
+				)}
 			</div>)
 	}
 }

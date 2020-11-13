@@ -41,7 +41,7 @@ const RenderMarket = () => {
     })
 
     return (<div onClick={() => setShowPlot(!showPlot)} style={{ cursor: 'pointer', backgroundImage: 'url(/assets/img/photo7.jpg)' }}>
-        <Label style={{ float: 'left' }} color='gray'>
+        <Label style={{ float: 'left' }} color='grey'>
             <Icon name={showPlot ? 'compress' : 'expand'} />
             {showPlot ? 'Minimize' : 'Expand'}
         </Label>
