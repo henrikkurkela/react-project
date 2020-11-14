@@ -75,7 +75,7 @@ const ParseArticlePreview = ({ item }) => {
 	const history = useHistory()
 	const [hovered, setHovered] = useState('')
 
-	return (<div style={{ boxShadow: hovered }}>
+	return (<div style={{ margin: '-1em', padding: '1em', boxShadow: hovered }}>
 		<div style={{ cursor: 'pointer', overflow: 'auto' }}
 			onClick={() => history.push(`/${item.category}/${item.id}`)}
 			onMouseEnter={() => setHovered('0 4px 8px 8px rgba(0, 0, 0, 0.2)')}
@@ -86,7 +86,7 @@ const ParseArticlePreview = ({ item }) => {
 			<ParseContent content={item.content} />
 			<div style={{ clear: 'both' }} />
 		</div>
-		<Divider />
+		<Divider style={{ margin: '1rem 0 0' }} />
 	</div>)
 }
 
