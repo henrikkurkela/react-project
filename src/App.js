@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { getRequest } from './services/httpService'
 import { addNews, addAd, addComment, addUser, updateMarket, resetContent } from './actions'
 
-import ConnectedSiteHeader from './SiteHeader'
+import SiteHeader from './SiteHeader'
 import ConnectedRenderNews from './RenderNews'
 import ConnectedLogin from './Login'
 import Signup from './Signup'
@@ -65,7 +65,7 @@ const App = () => {
 				<Grid columns='equal'>
 					<Grid.Column>
 						<Grid.Row>
-							<ConnectedSiteHeader />
+							<SiteHeader />
 						</Grid.Row>
 						<Grid.Row style={{ backgroundColor: 'white', padding: '2em', borderRadius: '0.5em' }}>
 							<Grid>
