@@ -4,6 +4,7 @@ import { Header, Icon, Divider, Confirm } from 'semantic-ui-react'
 
 import { deleteRequest } from './services/httpService'
 import { removeNews } from './actions'
+import { ParseArticle } from './RenderNews'
 
 const ModerateNews = ({ news }) => {
 
@@ -37,8 +38,7 @@ const ModerateNews = ({ news }) => {
                             setOpenConfirm(false)
                         }}
                     />
-                    <Header as='h3'>{item.headline}</Header>
-                    {item.content.split('\n\n').map((paragraph, key) => <p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{paragraph}</p>)}
+                    <ParseArticle item={item} showComments={false} />
                     < Divider />
                 </ div>)}
         </ div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Form, Divider } from 'semantic-ui-react'
+import { Form, Divider, Header } from 'semantic-ui-react'
 
 import { postRequest, getRequest } from './services/httpService'
 import { addNews } from './actions'
@@ -38,6 +38,7 @@ const Publish = () => {
     }
 
     return (<>
+        <Header as='h3'>Publish</Header>
         <Form style={{ float: 'left', minWidth: '100%', paddingBottom: '1em' }}>
             <Form.Input placeholder='Headline' value={newNews.headline} onChange={(event) => setNewNews({ ...newNews, headline: event.target.value })} />
             <Form.Dropdown placeholder='Category' options={categories} selection clearable onChange={(event, data) => setNewNews({ ...newNews, category: data.value })} />
