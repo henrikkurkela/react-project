@@ -7,12 +7,12 @@ import { categories } from './constants'
 
 const HeaderLink = ({ to, text, floated = 'none' }) => {
 
-    const [hovered, setHovered] = useState('')
+    const [hovered, setHovered] = useState({})
 
     return (
-        <Link to={to} style={{ display: 'inline-block', padding: '1em', color: 'white', float: floated, textShadow: hovered }}
-            onMouseEnter={() => setHovered('0 0 16px darkblue')}
-            onMouseLeave={() => setHovered('')}
+        <Link to={to} style={{ display: 'inline-block', padding: '1em', color: 'white', float: floated, ...hovered }}
+            onMouseEnter={() => setHovered({ textShadow: '0 0 16px orange', color: 'orange' })}
+            onMouseLeave={() => setHovered({})}
         >
             {text}
         </Link>

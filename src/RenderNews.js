@@ -73,21 +73,21 @@ const ParseArticle = ({ item, showComments = true }) => {
 const ParseArticlePreview = ({ item }) => {
 
 	const history = useHistory()
-	const [hovered, setHovered] = useState('')
+	const [hovered, setHovered] = useState({})
 
-	return (<div style={{ margin: '-1em', padding: '1em', boxShadow: hovered }}>
-		<div style={{ cursor: 'pointer', overflow: 'auto' }}
+	return (<>
+		<div style={{ cursor: 'pointer', overflow: 'auto', margin: '-1em', padding: '1em', ...hovered }}
 			onClick={() => history.push(`/${item.category}/${item.id}`)}
-			onMouseEnter={() => setHovered('0 4px 8px 8px rgba(0, 0, 0, 0.2)')}
-			onMouseLeave={() => setHovered('')}
+			onMouseEnter={() => setHovered({ boxShadow: '0 4px 8px 8px rgba(0, 0, 0, 0.2)' })}
+			onMouseLeave={() => setHovered({})}
 		>
 			<Header as='h3'>{item.headline}</Header>
 			<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
 			<ParseContent content={item.content} />
 			<div style={{ clear: 'both' }} />
 		</div>
-		<Divider style={{ margin: '1rem 0 0' }} />
-	</div>)
+		<Divider />
+	</>)
 }
 
 const RenderNews = ({ news }) => {
