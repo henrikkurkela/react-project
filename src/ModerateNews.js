@@ -39,7 +39,7 @@ const ModerateNews = ({ news }) => {
                         }}
                     />
                     <ParseArticle item={item} showComments={false} />
-                    < Divider />
+                    <Divider />
                 </ div>)}
         </ div>
     </>)
