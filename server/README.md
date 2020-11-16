@@ -160,6 +160,14 @@ Responds 200:
 
 - avatars [ARRAY]
 
+## /api/pictures
+
+Accepts GET
+
+Responds 200:
+
+- pictures [ARRAY]
+
 ## /api/market
 
 Accepts GET
