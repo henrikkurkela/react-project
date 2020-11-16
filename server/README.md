@@ -53,7 +53,10 @@ Responds 200 [ARRAY]:
 - likes
 - headline
 - picture
+- caption
 - content
+- author
+- time
 
 ## /api/news/:id
 
@@ -68,7 +71,10 @@ Responds 200
 - likes
 - headline
 - picture
+- caption
 - content
+- author
+- time
 
 ## /api/users
 
@@ -77,8 +83,10 @@ Accepts GET:
 Responds 200 [ARRAY]:
 
 - id
+- email
 - username
 - avatar
+- type
 
 ## /api/users/:id
 
@@ -93,8 +101,10 @@ Accepts PATCH:
 Responds 200
 
 - id
+- email
 - username
 - avatar
+- type
 
 Accepts DELETE:
 
