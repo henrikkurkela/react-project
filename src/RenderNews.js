@@ -8,10 +8,36 @@ import ConnectedRenderComments from './RenderComments'
 import NotFound from './NotFound'
 import RenderMarket from './RenderMarket'
 
+const ParsePicture = ({ item }) => {
+
+	return (
+		<div style={{ marginBottom: '1em' }}>
+			{item.picture ? <Image style={{ marginBottom: '0.5em' }} src={item.picture} /> : null}
+			{item.caption ? <b>{item.caption}</b> : null}
+		</div>
+	)
+}
+
 const ParseContent = ({ content }) => {
 
 	const parsedItems = content.split('\n\n').map((item, key) => {
-		return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item}</p>)
+		if (item.substring(0, 1) === '{') {
+			try {
+				const parseItem = JSON.parse(item)
+				switch (parseItem.type) {
+					case 'picture':
+						return (<ParsePicture key={key} item={parseItem} />)
+					default:
+						console.log(`ERROR: No parser found for content type ${parseItem.type}`)
+						return null
+				}
+			} catch (error) {
+				return null
+			}
+
+		} else {
+			return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item}</p>)
+		}
 	})
 
 	return parsedItems
@@ -36,10 +62,7 @@ const ParseArticle = ({ item, showComments = true }) => {
 
 	if (item.picture) {
 		parsedArticle.push(
-			<div key='picture' style={{ marginBottom: '1em' }}>
-				<Image style={{ marginBottom: '0.5em' }} src={item.picture} />
-				{item.caption ? <b>{item.caption}</b> : null}
-			</div>
+			<ParsePicture key='picture' item={{ picture: item.picture, caption: item.caption }} />
 		)
 	}
 

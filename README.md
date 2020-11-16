@@ -204,3 +204,5 @@ Implement simple tests:
 2020-11-14: Update Site Header 1h (Total 91h)
 
 2020-11-15: Minor Style Changes 1h (Total 92h)
+
+2020-11-16: Begin Work on New Content Parser 1h (Total 93h)
