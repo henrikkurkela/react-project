@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Header, Image, Divider, Icon } from 'semantic-ui-react'
+import { Header, Image, Divider, Icon, Embed } from 'semantic-ui-react'
 import { connect, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import '../node_modules/react-vis/dist/style.css'
@@ -7,6 +7,21 @@ import '../node_modules/react-vis/dist/style.css'
 import ConnectedRenderComments from './RenderComments'
 import NotFound from './NotFound'
 import RenderMarket from './RenderMarket'
+
+const ParseVideo = ({ item }) => {
+
+	return (
+		<div style={{ marginBottom: '1em' }}>
+			{ item.id ? <Embed
+				style={{ marginBottom: '0.5em' }}
+				id={item.id}
+				placeholder='/assets/img/photo8.jpg'
+				source='youtube'
+			/> : null}
+			{ item.caption ? <b>{item.caption}</b> : null}
+		</div>
+	)
+}
 
 const ParsePicture = ({ item }) => {
 
@@ -18,15 +33,21 @@ const ParsePicture = ({ item }) => {
 	)
 }
 
-const ParseContent = ({ content }) => {
+const ParseContent = ({ content, textOnly = false }) => {
 
 	const parsedItems = content.split('\n\n').map((item, key) => {
-		if (item.substring(0, 1) === '{') {
+		if (item.trim().substring(0, 1) !== '{') {
+			return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item.trim()}</p>)
+		} else if (textOnly === true) {
+			return null
+		} else {
 			try {
 				const parseItem = JSON.parse(item)
 				switch (parseItem.type) {
 					case 'picture':
 						return (<ParsePicture key={key} item={parseItem} />)
+					case 'video':
+						return (<ParseVideo key={key} item={parseItem} />)
 					default:
 						console.log(`ERROR: No parser found for content type ${parseItem.type}`)
 						return null
@@ -34,9 +55,6 @@ const ParseContent = ({ content }) => {
 			} catch (error) {
 				return null
 			}
-
-		} else {
-			return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item}</p>)
 		}
 	})
 
@@ -106,7 +124,7 @@ const ParseArticlePreview = ({ item }) => {
 		>
 			<Header as='h3'>{item.headline}</Header>
 			<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
-			<ParseContent content={item.content} />
+			<ParseContent content={item.content} textOnly />
 			<div style={{ clear: 'both' }} />
 		</div>
 		<Divider />

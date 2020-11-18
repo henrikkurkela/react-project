@@ -206,3 +206,5 @@ Implement simple tests:
 2020-11-15: Minor Style Changes 1h (Total 92h)
 
 2020-11-16: Begin Work on New Content Parser 1h (Total 93h)
+
+2020-11-17: Add Video Embed Ability 2h (Total 95h)
