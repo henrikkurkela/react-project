@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Header, Image, Divider, Icon, Embed } from 'semantic-ui-react'
+import { Header, Image, Divider, Icon, Embed, Label } from 'semantic-ui-react'
 import { connect, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import '../node_modules/react-vis/dist/style.css'
@@ -33,6 +33,19 @@ const ParsePicture = ({ item }) => {
 	)
 }
 
+const ParseQuote = ({ item }) => {
+
+	return (
+		<div style={{ backgroundColor: 'lightgray', width: '80%', margin: ' 0em auto 1em' }}>
+			<Label style={{ float: 'left', margin: '1em' }} color='grey' ribbon>
+				Quote
+        	</Label>
+			{item.quote ? <Header as='h3' color='grey' style={{ textAlign: 'center', padding: '1em 5em 0em', margin: '1rem 0' }}><i>{item.quote}</i></Header> : null}
+			{item.author ? <p style={{ color: 'grey', textAlign: 'right', padding: '0em 3em 0.5em' }}> - {item.author}</p> : null}
+		</div>
+	)
+}
+
 const ParseContent = ({ content, textOnly = false }) => {
 
 	const parsedItems = content.split('\n\n').map((item, key) => {
@@ -48,6 +61,8 @@ const ParseContent = ({ content, textOnly = false }) => {
 						return (<ParsePicture key={key} item={parseItem} />)
 					case 'video':
 						return (<ParseVideo key={key} item={parseItem} />)
+					case 'quote':
+						return (<ParseQuote key={key} item={parseItem} />)
 					default:
 						console.log(`ERROR: No parser found for content type ${parseItem.type}`)
 						return null
