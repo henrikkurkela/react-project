@@ -209,4 +209,4 @@ Implement simple tests:
 
 2020-11-17: Add Video Embed Ability 2h (Total 95h)
 
-2020-11-18: Add Pull Quotes, Improve Publish Page 2h (Total 97h)
+2020-11-19: Add Pull Quotes, Improve Publish Page 2h (Total 97h)

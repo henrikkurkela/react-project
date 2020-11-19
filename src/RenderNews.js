@@ -36,12 +36,13 @@ const ParsePicture = ({ item }) => {
 const ParseQuote = ({ item }) => {
 
 	return (
-		<div style={{ backgroundColor: 'lightgray', width: '80%', margin: ' 0em auto 1em' }}>
+		<div style={{ background: 'linear-gradient(0deg, rgba(0,0,255,1) 0%, rgba(0,0,255,1) 25%, rgba(0,128,255,1) 100%)', width: '80%', margin: ' 0em auto 1em', borderRadius: '0.5em' }}>
 			<Label style={{ float: 'left', margin: '1em' }} color='grey' ribbon>
+				<Icon name='quote right' />
 				Quote
         	</Label>
-			{item.quote ? <Header as='h3' color='grey' style={{ textAlign: 'center', padding: '1em 5em 0em', margin: '1rem 0' }}><i>{item.quote}</i></Header> : null}
-			{item.author ? <p style={{ color: 'grey', textAlign: 'right', padding: '0em 3em 0.5em' }}> - {item.author}</p> : null}
+			{item.quote ? <Header as='h3' style={{ textAlign: 'center', padding: '1em 5em 0em', margin: '1rem 0', color: 'white' }}>{item.quote}</Header> : null}
+			{item.author ? <p style={{ color: 'orange', textAlign: 'right', padding: '0em 3em 0.5em' }}> - {item.author}</p> : null}
 		</div>
 	)
 }
