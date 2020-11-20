@@ -20,15 +20,22 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
-Tenth Iteration:
+Eleventh Iteration:
+
+Advertisement overhaul:
+
+- Better transition effects
+- Zoom and pan effects
+
+## DONE
+
+Tenth Iteration (11h):
 
 News story overhaul:
 
 - Multiple pictures in story
 - YouTube embed links
 - Author credit
-
-## DONE
 
 Ninth Iteration (7h):
 
@@ -210,3 +217,5 @@ Implement simple tests:
 2020-11-17: Add Video Embed Ability 2h (Total 95h)
 
 2020-11-19: Add Pull Quotes, Improve Publish Page 2h (Total 97h)
+
+2020-11-20: Tenth Iteration Goals Met, Planning 1h (Total 98h)

@@ -36,7 +36,7 @@ const ParsePicture = ({ item }) => {
 const ParseQuote = ({ item }) => {
 
 	return (
-		<div style={{ background: 'linear-gradient(0deg, rgba(0,0,255,1) 0%, rgba(0,0,255,1) 25%, rgba(0,128,255,1) 100%)', width: '80%', margin: ' 0em auto 1em', borderRadius: '0.5em' }}>
+		<div style={{ background: 'linear-gradient(0deg, rgba(0,0,255,1) 0%, rgba(0,0,255,1) 25%, rgba(0,128,255,1) 100%)', margin: '0em auto 1em', borderRadius: '0.5em' }}>
 			<Label style={{ float: 'left', margin: '1em' }} color='grey' ribbon>
 				<Icon name='quote right' />
 				Quote
