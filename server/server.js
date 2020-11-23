@@ -87,6 +87,10 @@ app.post('/api/reset', async (request, response) => {
 		{
 			picture: "/assets/img/photo5.jpg",
 			href: "http://www.bing.com"
+		},
+		{
+			picture: "/assets/img/photo10.jpg",
+			href: "http://duckduckgo.com"
 		}
 	]
 

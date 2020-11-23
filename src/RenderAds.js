@@ -5,34 +5,47 @@ import { Image, Header } from 'semantic-ui-react'
 const RenderAds = () => {
 
     const ads = useSelector(state => state.ads)
-    const [randomAd, setRandomAd] = useState([])
+    const [position, setPosition] = useState(0)
     const [hovered, setHovered] = useState({})
 
     useEffect(() => {
 
-        setRandomAd(ads[Math.floor(Math.random() * ads.length)])
         const interval = setInterval(() => {
-            setRandomAd(ads[Math.floor(Math.random() * ads.length)])
+            if (position < ads.length - 1) {
+                setPosition(position + 1)
+            } else {
+                setPosition(0)
+            }
         }, 10000)
 
         return () => clearInterval(interval)
-    }, [ads])
+    }, [ads, position])
 
-    return (<div
-        style={{ position: 'sticky', top: '1em', margin: '-1em', padding: '1em', textAlign: 'center', ...hovered }}
-        onMouseEnter={() => setHovered({ boxShadow: '0 4px 8px 8px rgba(0, 0, 0, 0.2)' })}
-        onMouseLeave={() => setHovered({})}
-    >
-        <Header as='h3' color={'orange'}>Sponsored</Header>
-        <Image 
-            key={randomAd ? randomAd.picture : null}
-            src={randomAd ? randomAd.picture : null}
-            style={{ animation: 'fadeIn ease 1s' }}
-            as='a'
-            href={randomAd ? randomAd.href : null}
-            target='_blank'
-        />
-    </div>)
+    return (
+        <div
+            style={{ position: 'sticky', top: '1em', margin: '-1em', padding: '1em', overflow: 'hidden', textAlign: 'center', ...hovered }}
+            onMouseEnter={() => setHovered({ boxShadow: '0 4px 8px 8px rgba(0, 0, 0, 0.2)' })}
+            onMouseLeave={() => setHovered({})}
+        >
+            <Header as='h3' color={'orange'}>Sponsored</Header>
+            <div style={{ position: 'relative', width: '100%', height: '490px' }}>
+                {
+                    ads.map((item, key) => {
+                        return (
+                            <Image
+                                src={item.picture}
+                                key={key}
+                                style={{ position: 'absolute', width: '245px', left: `${(key - position) * 300}px`, transition: 'left 0.5s' }}
+                                as='a'
+                                href={item.href}
+                                target='_blank'
+                            />
+                        )
+                    })
+                }
+            </div>
+        </div>
+    )
 }
 
 export default RenderAds

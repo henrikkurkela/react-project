@@ -220,4 +220,4 @@ Implement simple tests:
 
 2020-11-20: Tenth Iteration Goals Met, Planning 1h (Total 98h)
 
-2020-11-23: Start Working on Ad Effects 1h (Total 99h)
+2020-11-23: Start Working on Ad Effects 2h (Total 100h)
