@@ -6,6 +6,7 @@ const RenderAds = () => {
 
     const ads = useSelector(state => state.ads)
     const [randomAd, setRandomAd] = useState([])
+    const [hovered, setHovered] = useState({})
 
     useEffect(() => {
 
@@ -17,9 +18,16 @@ const RenderAds = () => {
         return () => clearInterval(interval)
     }, [ads])
 
-    return (<div style={{ position: 'sticky', top: '1em', textAlign: 'center' }}>
+    return (<div
+        style={{ position: 'sticky', top: '1em', margin: '-1em', padding: '1em', textAlign: 'center', ...hovered }}
+        onMouseEnter={() => setHovered({ boxShadow: '0 4px 8px 8px rgba(0, 0, 0, 0.2)' })}
+        onMouseLeave={() => setHovered({})}
+    >
         <Header as='h3' color={'orange'}>Sponsored</Header>
-        <Image src={randomAd ? randomAd.picture : null}
+        <Image 
+            key={randomAd ? randomAd.picture : null}
+            src={randomAd ? randomAd.picture : null}
+            style={{ animation: 'fadeIn ease 1s' }}
             as='a'
             href={randomAd ? randomAd.href : null}
             target='_blank'

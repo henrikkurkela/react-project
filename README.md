@@ -219,3 +219,5 @@ Implement simple tests:
 2020-11-19: Add Pull Quotes, Improve Publish Page 2h (Total 97h)
 
 2020-11-20: Tenth Iteration Goals Met, Planning 1h (Total 98h)
+
+2020-11-23: Start Working on Ad Effects 1h (Total 99h)
