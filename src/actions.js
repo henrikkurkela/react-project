@@ -5,7 +5,7 @@ import store from './reducers'
 const updateNews = (news) => {
     store.dispatch({
         type: "UPDATE_NEWS",
-        data : {
+        data: {
             id: Number(news.id),
             headline: news.headline,
             content: news.content,
@@ -103,6 +103,7 @@ const loginToken = (auth) => {
         type: "LOGIN",
         data: auth
     })
+
     axios.defaults.headers['Authorization'] = `Bearer ${auth.auth}`
 }
 
