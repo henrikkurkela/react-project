@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
 import { Header, Form, Message, Button } from 'semantic-ui-react'
 
 import { postRequest } from './services/httpService'
@@ -18,10 +17,7 @@ const Login = ({ auth }) => {
 
         try {
             const response = await postRequest("login", { email: username, password: userpass })
-
             loginToken(response.data)
-            window.sessionStorage.setItem('auth', response.data.auth)
-            axios.defaults.headers.post['Authorization'] = `Bearer ${response.data.auth}`
         } catch (error) {
             if (error.response.data) {
                 setUserError(true)

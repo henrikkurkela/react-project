@@ -111,7 +111,6 @@ const logoutToken = () => {
         type: "LOGOUT"
     })
 
-    window.sessionStorage.removeItem('auth')
     axios.defaults.headers['Authorization'] = null
 }
 
