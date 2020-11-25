@@ -221,3 +221,5 @@ Implement simple tests:
 2020-11-20: Tenth Iteration Goals Met, Planning 1h (Total 98h)
 
 2020-11-23: Start Working on Ad Effects 2h (Total 100h)
+
+2020-11-25: Implement Ad Carousel Controls 1h (Total 101h)

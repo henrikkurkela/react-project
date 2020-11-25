@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Image, Header } from 'semantic-ui-react'
+import { Image, Header, Icon } from 'semantic-ui-react'
 
 const RenderAds = () => {
 
@@ -35,7 +35,7 @@ const RenderAds = () => {
                             <Image
                                 src={item.picture}
                                 key={key}
-                                style={{ position: 'absolute', width: '245px', left: `${(key - position) * 300}px`, transition: 'left 0.5s' }}
+                                style={{ position: 'absolute', width: '245px', height: '490px', top: '0px', left: `${(key - position) * 300}px`, transition: 'left 0.5s' }}
                                 as='a'
                                 href={item.href}
                                 target='_blank'
@@ -44,6 +44,13 @@ const RenderAds = () => {
                     })
                 }
             </div>
+            {
+                ads.map((item, key) => {
+                    return (
+                        <Icon name={key === position ? 'circle' : 'circle outline'} key={key} onClick={() => setPosition(key)} style={{ cursor: 'pointer' }} />
+                    )
+                })
+            }
         </div>
     )
 }
