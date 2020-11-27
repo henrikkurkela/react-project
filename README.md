@@ -25,7 +25,14 @@ Eleventh Iteration:
 Advertisement overhaul:
 
 - Better transition effects
-- Zoom and pan effects
+
+Refactor frontend:
+
+- Replace connects with useSelectors
+
+Reimplement tests:
+
+- Front end unit tests
 
 ## DONE
 
@@ -223,3 +230,5 @@ Implement simple tests:
 2020-11-23: Start Working on Ad Effects 2h (Total 100h)
 
 2020-11-25: Implement Ad Carousel Controls 1h (Total 101h)
+
+2020-11-27: Planning, Replace Connects with useSelectors 2h (Total 103h)

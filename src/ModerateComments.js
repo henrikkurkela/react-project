@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Header, Comment, Icon, Modal, Button } from 'semantic-ui-react'
 
 import { deleteRequest } from './services/httpService'
 import { removeComment } from './actions'
 
-const ModerateComments = ({ users, comments }) => {
+const ModerateComments = () => {
+
+    const users = useSelector(state => state.users)
+    const comments = useSelector(state => state.comments)
 
     const [openComment, setOpenComment] = useState(false)
     const [selectedComment, setSelectedComment] = useState(null)
@@ -29,60 +32,53 @@ const ModerateComments = ({ users, comments }) => {
         }
     }
 
-    return (<>
-        <Header as='h3'>Comments</Header>
-        <Comment.Group style={{ minWidth: '100%' }}>
-            {comments.map((comment, key) =>
-                <Comment key={key}>
-                    <Comment.Avatar src={commenterDetails(comment.userid).avatar} />
-                    <Comment.Content>
-                        <Icon style={{ float: 'right', display: 'inline-block', cursor: 'pointer' }} name='delete' onClick={() => {
-                            setOpenComment(true)
-                            setSelectedComment(comment)
-                        }}></Icon>
-                        <Comment.Author>{commenterDetails(comment.userid).username}</Comment.Author>
-                        <Comment.Text>{comment.content}</Comment.Text>
-                    </Comment.Content>
-                </Comment>
-            )}
-        </Comment.Group>
-        <Modal
-            closeIcon
-            onClose={() => setOpenComment(false)}
-            onOpen={() => setOpenComment(true)}
-            open={openComment}
-        >
-            <Modal.Header>Confirm Delete Comment</Modal.Header>
-            <Modal.Content>
-                {selectedComment ? <Comment>
-                    <Comment.Content>
-                        <Comment.Text>{selectedComment.content}</Comment.Text>
-                    </Comment.Content>
-                </Comment> : null}
-            </Modal.Content>
-            <Modal.Actions>
-                <Button color='green' onClick={() => setOpenComment(false)}>
-                    Cancel
+    return (
+        <>
+            <Header as='h3'>Comments</Header>
+            <Comment.Group style={{ minWidth: '100%' }}>
+                {comments.map((comment, key) =>
+                    <Comment key={key}>
+                        <Comment.Avatar src={commenterDetails(comment.userid).avatar} />
+                        <Comment.Content>
+                            <Icon style={{ float: 'right', display: 'inline-block', cursor: 'pointer' }} name='delete' onClick={() => {
+                                setOpenComment(true)
+                                setSelectedComment(comment)
+                            }} />
+                            <Comment.Author>{commenterDetails(comment.userid).username}</Comment.Author>
+                            <Comment.Text>{comment.content}</Comment.Text>
+                        </Comment.Content>
+                    </Comment>
+                )}
+            </Comment.Group>
+            <Modal
+                closeIcon
+                onClose={() => setOpenComment(false)}
+                onOpen={() => setOpenComment(true)}
+                open={openComment}
+            >
+                <Modal.Header>Confirm Delete Comment</Modal.Header>
+                <Modal.Content>
+                    {selectedComment ? <Comment>
+                        <Comment.Content>
+                            <Comment.Text>{selectedComment.content}</Comment.Text>
+                        </Comment.Content>
+                    </Comment> : null}
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button color='green' onClick={() => setOpenComment(false)}>
+                        Cancel
                     </Button>
-                <Button color='red' onClick={() => {
-                    setOpenComment(false)
-                    destroyComment(selectedComment)
-                }}>
-                    Delete
+                    <Button color='red' onClick={() => {
+                        setOpenComment(false)
+                        destroyComment(selectedComment)
+                    }}>
+                        Delete
                     </Button>
-            </Modal.Actions>
-        </Modal>
-    </>)
+                </Modal.Actions>
+            </Modal>
+        </>
+    )
 
 }
 
-const mapStateToProps = (state) => {
-    return {
-        users: state.users,
-        comments: state.comments
-    }
-}
-
-const ConnectedModerateComments = connect(mapStateToProps)(ModerateComments)
-
-export default ConnectedModerateComments
+export default ModerateComments

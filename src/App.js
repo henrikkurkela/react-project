@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Container } from 'semantic-ui-react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import { getRequest } from './services/httpService'
 import { addNews, addAd, addComment, addUser, updateMarket, resetContent } from './actions'
 
 import SiteHeader from './SiteHeader'
-import ConnectedRenderNews from './RenderNews'
-import ConnectedLogin from './Login'
+import RenderNews from './RenderNews'
+import Login from './Login'
 import Signup from './Signup'
 import Logout from './Logout'
-import ConnectedAccount from './Account'
-import ConnectedUnregister from './Unregister'
+import Account from './Account'
+import Unregister from './Unregister'
 import User from './User'
 import RenderAds from './RenderAds'
-import ConnectedAvatar from './Avatar'
+import Avatar from './Avatar'
 import Development from './Development'
 import Moderation from './Moderation'
 import About from './About'
@@ -60,7 +60,7 @@ const App = () => {
 	}, [requestReset])
 
 	return (
-		<Router>
+		<BrowserRouter>
 			<Container>
 				<Grid columns='equal'>
 					<Grid.Column>
@@ -78,19 +78,19 @@ const App = () => {
 											<Moderation />
 										</Route>
 										<Route path="/account">
-											<ConnectedAccount />
+											<Account />
 										</Route>
 										<Route path="/avatar">
-											<ConnectedAvatar />
+											<Avatar />
 										</Route>
 										<Route path="/login">
-											<ConnectedLogin />
+											<Login />
 										</Route>
 										<Route path="/signup">
 											<Signup />
 										</Route>
 										<Route path="/unregister">
-											<ConnectedUnregister />
+											<Unregister />
 										</Route>
 										<Route path="/logout">
 											<Logout />
@@ -102,7 +102,7 @@ const App = () => {
 											<User />
 										</Route>
 										<Route path={["/:category/:story", "/:category", "/"]}>
-											<ConnectedRenderNews />
+											<RenderNews />
 										</Route>
 									</Switch>
 								</ Grid.Column>
@@ -117,7 +117,7 @@ const App = () => {
 					<SiteFooter />
 				</Grid.Row>
 			</Container>
-		</Router>
+		</BrowserRouter>
 	)
 }
 

@@ -2,10 +2,9 @@ import React from 'react'
 import { Route, useHistory } from 'react-router-dom';
 import { Header, Button } from 'semantic-ui-react'
 
-
 import Publish from './Publish'
-import ConnectedModerateComments from './ModerateComments'
-import ConnectedModerateNews from './ModerateNews'
+import ModerateComments from './ModerateComments'
+import ModerateNews from './ModerateNews'
 
 const Moderation = () => {
 
@@ -19,10 +18,10 @@ const Moderation = () => {
             <Button onClick={() => history.push('/moderation/publish')}>Publish Story</Button>
         </Route>
         <Route path="/moderation/comments">
-            <ConnectedModerateComments />
+            <ModerateComments />
         </Route>
         <Route path="/moderation/news">
-            <ConnectedModerateNews />
+            <ModerateNews />
         </Route>
         <Route path="/moderation/publish">
             <Publish />

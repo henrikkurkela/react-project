@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Header, Icon, Divider, Confirm } from 'semantic-ui-react'
 
 import { deleteRequest } from './services/httpService'
 import { removeNews } from './actions'
 import { ParseArticle } from './RenderNews'
 
-const ModerateNews = ({ news }) => {
+const ModerateNews = () => {
+
+    const news = useSelector(state => state.news)
 
     const [openConfrim, setOpenConfirm] = useState(false)
     const [selectedNews, setSelectedNews] = useState(null)
@@ -29,7 +31,7 @@ const ModerateNews = ({ news }) => {
                     <Icon style={{ float: 'right', display: 'inline-block', cursor: 'pointer' }} name='delete' onClick={() => {
                         setOpenConfirm(true)
                         setSelectedNews(item)
-                    }}></Icon>
+                    }} />
                     <Confirm
                         open={openConfrim}
                         onCancel={() => setOpenConfirm(false)}
@@ -45,12 +47,4 @@ const ModerateNews = ({ news }) => {
     </>)
 }
 
-const mapStateToProps = (state) => {
-    return {
-        news: state.news,
-    }
-}
-
-const ConnectedModerateNews = connect(mapStateToProps)(ModerateNews)
-
-export default ConnectedModerateNews
+export default ModerateNews

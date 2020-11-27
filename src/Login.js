@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Header, Form, Message, Button } from 'semantic-ui-react'
 
 import { postRequest } from './services/httpService'
 import { loginToken, addUser } from './actions'
 
-const Login = ({ auth }) => {
+const Login = () => {
+
+    const auth = useSelector(state => state.auth)
 
     const [userError, setUserError] = useState(false)
     const [user, setUser] = useState('')
@@ -61,12 +63,4 @@ const Login = ({ auth }) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.auth
-    }
-}
-
-const ConnectedLogin = connect(mapStateToProps)(Login)
-
-export default ConnectedLogin
+export default Login

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis } from 'react-vis'
 import { Header, Divider, Label, Icon } from 'semantic-ui-react'
+import '../node_modules/react-vis/dist/style.css'
 
 import { getRequest } from './services/httpService'
 import { updateMarket } from './actions'

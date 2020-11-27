@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Comment, Divider, Header, Form, Button } from 'semantic-ui-react'
 
 import { postRequest, patchRequest } from './services/httpService'
 import { addComment, updateNews } from './actions'
 
-const RenderComments = ({ id, comments, news, users, auth }) => {
+const RenderComments = ({ id }) => {
+
+	const comments = useSelector(state => state.comments)
+	const news = useSelector(state => state.news)
+	const users = useSelector(state => state.users)
+	const auth = useSelector(state => state.auth)
 
 	const [newComment, setNewComment] = useState('')
 	const [liked, setLiked] = useState(() => {
@@ -73,10 +78,10 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 							<Comment.Text>{comment.content}</Comment.Text>
 						</Comment.Content>
 					</Comment>
-				) : 
+				) :
 				<p style={{ textAlign: 'center', color: 'darkgray' }}>No comments... yet. Be the first one to comment below!</p>
 			}
-			<Form reply style={{ float: 'left', minWidth: '100%' }}>
+			<Form reply style={{ minWidth: '100%' }}>
 				<Form.TextArea value={newComment} onChange={(event) => setNewComment(event.target.value)} onKeyDown={commentOnKeyDown} />
 				<Button style={{ width: '20%' }} content='Comment' labelPosition='left' icon='edit' primary onClick={commentForm} />
 				<Button style={{ width: '20%' }} content={linkCopied ? 'Link Copied' : 'Share'} labelPosition='left' icon={linkCopied ? 'linkify' : 'share square'} onClick={share} />
@@ -86,15 +91,4 @@ const RenderComments = ({ id, comments, news, users, auth }) => {
 	)
 }
 
-const mapStateToRenderCommentsProps = (state) => {
-	return {
-		comments: state.comments,
-		news: state.news,
-		users: state.users,
-		auth: state.auth
-	}
-}
-
-const ConnectedRenderComments = connect(mapStateToRenderCommentsProps)(RenderComments)
-
-export default ConnectedRenderComments
+export default RenderComments
