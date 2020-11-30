@@ -90,7 +90,7 @@ app.post('/api/reset', async (request, response) => {
 		},
 		{
 			picture: "/assets/img/photo10.jpg",
-			href: "http://duckduckgo.com"
+			href: "http://www.duckduckgo.com"
 		}
 	]
 

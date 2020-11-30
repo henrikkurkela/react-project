@@ -232,3 +232,5 @@ Implement simple tests:
 2020-11-25: Implement Ad Carousel Controls 1h (Total 101h)
 
 2020-11-27: Planning, Replace Connects with useSelectors 2h (Total 103h)
+
+2020-11-30: Begin Work on Unit Tests 2h (Total 105h)
