@@ -4,8 +4,8 @@ import Adapter from 'enzyme-adapter-react-16'
 import { mount, configure } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
-import axios from 'axios'
 
+import * as http from '../services/httpService'
 import Avatar from '../Avatar'
 
 configure({ adapter: new Adapter() })
@@ -16,12 +16,11 @@ const store = mockStore({
     }
 })
 
-jest.mock('axios')
-
 describe('Avatars', () => {
     it('contains the correct avatars', async () => {
 
-        axios.get.mockResolvedValue({ data: { avatars: ['1.jpg', '2.jpg', '3.jpg', 'anon.jpg', 'default.jpg'] } })
+        http.getRequest = jest.fn()
+        http.getRequest.mockResolvedValue({ data: { avatars: ['1.jpg', '2.jpg', '3.jpg', 'anon.jpg', 'default.jpg'] } })
 
         let wrapper
 
