@@ -233,6 +233,8 @@ Implement simple tests:
 
 2020-11-27: Planning, Replace Connects with useSelectors 2h (Total 103h)
 
-2020-11-30: Begin Work on Unit Tests 2h (Total 105h)
+2020-11-30: Begin Work on Unit Tests 2h (Avatar, NotFound) (Total 105h)
 
-2020-12-01: Continue Work on Unit Tests 1h (Total 106h)
+2020-12-01: Continue Work on Unit Tests 1h (Login) (Total 106h)
+
+2020-12-02: Continue Work on Unit Tests 1h (Signup, RenderComments) (107h)

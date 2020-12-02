@@ -69,7 +69,7 @@ describe('Login', () => {
             wrapper.find('Button').at(0).props().onClick()
         })
 
-        expect(http.postRequest).toHaveBeenCalledWith("login", { email: "demo@user.com", password: "demouser" })
+        expect(http.postRequest).toHaveBeenCalledWith('login', { email: 'demo@user.com', password: 'demouser' })
     })
 
     it('provides the demouser functionality', async () => {
@@ -77,7 +77,8 @@ describe('Login', () => {
         store = mockStore({})
 
         http.postRequest = jest.fn()
-        http.postRequest.mockResolvedValue({ data: { auth: '123', email: 'demo@user.com', id: 1, username: 'DemoUser', avatar: 'default.jpg' } })
+        http.postRequest.mockResolvedValueOnce({ data: { email: 'demo@user.com', id: 1, username: 'DemoUser', avatar: 'default.jpg' }, status: 200 })
+        http.postRequest.mockResolvedValueOnce({ data: { auth: '123', email: 'demo@user.com', id: 1, username: 'DemoUser', avatar: 'default.jpg' }, status: 200 })
 
         let wrapper
 
@@ -90,7 +91,7 @@ describe('Login', () => {
             wrapper.find('Button').at(1).props().onClick()
         })
 
-        expect(http.postRequest).toHaveBeenCalledWith("signup", { email: "demo@user.com", username: 'DemoUser', password: "demouser" })
-        expect(http.postRequest).toHaveBeenCalledWith("login", { email: "demo@user.com", password: "demouser" })
+        expect(http.postRequest).toHaveBeenCalledWith('signup', { email: 'demo@user.com', username: 'DemoUser', password: 'demouser' })
+        expect(http.postRequest).toHaveBeenCalledWith('login', { email: 'demo@user.com', password: 'demouser' })
     })
 })
