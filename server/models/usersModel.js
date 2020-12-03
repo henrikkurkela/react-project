@@ -1,4 +1,5 @@
 const connection = require('./database')
+const SqlString = require('sqlstring')
 
 class UsersModel {
 
@@ -28,7 +29,7 @@ class UsersModel {
 
     getByEmail = (email) => {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM users WHERE email = "${email}"`, (error, result) => {
+            connection.query(`SELECT * FROM users WHERE email = ${SqlString.escape(email)}`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
@@ -40,7 +41,7 @@ class UsersModel {
 
     getByUsername = (username) => {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM users WHERE username = "${username}"`, (error, result) => {
+            connection.query(`SELECT * FROM users WHERE username = ${SqlString.escape(username)}`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
@@ -52,7 +53,7 @@ class UsersModel {
 
     addUser = (email, username, avatar, password) => {
         return new Promise((resolve, reject) => {
-            connection.query(`INSERT INTO users (email, username, avatar, password) VALUES ("${email}", "${username}", "${avatar}", "${password}")`, (error, result) => {
+            connection.query(`INSERT INTO users (email, username, avatar, password) VALUES (${SqlString.escape(email)}, ${SqlString.escape(username)}, ${SqlString.escape(avatar)}, ${SqlString.escape(password)})`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
@@ -70,7 +71,7 @@ class UsersModel {
 
     updateAvatarOfId = (avatar, id) => {
         return new Promise((resolve, reject) => {
-            connection.query(`UPDATE users SET avatar = "${avatar}" WHERE id = ${id} AND LAST_INSERT_ID(id)`, (error, result) => {
+            connection.query(`UPDATE users SET avatar = ${SqlString.escape(avatar)} WHERE id = ${id} AND LAST_INSERT_ID(id)`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
@@ -88,7 +89,7 @@ class UsersModel {
 
     deleteById = (id) => {
         return new Promise((resolve, reject) => {
-            connection.query(`DELETE FROM users WHERE id = "${id}"`, (error, result) => {
+            connection.query(`DELETE FROM users WHERE id = ${id}`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
@@ -97,7 +98,6 @@ class UsersModel {
             })
         })
     }
-
 }
 
 module.exports = UsersModel

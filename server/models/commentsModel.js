@@ -1,4 +1,5 @@
 const connection = require('./database')
+const SqlString = require('sqlstring')
 
 class CommentsModel {
 
@@ -16,7 +17,7 @@ class CommentsModel {
 
     addComment = (newsid, userid, content) => {
         return new Promise((resolve, reject) => {
-            connection.query(`INSERT INTO comments (newsid, userid, content) VALUES (${newsid}, ${userid}, "${content}")`, (error, result) => {
+            connection.query(`INSERT INTO comments (newsid, userid, content) VALUES (${newsid}, ${userid}, ${SqlString.escape(content)})`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
@@ -34,7 +35,7 @@ class CommentsModel {
 
     deleteById = (id) => {
         return new Promise((resolve, reject) => {
-            connection.query(`DELETE FROM comments WHERE id = "${id}"`, (error, result) => {
+            connection.query(`DELETE FROM comments WHERE id = ${id}`, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
@@ -43,7 +44,6 @@ class CommentsModel {
             })
         })
     }
-
 }
 
 module.exports = CommentsModel

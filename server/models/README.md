@@ -16,8 +16,6 @@
 - likes int
 - headline text
 - content text
-- picture text
-- caption text
 - author int foreign key
 - time datetime
 
@@ -40,6 +38,6 @@
 
 - CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(255) NOT NULL UNIQUE, avatar TEXT NOT NULL, password TEXT NOT NULL, type VARCHAR(255) DEFAULT 'user');
 
-- CREATE TABLE news (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, category INT NOT NULL, likes INT NOT NULL, headline TEXT NOT NULL, content TEXT NOT NULL, picture TEXT, caption TEXT, author INT, time DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (author) REFERENCES users(id) ON DELETE CASCADE);
+- CREATE TABLE news (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, category INT NOT NULL, likes INT NOT NULL, headline TEXT NOT NULL, content TEXT NOT NULL, author INT, time DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (author) REFERENCES users(id) ON DELETE CASCADE);
 
 - CREATE TABLE comments (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, newsid INT NOT NULL, userid INT, content TEXT NOT NULL, FOREIGN KEY (newsid) REFERENCES news(id) ON DELETE CASCADE, FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE);

@@ -6,7 +6,6 @@ const pictures = () => {
 
     const files = fs.readdirSync(picturesFolder)
     return { pictures: files }
-
 }
 
 module.exports = pictures()

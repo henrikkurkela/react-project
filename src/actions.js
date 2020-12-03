@@ -9,7 +9,6 @@ const updateNews = (news) => {
             id: Number(news.id),
             headline: news.headline,
             content: news.content,
-            picture: news.picture,
             likes: news.likes,
             category: Number(news.category)
         }
@@ -23,8 +22,6 @@ const addNews = (news) => {
             id: Number(news.id),
             headline: news.headline,
             content: news.content,
-            picture: news.picture,
-            caption: news.caption,
             likes: Number(news.likes),
             category: Number(news.category),
             author: Number(news.author),

@@ -238,3 +238,5 @@ Implement simple tests:
 2020-12-01: Continue Work on Unit Tests 1h (Login) (Total 106h)
 
 2020-12-02: Continue Work on Unit Tests 1h (Signup, RenderComments) (107h)
+
+2020-12-03: Continue Work on Unit Tests (Account, Development), RenderNews Revamp, SqlString in Backend Models 4h (111h)

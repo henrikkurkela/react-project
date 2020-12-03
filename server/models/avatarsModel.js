@@ -6,7 +6,6 @@ const avatars = () => {
 
     const files = fs.readdirSync(avatarFolder)
     return { avatars: files }
-
 }
 
 module.exports = avatars()

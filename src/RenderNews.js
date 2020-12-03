@@ -22,14 +22,18 @@ const ParseVideo = ({ item }) => {
 	)
 }
 
-const ParsePicture = ({ item }) => {
+const ParsePicture = ({ item, preview = false }) => {
 
-	return (
-		<div style={{ marginBottom: '1em' }}>
-			{item.picture ? <Image style={{ marginBottom: '0.5em' }} src={item.picture} /> : null}
-			{item.caption ? <b>{item.caption}</b> : null}
-		</div>
-	)
+	if (preview === true) {
+		return (<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />)
+	} else {
+		return (
+			<div style={{ marginBottom: '1em' }}>
+				{item.picture ? <Image style={{ marginBottom: '0.5em' }} src={item.picture} /> : null}
+				{item.caption ? <b>{item.caption}</b> : null}
+			</div>
+		)
+	}
 }
 
 const ParseQuote = ({ item }) => {
@@ -46,34 +50,51 @@ const ParseQuote = ({ item }) => {
 	)
 }
 
-const ParseContent = ({ content, textOnly = false }) => {
+const ParseContent = ({ content, preview = false }) => {
 
-	const parsedItems = content.split('\n\n').map((item, key) => {
-		if (item.trim().substring(0, 1) !== '{') {
-			return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item.trim()}</p>)
-		} else if (textOnly === true) {
-			return null
-		} else {
-			try {
-				const parseItem = JSON.parse(item)
-				switch (parseItem.type) {
-					case 'picture':
-						return (<ParsePicture key={key} item={parseItem} />)
-					case 'video':
-						return (<ParseVideo key={key} item={parseItem} />)
-					case 'quote':
-						return (<ParseQuote key={key} item={parseItem} />)
-					default:
-						console.log(`ERROR: No parser found for content type ${parseItem.type}`)
+	if (preview === true) {
+		return content.split('\n\n').map((item, key) => {
+			if (item.trim().substring(0, 1) !== '{') {
+				return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item.trim()}</p>)
+			} else if (key === 0) {
+				try {
+					const parseItem = JSON.parse(item)
+					if (parseItem.type === 'picture') {
+						return (<ParsePicture key={key} item={parseItem} preview />)
+					} else {
 						return null
+					}
+				} catch (error) {
+					return null
 				}
-			} catch (error) {
+			} else {
 				return null
 			}
-		}
-	})
-
-	return parsedItems
+		})
+	} else {
+		return content.split('\n\n').map((item, key) => {
+			if (item.trim().substring(0, 1) !== '{') {
+				return (<p key={key} style={{ textAlign: 'justify', textJustify: 'inter-word' }}>{item.trim()}</p>)
+			} else {
+				try {
+					const parseItem = JSON.parse(item)
+					switch (parseItem.type) {
+						case 'picture':
+							return (<ParsePicture key={key} item={parseItem} />)
+						case 'video':
+							return (<ParseVideo key={key} item={parseItem} />)
+						case 'quote':
+							return (<ParseQuote key={key} item={parseItem} />)
+						default:
+							console.log(`ERROR: No parser found for content type ${parseItem.type}`)
+							return null
+					}
+				} catch (error) {
+					return null
+				}
+			}
+		})
+	}
 }
 
 const ParseArticle = ({ item, showComments = true }) => {
@@ -90,12 +111,6 @@ const ParseArticle = ({ item, showComments = true }) => {
 	if (item.time) {
 		parsedArticle.push(
 			<p key='time' style={{ color: 'gray' }}><Icon name='clock outline'></Icon>{item.time}</p>
-		)
-	}
-
-	if (item.picture) {
-		parsedArticle.push(
-			<ParsePicture key='picture' item={{ picture: item.picture, caption: item.caption }} />
 		)
 	}
 
@@ -141,8 +156,7 @@ const ParseArticlePreview = ({ item }) => {
 				onMouseLeave={() => setHovered({})}
 			>
 				<Header as='h3'>{item.headline}</Header>
-				<Image style={{ width: '30%', minWidth: '240px', float: 'left', marginRight: '1em' }} src={item.picture ? item.picture : null} />
-				<ParseContent content={item.content} textOnly />
+				<ParseContent content={item.content} preview />
 				<div style={{ clear: 'both' }} />
 			</div>
 			<Divider />

@@ -52,8 +52,27 @@ Responds 200 [ARRAY]:
 - category
 - likes
 - headline
-- picture
-- caption
+- content
+- author
+- time
+
+Accepts POST:
+
+- auth (*)
+- category
+- likes
+- headline
+- content
+- author
+
+(*) The JSON Web Token for the user.
+
+Responds 200:
+
+- id
+- category
+- likes
+- headline
 - content
 - author
 - time
@@ -70,8 +89,6 @@ Responds 200
 - category
 - likes
 - headline
-- picture
-- caption
 - content
 - author
 - time
