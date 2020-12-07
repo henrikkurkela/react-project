@@ -22,6 +22,7 @@ describe('Logout', () => {
             </Provider>
         )
 
+        expect(wrapper.html()).toContain('Good Bye!')
         expect(actions.logoutToken).toHaveBeenCalled()
     })
 })

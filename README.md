@@ -244,3 +244,5 @@ Implement simple tests:
 2020-12-04: Continue Work on Unit Tests (User, Logout) 1h (112h)
 
 2020-12-06: Continue Work on Unit Tests (ModerateNews, ModerateComments, Unregister) 1h (113h)
+
+2020-12-07: Continue Work on Unit Tests (commentsReducer, adsReducer, authReducer) 1h (114h)
