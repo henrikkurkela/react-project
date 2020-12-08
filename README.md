@@ -246,3 +246,5 @@ Implement simple tests:
 2020-12-06: Continue Work on Unit Tests (ModerateNews, ModerateComments, Unregister) 1h (113h)
 
 2020-12-07: Continue Work on Unit Tests (commentsReducer, adsReducer, authReducer) 1h (114h)
+
+2020-12-08: Continue Work on Unit Tests (marketReducer, newsReducer, usersReducer) 1h (115h)
