@@ -20,7 +20,15 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
-Eleventh Iteration:
+Twelfth Iteration:
+
+Backend Focus:
+
+- Investigate Sequelize as possible DB driver
+
+## DONE
+
+Eleventh Iteration (18h):
 
 Advertisement overhaul:
 
@@ -33,8 +41,6 @@ Refactor frontend:
 Reimplement tests:
 
 - Front end unit tests
-
-## DONE
 
 Tenth Iteration (11h):
 
@@ -248,3 +254,5 @@ Implement simple tests:
 2020-12-07: Continue Work on Unit Tests (commentsReducer, adsReducer, authReducer) 1h (114h)
 
 2020-12-08: Continue Work on Unit Tests (marketReducer, newsReducer, usersReducer) 1h (115h)
+
+2020-12-11: Finish Work on Unit Tests (RenderNews, RenderMarket), Eleventh Iteration Goals Met 1h (116h)
