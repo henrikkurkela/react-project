@@ -256,3 +256,5 @@ Implement simple tests:
 2020-12-08: Continue Work on Unit Tests (marketReducer, newsReducer, usersReducer) 1h (115h)
 
 2020-12-11: Finish Work on Unit Tests (RenderNews, RenderMarket), Eleventh Iteration Goals Met 1h (116h)
+
+2020-11-12: Reimplement MySQL Queries With Sequelize 4h (Total 120h)

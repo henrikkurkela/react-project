@@ -1,48 +1,47 @@
+const { DataTypes } = require('sequelize')
+
 const connection = require('./database')
-const SqlString = require('sqlstring')
+
+const Comments = connection.define("comments",
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        newsid: {
+            type: DataTypes.INTEGER,
+            references: 'news',
+            referencesKey: 'id'
+        },
+        userid: {
+            type: DataTypes.INTEGER,
+            references: 'users',
+            referencesKey: 'id'
+        },
+        content: DataTypes.TEXT
+    },
+    {
+        timestamps: false
+    }
+)
 
 class CommentsModel {
 
     getAll = () => {
-        return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM comments', (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
+        return Comments.findAll()
     }
 
-    addComment = (newsid, userid, content) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`INSERT INTO comments (newsid, userid, content) VALUES (${newsid}, ${userid}, ${SqlString.escape(content)})`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    connection.query(`SELECT * FROM comments WHERE id = LAST_INSERT_ID()`, (error, result) => {
-                        if (error) {
-                            reject(error)
-                        } else {
-                            resolve({ ...result[0] })
-                        }
-                    })
-                }
-            })
-        })
+    addComment = (comment) => {
+        return Comments.create({ ...comment })
     }
 
     deleteById = (id) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`DELETE FROM comments WHERE id = ${id}`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
+        return Comments.destroy({ where: { id } })
+    }
+
+    deleteAll = () => {
+        return Comments.destroy({ where: {} })
     }
 }
 

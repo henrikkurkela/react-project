@@ -1,18 +1,13 @@
-const mysql = require('mysql')
+require('dotenv').config()
+const { Sequelize } = require('sequelize')
 
-const connection = mysql.createConnection({
+const connection = new Sequelize({
     host: process.env.SQL_HOST,
-    user: process.env.SQL_USER,
+    database: process.env.SQL_DATABASE,
+    username: process.env.SQL_USER,
     password: process.env.SQL_PASSWORD,
-    database: process.env.SQL_DATABASE
-})
-
-connection.connect((error) => {
-    
-    if (error) {
-        console.log('Unable to connect to MySQL server.')
-        throw error
-    }
+    port: process.env.SQL_PORT,
+    dialect: 'mysql'
 })
 
 module.exports = connection

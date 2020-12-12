@@ -1,86 +1,55 @@
+const { DataTypes } = require('sequelize')
+
 const connection = require('./database')
-const SqlString = require('sqlstring')
+
+const News = connection.define("news",
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        category: DataTypes.INTEGER,
+        headline: DataTypes.TEXT,
+        author: {
+            type: DataTypes.INTEGER,
+            references: 'users',
+            referencesKey: 'id'
+        },
+        time: DataTypes.DATE,
+        likes: DataTypes.INTEGER,
+        content: DataTypes.TEXT
+    },
+    {
+        timestamps: false
+    }
+)
 
 class NewsModel {
 
     getAll = () => {
-        return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM news', (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
+        return News.findAll()
     }
 
     addStory = (news) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`INSERT INTO news (category, likes, headline, content, author) VALUES (${news.category}, ${news.likes}, ${SqlString.escape(news.headline)}, ${SqlString.escape(news.content)}, ${news.author})`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    connection.query(`SELECT * FROM news WHERE id = LAST_INSERT_ID()`, (error, result) => {
-                        if (error) {
-                            reject(error)
-                        } else {
-                            resolve({ ...result[0] })
-                        }
-                    })
-                }
-            })
-        })
+        return News.create({ ...news })
     }
 
     likeStory = (id) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`UPDATE news SET likes = likes + 1 WHERE id = ${id} AND LAST_INSERT_ID(id)`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    connection.query(`SELECT * FROM news WHERE id = LAST_INSERT_ID()`, (error, result) => {
-                        if (error) {
-                            reject(error)
-                        } else {
-                            resolve({ ...result[0] })
-                        }
-                    })
-                }
-            })
-        })
+        return News.findByPk(id).then((story) => story.increment('likes'))
     }
 
     dislikeStory = (id) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`UPDATE news SET likes = likes - 1 WHERE id = ${id} AND LAST_INSERT_ID(id)`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    connection.query(`SELECT * FROM news WHERE id = LAST_INSERT_ID()`, (error, result) => {
-                        if (error) {
-                            reject(error)
-                        } else {
-                            resolve({ ...result[0] })
-                        }
-                    })
-                }
-            })
-        })
+        return News.findByPk(id).then((story) => story.decrement('likes'))
     }
 
     deleteById = (id) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`DELETE FROM news WHERE id = ${id}`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
+        return News.destroy({ where: { id } })
+    }
+
+    deleteAll = () => {
+        return News.destroy({ where: {} })
     }
 }
 
 module.exports = NewsModel
-

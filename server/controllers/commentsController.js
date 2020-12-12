@@ -45,7 +45,7 @@ commentsRouter.post('/', auth, (request, response) => {
         }
     }
 
-    Comments.addComment(request.body.newsid, request.body.userid, request.body.content).then((result) => {
+    Comments.addComment({ newsid: request.body.newsid, userid: request.body.userid, content: request.body.content }).then((result) => {
         response.json(result)
     }).catch((error) => {
         console.log(error)

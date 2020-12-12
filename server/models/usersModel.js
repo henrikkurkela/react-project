@@ -1,102 +1,55 @@
+const { DataTypes } = require('sequelize')
+
 const connection = require('./database')
-const SqlString = require('sqlstring')
+
+const Users = connection.define("users",
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        email: {
+            type: DataTypes.CHAR(255),
+            unique: true
+        },
+        username: {
+            type: DataTypes.CHAR(255),
+            unique: true
+        },
+        avatar: DataTypes.TEXT,
+        password: DataTypes.TEXT,
+        type: DataTypes.CHAR(255)
+    },
+    {
+        timestamps: false
+    }
+)
 
 class UsersModel {
 
     getAll = () => {
-        return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM users', (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
+        return Users.findAll()
     }
 
-    getById = (id) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM users WHERE id = ${id}`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve({ ...result[0] })
-                }
-            })
-        })
+    getOne = (user) => {
+        return Users.findOne({ where: { ...user } }).then((user) => user.get({ plain: true }))
     }
 
-    getByEmail = (email) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM users WHERE email = ${SqlString.escape(email)}`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve({ ...result[0] })
-                }
-            })
-        })
-    }
-
-    getByUsername = (username) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM users WHERE username = ${SqlString.escape(username)}`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve({ ...result[0] })
-                }
-            })
-        })
-    }
-
-    addUser = (email, username, avatar, password) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`INSERT INTO users (email, username, avatar, password) VALUES (${SqlString.escape(email)}, ${SqlString.escape(username)}, ${SqlString.escape(avatar)}, ${SqlString.escape(password)})`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    connection.query(`SELECT * FROM users WHERE id = LAST_INSERT_ID()`, (error, result) => {
-                        if (error) {
-                            reject(error)
-                        } else {
-                            resolve({ ...result[0] })
-                        }
-                    })
-                }
-            })
-        })
+    addUser = (newUser) => {
+        return Users.create({ ...newUser })
     }
 
     updateAvatarOfId = (avatar, id) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`UPDATE users SET avatar = ${SqlString.escape(avatar)} WHERE id = ${id} AND LAST_INSERT_ID(id)`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    connection.query(`SELECT * FROM users WHERE id = LAST_INSERT_ID()`, (error, result) => {
-                        if (error) {
-                            reject(error)
-                        } else {
-                            resolve({ ...result[0] })
-                        }
-                    })
-                }
-            })
-        })
+        return Users.findByPk(id).then((user) => user.update({ avatar }))
     }
 
     deleteById = (id) => {
-        return new Promise((resolve, reject) => {
-            connection.query(`DELETE FROM users WHERE id = ${id}`, (error, result) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
+        return Users.destroy({ where: { id } })
+    }
+
+    deleteAll = () => {
+        return Users.destroy({ where: {} })
     }
 }
 
