@@ -18,11 +18,13 @@ commentsRouter.get('/', (request, response) => {
 
 commentsRouter.delete('/:id', auth, (request, response) => {
 
+    if (request.auth === null) {
+        response.status(401).end()
+    }
+
     Comments.getAll().then((result) => {
-        if (request.auth === null) {
-            response.status(401).end()
-        } else if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid || request.auth.type === 'admin') {
-            Comments.deleteById(request.params.id).then((result) => {
+        if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid || request.auth.type === 'admin') {
+            Comments.deleteById(request.params.id).then(() => {
                 response.status(200).end()
             }).catch((error) => {
                 console.log(error)
@@ -39,13 +41,9 @@ commentsRouter.delete('/:id', auth, (request, response) => {
 
 commentsRouter.post('/', auth, (request, response) => {
 
-    if (request.auth !== null) {
-        if (request.auth.id !== request.body.userid) {
-            delete request.body.userid
-        }
-    }
+    const newComment = { ...request.body, userid: request.auth ? request.auth.id : null }
 
-    Comments.addComment({ newsid: request.body.newsid, userid: request.body.userid, content: request.body.content }).then((result) => {
+    Comments.addComment(newComment).then((result) => {
         response.json(result)
     }).catch((error) => {
         console.log(error)

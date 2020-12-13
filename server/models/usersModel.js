@@ -33,15 +33,15 @@ class UsersModel {
     }
 
     getOne = (user) => {
-        return Users.findOne({ where: { ...user } }).then((user) => user.get({ plain: true }))
+        return Users.findOne({ where: { ...user } })
     }
 
     addUser = (newUser) => {
         return Users.create({ ...newUser })
     }
 
-    updateAvatarOfId = (avatar, id) => {
-        return Users.findByPk(id).then((user) => user.update({ avatar }))
+    updateUserById = (user) => {
+        return Users.update({ ...user }, { where: { id: user.id } })
     }
 
     deleteById = (id) => {
