@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 
 const connection = require('./database')
 
-const Ads = connection.define("ads",
+const Ads = connection.define('ads',
     {
         id: {
             type: DataTypes.INTEGER,
@@ -13,7 +13,8 @@ const Ads = connection.define("ads",
         href: DataTypes.TEXT
     },
     {
-        timestamps: false
+        timestamps: false,
+        freezeTableName: true
     }
 )
 

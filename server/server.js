@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 
+const connection = require('./models/database')
+
 const newsController = require('./controllers/newsController')
 const adsController = require('./controllers/adsController')
 const commentsController = require('./controllers/commentsController')
@@ -34,3 +36,5 @@ app.use('/api/signup', signupController)
 
 app.use('*', express.static('build'))
 app.listen(process.env.BACKEND_PORT)
+
+connection.sync({ alter: true })

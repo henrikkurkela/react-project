@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 
 const connection = require('./database')
 
-const News = connection.define("news",
+const News = connection.define('news',
     {
         id: {
             type: DataTypes.INTEGER,
@@ -13,15 +13,18 @@ const News = connection.define("news",
         headline: DataTypes.TEXT,
         author: {
             type: DataTypes.INTEGER,
-            references: 'users',
-            referencesKey: 'id'
+            references: {
+                model: 'users',
+                referencesKey: 'id'
+            }
         },
         time: DataTypes.DATE,
         likes: DataTypes.INTEGER,
         content: DataTypes.TEXT
     },
     {
-        timestamps: false
+        timestamps: false,
+        freezeTableName: true
     }
 )
 
