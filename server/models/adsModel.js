@@ -28,6 +28,10 @@ class AdsModel {
         Ads.create(ad)
     }
 
+    deleteById = (id) => {
+        return Ads.destroy({ where: { id } })
+    }
+
     deleteAll = () => {
         return Ads.destroy({ where: {} })
     }
