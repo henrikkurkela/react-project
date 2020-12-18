@@ -18,25 +18,25 @@ commentsRouter.get('/', (request, response) => {
 
 commentsRouter.delete('/:id', auth, (request, response) => {
 
-    if (request.auth === null) {
+    if (request.auth) {
+        Comments.getAll().then((result) => {
+            if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid || request.auth.type === 'admin') {
+                Comments.deleteById(request.params.id).then(() => {
+                    response.status(200).end()
+                }).catch((error) => {
+                    console.log(error)
+                    response.status(500).end()
+                })
+            } else {
+                response.status(401).end()
+            }
+        }).catch((error) => {
+            console.log(error)
+            response.status(500).end()
+        })
+    } else {
         response.status(401).end()
     }
-
-    Comments.getAll().then((result) => {
-        if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid || request.auth.type === 'admin') {
-            Comments.deleteById(request.params.id).then(() => {
-                response.status(200).end()
-            }).catch((error) => {
-                console.log(error)
-                response.status(500).end()
-            })
-        } else {
-            response.status(401).end()
-        }
-    }).catch((error) => {
-        console.log(error)
-        response.status(500).end()
-    })
 })
 
 commentsRouter.post('/', auth, (request, response) => {

@@ -19,22 +19,20 @@ usersRouter.get('/', (request, response) => {
 	})
 })
 
-usersRouter.patch('/:id', auth, (request, response) => {
+usersRouter.patch('/:id', auth, async (request, response) => {
 
-	if (request.auth === null) {
-		response.status(401).end()
-	} else if (request.auth.id === Number(request.params.id)) {
+	if (request.auth) {
 		switch (request.body.action) {
 			case 'avatar':
 				if (RegExp('/assets/avatar/[a-zA-Z0-9.]+').test(request.body.avatar)) {
-					Users.updateUserById({ id: request.auth.id, avatar: request.body.avatar }).then(() => {
-						updated = Users.getOne({ id: request.auth.id }).then((user) => {
-							response.json({ ...user.get({ plain: true }), password: null })
-						})
-					}).catch((error) => {
+					try {
+						await Users.updateUserById({ id: request.auth.id, avatar: request.body.avatar })
+						const updated = await Users.getOne({ id: request.auth.id })
+						response.json({ ...updated.get({ plain: true }), password: null })
+					} catch (error) {
 						console.log(error)
 						response.status(500).end()
-					})
+					}
 				} else {
 					response.status(400).end()
 				}
@@ -49,9 +47,7 @@ usersRouter.patch('/:id', auth, (request, response) => {
 
 usersRouter.delete('/:id', auth, (request, response) => {
 
-	if (request.auth === null) {
-		response.status(401)
-	} else if (request.auth.id === Number(request.params.id)) {
+	if (request.auth) {
 		Users.deleteById(request.auth.id).then(() => {
 			response.status(200).end()
 		}).catch((error) => {
@@ -59,7 +55,7 @@ usersRouter.delete('/:id', auth, (request, response) => {
 			response.status(500).end()
 		})
 	} else {
-		response.status(401)
+		response.status(401).end()
 	}
 })
 
