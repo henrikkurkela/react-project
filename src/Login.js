@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Header, Form, Message, Button } from 'semantic-ui-react'
 
 import { postRequest } from './services/httpService'
@@ -14,12 +15,15 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
 
+    const history = useHistory()
+
     async function login(username, userpass) {
         setUserError(false)
 
         try {
             const response = await postRequest("login", { email: username, password: userpass })
             loginToken(response.data)
+            history.push('/')
         } catch (error) {
             if (error.response.data) {
                 setUserError(true)

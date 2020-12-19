@@ -10,7 +10,7 @@ loginRouter.post('/', async (request, response) => {
 
     const user = await Users.getOne({ email: request.body.email })
 
-    if ("password" in user) {
+    if (user) {
         try {
             const correctpassword = await bcrypt.compare(request.body.password, user.password)
             if (correctpassword) {
