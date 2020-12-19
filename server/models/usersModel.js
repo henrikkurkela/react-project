@@ -10,12 +10,10 @@ const Users = connection.define('users',
             primaryKey: true,
         },
         email: {
-            type: DataTypes.CHAR(255),
-            unique: true
+            type: DataTypes.CHAR(255)
         },
         username: {
-            type: DataTypes.CHAR(255),
-            unique: true
+            type: DataTypes.CHAR(255)
         },
         avatar: DataTypes.TEXT,
         password: DataTypes.TEXT,
@@ -23,7 +21,11 @@ const Users = connection.define('users',
     },
     {
         timestamps: false,
-        freezeTableName: true
+        freezeTableName: true,
+        indexes: [
+            {unique: true, fields: ['email']},
+            {unique: true, fields: ['username']}
+        ]
     }
 )
 
