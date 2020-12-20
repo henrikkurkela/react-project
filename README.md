@@ -266,3 +266,5 @@ Implement simple tests:
 2020-11-18: Backend Refactoring, Ads Model/Controller Expanded 2h (Total 124h)
 
 2020-11-19: Backend Refactoring, Publish Insert Modals 3h (Total 127h)
+
+2020-11-20: Refactoring, Ads Moderation Route 2h (Total 129h)

@@ -1,16 +1,29 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Header, Icon, Divider, Confirm, Image } from 'semantic-ui-react'
+import { Header, Icon, Confirm, Image, Button } from 'semantic-ui-react'
 
-import { deleteRequest } from './services/httpService'
-import { removeAd } from './actions'
+import { postRequest, deleteRequest } from './services/httpService'
+import { addAd, removeAd } from './actions'
+
+import PictureModal from './PictureModal'
 
 const ModerateAds = () => {
 
     const ads = useSelector(state => state.ads)
 
+    const [newAd, setNewAd] = useState(false)
     const [openConfrim, setOpenConfirm] = useState(false)
     const [selectedAd, setSelectedAd] = useState(null)
+
+    const createAd = (ad) => {
+        postRequest('/ads', { picture: ad.picture, href: ad.caption }).then((response) => {
+            if (response.status === 200) {
+                addAd(response.data)
+            }
+        }).catch((error) => {
+            console.log(error.response.status)
+        })
+    }
 
     const destroyAd = (ad) => {
         deleteRequest(`ads/${ad.id}`).then((response) => {
@@ -24,17 +37,19 @@ const ModerateAds = () => {
 
     return (<>
         <Header as='h3'>Advertisements</Header>
+        <Button onClick={() => setNewAd(true)}>New Ad</Button>
         <div>
             {ads.map((item, key) =>
-                <div key={key}>
-                    <Icon style={{ float: 'right', display: 'inline-block', cursor: 'pointer' }} name='delete' onClick={() => {
-                        setOpenConfirm(true)
-                        setSelectedAd(item)
-                    }} />
+                <div key={key} style={{ padding: '1em 1em 1em 0em', float: 'left', position: 'relative', textAlign: 'center' }}>
                     <Image
                         src={item.picture}
                         style={{ width: '245px', height: '490px' }}
                     />
+                    <Icon style={{ position: 'absolute', top: '4%', right: '8%', cursor: 'pointer' }} name='delete' onClick={() => {
+                        setOpenConfirm(true)
+                        setSelectedAd(item)
+                    }} />
+                    <a href={item.href} rel='noreferrer' target='_blank'>{item.href}</a>
                     <Confirm
                         open={openConfrim}
                         onCancel={() => setOpenConfirm(false)}
@@ -43,9 +58,9 @@ const ModerateAds = () => {
                             setOpenConfirm(false)
                         }}
                     />
-                    <Divider />
-                </ div>)}
-        </ div>
+                </div>)}
+        </div>
+        <PictureModal state={newAd} changeState={setNewAd} action={createAd} />
     </>)
 }
 

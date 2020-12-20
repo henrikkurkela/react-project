@@ -25,7 +25,7 @@ class AdsModel {
     }
 
     addAd = (ad) => {
-        Ads.create(ad)
+        return Ads.create(ad)
     }
 
     deleteById = (id) => {
