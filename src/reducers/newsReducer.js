@@ -1,9 +1,9 @@
 const reducer = (state = [], action) => {
 	
 	switch (action.type) {
-		case "NEW_NEWS":
+		case 'NEW_NEWS':
 			return state.concat(action.data)
-		case "UPDATE_NEWS":
+		case 'UPDATE_NEWS':
 			const id = action.data.id
 			const updatedNews = state.find(item => item.id === id)
 			const changedNews = {
@@ -12,9 +12,9 @@ const reducer = (state = [], action) => {
 			return state.map(item =>
 				item.id !== id ? item : changedNews
 			)
-		case "REMOVE_NEWS":
+		case 'REMOVE_NEWS':
 			return state.filter(item => item.id !== action.data.id)
-		case "RESET":
+		case 'RESET':
 			return state = []
 		default:
 			return state

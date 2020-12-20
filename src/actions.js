@@ -4,7 +4,7 @@ import store from './reducers'
 
 const updateNews = (news) => {
     store.dispatch({
-        type: "UPDATE_NEWS",
+        type: 'UPDATE_NEWS',
         data: {
             id: Number(news.id),
             headline: news.headline,
@@ -17,7 +17,7 @@ const updateNews = (news) => {
 
 const addNews = (news) => {
     store.dispatch({
-        type: "NEW_NEWS",
+        type: 'NEW_NEWS',
         data: {
             id: Number(news.id),
             headline: news.headline,
@@ -32,25 +32,32 @@ const addNews = (news) => {
 
 const removeNews = (news) => {
     store.dispatch({
-        type: "REMOVE_NEWS",
+        type: 'REMOVE_NEWS',
         data: news
     })
 }
 
-const addAd = (item) => {
+const addAd = (ad) => {
     store.dispatch({
-        type: "NEW_AD",
+        type: 'NEW_AD',
         data: {
-            id: Number(item.id),
-            picture: item.picture,
-            href: item.href
+            id: Number(ad.id),
+            picture: ad.picture,
+            href: ad.href
         }
+    })
+}
+
+const removeAd = (ad) => {
+    store.dispatch({
+        type: 'REMOVE_AD',
+        data: ad
     })
 }
 
 const addComment = (comment) => {
     store.dispatch({
-        type: "NEW_COMMENT",
+        type: 'NEW_COMMENT',
         data: {
             id: Number(comment.id),
             newsid: Number(comment.newsid),
@@ -62,21 +69,21 @@ const addComment = (comment) => {
 
 const removeComment = (comment) => {
     store.dispatch({
-        type: "REMOVE_COMMENT",
+        type: 'REMOVE_COMMENT',
         data: comment
     })
 }
 
 const updateMarket = (market) => {
     store.dispatch({
-        type: "NEW_MARKET",
+        type: 'NEW_MARKET',
         data: market
     })
 }
 
 const addUser = (user) => {
     store.dispatch({
-        type: "NEW_USER",
+        type: 'NEW_USER',
         data: user
     })
 }
@@ -90,14 +97,14 @@ const updateUser = (user) => {
 
 const updateToken = (auth) => {
     store.dispatch({
-        type: "UPDATE_AUTH",
+        type: 'UPDATE_AUTH',
         data: auth
     })
 }
 
 const loginToken = (auth) => {
     store.dispatch({
-        type: "LOGIN",
+        type: 'LOGIN',
         data: auth
     })
 
@@ -106,7 +113,7 @@ const loginToken = (auth) => {
 
 const logoutToken = () => {
     store.dispatch({
-        type: "LOGOUT"
+        type: 'LOGOUT'
     })
 
     axios.defaults.headers['Authorization'] = null
@@ -114,8 +121,8 @@ const logoutToken = () => {
 
 const resetContent = () => {
     store.dispatch({
-        type: "RESET"
+        type: 'RESET'
     })
 }
 
-export { updateNews, addNews, removeNews, addAd, addComment, updateMarket, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, resetContent }
+export { updateNews, addNews, removeNews, addAd, removeAd, addComment, updateMarket, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, resetContent }

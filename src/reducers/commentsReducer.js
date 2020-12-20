@@ -1,11 +1,11 @@
 const reducer = (state = [], action) => {
 	
 	switch (action.type) {
-		case "NEW_COMMENT":
+		case 'NEW_COMMENT':
 			return state.concat(action.data)
-		case "REMOVE_COMMENT":
+		case 'REMOVE_COMMENT':
 			return state.filter(item => item.id !== action.data.id)
-		case "RESET":
+		case 'RESET':
 			return state = []
 		default:
 			return state

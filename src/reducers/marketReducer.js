@@ -1,9 +1,9 @@
 const reducer = (state = null, action) => {
 	
 	switch (action.type) {
-		case "NEW_MARKET":
+		case 'NEW_MARKET':
 			return state = action.data
-		case "RESET":
+		case 'RESET':
 			return state = null
 		default:
 			return state
