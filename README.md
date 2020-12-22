@@ -259,12 +259,14 @@ Implement simple tests:
 
 2020-12-11: Finish Work on Unit Tests (RenderNews, RenderMarket), Eleventh Iteration Goals Met 1h (116h)
 
-2020-11-12: Reimplement MySQL Queries With Sequelize 4h (Total 120h)
+2020-12-12: Reimplement MySQL Queries With Sequelize 4h (Total 120h)
 
-2020-11-13: Backend Refactoring 2h (Total 122h)
+2020-12-13: Backend Refactoring 2h (Total 122h)
 
-2020-11-18: Backend Refactoring, Ads Model/Controller Expanded 2h (Total 124h)
+2020-12-18: Backend Refactoring, Ads Model/Controller Expanded 2h (Total 124h)
 
-2020-11-19: Backend Refactoring, Publish Insert Modals 3h (Total 127h)
+2020-12-19: Backend Refactoring, Publish Insert Modals 3h (Total 127h)
 
-2020-11-20: Refactoring, Ads Moderation Route 2h (Total 129h)
+2020-12-20: Refactoring, Ads Moderation Route 2h (Total 129h)
+
+2020-12-22: Modal Tests 2h (Total 131h)

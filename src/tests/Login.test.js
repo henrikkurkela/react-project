@@ -8,6 +8,12 @@ import configureStore from 'redux-mock-store'
 import * as http from '../services/httpService'
 import Login from '../Login'
 
+jest.mock('react-router-dom', () => ({
+    useHistory: () => ({
+        push: jest.fn()
+    })
+}))
+
 configure({ adapter: new Adapter() })
 const mockStore = configureStore()
 let store

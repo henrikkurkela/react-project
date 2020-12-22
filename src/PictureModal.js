@@ -18,6 +18,8 @@ const PictureModal = ({ state, changeState, action }) => {
             if (mounted) {
                 setPictures(response.data.pictures)
             }
+        }).catch((error) => {
+            console.log(error)
         })
 
         return () => mounted = false
