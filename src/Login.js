@@ -35,7 +35,7 @@ const Login = () => {
         }
     }
 
-    async function demoLogin(event) {
+    async function demoLogin() {
         try {
             const response = await postRequest("signup", { email: "demo@user.com", username: 'DemoUser', password: "demouser" })
             if (response.status !== 400) {
@@ -56,9 +56,9 @@ const Login = () => {
             <Header as='h3'>Login</Header>
             <Form error={userError} style={{ display: 'inline-block', width: '33%' }}>
                 <Message error header='Error' content={errorMessage} />
-                <Form.Input placeholder='Email' onChange={(event) => setUser(event.target.value)} />
-                <Form.Input placeholder='Password' type='password' onChange={(event) => setPassword(event.target.value)} />
-                <Form.Button content='Login' onClick={(event) => login(user, password)} />
+                <Form.Input required placeholder='Email' onChange={(event) => setUser(event.target.value)} />
+                <Form.Input required placeholder='Password' type='password' onChange={(event) => setPassword(event.target.value)} />
+                <Form.Button content='Login' onClick={() => login(user, password)} />
             </Form>
             <p style={{ paddingTop: '1em' }}>No account yet? Sign up <a href="/signup">here</a>.</p>
             <Header as='h3'>Demo User</Header>

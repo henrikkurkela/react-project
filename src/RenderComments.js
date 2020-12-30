@@ -82,7 +82,7 @@ const RenderComments = ({ id }) => {
 				<p style={{ textAlign: 'center', color: 'darkgray' }}>No comments... yet. Be the first one to comment below!</p>
 			}
 			<Form reply style={{ minWidth: '100%' }}>
-				<Form.TextArea value={newComment} onChange={(event) => setNewComment(event.target.value)} onKeyDown={commentOnKeyDown} />
+				<Form.TextArea required value={newComment} onChange={(event) => setNewComment(event.target.value)} onKeyDown={commentOnKeyDown} />
 				<Button style={{ width: '20%' }} content='Comment' labelPosition='left' icon='edit' primary onClick={commentForm} />
 				<Button style={{ width: '20%' }} content={linkCopied ? 'Link Copied' : 'Share'} labelPosition='left' icon={linkCopied ? 'linkify' : 'share square'} onClick={share} />
 				<Button style={{ width: '15%' }} content={liked ? 'Liked' : (news.find(item => item.id === id).likes)} labelPosition='left' icon='heart' onClick={like} color={liked ? 'green' : null} />

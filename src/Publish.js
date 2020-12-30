@@ -44,9 +44,9 @@ const Publish = () => {
     return (<>
         <Header as='h3'>Publish</Header>
         <Form style={{ float: 'left', minWidth: '100%', paddingBottom: '1em' }}>
-            <Form.Input placeholder='Headline' value={newNews.headline} onChange={(event) => setNewNews({ ...newNews, headline: event.target.value })} />
-            <Form.Dropdown placeholder='Category' options={categories} selection clearable onChange={(event, data) => setNewNews({ ...newNews, category: data.value })} />
-            <Form.TextArea placeholder='Content' rows='10' value={newNews.content} onChange={(event) => setNewNews({ ...newNews, content: event.target.value })} />
+            <Form.Input required placeholder='Headline' value={newNews.headline} onChange={(event) => setNewNews({ ...newNews, headline: event.target.value })} />
+            <Form.Dropdown required placeholder='Category' options={categories} selection clearable onChange={(event, data) => setNewNews({ ...newNews, category: data.value })} />
+            <Form.TextArea required placeholder='Content' rows='10' value={newNews.content} onChange={(event) => setNewNews({ ...newNews, content: event.target.value })} />
             <Button content='Insert Video' labelPosition='left' icon='video' onClick={() => setShowVideoModal(true)} />
             <Button content='Insert Picture' labelPosition='left' icon='image' onClick={() => setShowPictureModal(true)} />
             <Button content='Insert Quote' labelPosition='left' icon='quote right' onClick={() => setShowQuoteModal(true)} />

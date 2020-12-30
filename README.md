@@ -22,11 +22,15 @@ Stock photos downloaded from unsplash.com
 
 Twelfth Iteration:
 
-Backend Focus:
+Backend focus:
 
 - Investigate Sequelize as possible DB driver
 - Refactor controllers
 - Refactor authMiddleware
+
+Frontend improvements:
+- Better moderation tools
+- Improve responsiveness
 
 ## DONE
 
@@ -270,3 +274,5 @@ Implement simple tests:
 2020-12-20: Refactoring, Ads Moderation Route 2h (Total 129h)
 
 2020-12-22: Modal Tests 2h (Total 131h)
+
+2020-12-30: Responsiveness Fixes, Minor Usability Fixes 2h (Total 133h)

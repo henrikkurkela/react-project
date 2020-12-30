@@ -41,6 +41,7 @@ const SiteHeader = () => {
                 </> :
                 <HeaderLink to='/login' text='Login' floated='right' />
         }
+        <div style={{ clear: 'both' }} />
     </div>)
 
 }

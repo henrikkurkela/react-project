@@ -69,7 +69,7 @@ const App = () => {
 						</Grid.Row>
 						<Grid.Row style={{ backgroundColor: 'white', padding: '2em', borderRadius: '0.5em' }}>
 							<Grid>
-								<Grid.Column width={12}>
+								<Grid.Column mobile={16} tablet={16} computer={12}>
 									<Switch>
 										<Route path="/development">
 											<Development requestReset={setRequestReset} />
@@ -105,10 +105,10 @@ const App = () => {
 											<RenderNews />
 										</Route>
 									</Switch>
-								</ Grid.Column>
-								<Grid.Column width={4} style={{ borderLeft: 'solid 1px rgba(34,36,38,.15)' }}>
+								</Grid.Column>
+								<Grid.Column only='computer' computer={4} style={{ borderLeft: 'solid 1px rgba(34,36,38,.15)' }}>
 									<RenderAds />
-								</ Grid.Column>
+								</Grid.Column>
 							</Grid>
 						</Grid.Row>
 					</Grid.Column>

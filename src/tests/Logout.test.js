@@ -7,6 +7,12 @@ import configureStore from 'redux-mock-store'
 import Logout from '../Logout'
 import * as actions from '../actions'
 
+jest.mock('react-router-dom', () => ({
+    useHistory: () => ({
+        push: jest.fn()
+    })
+}))
+
 configure({ adapter: new Adapter() })
 const mockStore = configureStore()
 const store = mockStore({})
@@ -16,13 +22,12 @@ describe('Logout', () => {
 
         actions.logoutToken = jest.fn()
 
-        const wrapper = mount(
+        mount(
             <Provider store={store}>
                 <Logout />
             </Provider>
         )
 
-        expect(wrapper.html()).toContain('Good Bye!')
         expect(actions.logoutToken).toHaveBeenCalled()
     })
 })
