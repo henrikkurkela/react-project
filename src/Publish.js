@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Form, Divider, Header, Button } from 'semantic-ui-react'
@@ -6,6 +6,7 @@ import { Form, Divider, Header, Button } from 'semantic-ui-react'
 import { postRequest } from './services/httpService'
 import { addNews } from './actions'
 import { categories } from './constants'
+import useWidth from './useWidth'
 
 import { ParseArticle } from './RenderNews'
 import PictureModal from './PictureModal'
@@ -21,8 +22,20 @@ const Publish = () => {
     const [showPictureModal, setShowPictureModal] = useState(false)
     const [showQuoteModal, setShowQuoteModal] = useState(false)
     const [showVideoModal, setShowVideoModal] = useState(false)
+    const [buttonStyle, setButtonStyle] = useState({ width: '180px' })
+
+    const mobile = useWidth()
 
     const history = useHistory()
+
+    useEffect(() => {
+
+        if (mobile) {
+            setButtonStyle({ width: '100%', marginBottom: '0.5em' })
+        } else {
+            setButtonStyle({ width: '180px' })
+        }
+    }, [mobile])
 
     const postNews = (news) => {
 
@@ -47,11 +60,11 @@ const Publish = () => {
             <Form.Input required placeholder='Headline' value={newNews.headline} onChange={(event) => setNewNews({ ...newNews, headline: event.target.value })} />
             <Form.Dropdown required placeholder='Category' options={categories} selection clearable onChange={(event, data) => setNewNews({ ...newNews, category: data.value })} />
             <Form.TextArea required placeholder='Content' rows='10' value={newNews.content} onChange={(event) => setNewNews({ ...newNews, content: event.target.value })} />
-            <Button content='Insert Video' labelPosition='left' icon='video' onClick={() => setShowVideoModal(true)} />
-            <Button content='Insert Picture' labelPosition='left' icon='image' onClick={() => setShowPictureModal(true)} />
-            <Button content='Insert Quote' labelPosition='left' icon='quote right' onClick={() => setShowQuoteModal(true)} />
+            <Button type='button' style={buttonStyle} content='Insert Video' labelPosition='left' icon='video' onClick={() => setShowVideoModal(true)} />
+            <Button type='button' style={buttonStyle} content='Insert Picture' labelPosition='left' icon='image' onClick={() => setShowPictureModal(true)} />
+            <Button type='button' style={buttonStyle} content='Insert Quote' labelPosition='left' icon='quote right' onClick={() => setShowQuoteModal(true)} />
             <Divider />
-            <Form.Button content='Post' labelPosition='left' icon='newspaper' onClick={() => postNews(newNews)} />
+            <Form.Button style={buttonStyle} content='Post' labelPosition='left' icon='newspaper' onClick={() => postNews(newNews)} />
         </Form>
         <Divider style={{ clear: 'left' }} />
         <ParseArticle item={newNews} showComments={false} />

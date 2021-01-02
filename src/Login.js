@@ -54,7 +54,7 @@ const Login = () => {
         </div> :
         <div style={{ textAlign: 'center' }}>
             <Header as='h3'>Login</Header>
-            <Form error={userError} style={{ display: 'inline-block', width: '33%' }}>
+            <Form error={userError} style={{ display: 'inline-block', width: '33%', minWidth: '234px' }}>
                 <Message error header='Error' content={errorMessage} />
                 <Form.Input required placeholder='Email' onChange={(event) => setUser(event.target.value)} />
                 <Form.Input required placeholder='Password' type='password' onChange={(event) => setPassword(event.target.value)} />

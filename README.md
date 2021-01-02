@@ -22,13 +22,14 @@ Stock photos downloaded from unsplash.com
 
 Twelfth Iteration:
 
-Backend focus:
+Backend:
 
 - Investigate Sequelize as possible DB driver
 - Refactor controllers
 - Refactor authMiddleware
 
-Frontend improvements:
+Frontend:
+
 - Better moderation tools
 - Improve responsiveness
 
@@ -276,3 +277,5 @@ Implement simple tests:
 2020-12-22: Modal Tests 2h (Total 131h)
 
 2020-12-30: Responsiveness Fixes, Minor Usability Fixes 2h (Total 133h)
+
+2021-01-01: Responsiveness Fixes 3h (Total 136h)

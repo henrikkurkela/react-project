@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Header } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Header, Dropdown } from 'semantic-ui-react'
+import { Link, useHistory } from 'react-router-dom'
 
 import { categories } from './constants'
+import useWidth from './useWidth'
 
 const HeaderLink = ({ to, text, floated = 'none' }) => {
 
@@ -23,14 +24,24 @@ const SiteHeader = () => {
 
     const auth = useSelector(state => state.auth)
 
+    const mobile = useWidth()
+
+    const history = useHistory()
+
     return (<div>
         <Header as='h1' style={{ color: 'white', textAlign: 'center', paddingTop: '1.5em', margin: '0', fontSize: '3em' }}>News Site</Header>
         <p style={{ textAlign: 'center', color: 'white', fontSize: '1em' }}>The Best News in Town!</p>
-        <HeaderLink to='/' text='All News' />
         {
-            categories.filter(item => item.key !== 0).map((item) =>
-                <HeaderLink key={item.key} to={`/${item.value}`} text={item.text} />
-            )
+            mobile ?
+                <Dropdown placeholder='All News' style={{ display: 'inline-block', padding: '1em', color: 'white' }} clearable options={categories} onChange={(event, data) => history.push(`/${data.value}`)} /> :
+                <>
+                    <HeaderLink to='/' text='All News' />
+                    {
+                        categories.filter(item => item.key !== 0).map((item) =>
+                            <HeaderLink key={item.key} to={`/${item.value}`} text={item.text} />
+                        )
+                    }
+                </>
         }
         <HeaderLink to='/development' text='Development' floated='right' />
         {

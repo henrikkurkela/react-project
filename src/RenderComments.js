@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Comment, Divider, Header, Form, Button } from 'semantic-ui-react'
 
 import { postRequest, patchRequest } from './services/httpService'
 import { addComment, updateNews } from './actions'
+import useWidth from './useWidth'
 
 const RenderComments = ({ id }) => {
 
@@ -22,7 +23,20 @@ const RenderComments = ({ id }) => {
 		}
 	})
 	const [linkCopied, setLinkCopied] = useState(false)
+	const [buttonStyle, setButtonStyle] = useState({ width: '180px' })
+
+	const mobile = useWidth()
+
 	const history = useHistory()
+
+	useEffect(() => {
+
+		if (mobile) {
+			setButtonStyle({ width: '100%', marginBottom: '0.5em' })
+		} else {
+			setButtonStyle({ width: '180px' })
+		}
+	}, [mobile])
 
 	const commentForm = (event) => {
 		if (newComment !== null && newComment !== "") {
@@ -83,9 +97,9 @@ const RenderComments = ({ id }) => {
 			}
 			<Form reply style={{ minWidth: '100%' }}>
 				<Form.TextArea required value={newComment} onChange={(event) => setNewComment(event.target.value)} onKeyDown={commentOnKeyDown} />
-				<Button style={{ width: '20%' }} content='Comment' labelPosition='left' icon='edit' primary onClick={commentForm} />
-				<Button style={{ width: '20%' }} content={linkCopied ? 'Link Copied' : 'Share'} labelPosition='left' icon={linkCopied ? 'linkify' : 'share square'} onClick={share} />
-				<Button style={{ width: '15%' }} content={liked ? 'Liked' : (news.find(item => item.id === id).likes)} labelPosition='left' icon='heart' onClick={like} color={liked ? 'green' : null} />
+				<Button style={buttonStyle} content='Comment' labelPosition='left' icon='edit' primary onClick={commentForm} />
+				<Button style={buttonStyle} type='button' content={linkCopied ? 'Link Copied' : 'Share'} labelPosition='left' icon={linkCopied ? 'linkify' : 'share square'} onClick={share} />
+				<Button style={buttonStyle} type='button' content={news.find(item => item.id === id).likes} labelPosition='left' icon='heart' onClick={like} color={liked ? 'green' : null} />
 			</Form>
 		</Comment.Group>
 	)

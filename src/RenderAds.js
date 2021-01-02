@@ -28,14 +28,14 @@ const RenderAds = () => {
             onMouseLeave={() => setHovered({})}
         >
             <Header as='h3' color={'orange'}>Sponsored</Header>
-            <div style={{ position: 'relative', width: '100%', height: '490px' }}>
+            <div style={{ position: 'relative', width: '100%', paddingTop: '200%' }}>
                 {
                     ads.map((item, key) => {
                         return (
                             <Image
                                 src={item.picture}
                                 key={key}
-                                style={{ position: 'absolute', width: '245px', height: '490px', top: '0px', left: `${(key - position) * 300}px`, transition: 'left 0.5s' }}
+                                style={{ position: 'absolute', width: '245px', top: '0px', left: `${(key - position) * 300}px`, transition: 'left 0.5s' }}
                                 as='a'
                                 href={item.href}
                                 target='_blank'

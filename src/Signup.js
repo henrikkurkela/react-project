@@ -38,7 +38,7 @@ const Signup = () => {
     return (
         <div style={{textAlign: 'center'}}>
             <Header as='h3'>Sign Up</Header>
-            <Form error={signupError} style={{ display: 'inline-block', width: '33%' }}>
+            <Form error={signupError} style={{ display: 'inline-block', width: '33%', minWidth: '234px' }}>
                 <Message error header='Error' content={errorMessage} />
                 <Form.Input required placeholder='Email' onChange={(event) => setNewEmail(event.target.value)} />
                 <Form.Input required placeholder='Username' onChange={(event) => setNewUsername(event.target.value)} />
