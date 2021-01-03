@@ -278,4 +278,6 @@ Implement simple tests:
 
 2020-12-30: Responsiveness Fixes, Minor Usability Fixes 2h (Total 133h)
 
-2021-01-01: Responsiveness Fixes 3h (Total 136h)
+2021-01-02: Responsiveness Fixes 3h (Total 136h)
+
+2020-01-03: Responsiveness Fixes 1h (Total 137h)

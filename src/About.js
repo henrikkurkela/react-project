@@ -1,13 +1,15 @@
 import React from 'react'
-import { Header } from 'semantic-ui-react'
+import { Header, Image } from 'semantic-ui-react'
+
+import useWidth from './useWidth'
 
 const About = () => {
 
+    const mobile = useWidth()
+
     return (
-        <div style={{ width: 'fit-content', height: 'fit-content', margin: 'auto', overflow: 'auto', padding: '5em' }}>
-            <div style={{ float: 'left', display: 'inline-block', background: 'linear-gradient(0deg, rgba(0,0,255,1) 0%, rgba(0,0,255,1) 25%, rgba(0,128,255,1) 100%)', borderRadius: '1em', marginRight: '3em' }}>
-                <Header as='h1' style={{ color: 'white', textAlign: 'center', margin: '1em', fontSize: '3em' }}>News<br />Site</Header>
-            </div>
+        <div style={{ width: 'fit-content', height: 'fit-content', margin: 'auto', overflow: 'auto', padding: '5em 0 5em 0' }}>
+            <Image src='/assets/img/photo11.jpg' floated={mobile ? null : 'left'} centered={mobile ? true : null} />
             <div style={{ display: 'inline-block', paddingTop: '1em' }}>
                 <Header as='h3'>News Site Company, LLC</Header>
                 <p><i>The Best News In Town!</i></p>
