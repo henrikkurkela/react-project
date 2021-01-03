@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Header, Comment, Button, Icon, Modal, Image } from 'semantic-ui-react'
 
 import { deleteRequest } from './services/httpService'
 import { removeComment } from './actions'
+import useWidth from './useWidth'
 
 const Account = () => {
 
@@ -13,6 +14,20 @@ const Account = () => {
 
     const [open, setOpen] = useState(false)
     const [selectedComment, setSelectedComment] = useState(null)
+    const [buttonStyle, setButtonStyle] = useState({ width: '180px' })
+
+    const mobile = useWidth()
+
+    const history = useHistory()
+
+    useEffect(() => {
+
+        if (mobile) {
+            setButtonStyle({ width: '100%', marginBottom: '0.5em' })
+        } else {
+            setButtonStyle({ width: '180px' })
+        }
+    }, [mobile])
 
     const destroyComment = (comment) => {
         deleteRequest(`comments/${comment.id}`).then(
@@ -23,20 +38,14 @@ const Account = () => {
     return (
         <>
             {auth ? <>
-                <div style={{ margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1em' }}>
-                    <Image
-                        src={auth.avatar}
-                        style={{ borderRadius: '1em', float: 'left' }}
-                    />
-                    <Header as='h3' style={{ margin: '1em' }}>{auth.username}</Header>
-                </div>
+                <Image
+                    src={auth.avatar}
+                    centered={true}
+                    style={{ borderRadius: '1em' }}
+                />
                 <Header as='h3'>Actions</Header>
-                <Link to='/avatar'>
-                    <Button to='/unregister'>Choose Avatar</Button>
-                </Link>
-                <Link to='/unregister'>
-                    <Button color='red' to='/unregister'>Delete Account</Button>
-                </Link>
+                <Button style={buttonStyle} onClick={() => history.push('/avatar')}>Choose Avatar</Button>
+                <Button style={buttonStyle} color='red' onClick={() => history.push('/unregister')}>Delete Account</Button>
                 <Header as='h3'>Recent Activity</Header>
                 <Comment.Group style={{ minWidth: '100%' }}>
                     {comments.filter(item => item.userid === auth.id).map((comment, key) =>
