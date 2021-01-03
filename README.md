@@ -280,4 +280,4 @@ Implement simple tests:
 
 2021-01-02: Responsiveness Fixes 3h (Total 136h)
 
-2021-01-03: Responsiveness Fixes 1h (Total 137h)
+2021-01-03: Responsiveness Fixes, Sequelize Cascade Deletes, Disable Default Sync Alter 1h (Total 137h)

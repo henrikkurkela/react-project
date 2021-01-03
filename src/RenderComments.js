@@ -38,16 +38,21 @@ const RenderComments = ({ id }) => {
 		}
 	}, [mobile])
 
-	const commentForm = (event) => {
-		if (newComment !== null && newComment !== "") {
-			postRequest("comments", { content: newComment, newsid: id, userid: auth ? auth.id : null }).then((response) => addComment(response.data))
+	const commentForm = () => {
+		if (newComment.trim() === null || newComment.trim() === "") {
+			setNewComment('')
+		} else {
+			postRequest("comments", { content: newComment.trim(), newsid: id, userid: auth ? auth.id : null })
+				.then((response) => {
+					addComment(response.data)
+					setNewComment('')
+				})
 		}
-		setNewComment('')
 	}
 
 	const commentOnKeyDown = (event) => {
 		if (event.keyCode === 13) {
-			commentForm(event)
+			commentForm()
 		}
 	}
 

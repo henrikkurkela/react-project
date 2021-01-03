@@ -37,4 +37,4 @@ app.use('/api/signup', signupController)
 app.use('*', express.static('build'))
 app.listen(process.env.BACKEND_PORT)
 
-connection.sync({ alter: true })
+connection.sync()

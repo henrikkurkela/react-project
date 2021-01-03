@@ -14,14 +14,16 @@ const Comments = connection.define('comments',
             references: {
                 model: 'news',
                 referencesKey: 'id'
-            }
+            },
+            onDelete: 'CASCADE'
         },
         userid: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'users',
                 referencesKey: 'id'
-            }
+            },
+            onDelete: 'CASCADE'
         },
         content: DataTypes.TEXT
     },

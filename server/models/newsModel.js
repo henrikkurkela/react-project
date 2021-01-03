@@ -16,7 +16,8 @@ const News = connection.define('news',
             references: {
                 model: 'users',
                 referencesKey: 'id'
-            }
+            },
+            onDelete: 'CASCADE'
         },
         time: DataTypes.DATE,
         likes: DataTypes.INTEGER,
