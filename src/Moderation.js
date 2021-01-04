@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Route, useHistory } from 'react-router-dom';
 import { Header, Button } from 'semantic-ui-react'
+
+import useWidth from './useWidth'
 
 import Publish from './Publish'
 import ModerateComments from './ModerateComments'
@@ -9,15 +11,30 @@ import ModerateAds from './ModerateAds'
 
 const Moderation = () => {
 
+    const [buttonStyle, setButtonStyle] = useState({ width: '180px' })
+
+    const mobile = useWidth()
+
     const history = useHistory()
+
+    useEffect(() => {
+
+        if (mobile) {
+            setButtonStyle({ width: '100%', marginBottom: '0.5em' })
+        } else {
+            setButtonStyle({ width: '180px' })
+        }
+    }, [mobile])
 
     return (<>
         <Route exact path='/moderation'>
-            <Header as='h3'>Moderator Panel</Header>
-            <Button onClick={() => history.push('/moderation/comments')}>Comments</Button>
-            <Button onClick={() => history.push('/moderation/news')}>News</Button>
-            <Button onClick={() => history.push('/moderation/ads')}>Ads</Button>
-            <Button onClick={() => history.push('/moderation/publish')}>Publish Story</Button>
+            <Header as='h3'>Publish</Header>
+            <Button style={buttonStyle} onClick={() => history.push('/moderation/publish')}>Publish Story</Button>
+            <Header as='h3'>Moderate</Header>
+            <Button style={buttonStyle} onClick={() => history.push('/moderation/comments')}>Comments</Button>
+            <Button style={buttonStyle} onClick={() => history.push('/moderation/news')}>News</Button>
+            <Header as='h3'>Collaboration</Header>
+            <Button style={buttonStyle} onClick={() => history.push('/moderation/ads')}>Ads</Button>
         </Route>
         <Route path='/moderation/comments'>
             <ModerateComments />

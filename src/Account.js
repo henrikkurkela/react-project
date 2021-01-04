@@ -38,30 +38,39 @@ const Account = () => {
     return (
         <>
             {auth ? <>
+                <Header as='h3'>{auth.username}</Header>
                 <Image
+                    label={{
+                        color: 'grey',
+                        content: 'Change Avatar',
+                        icon: 'edit',
+                        ribbon: true
+                    }}
                     src={auth.avatar}
-                    centered={true}
-                    style={{ borderRadius: '1em' }}
+                    fluid={mobile ? true : false}
+                    rounded={true}
+                    onClick={() => history.push('/avatar')}
                 />
-                <Header as='h3'>Actions</Header>
-                <Button style={buttonStyle} onClick={() => history.push('/avatar')}>Choose Avatar</Button>
-                <Button style={buttonStyle} color='red' onClick={() => history.push('/unregister')}>Delete Account</Button>
                 <Header as='h3'>Recent Activity</Header>
                 <Comment.Group style={{ minWidth: '100%' }}>
-                    {comments.filter(item => item.userid === auth.id).map((comment, key) =>
-                        <Comment key={key}>
-                            <Comment.Avatar src={auth.avatar} />
-                            <Comment.Content>
-                                <Icon style={{ float: 'right', display: 'inline-block', cursor: 'pointer' }} name='delete' onClick={() => {
-                                    setOpen(true)
-                                    setSelectedComment(comment)
-                                }}></Icon>
-                                <Comment.Author>{auth.username}</Comment.Author>
-                                <Comment.Text>{comment.content}</Comment.Text>
-                            </Comment.Content>
-                        </Comment>
-                    )}
+                    {comments.filter(item => item.userid === auth.id).length > 0 ?
+                        comments.filter(item => item.userid === auth.id).map((comment, key) =>
+                            <Comment key={key}>
+                                <Comment.Avatar src={auth.avatar} />
+                                <Comment.Content>
+                                    <Icon style={{ float: 'right', display: 'inline-block', cursor: 'pointer' }} name='delete' onClick={() => {
+                                        setOpen(true)
+                                        setSelectedComment(comment)
+                                    }}></Icon>
+                                    <Comment.Author>{auth.username}</Comment.Author>
+                                    <Comment.Text>{comment.content}</Comment.Text>
+                                </Comment.Content>
+                            </Comment>
+                        ) : <p style={{ textAlign: 'center', color: 'darkgray' }}>No recent activity.</p>
+                    }
                 </Comment.Group>
+                <Header as='h3'>Actions</Header>
+                <Button style={buttonStyle} color='red' onClick={() => history.push('/unregister')}>Delete Account</Button>
                 <Modal
                     closeIcon
                     onClose={() => setOpen(false)}

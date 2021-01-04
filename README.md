@@ -20,11 +20,13 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
-Twelfth Iteration:
+## DONE
+
+Twelfth Iteration (22h):
 
 Backend:
 
-- Investigate Sequelize as possible DB driver
+- Sequelize DB driver
 - Refactor controllers
 - Refactor authMiddleware
 
@@ -32,8 +34,6 @@ Frontend:
 
 - Better moderation tools
 - Improve responsiveness
-
-## DONE
 
 Eleventh Iteration (18h):
 
@@ -281,3 +281,5 @@ Implement simple tests:
 2021-01-02: Responsiveness Fixes 3h (Total 136h)
 
 2021-01-03: Responsiveness Fixes, Sequelize Cascade Deletes, Disable Default Sync Alter 1h (Total 137h)
+
+2021-01-04: Twelfth Iteration Goals Met 1h (Total 138h)
