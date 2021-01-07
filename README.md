@@ -288,4 +288,4 @@ Implement simple tests:
 
 2021-01-04: Twelfth Iteration Goals Met 1h (Total 138h)
 
-2021-01-07: Start Working on Picture Upload Functionality 2h (Total 140h)
+2021-01-07: Start Working on Picture Upload Functionality 3h (Total 141h)

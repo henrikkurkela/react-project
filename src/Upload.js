@@ -32,7 +32,7 @@ const Upload = () => {
             })
             .catch((error) => {
                 setUploadError(true)
-                setStatusMessage('Something went wrong.')
+                setStatusMessage(error.response.data)
                 console.log(error)
             })
     }
