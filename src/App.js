@@ -29,27 +29,27 @@ const App = () => {
 		if (requestReset) {
 			resetContent()
 
-			getRequest("news").then(response => {
+			getRequest('news').then(response => {
 				const news = response.data
 				news.map(item => addNews(item))
 			})
 
-			getRequest("ads").then(response => {
+			getRequest('ads').then(response => {
 				const ads = response.data
 				ads.map(item => addAd(item))
 			})
 
-			getRequest("comments").then(response => {
+			getRequest('comments').then(response => {
 				const comments = response.data
 				comments.map(item => addComment(item))
 			})
 
-			getRequest("users").then(response => {
+			getRequest('users').then(response => {
 				const users = response.data
 				users.map(item => addUser(item))
 			})
 
-			getRequest("market").then(response => {
+			getRequest('market').then(response => {
 				const market = response.data
 				updateMarket(market)
 			})
@@ -71,37 +71,37 @@ const App = () => {
 							<Grid>
 								<Grid.Column mobile={16} tablet={16} computer={12}>
 									<Switch>
-										<Route path="/development">
+										<Route path='/development'>
 											<Development requestReset={setRequestReset} />
 										</Route>
-										<Route path="/moderation">
+										<Route path='/moderation'>
 											<Moderation />
 										</Route>
-										<Route path="/account">
+										<Route path='/account'>
 											<Account />
 										</Route>
-										<Route path="/avatar">
+										<Route path='/avatar'>
 											<Avatar />
 										</Route>
-										<Route path="/login">
+										<Route path='/login'>
 											<Login />
 										</Route>
-										<Route path="/signup">
+										<Route path='/signup'>
 											<Signup />
 										</Route>
-										<Route path="/unregister">
+										<Route path='/unregister'>
 											<Unregister />
 										</Route>
-										<Route path="/logout">
+										<Route path='/logout'>
 											<Logout />
 										</Route>
-										<Route path="/about">
+										<Route path='/about'>
 											<About />
 										</Route>
-										<Route path={["/users/:user", "/users"]}>
+										<Route path={['/users/:user', '/users']}>
 											<User />
 										</Route>
-										<Route path={["/:category/:story", "/:category", "/"]}>
+										<Route path={['/:category/:story', '/:category', '/']}>
 											<RenderNews />
 										</Route>
 									</Switch>

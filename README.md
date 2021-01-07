@@ -20,6 +20,10 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
+Thirteenth Iteration:
+
+- Add upload file functionality
+
 ## DONE
 
 Twelfth Iteration (22h):
@@ -283,3 +287,5 @@ Implement simple tests:
 2021-01-03: Responsiveness Fixes, Sequelize Cascade Deletes, Disable Default Sync Alter 1h (Total 137h)
 
 2021-01-04: Twelfth Iteration Goals Met 1h (Total 138h)
+
+2021-01-07: Start Working on Picture Upload Functionality 2h (Total 140h)

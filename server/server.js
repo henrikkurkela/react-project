@@ -15,6 +15,7 @@ const marketController = require('./controllers/marketController')
 const resetController = require('./controllers/resetController')
 const loginController = require('./controllers/loginController')
 const signupController = require('./controllers/signupController')
+const uploadController = require('./controllers/uploadController')
 
 const app = express()
 
@@ -33,6 +34,7 @@ app.use('/api/market', marketController)
 app.use('/api/reset', resetController)
 app.use('/api/login', loginController)
 app.use('/api/signup', signupController)
+app.use('/api/upload', uploadController)
 
 app.use('*', express.static('build'))
 app.listen(process.env.BACKEND_PORT)
