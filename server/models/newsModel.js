@@ -39,6 +39,10 @@ class NewsModel {
         return News.create({ ...news })
     }
 
+    patchStory = (news) => {
+        return News.update({ ...news }, { where: { id: news.id } })
+    }
+
     likeStory = (id) => {
         return News.findByPk(id).then((story) => story.increment('likes'))
     }

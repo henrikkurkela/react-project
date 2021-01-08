@@ -9,7 +9,7 @@ const auth = require('../middlewares/authMiddleware')
 uploadRouter.post('/', [upload.single('picture'), auth], (request, response) => {
     if (request.auth === null) {
         fs.unlinkSync(request.file.path)
-        response.status(403).end('Unauthorized')
+        response.status(403).send('Unauthorized')
     } else if (request.auth.type !== 'admin') {
         fs.unlinkSync(request.file.path)
         response.status(403).send('Unauthorized')

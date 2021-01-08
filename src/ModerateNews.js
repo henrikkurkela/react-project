@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Header, Icon, Divider, Confirm } from 'semantic-ui-react'
 
 import { deleteRequest } from './services/httpService'
@@ -13,6 +14,8 @@ const ModerateNews = () => {
     const [openConfrim, setOpenConfirm] = useState(false)
     const [selectedNews, setSelectedNews] = useState(null)
 
+    const history = useHistory()
+
     const destroyNews = (news) => {
         deleteRequest(`news/${news.id}`).then((response) => {
             if (response.status === 200) {
@@ -21,6 +24,10 @@ const ModerateNews = () => {
         }).catch((error) => {
             console.log(error.response.status)
         })
+    }
+
+    const editNews = (news) => {
+        history.push('/moderation/publish', news)
     }
 
     return (<>
@@ -32,6 +39,9 @@ const ModerateNews = () => {
                         setOpenConfirm(true)
                         setSelectedNews(item)
                     }} />
+                    <Icon style={{ float: 'left', display: 'inline-block', cursor: 'pointer' }} name='edit' onClick={() => {
+                        editNews(item)
+                    }} />
                     <Confirm
                         open={openConfrim}
                         onCancel={() => setOpenConfirm(false)}
@@ -42,6 +52,7 @@ const ModerateNews = () => {
                     />
                     <ParseArticle item={item} showComments={false} />
                     <Divider />
+                    <div style={{ clear: 'both' }} />
                 </ div>)}
         </ div>
     </>)

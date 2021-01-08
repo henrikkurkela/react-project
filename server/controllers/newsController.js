@@ -50,7 +50,7 @@ newsRouter.delete('/:id', auth, (request, response) => {
 	}
 })
 
-newsRouter.patch('/:id', async (request, response) => {
+newsRouter.patch('/:id', auth, async (request, response) => {
 
 	try {
 		switch (request.body.action) {
@@ -61,6 +61,15 @@ newsRouter.patch('/:id', async (request, response) => {
 				await News.dislikeStory(request.params.id)
 				break
 			default:
+				if (request.auth === null) {
+					response.status(403).send('Unauthorized')
+					return
+				} else if (request.auth.type !== 'admin') {
+					response.status(403).send('Unauthorized')
+					return
+				} else {
+					await News.patchStory(request.body)
+				}
 		}
 
 		const result = await News.getAll()

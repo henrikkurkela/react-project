@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Form, Divider, Header, Button } from 'semantic-ui-react'
 
-import { postRequest } from './services/httpService'
-import { addNews } from './actions'
+import { postRequest, patchRequest } from './services/httpService'
+import { addNews, updateNews } from './actions'
 import { categories } from './constants'
 import useWidth from './useWidth'
 
@@ -23,10 +23,19 @@ const Publish = () => {
     const [showQuoteModal, setShowQuoteModal] = useState(false)
     const [showVideoModal, setShowVideoModal] = useState(false)
     const [buttonStyle, setButtonStyle] = useState({ width: '180px' })
+    const [editMode, setEditMode] = useState(false)
 
     const mobile = useWidth()
 
     const history = useHistory()
+
+    useEffect(() => {
+
+        if (history.location.state !== undefined) {
+            setNewNews(history.location.state)
+            setEditMode(true)
+        }
+    }, [history])
 
     useEffect(() => {
 
@@ -37,17 +46,30 @@ const Publish = () => {
         }
     }, [mobile])
 
-    const postNews = (news) => {
+    const postNews = async (news) => {
 
-        postRequest(`news`, { ...news, headline: news.headline.trim(), content: news.content.trim() }).then((response) => {
-            if (response.status === 200) {
-                addNews(response.data)
-                setNewNews(defaultState)
-                history.push(`/${response.data.category}/${response.data.id}`)
+        try {
+            if (editMode) {
+                await patchRequest(`news/${news.id}`, { ...news, headline: news.headline.trim(), content: news.content.trim() }).then((response) => {
+                    if (response.status === 200) {
+                        updateNews(response.data)
+                        setNewNews(defaultState)
+                        setEditMode(false)
+                        history.push(`/${response.data.category}/${response.data.id}`)
+                    }
+                })
+            } else {
+                await postRequest(`news`, { ...news, headline: news.headline.trim(), content: news.content.trim() }).then((response) => {
+                    if (response.status === 200) {
+                        addNews(response.data)
+                        setNewNews(defaultState)
+                        history.push(`/${response.data.category}/${response.data.id}`)
+                    }
+                })
             }
-        }).catch((error) => {
-            console.log(error.response.status)
-        })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const insertMediaJson = (mediaJson) => {
@@ -55,16 +77,16 @@ const Publish = () => {
     }
 
     return (<>
-        <Header as='h3'>Publish</Header>
+        <Header as='h3'>{editMode ? 'Edit News' : 'Publish'}</Header>
         <Form style={{ float: 'left', minWidth: '100%', paddingBottom: '1em' }}>
             <Form.Input required placeholder='Headline' value={newNews.headline} onChange={(event) => setNewNews({ ...newNews, headline: event.target.value })} />
-            <Form.Dropdown required placeholder='Category' options={categories} selection clearable onChange={(event, data) => setNewNews({ ...newNews, category: data.value })} />
+            <Form.Dropdown required placeholder='Category' value={newNews.category} options={categories} selection clearable onChange={(event, data) => setNewNews({ ...newNews, category: data.value })} />
             <Form.TextArea required placeholder='Content' rows='10' value={newNews.content} onChange={(event) => setNewNews({ ...newNews, content: event.target.value })} />
             <Button type='button' style={buttonStyle} content='Insert Video' labelPosition='left' icon='video' onClick={() => setShowVideoModal(true)} />
             <Button type='button' style={buttonStyle} content='Insert Picture' labelPosition='left' icon='image' onClick={() => setShowPictureModal(true)} />
             <Button type='button' style={buttonStyle} content='Insert Quote' labelPosition='left' icon='quote right' onClick={() => setShowQuoteModal(true)} />
             <Divider />
-            <Form.Button style={buttonStyle} content='Post' labelPosition='left' icon='newspaper' onClick={() => postNews(newNews)} />
+            <Form.Button style={buttonStyle} content={editMode ? 'Save' : 'Post'} labelPosition='left' icon='newspaper' onClick={() => postNews(newNews)} />
         </Form>
         <Divider style={{ clear: 'left' }} />
         <ParseArticle item={newNews} showComments={false} />
