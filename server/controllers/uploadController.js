@@ -7,6 +7,7 @@ const upload = multer({ dest: 'public/assets/img/' })
 const auth = require('../middlewares/authMiddleware')
 
 uploadRouter.post('/', [upload.single('picture'), auth], (request, response) => {
+
     if (request.auth === null) {
         fs.unlinkSync(request.file.path)
         response.status(403).send('Unauthorized')
