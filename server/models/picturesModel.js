@@ -2,10 +2,10 @@ const fs = require('fs')
 
 const imgFolder = './public/assets/img/'
 
-const pictures = () => {
+const pictures = async () => {
 
     const img = fs.readdirSync(imgFolder)
-    return { pictures: img }
+    return img
 }
 
-module.exports = pictures()
+module.exports = pictures

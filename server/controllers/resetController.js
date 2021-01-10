@@ -1,5 +1,6 @@
 const resetRouter = require('express').Router()
 const bcrypt = require('bcrypt')
+const fs = require('fs')
 
 const CommentsModel = require('../models/commentsModel')
 const UsersModel = require('../models/usersModel')
@@ -74,26 +75,32 @@ resetRouter.post('/', async (request, response) => {
 	]
 
 	const adminUser = {
-		email: "admin@localhost.com",
-		username: "administrator",
-		avatar: "/assets/avatar/default.jpg",
+		email: 'admin@localhost.com',
+		username: 'administrator',
+		avatar: '/assets/avatar/default.jpg',
 		password: await bcrypt.hash(process.env.BACKEND_PASSWORD, 10),
-		type: "admin"
+		type: 'admin'
 	}
 
 	try {
 		await Comments.deleteAll()
 		await News.deleteAll()
 		await Users.deleteAll()
-		admin = await Users.addUser(adminUser)
-		news.map((item) => {
+		const admin = await Users.addUser(adminUser)
+		news.map((item) =>
 			News.addStory({ ...item, author: admin.id })
-		})
+		)
 
 		await Ads.deleteAll()
-		ads.map((item) => {
+		ads.map((item) =>
 			Ads.addAd(item)
-		})
+		)
+
+		const files = fs.readdirSync('public/assets/img')
+		files
+			.filter((item) => !RegExp('[a-zA-Z0-9].jpg').test(item))
+			.map((item) => fs.unlinkSync(`public/assets/img/${item}`))
+
 	} catch (error) {
 		console.log(error)
 		response.status(500).end()

@@ -5,7 +5,7 @@ import { Header, Button } from 'semantic-ui-react'
 import useWidth from './useWidth'
 
 import Publish from './Publish'
-import Upload from './Upload'
+import ModeratePictures from './ModeratePictures'
 import ModerateComments from './ModerateComments'
 import ModerateNews from './ModerateNews'
 import ModerateAds from './ModerateAds'
@@ -31,7 +31,7 @@ const Moderation = () => {
         <Route exact path='/moderation'>
             <Header as='h3'>Publish</Header>
             <Button style={buttonStyle} onClick={() => history.push('/moderation/publish')}>Publish Story</Button>
-            <Button style={buttonStyle} onClick={() => history.push('/moderation/upload')} >Upload Pictures</Button>
+            <Button style={buttonStyle} onClick={() => history.push('/moderation/pictures')}>Pictures</Button>
             <Header as='h3'>Moderate</Header>
             <Button style={buttonStyle} onClick={() => history.push('/moderation/comments')}>Comments</Button>
             <Button style={buttonStyle} onClick={() => history.push('/moderation/news')}>News</Button>
@@ -50,8 +50,8 @@ const Moderation = () => {
         <Route path='/moderation/publish'>
             <Publish />
         </Route>
-        <Route path='/moderation/upload'>
-            <Upload />
+        <Route path='/moderation/pictures'>
+            <ModeratePictures />
         </Route>
     </>)
 }
