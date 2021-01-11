@@ -43,7 +43,7 @@ const SiteHeader = () => {
                     }
                 </>
         }
-        <HeaderLink to='/development' text='Development' floated='right' />
+        <HeaderLink to='/moderation' text='Moderation' floated='right' />
         {
             auth ?
                 <>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, useHistory } from 'react-router-dom';
 import { Header, Button } from 'semantic-ui-react'
 
+import { postRequest } from './services/http'
 import { useWidth } from './hooks'
 
 import Publish from './Publish'
@@ -10,7 +11,7 @@ import ModerateComments from './ModerateComments'
 import ModerateNews from './ModerateNews'
 import ModerateAds from './ModerateAds'
 
-const Moderation = () => {
+const Moderation = ({ requestReset }) => {
 
     const [buttonStyle, setButtonStyle] = useState({ width: '180px' })
 
@@ -27,6 +28,19 @@ const Moderation = () => {
         }
     }, [mobile])
 
+    const reset = () => {
+        postRequest('reset')
+            .then((response) => {
+                if (response.status === 200) {
+                    requestReset(true)
+                    history.push('/')
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     return (<>
         <Route exact path='/moderation'>
             <Header as='h3'>Publish</Header>
@@ -37,6 +51,8 @@ const Moderation = () => {
             <Button style={buttonStyle} onClick={() => history.push('/moderation/news')}>News</Button>
             <Header as='h3'>Collaboration</Header>
             <Button style={buttonStyle} onClick={() => history.push('/moderation/ads')}>Ads</Button>
+            <Header as='h3'>Development</Header>
+            <Button style={buttonStyle} onClick={reset}>Reset</Button>
         </Route>
         <Route path='/moderation/comments'>
             <ModerateComments />

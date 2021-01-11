@@ -15,7 +15,6 @@ import Unregister from './Unregister'
 import User from './User'
 import RenderAds from './RenderAds'
 import Avatar from './Avatar'
-import Development from './Development'
 import Moderation from './Moderation'
 import About from './About'
 import SiteFooter from './SiteFooter'
@@ -71,11 +70,8 @@ const App = () => {
 							<Grid>
 								<Grid.Column mobile={16} tablet={16} computer={12}>
 									<Switch>
-										<Route path='/development'>
-											<Development requestReset={setRequestReset} />
-										</Route>
 										<Route path='/moderation'>
-											<Moderation />
+											<Moderation requestReset={setRequestReset} />
 										</Route>
 										<Route path='/account'>
 											<Account />
