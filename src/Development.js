@@ -2,7 +2,7 @@ import React from 'react'
 import { Header, Button } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 
-import { postRequest } from './services/httpService'
+import { postRequest } from './services/http'
 
 const Development = ({ requestReset }) => {
 

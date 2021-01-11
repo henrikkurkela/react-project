@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Comment, Divider, Header, Form, Button } from 'semantic-ui-react'
 
-import { postRequest, patchRequest } from './services/httpService'
+import { postRequest, patchRequest } from './services/http'
 import { addComment, updateNews } from './actions'
-import useWidth from './useWidth'
+import { useWidth } from './hooks'
 
 const RenderComments = ({ id }) => {
 

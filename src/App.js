@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Grid, Container } from 'semantic-ui-react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import { getRequest } from './services/httpService'
+import { getRequest } from './services/http'
 import { addNews, addAd, addComment, addUser, updateMarket, resetContent } from './actions'
 
 import SiteHeader from './SiteHeader'

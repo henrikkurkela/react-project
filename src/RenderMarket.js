@@ -4,9 +4,9 @@ import { XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxi
 import { Header, Divider, Label, Icon } from 'semantic-ui-react'
 import '../node_modules/react-vis/dist/style.css'
 
-import { getRequest } from './services/httpService'
+import { getRequest } from './services/http'
 import { updateMarket } from './actions'
-import useWidth from './useWidth'
+import { useWidth } from './hooks'
 
 const RenderMarket = () => {
 

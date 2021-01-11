@@ -3,8 +3,8 @@ import { Header, Image, Form, Message, Modal, Button, Divider } from 'semantic-u
 import axios from 'axios'
 
 import { backendUrl } from './constants'
-import { getRequest, deleteRequest } from './services/httpService'
-import useWidth from './useWidth'
+import { getRequest, deleteRequest } from './services/http'
+import { useWidth } from './hooks'
 
 const ModeratePictures = () => {
 

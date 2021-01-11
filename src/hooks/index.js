@@ -23,4 +23,4 @@ const useWidth = (width = 768) => {
     return lessThan
 }
 
-export default useWidth
+export { useWidth }

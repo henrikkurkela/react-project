@@ -5,7 +5,7 @@ import { mount, configure } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import * as http from '../services/httpService'
+import * as http from '../services/http'
 import Avatar from '../Avatar'
 
 configure({ adapter: new Adapter() })

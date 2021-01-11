@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils'
 import Adapter from 'enzyme-adapter-react-16'
 import { mount, configure } from 'enzyme'
 
-import * as http from '../services/httpService'
+import * as http from '../services/http'
 import PictureModal from '../PictureModal'
 
 configure({ adapter: new Adapter() })

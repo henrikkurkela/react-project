@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Header, Form, Message } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 
-import { postRequest } from './services/httpService'
+import { postRequest } from './services/http'
 import { addUser } from './actions'
 
 const Signup = () => {

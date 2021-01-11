@@ -294,3 +294,5 @@ Implement simple tests:
 2021-01-08: Start Working on News Article Edit Functionality 2h (Total 143h)
 
 2021-01-10: Continue Work on Picture Upload Functionality, Picture Delete Functionality 3h (Total 146h)
+
+2021-01-11: Refactoring, Continue Work on Picture Upload/Delete Functionality 1h (Total 147h)

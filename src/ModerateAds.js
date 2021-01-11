@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Header, Icon, Confirm, Image, Button } from 'semantic-ui-react'
 
-import { postRequest, deleteRequest } from './services/httpService'
+import { postRequest, deleteRequest } from './services/http'
 import { addAd, removeAd } from './actions'
 
 import PictureModal from './PictureModal'

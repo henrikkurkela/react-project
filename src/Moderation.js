@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, useHistory } from 'react-router-dom';
 import { Header, Button } from 'semantic-ui-react'
 
-import useWidth from './useWidth'
+import { useWidth } from './hooks'
 
 import Publish from './Publish'
 import ModeratePictures from './ModeratePictures'

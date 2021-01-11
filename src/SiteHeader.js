@@ -4,7 +4,7 @@ import { Header, Dropdown } from 'semantic-ui-react'
 import { Link, useHistory } from 'react-router-dom'
 
 import { categories } from './constants'
-import useWidth from './useWidth'
+import { useWidth } from './hooks'
 
 const HeaderLink = ({ to, text, floated = 'none' }) => {
 

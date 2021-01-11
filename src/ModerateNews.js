@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Header, Icon, Divider, Confirm } from 'semantic-ui-react'
 
-import { deleteRequest } from './services/httpService'
+import { deleteRequest } from './services/http'
 import { removeNews } from './actions'
 import { ParseArticle } from './RenderNews'
 
