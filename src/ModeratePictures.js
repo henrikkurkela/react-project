@@ -28,7 +28,7 @@ const ModeratePictures = () => {
                 setPictures(response.data.pictures)
             }
         }).catch((error) => {
-            console.log(error)
+            console.log(error.response?.status)
         })
 
         return () => mounted = false
@@ -66,8 +66,8 @@ const ModeratePictures = () => {
             })
             .catch((error) => {
                 setError(true)
-                setStatusMessage(error.response.data)
-                console.log(error)
+                setStatusMessage(error.response?.data)
+                console.log(error.response?.status)
             })
     }
 
@@ -85,7 +85,7 @@ const ModeratePictures = () => {
             })
             .catch((error) => {
                 setError(true)
-                setStatusMessage(error.response.data)
+                setStatusMessage(error.response?.data)
                 console.log(error)
             })
     }

@@ -37,7 +37,7 @@ const Unregister = () => {
 
             history.push('/')
         }).catch((error) => {
-            console.log(error.response.status)
+            console.log(error.response?.status)
         })
     }
 

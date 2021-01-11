@@ -19,15 +19,13 @@ const Signup = () => {
         setSignupError(false)
         postRequest("signup", { email: email, username: username, password: userpass })
             .then(response => {
-                if (response.status !== 400) {
-                    addUser(response.data)
-                    history.push('/login')
-                }
+                addUser(response.data)
+                history.push('/login')
             })
             .catch(error => {
-                if (error.response.data) {
+                if (error.response?.data) {
                     setSignupError(true)
-                    setErrorMessage(error.response.data)
+                    setErrorMessage(error.response?.data)
                 } else {
                     setSignupError(true)
                     setErrorMessage('Something went wrong, try again later')
@@ -36,7 +34,7 @@ const Signup = () => {
     }
 
     return (
-        <div style={{textAlign: 'center'}}>
+        <div style={{ textAlign: 'center' }}>
             <Header as='h3'>Sign Up</Header>
             <Form error={signupError} style={{ display: 'inline-block', width: '33%', minWidth: '234px' }}>
                 <Message error header='Error' content={errorMessage} />

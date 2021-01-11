@@ -40,7 +40,7 @@ newsRouter.delete('/:id', auth, (request, response) => {
 		response.status(401).end()
 	} else if (request.auth.type === 'admin') {
 		News.deleteById(request.params.id).then((result) => {
-			response.status(200).end()
+			response.status(204).end()
 		}).catch((error) => {
 			console.log(error)
 			response.status(500).end()
@@ -62,10 +62,10 @@ newsRouter.patch('/:id', auth, async (request, response) => {
 				break
 			default:
 				if (request.auth === null) {
-					response.status(403).send('Unauthorized')
+					response.status(401).send('Unauthorized')
 					return
 				} else if (request.auth.type !== 'admin') {
-					response.status(403).send('Unauthorized')
+					response.status(401).send('Unauthorized')
 					return
 				} else {
 					await News.patchStory(request.body)

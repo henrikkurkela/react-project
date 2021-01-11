@@ -20,9 +20,9 @@ picturesRouter.get('/', async (request, response) => {
 picturesRouter.delete('/:id', auth, async (request, response) => {
 
     if (request.auth === null) {
-        response.status(403).send('Unauthorized')
+        response.status(401).send('Unauthorized')
     } else if (request.auth.type !== 'admin') {
-        response.status(403).send('Unauthorized')
+        response.status(401).send('Unauthorized')
     } else if (RegExp('\\.jpg').test(request.params.id)) {
         response.status(403).send('This picture can not be removed.')
     } else {

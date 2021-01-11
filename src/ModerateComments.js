@@ -14,12 +14,10 @@ const ModerateComments = () => {
     const [selectedComment, setSelectedComment] = useState(null)
 
     const destroyComment = (comment) => {
-        deleteRequest(`comments/${comment.id}`).then((response) => {
-            if (response.status === 200) {
-                removeComment(comment)
-            }
+        deleteRequest(`comments/${comment.id}`).then(() => {
+            removeComment(comment)
         }).catch((error) => {
-            console.log(error.response.status)
+            console.log(error.response?.status)
         })
     }
 

@@ -106,7 +106,7 @@ resetRouter.post('/', async (request, response) => {
 		response.status(500).end()
 	}
 
-	response.status(200).end()
+	response.status(204).end()
 
 })
 

@@ -54,7 +54,7 @@ describe('ModerateComments', () => {
 
         actions.removeComment = jest.fn(() => { return null })
         http.deleteRequest = jest.fn()
-        http.deleteRequest.mockResolvedValue({ status: 200 })
+        http.deleteRequest.mockResolvedValue({ status: 204 })
 
         const wrapper = mount(
             <Provider store={store}>

@@ -49,7 +49,7 @@ usersRouter.delete('/:id', auth, (request, response) => {
 
 	if (request.auth) {
 		Users.deleteById(request.auth.id).then(() => {
-			response.status(200).end()
+			response.status(204).end()
 		}).catch((error) => {
 			console.log(error)
 			response.status(500).end()

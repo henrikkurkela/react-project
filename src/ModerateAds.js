@@ -17,21 +17,17 @@ const ModerateAds = () => {
 
     const createAd = (ad) => {
         postRequest('/ads', { picture: ad.picture, href: ad.caption }).then((response) => {
-            if (response.status === 200) {
-                addAd(response.data)
-            }
+            addAd(response.data)
         }).catch((error) => {
-            console.log(error.response.status)
+            console.log(error.response?.status)
         })
     }
 
     const destroyAd = (ad) => {
-        deleteRequest(`ads/${ad.id}`).then((response) => {
-            if (response.status === 204) {
-                removeAd(ad)
-            }
+        deleteRequest(`ads/${ad.id}`).then(() => {
+            removeAd(ad)
         }).catch((error) => {
-            console.log(error.response.status)
+            console.log(error.response?.status)
         })
     }
 

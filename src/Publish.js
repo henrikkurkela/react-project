@@ -51,24 +51,20 @@ const Publish = () => {
         try {
             if (editMode) {
                 await patchRequest(`news/${news.id}`, { ...news, headline: news.headline.trim(), content: news.content.trim() }).then((response) => {
-                    if (response.status === 200) {
-                        updateNews(response.data)
-                        setNewNews(defaultState)
-                        setEditMode(false)
-                        history.push(`/${response.data.category}/${response.data.id}`)
-                    }
+                    updateNews(response.data)
+                    setNewNews(defaultState)
+                    setEditMode(false)
+                    history.push(`/${response.data.category}/${response.data.id}`)
                 })
             } else {
                 await postRequest(`news`, { ...news, headline: news.headline.trim(), content: news.content.trim() }).then((response) => {
-                    if (response.status === 200) {
-                        addNews(response.data)
-                        setNewNews(defaultState)
-                        history.push(`/${response.data.category}/${response.data.id}`)
-                    }
+                    addNews(response.data)
+                    setNewNews(defaultState)
+                    history.push(`/${response.data.category}/${response.data.id}`)
                 })
             }
         } catch (error) {
-            console.log(error)
+            console.log(error.response?.status)
         }
     }
 

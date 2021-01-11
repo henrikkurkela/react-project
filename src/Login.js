@@ -25,9 +25,9 @@ const Login = () => {
             loginToken(response.data)
             history.push('/')
         } catch (error) {
-            if (error.response.data) {
+            if (error.response?.data) {
                 setUserError(true)
-                setErrorMessage(error.response.data)
+                setErrorMessage(error.response?.data)
             } else {
                 setUserError(true)
                 setErrorMessage('Something went wrong, try again later')
@@ -38,11 +38,9 @@ const Login = () => {
     async function demoLogin() {
         try {
             const response = await postRequest("signup", { email: "demo@user.com", username: 'DemoUser', password: "demouser" })
-            if (response.status !== 400) {
-                addUser(response.data)
-            }
+            addUser(response.data)
         } catch (error) {
-            console.log(error.response.status)
+            console.log(error.response?.status)
         } finally {
             await login("demo@user.com", "demouser")
         }

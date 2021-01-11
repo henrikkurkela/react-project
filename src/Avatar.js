@@ -27,6 +27,8 @@ const Avatar = () => {
             updateUser(response.data)
             updateToken({ avatar: response.data.avatar })
             history.push('/account')
+        }).catch((error) => {
+            console.log(error.response?.status)
         })
     }
 

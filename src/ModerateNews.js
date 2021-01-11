@@ -17,12 +17,10 @@ const ModerateNews = () => {
     const history = useHistory()
 
     const destroyNews = (news) => {
-        deleteRequest(`news/${news.id}`).then((response) => {
-            if (response.status === 200) {
-                removeNews(news)
-            }
+        deleteRequest(`news/${news.id}`).then(() => {
+            removeNews(news)
         }).catch((error) => {
-            console.log(error.response.status)
+            console.log(error.response?.status)
         })
     }
 

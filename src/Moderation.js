@@ -30,14 +30,12 @@ const Moderation = ({ requestReset }) => {
 
     const reset = () => {
         postRequest('reset')
-            .then((response) => {
-                if (response.status === 200) {
-                    requestReset(true)
-                    history.push('/')
-                }
+            .then(() => {
+                requestReset(true)
+                history.push('/')
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error.response?.status)
             })
     }
 
