@@ -1,5 +1,7 @@
 # Server REST API Documentation
 
+# Login and Signup Routes
+
 ## /api/login
 
 Accepts POST:
@@ -32,66 +34,7 @@ Responds 200:
 - username
 - avatar
 
-## /api/ads
-
-Accepts GET:
-
-Responds 200 [ARRAY]:
-
-- id
-- picture
-- href
-
-## /api/news
-
-Accepts GET:
-
-Responds 200 [ARRAY]:
-
-- id
-- category
-- likes
-- headline
-- content
-- author
-- time
-
-Accepts POST:
-
-- auth (*)
-- category
-- likes
-- headline
-- content
-- author
-
-(*) The JSON Web Token for the user.
-
-Responds 200:
-
-- id
-- category
-- likes
-- headline
-- content
-- author
-- time
-
-## /api/news/:id
-
-Accepts PATCH:
-
-- action: 'like' OR 'unlike'
-
-Responds 200
-
-- id
-- category
-- likes
-- headline
-- content
-- author
-- time
+# User Account Routes
 
 ## /api/users
 
@@ -109,11 +52,8 @@ Responds 200 [ARRAY]:
 
 Accepts PATCH:
 
-- auth (*)
 - action: 'avatar'
 - avatar
-
-(*) The JSON Web Token for the user.
 
 Responds 200
 
@@ -125,11 +65,96 @@ Responds 200
 
 Accepts DELETE:
 
-- auth (*)
+Responds 204
 
-(*) The JSON Web Token for the user.
+# Advertisement Routes
 
-Responds 200
+## /api/ads
+
+Accepts GET:
+
+Responds 200 [ARRAY]:
+
+- id
+- picture
+- href
+
+Accepts POST:
+
+- picture
+- href
+
+Responds 200:
+
+- id
+- picture
+- href
+
+## /api/ads/:id
+
+Accepts DELETE:
+
+- id
+
+Responds 204
+
+# News Story Routes
+
+## /api/news
+
+Accepts GET:
+
+Responds 200 [ARRAY]:
+
+- id
+- category
+- likes
+- headline
+- content
+- author
+- time
+
+Accepts POST:
+
+- category
+- likes
+- headline
+- content
+- author
+
+Responds 200:
+
+- id
+- category
+- likes
+- headline
+- content
+- author
+- time
+
+## /api/news/:id
+
+Accepts PATCH:
+
+- action: 'like' OR 'unlike' (*)
+
+(*) Optional.
+
+Responds 200:
+
+- id
+- category
+- likes
+- headline
+- content
+- author
+- time
+
+Accepts DELETE:
+
+Responds 204
+
+# News Story Comments Routes
 
 ## /api/comments
 
@@ -139,18 +164,13 @@ Responds 200 [ARRAY]:
 
 - id
 - newsid
-- userid (1)
+- userid
 - content
-
-(1) Optional.
 
 Accepts POST:
 
 - newsid
 - content
-- auth (1)
-
-(1) Optional.
 
 Responds 200:
 
@@ -163,11 +183,9 @@ Responds 200:
 
 Accepts DELETE:
 
-- auth (*)
+Responds 204
 
-(*) The JSON Web Token for the user.
-
-Responds 200
+# Image Asset Routes
 
 ## /api/avatars
 
@@ -185,6 +203,20 @@ Responds 200:
 
 - pictures [ARRAY]
 
+## /api/upload
+
+Accepts POST (*):
+
+- picture
+
+(*) Content-Type: multipart/form-data
+
+Responds 200:
+
+- filename
+
+# Business Section Market Tracker Routes
+
 ## /api/market
 
 Accepts GET
@@ -194,8 +226,10 @@ Responds 200 [ARRAY]:
 - x
 - y
 
+# Development Routes
+
 ## /api/reset
 
 Accepts POST
 
-Responds 200
+Responds 204

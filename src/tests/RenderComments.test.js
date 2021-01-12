@@ -78,6 +78,6 @@ describe('RenderComments', () => {
             wrapper.find('Button').at(0).props().onClick()
         })
 
-        expect(http.postRequest).toHaveBeenCalledWith('comments', { content: 'Test Comment 3', newsid: 1, userid: null })
+        expect(http.postRequest).toHaveBeenCalledWith('comments', { content: 'Test Comment 3', newsid: 1 })
     })
 })

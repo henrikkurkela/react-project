@@ -39,7 +39,7 @@ newsRouter.delete('/:id', auth, (request, response) => {
 	if (request.auth === null) {
 		response.status(401).end()
 	} else if (request.auth.type === 'admin') {
-		News.deleteById(request.params.id).then((result) => {
+		News.deleteById(request.params.id).then(() => {
 			response.status(204).end()
 		}).catch((error) => {
 			console.log(error)

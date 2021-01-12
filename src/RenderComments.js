@@ -12,7 +12,6 @@ const RenderComments = ({ id }) => {
 	const comments = useSelector(state => state.comments)
 	const news = useSelector(state => state.news)
 	const users = useSelector(state => state.users)
-	const auth = useSelector(state => state.auth)
 
 	const [newComment, setNewComment] = useState('')
 	const [liked, setLiked] = useState(() => {
@@ -42,7 +41,7 @@ const RenderComments = ({ id }) => {
 		if (newComment.trim() === null || newComment.trim() === "") {
 			setNewComment('')
 		} else {
-			postRequest("comments", { content: newComment.trim(), newsid: id, userid: auth ? auth.id : null })
+			postRequest("comments", { content: newComment.trim(), newsid: id })
 				.then((response) => {
 					addComment(response.data)
 					setNewComment('')

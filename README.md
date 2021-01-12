@@ -297,3 +297,5 @@ Implement simple tests:
 2021-01-10: Continue Work on Picture Upload Functionality, Picture Delete Functionality 3h (Total 146h)
 
 2021-01-11: Refactoring, Continue Work on Picture Upload/Delete Functionality, Better Response Status Codes 2h (Total 148h)
+
+2021-01-12: Update REST API Documentation 1h (Total 149h)
