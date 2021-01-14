@@ -62,7 +62,6 @@ describe('ModerateComments', () => {
             </Provider>
         )
 
-
         await act(async () => {
             wrapper.find('Icon').at(0).props().onClick()
         })

@@ -4,12 +4,13 @@ import { useHistory } from 'react-router-dom'
 import { Header, Icon, Divider, Confirm } from 'semantic-ui-react'
 
 import { deleteRequest } from './services/http'
-import { removeNews } from './actions'
+import { removeComment, removeNews } from './actions'
 import { ParseArticle } from './RenderNews'
 
 const ModerateNews = () => {
 
     const news = useSelector(state => state.news)
+    const comments = useSelector(state => state.comments)
 
     const [openConfrim, setOpenConfirm] = useState(false)
     const [selectedNews, setSelectedNews] = useState(null)
@@ -18,6 +19,11 @@ const ModerateNews = () => {
 
     const destroyNews = (news) => {
         deleteRequest(`news/${news.id}`).then(() => {
+
+            comments
+                .filter((comment) => comment.newsid === news.id)
+                .map((comment) => removeComment(comment))
+
             removeNews(news)
         }).catch((error) => {
             console.log(error.response?.status)

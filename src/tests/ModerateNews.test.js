@@ -19,10 +19,11 @@ const store = mockStore({
             headline: 'News Story',
             content: 'Lorem Ipsum'
         }
-    ]
+    ],
+    comments: []
 })
 
-describe('ModerateComments', () => {
+describe('ModerateNews', () => {
     it('deletes comments as expected', async () => {
 
         actions.removeNews = jest.fn(() => { return null })

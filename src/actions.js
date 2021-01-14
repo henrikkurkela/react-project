@@ -95,6 +95,13 @@ const updateUser = (user) => {
     })
 }
 
+const removeUser = (user) => {
+    store.dispatch({
+        type: 'REMOVE_USER',
+        data: user
+    })
+}
+
 const updateToken = (auth) => {
     store.dispatch({
         type: 'UPDATE_AUTH',
@@ -125,4 +132,4 @@ const resetContent = () => {
     })
 }
 
-export { updateNews, addNews, removeNews, addAd, removeAd, addComment, updateMarket, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, resetContent }
+export { updateNews, addNews, removeNews, addAd, removeAd, addComment, updateMarket, updateToken, loginToken, logoutToken, removeComment, addUser, updateUser, removeUser, resetContent }
