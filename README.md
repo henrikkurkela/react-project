@@ -299,3 +299,5 @@ Implement simple tests:
 2021-01-11: Refactoring, Continue Work on Picture Upload/Delete Functionality, Better Response Status Codes 2h (Total 148h)
 
 2021-01-12: Update REST API Documentation 1h (Total 149h)
+
+2021-01-14: Change Status Codes 200->201 For Requests That Create New Resources 1h (150h)

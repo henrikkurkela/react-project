@@ -16,7 +16,7 @@ uploadRouter.post('/', [upload.single('picture'), auth], (request, response) => 
         response.status(401).send('Unauthorized')
     } else {
         fs.renameSync(`public/assets/upload/${request.file.filename}`, `public/assets/img/${request.file.filename}`)
-        response.json({ filename: request.file.filename })
+        response.status(201).json({ filename: request.file.filename })
     }
 })
 

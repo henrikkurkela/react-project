@@ -83,7 +83,7 @@ describe('Login', () => {
         store = mockStore({})
 
         http.postRequest = jest.fn()
-        http.postRequest.mockResolvedValueOnce({ data: { email: 'demo@user.com', id: 1, username: 'DemoUser', avatar: 'default.jpg' }, status: 200 })
+        http.postRequest.mockResolvedValueOnce({ data: { email: 'demo@user.com', id: 1, username: 'DemoUser', avatar: 'default.jpg' }, status: 201 })
         http.postRequest.mockResolvedValueOnce({ data: { auth: '123', email: 'demo@user.com', id: 1, username: 'DemoUser', avatar: 'default.jpg' }, status: 200 })
 
         let wrapper

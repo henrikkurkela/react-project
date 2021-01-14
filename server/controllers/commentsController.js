@@ -44,7 +44,7 @@ commentsRouter.post('/', auth, (request, response) => {
     const newComment = { ...request.body, userid: request.auth ? request.auth.id : null }
 
     Comments.addComment(newComment).then((result) => {
-        response.json(result)
+        response.status(201).json(result)
     }).catch((error) => {
         console.log(error)
         response.status(500).end()

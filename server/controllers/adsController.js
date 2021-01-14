@@ -24,7 +24,7 @@ adsRouter.post('/', auth, (request, response) => {
 		response.status(401).end()
 	} else {
 		Ads.addAd(request.body).then((result) => {
-			response.json(result)
+			response.status(201).json(result)
 		}).catch((error) => {
 			console.log(error)
 			response.status(500).end()

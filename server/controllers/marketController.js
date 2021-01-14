@@ -2,6 +2,7 @@ const marketRouter = require('express').Router()
 
 const marketValues = []
 let newValue = Math.floor(Math.random() * 100)
+
 for (let i = 0; i < 100; i++) {
     marketValues.push({ x: i, y: newValue })
     newValue = newValue + Math.floor(Math.random() * 5) - 2

@@ -19,7 +19,7 @@ signupRouter.post('/', async (request, response) => {
                 avatar: '/assets/avatar/default.jpg',
                 password: await bcrypt.hash(request.body.password, 10)
             })
-            response.json({ ...newuser.get({ plain: true }), password: null })
+            response.status(201).json({ ...newuser.get({ plain: true }), password: null })
         } catch (error) {
             response.status(400).send('User already exists')
         }

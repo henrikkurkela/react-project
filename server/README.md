@@ -27,7 +27,7 @@ Accepts POST:
 - username
 - password
 
-Responds 200:
+Responds 201:
 
 - id
 - email
@@ -84,7 +84,7 @@ Accepts POST:
 - picture
 - href
 
-Responds 200:
+Responds 201:
 
 - id
 - picture
@@ -122,7 +122,7 @@ Accepts POST:
 - content
 - author
 
-Responds 200:
+Responds 201:
 
 - id
 - category
@@ -172,7 +172,7 @@ Accepts POST:
 - newsid
 - content
 
-Responds 200:
+Responds 201:
 
 - id
 - newsid
@@ -211,7 +211,7 @@ Accepts POST (*):
 
 (*) Content-Type: multipart/form-data
 
-Responds 200:
+Responds 201:
 
 - filename
 

@@ -13,7 +13,7 @@ describe('Moderation', () => {
     it('sends the reset request as expected', async () => {
 
         http.postRequest = jest.fn()
-        http.postRequest.mockResolvedValue({ status: 200 })
+        http.postRequest.mockResolvedValue({ status: 204 })
 
         const wrapper = mount(
             <MemoryRouter initialEntries={['/moderation']}>

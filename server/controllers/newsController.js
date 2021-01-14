@@ -26,7 +26,7 @@ newsRouter.post('/', auth, (request, response) => {
 		response.status(400).end()
 	} else {
 		News.addStory(request.body).then((result) => {
-			response.json(result)
+			response.status(201).json(result)
 		}).catch((error) => {
 			console.log(error)
 			response.status(500).end()
