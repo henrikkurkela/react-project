@@ -1,4 +1,4 @@
-import marketReducer from '../reducers/marketReducer'
+import marketReducer from 'reducers/marketReducer'
 
 describe('marketReducer', () => {
     it('stores values correctly', () => {

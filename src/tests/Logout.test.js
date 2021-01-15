@@ -4,8 +4,8 @@ import { mount, configure } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import Logout from '../Logout'
-import * as actions from '../actions'
+import Logout from 'components/account/Logout'
+import * as actions from 'actions'
 
 jest.mock('react-router-dom', () => ({
     useHistory: () => ({

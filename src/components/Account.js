@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { Header, Comment, Button, Icon, Modal, Image } from 'semantic-ui-react'
 
-import { deleteRequest } from './services/http'
-import { removeComment } from './actions'
-import { useWidth } from './hooks'
+import { deleteRequest } from 'services/http'
+import { removeComment } from 'actions'
+import { useWidth } from 'hooks'
 
 const Account = () => {
 

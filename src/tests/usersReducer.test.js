@@ -1,4 +1,4 @@
-import usersReducer from '../reducers/usersReducer'
+import usersReducer from 'reducers/usersReducer'
 
 describe('usersReducer', () => {
     it('adds users correctly', () => {

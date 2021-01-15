@@ -1,12 +1,12 @@
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import newsReducer from './newsReducer'
-import adsReducer from './adsReducer'
-import commentsReducer from './commentsReducer'
-import authReducer from  './authReducer'
-import usersReducer from './usersReducer'
-import marketReducer from './marketReducer'
+import newsReducer from 'reducers/newsReducer'
+import adsReducer from 'reducers/adsReducer'
+import commentsReducer from 'reducers/commentsReducer'
+import authReducer from  'reducers/authReducer'
+import usersReducer from 'reducers/usersReducer'
+import marketReducer from 'reducers/marketReducer'
 
 const reducer = combineReducers({
 	news: newsReducer,

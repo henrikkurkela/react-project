@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Header, Comment, Icon, Modal, Button } from 'semantic-ui-react'
 
-import { deleteRequest } from './services/http'
-import { removeComment } from './actions'
+import { deleteRequest } from 'services/http'
+import { removeComment } from 'actions'
 
 const ModerateComments = () => {
 

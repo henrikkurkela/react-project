@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Header, Comment, Image } from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
 
-import NotFound from './NotFound'
+import NotFound from 'components/page/NotFound'
 
 const User = () => {
 

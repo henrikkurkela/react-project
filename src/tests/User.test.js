@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 import { useParams } from 'react-router-dom'
 
-import User from '../User'
+import User from 'components/account/User'
 
 configure({ adapter: new Adapter() })
 const mockStore = configureStore()

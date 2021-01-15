@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Header, Icon, Divider, Confirm } from 'semantic-ui-react'
 
-import { deleteRequest } from './services/http'
-import { removeComment, removeNews } from './actions'
-import { ParseArticle } from './RenderNews'
+import { deleteRequest } from 'services/http'
+import { removeComment, removeNews } from 'actions'
+import { ParseArticle } from 'components/RenderNews'
 
 const ModerateNews = () => {
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header, Image } from 'semantic-ui-react'
 
-import { useWidth } from './hooks'
+import { useWidth } from 'hooks'
 
 const About = () => {
 

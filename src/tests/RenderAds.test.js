@@ -4,7 +4,7 @@ import { mount, configure } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import RenderAds from '../RenderAds'
+import RenderAds from 'components/RenderAds'
 
 configure({ adapter: new Adapter() })
 const mockStore = configureStore()

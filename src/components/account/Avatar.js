@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { Header, Image } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 
-import { getRequest, patchRequest } from './services/http'
-import { updateUser, updateToken } from './actions'
+import { getRequest, patchRequest } from 'services/http'
+import { updateUser, updateToken } from 'actions'
 
 const Avatar = () => {
 

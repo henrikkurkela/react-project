@@ -5,8 +5,8 @@ import { mount, configure } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import * as http from '../services/http'
-import RenderComments from '../RenderComments'
+import * as http from 'services/http'
+import RenderComments from 'components/RenderComments'
 
 configure({ adapter: new Adapter() })
 const mockStore = configureStore()

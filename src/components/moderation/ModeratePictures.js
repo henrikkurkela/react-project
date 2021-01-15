@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Header, Image, Form, Message, Modal, Button, Divider } from 'semantic-ui-react'
 import axios from 'axios'
 
-import { backendUrl } from './constants'
-import { getRequest, deleteRequest } from './services/http'
-import { useWidth } from './hooks'
+import { backendUrl } from 'services/constants'
+import { getRequest, deleteRequest } from 'services/http'
+import { useWidth } from 'hooks'
 
 const ModeratePictures = () => {
 

@@ -3,9 +3,9 @@ import { Header, Image, Divider, Icon, Embed, Label } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 
-import RenderComments from './RenderComments'
-import NotFound from './NotFound'
-import RenderMarket from './RenderMarket'
+import RenderComments from 'components/RenderComments'
+import NotFound from 'components/page/NotFound'
+import RenderMarket from 'components/RenderMarket'
 
 const ParseVideo = ({ item }) => {
 

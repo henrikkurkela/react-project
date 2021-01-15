@@ -2,7 +2,7 @@ import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { mount, configure } from 'enzyme'
 
-import NotFound from '../NotFound'
+import NotFound from 'components/page/NotFound'
 
 configure({ adapter: new Adapter() })
 

@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { Header, Dropdown } from 'semantic-ui-react'
 import { Link, useHistory } from 'react-router-dom'
 
-import { categories } from './constants'
-import { useWidth } from './hooks'
+import { categories } from 'services/constants'
+import { useWidth } from 'hooks'
 
 const HeaderLink = ({ to, text, floated = 'none' }) => {
 

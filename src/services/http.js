@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { backendUrl } from '../../constants'
+import { backendUrl } from 'services/constants'
 
 axios.defaults.baseURL = backendUrl
 

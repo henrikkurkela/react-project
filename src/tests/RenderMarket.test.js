@@ -5,9 +5,9 @@ import { mount, configure } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import * as http from '../services/http'
-import * as actions from '../actions'
-import RenderMarket from '../RenderMarket'
+import * as http from 'services/http'
+import * as actions from 'actions'
+import RenderMarket from 'components/RenderMarket'
 
 configure({ adapter: new Adapter() })
 const mockStore = configureStore()

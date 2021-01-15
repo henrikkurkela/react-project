@@ -1,4 +1,4 @@
-import commentsReducer from '../reducers/commentsReducer'
+import commentsReducer from 'reducers/commentsReducer'
 
 describe('commentsReducer', () => {
     it('stores comments corretly', () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Header, Button, Modal, Image, Input } from 'semantic-ui-react'
 
-import { getRequest } from './services/http'
+import { getRequest } from 'services/http'
 
 const PictureModal = ({ state, changeState, action }) => {
 

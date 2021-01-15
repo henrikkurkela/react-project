@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Header, Button } from 'semantic-ui-react'
 
-import { deleteRequest } from './services/http'
-import { logoutToken, removeComment, removeUser } from './actions'
-import { useWidth } from './hooks'
+import { deleteRequest } from 'services/http'
+import { logoutToken, removeComment, removeUser } from 'actions'
+import { useWidth } from 'hooks'
 
 const Unregister = () => {
 

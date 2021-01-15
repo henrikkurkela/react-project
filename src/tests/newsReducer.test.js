@@ -1,4 +1,4 @@
-import newsReducer from '../reducers/newsReducer'
+import newsReducer from 'reducers/newsReducer'
 
 describe('newsReducer', () => {
     it('stores news items correctly', () => {

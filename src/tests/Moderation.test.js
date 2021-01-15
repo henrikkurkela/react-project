@@ -1,11 +1,11 @@
 import React from 'react'
+import { MemoryRouter } from 'react-router-dom'
 import { act } from 'react-dom/test-utils'
 import Adapter from 'enzyme-adapter-react-16'
 import { mount, configure } from 'enzyme'
 
-import * as http from '../services/http'
-import Moderation from '../Moderation'
-import { MemoryRouter } from 'react-router-dom'
+import * as http from 'services/http'
+import Moderation from 'components/Moderation'
 
 configure({ adapter: new Adapter() })
 

@@ -3,14 +3,14 @@ import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Form, Divider, Header, Button } from 'semantic-ui-react'
 
-import { postRequest, patchRequest } from './services/http'
-import { addNews, updateNews } from './actions'
-import { categories } from './constants'
-import { useWidth } from './hooks'
+import { postRequest, patchRequest } from 'services/http'
+import { addNews, updateNews } from 'actions'
+import { categories } from 'services/constants'
+import { useWidth } from 'hooks'
 
-import { ParseArticle } from './RenderNews'
-import PictureModal from './PictureModal'
-import TextModal from './TextModal'
+import { ParseArticle } from 'components/RenderNews'
+import PictureModal from 'components/modals/PictureModal'
+import TextModal from 'components/modals/TextModal'
 
 const Publish = () => {
 

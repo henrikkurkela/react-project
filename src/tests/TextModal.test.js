@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils'
 import Adapter from 'enzyme-adapter-react-16'
 import { mount, configure } from 'enzyme'
 
-import TextModal from '../TextModal'
+import TextModal from 'components/modals/TextModal'
 
 configure({ adapter: new Adapter() })
 

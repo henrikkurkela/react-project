@@ -1,4 +1,4 @@
-import adsReducer from '../reducers/adsReducer'
+import adsReducer from 'reducers/adsReducer'
 
 describe('adsReducer', () => {
     it('stores ads correctly', () => {

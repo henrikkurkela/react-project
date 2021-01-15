@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Header, Form, Message, Button } from 'semantic-ui-react'
 
-import { postRequest } from './services/http'
-import { loginToken, addUser } from './actions'
+import { postRequest } from 'services/http'
+import { loginToken, addUser } from 'actions'
 
 const Login = () => {
 

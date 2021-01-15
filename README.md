@@ -301,3 +301,5 @@ Implement simple tests:
 2021-01-12: Update REST API Documentation 1h (Total 149h)
 
 2021-01-14: Change Status Codes 200->201 For Requests That Create New Resources, Automatically Delete Orphaned Comments From Redux 1h (150h)
+
+2020-01-15: Refactor React Components to components Subfolder, Use Absolute Imports 2h (152h)

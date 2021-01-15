@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 import { useParams } from 'react-router-dom'
 
-import RenderNews from '../RenderNews'
+import RenderNews from 'components/RenderNews'
 
 configure({ adapter: new Adapter() })
 const mockStore = configureStore()

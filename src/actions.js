@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import store from './reducers'
+import store from 'reducers'
 
 const updateNews = (news) => {
     store.dispatch({

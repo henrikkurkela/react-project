@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Route, useHistory } from 'react-router-dom';
 import { Header, Button } from 'semantic-ui-react'
 
-import { postRequest } from './services/http'
-import { useWidth } from './hooks'
+import { postRequest } from 'services/http'
+import { useWidth } from 'hooks'
 
-import Publish from './Publish'
-import ModeratePictures from './ModeratePictures'
-import ModerateComments from './ModerateComments'
-import ModerateNews from './ModerateNews'
-import ModerateAds from './ModerateAds'
+import Publish from 'components/moderation/Publish'
+import ModeratePictures from 'components/moderation/ModeratePictures'
+import ModerateComments from 'components/moderation/ModerateComments'
+import ModerateNews from 'components/moderation/ModerateNews'
+import ModerateAds from 'components/moderation/ModerateAds'
 
 const Moderation = ({ requestReset }) => {
 

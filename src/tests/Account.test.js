@@ -5,7 +5,7 @@ import { mount, configure } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import Account from '../Account'
+import Account from 'components/Account'
 
 configure({ adapter: new Adapter() })
 const mockStore = configureStore()

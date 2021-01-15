@@ -5,8 +5,8 @@ import { mount, configure } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import * as http from '../services/http'
-import Login from '../Login'
+import * as http from 'services/http'
+import Login from 'components/account/Login'
 
 jest.mock('react-router-dom', () => ({
     useHistory: () => ({
