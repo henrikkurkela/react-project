@@ -27,6 +27,13 @@ describe('Account', () => {
                     email: 'demo@user.com',
                     avatar: '/assets/avatar/default.jpg',
                     type: 'user'
+                },
+                {
+                    id: 2,
+                    username: 'NotLoggedUser',
+                    email: 'offline@currently.com',
+                    avatar: '/assets/avatar/1.jpg',
+                    type: 'user'
                 }
             ],
             news: [
@@ -47,6 +54,12 @@ describe('Account', () => {
                     newsid: 1,
                     userid: 1,
                     content: 'Test Comment 2'
+                },
+                {
+                    id: 3,
+                    newsid: 1,
+                    userid: 2,
+                    content: 'Test Comment 3'
                 }
             ]
         })
@@ -62,6 +75,8 @@ describe('Account', () => {
         expect(wrapper.html()).toContain('DemoUser')
         expect(wrapper.html()).toContain('Test Comment 1')
         expect(wrapper.html()).toContain('Test Comment 2')
+
+        expect(wrapper.html()).not.toContain('Test Comment 3')
     })
 
     it('displays the correct content when logged out', () => {

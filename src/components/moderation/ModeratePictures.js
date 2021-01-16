@@ -23,7 +23,7 @@ const ModeratePictures = () => {
 
         let mounted = true
 
-        getRequest('/pictures').then((response) => {
+        getRequest('pictures').then((response) => {
             if (mounted) {
                 setPictures(response.data.pictures)
             }
@@ -77,7 +77,7 @@ const ModeratePictures = () => {
         setError(false)
         setStatusMessage('')
 
-        deleteRequest(`/pictures/${picture}`)
+        deleteRequest(`pictures/${picture}`)
             .then(() => {
                 setSuccess(true)
                 setStatusMessage('File deleted successfully.')

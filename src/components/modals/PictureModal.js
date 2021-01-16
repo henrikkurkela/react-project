@@ -14,7 +14,7 @@ const PictureModal = ({ state, changeState, action }) => {
 
         let mounted = true
 
-        getRequest('/pictures').then((response) => {
+        getRequest('pictures').then((response) => {
             if (mounted) {
                 setPictures(response.data.pictures)
             }

@@ -55,7 +55,7 @@ describe('RenderComments', () => {
         expect(wrapper.html()).toContain('Test Comment 2')
     })
 
-    it('allows anonymous commenting', async () => {
+    it('allows commenting', async () => {
 
         http.postRequest = jest.fn()
         http.postRequest.mockResolvedValue({ data: { id: 3, newsid: 1, userid: null, content: 'Test Comment 3' } })
@@ -79,5 +79,27 @@ describe('RenderComments', () => {
         })
 
         expect(http.postRequest).toHaveBeenCalledWith('comments', { content: 'Test Comment 3', newsid: 1 })
+    })
+
+    it('handles likes correctly', async () => {
+
+        http.patchRequest = jest.fn()
+        http.patchRequest.mockResolvedValue({ status: 200, data: { id: 1, likes: 2 } })
+
+        let wrapper
+
+        await act(async () => {
+            wrapper = mount(
+                <Provider store={store}>
+                    <RenderComments id={1} />
+                </Provider>
+            )
+
+            wrapper.find('Button').at(2).props().onClick()
+        })
+
+        wrapper.update()
+
+        expect(http.patchRequest).toHaveBeenCalledWith('news/1', { id: 1, action: 'like' })
     })
 })

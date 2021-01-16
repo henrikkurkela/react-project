@@ -14,9 +14,9 @@ describe('newsReducer', () => {
 
         let state = [{ id: 1, likes: 1, category: 1, headline: 'New Story', content: 'Lorem Ipsum' }]
 
-        state = newsReducer(state, { type: 'UPDATE_NEWS', data: { id: 1, likes: 9001 } })
+        state = newsReducer(state, { type: 'UPDATE_NEWS', data: { id: 1, likes: 9001, category: 1, headline: 'New Story - Revisited', content: 'Lorem Ipsum (Edited)' } })
 
-        expect(state).toEqual([{ id: 1, likes: 9001, category: 1, headline: 'New Story', content: 'Lorem Ipsum' }])
+        expect(state).toEqual([{ id: 1, likes: 9001, category: 1, headline: 'New Story - Revisited', content: 'Lorem Ipsum (Edited)' }])
     })
 
     it('removes news items correctly', () => {

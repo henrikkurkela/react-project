@@ -14,13 +14,13 @@ const Avatar = () => {
     const history = useHistory()
 
     useEffect(() => {
-        getRequest('/avatars').then((response) => {
+        getRequest('avatars').then((response) => {
             setAvatars(response.data.avatars)
         })
     }, [])
 
     const chooseAvatar = (avatar) => {
-        patchRequest(`/users/${auth.id}`, {
+        patchRequest(`users/${auth.id}`, {
             action: 'avatar',
             avatar: avatar
         }).then((response) => {

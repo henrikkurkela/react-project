@@ -16,7 +16,7 @@ const ModerateAds = () => {
     const [selectedAd, setSelectedAd] = useState(null)
 
     const createAd = (ad) => {
-        postRequest('/ads', { picture: ad.picture, href: ad.caption }).then((response) => {
+        postRequest('ads', { picture: ad.picture, href: ad.caption }).then((response) => {
             addAd(response.data)
         }).catch((error) => {
             console.log(error.response?.status)

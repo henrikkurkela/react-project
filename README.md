@@ -20,13 +20,19 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
-Thirteenth Iteration:
+## DONE
+
+Thirteenth Iteration (16h):
+
+Functionality:
 
 - Add upload picture functionality
 - Add edit news functionality
-- Refactoring and best practices fixes
 
-## DONE
+Frontend:
+
+- Refactor frontend file structure
+- Extend frontend tests to improve coverage
 
 Twelfth Iteration (22h):
 
@@ -302,4 +308,6 @@ Implement simple tests:
 
 2021-01-14: Change Status Codes 200->201 For Requests That Create New Resources, Automatically Delete Orphaned Comments From Redux 1h (150h)
 
-2020-01-15: Refactor React Components to components Subfolder, Use Absolute Imports 2h (152h)
+2021-01-15: Refactor React Components to components Subfolder, Use Absolute Imports 2h (152h)
+
+2021-01-16: Improve Front End Unit Test Coverage, Thirteenth Iteration Goals Met 2h (154h)
