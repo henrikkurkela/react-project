@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Header, Image, Form, Message, Modal, Button, Divider } from 'semantic-ui-react'
-import axios from 'axios'
 
-import { backendUrl } from 'services/constants'
-import { getRequest, deleteRequest } from 'services/http'
+import { getRequest, deleteRequest, postForm } from 'services/http'
 import { useWidth } from 'hooks'
 
 const ModeratePictures = () => {
@@ -52,12 +50,7 @@ const ModeratePictures = () => {
         let formData = new FormData()
         formData.append('picture', selectedFile)
 
-        axios({
-            method: 'post',
-            url: `${backendUrl}/upload`,
-            data: formData,
-            headers: { 'Content-Type': 'multipart/form-data' }
-        })
+        postForm('upload', formData)
             .then((response) => {
                 setSuccess(true)
                 setStatusMessage('File uploaded successfully.')
@@ -77,7 +70,9 @@ const ModeratePictures = () => {
         setError(false)
         setStatusMessage('')
 
-        deleteRequest(`pictures/${picture}`)
+        const filename = picture.split('/').pop()
+
+        deleteRequest(`pictures/${filename}`)
             .then(() => {
                 setSuccess(true)
                 setStatusMessage('File deleted successfully.')
@@ -106,7 +101,7 @@ const ModeratePictures = () => {
                 {pictures.map((picture, key) =>
                     <Image
                         key={key}
-                        src={`/assets/img/${picture}`}
+                        src={picture}
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
                             setSelectedPicture(picture)
@@ -121,7 +116,7 @@ const ModeratePictures = () => {
                 open={modalOpen}
             >
                 <Modal.Content image>
-                    <Image src={`/assets/img/${selectedPicture}`} />
+                    <Image src={selectedPicture} />
                 </Modal.Content>
                 <Modal.Actions>
                     <Button color='red' onClick={() => {

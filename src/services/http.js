@@ -12,6 +12,15 @@ const postRequest = (url, item) => {
     return axios.post(url, item)
 }
 
+const postForm = (url, data) => {
+    return axios({
+        method: 'post',
+        url: url,
+        data: data,
+        headers: { 'Content-Type': 'multipart/form-data' }
+    })
+}
+
 const patchRequest = (url, item) => {
     return axios.patch(url, item)
 }
@@ -20,4 +29,4 @@ const deleteRequest = (url) => {
     return axios.delete(url)
 }
 
-export { getRequest, postRequest, patchRequest, deleteRequest }
+export { getRequest, postRequest, patchRequest, deleteRequest, postForm }

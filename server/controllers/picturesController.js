@@ -9,7 +9,8 @@ const auth = require('../middlewares/authMiddleware')
 picturesRouter.get('/', async (request, response) => {
 
     try {
-        response.json({ pictures: await Pictures.getAll() })
+        const pictures = await Pictures.getAll()
+        response.json(pictures)
     } catch (error) {
         console.log(error)
         response.status(500).end()

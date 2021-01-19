@@ -1,15 +1,17 @@
 const fs = require('fs')
 
-const imgFolder = './public/assets/img/'
+const imgFolder = 'assets/img'
 
 class PicturesModel {
 
     getAll = async () => {
-        return fs.readdirSync(imgFolder)
+        const files = fs.readdirSync(`./public/${imgFolder}`)
+        const pictures = files.map((file) => `/${imgFolder}/${file}`)
+        return { pictures }
     }
 
     deleteByName = async (name) => {
-        return fs.unlinkSync(`${imgFolder}/${name}`)
+        return fs.unlinkSync(`./public/${imgFolder}/${name}`)
     }
 }
 

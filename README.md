@@ -20,6 +20,17 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
+Fourteenth Iteration:
+
+Functionality:
+
+- Last adjustments before feature completion
+- Remove development shortcuts
+
+Backend:
+
+- Backend unit tests
+
 ## DONE
 
 Thirteenth Iteration (16h):
@@ -311,3 +322,5 @@ Implement simple tests:
 2021-01-15: Refactor React Components to components Subfolder, Use Absolute Imports 2h (152h)
 
 2021-01-16: Improve Front End Unit Test Coverage, Thirteenth Iteration Goals Met 2h (154h)
+
+2021-01-19: Absolute File Paths for Avatars and Pictures 1h (Total 155h)

@@ -10,7 +10,7 @@ const Avatar = () => {
 
     const auth = useSelector(state => state.auth)
 
-    const [avatars, setAvatars] = useState(['default.jpg'])
+    const [avatars, setAvatars] = useState(['/assets/avatar/default.jpg'])
     const history = useHistory()
 
     useEffect(() => {
@@ -38,10 +38,10 @@ const Avatar = () => {
             {
                 avatars.map((item, key) => {
                     return <Image
-                        src={`/assets/avatar/${item}`}
+                        src={item}
                         key={key}
                         style={{ float: 'left', padding: '1rem', cursor: 'pointer' }}
-                        onClick={() => chooseAvatar(`/assets/avatar/${item}`)}
+                        onClick={() => chooseAvatar(item)}
                     />
                 })
             }

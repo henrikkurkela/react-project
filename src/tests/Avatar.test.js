@@ -22,7 +22,7 @@ describe('Avatars', () => {
     it('contains the correct avatars', async () => {
 
         http.getRequest = jest.fn()
-        http.getRequest.mockResolvedValue({ data: { avatars: ['1.jpg', '2.jpg', '3.jpg', 'anon.jpg', 'default.jpg'] } })
+        http.getRequest.mockResolvedValue({ data: { avatars: ['/assets/avatar/1.jpg', '/assets/avatar/2.jpg', '/assets/avatar/3.jpg', '/assets/avatar/anon.jpg', '/assets/avatar/default.jpg'] } })
 
         let wrapper
 
@@ -46,7 +46,7 @@ describe('Avatars', () => {
     it('is able to change the user avatar correctly', async () => {
 
         http.getRequest = jest.fn()
-        http.getRequest.mockResolvedValue({ status: 200, data: { avatars: ['1.jpg', '2.jpg', '3.jpg', 'anon.jpg', 'default.jpg'] } })
+        http.getRequest.mockResolvedValue({ status: 200, data: { avatars: ['/assets/avatar/1.jpg', '/assets/avatar/2.jpg', '/assets/avatar/3.jpg', '/assets/avatar/anon.jpg', '/assets/avatar/default.jpg'] } })
 
         http.patchRequest = jest.fn()
         http.patchRequest.mockResolvedValue({

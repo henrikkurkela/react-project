@@ -16,7 +16,7 @@ describe('PictureModal', () => {
         const action = jest.fn()
 
         http.getRequest = jest.fn()
-        http.getRequest.mockResolvedValue({ data: { pictures: ['photo1.jpg', 'photo2.jpg', 'photo3.jpg'] } })
+        http.getRequest.mockResolvedValue({ data: { pictures: ['/assets/img/photo1.jpg', '/assets/img/photo2.jpg', '/assets/img/photo3.jpg'] } })
 
         const wrapper = mount(
             <PictureModal state={open} changeState={setOpen} action={action} />
@@ -43,7 +43,7 @@ describe('PictureModal', () => {
         const action = jest.fn()
 
         http.getRequest = jest.fn()
-        http.getRequest.mockResolvedValue({ data: { pictures: ['photo1.jpg', 'photo2.jpg', 'photo3.jpg'] } })
+        http.getRequest.mockResolvedValue({ data: { pictures: ['/assets/img/photo1.jpg', '/assets/img/photo2.jpg', '/assets/img/photo3.jpg'] } })
 
         let wrapper
 

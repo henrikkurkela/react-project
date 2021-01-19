@@ -35,11 +35,11 @@ const PictureModal = ({ state, changeState, action }) => {
                 <Image.Group size='small'>
                     {pictures.map((picture, key) =>
                         <Image
-                            disabled={`/assets/img/${picture}` === newPicture.picture ? false : true}
+                            disabled={`${picture}` === newPicture.picture ? false : true}
                             key={key}
-                            src={`/assets/img/${picture}`}
+                            src={picture}
                             style={{ cursor: 'pointer' }}
-                            onClick={() => setNewPicture({ ...newPicture, picture: `/assets/img/${picture}` })}
+                            onClick={() => setNewPicture({ ...newPicture, picture: `${picture}` })}
                         />
                     )}
                 </Image.Group>
