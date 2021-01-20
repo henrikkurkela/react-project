@@ -324,3 +324,5 @@ Implement simple tests:
 2021-01-16: Improve Front End Unit Test Coverage, Thirteenth Iteration Goals Met 2h (154h)
 
 2021-01-19: Absolute File Paths for Avatars and Pictures 1h (Total 155h)
+
+2021-01-20: Unit tests for ModerateAds, ModeratePictures 1h (Total 156h)
