@@ -29,14 +29,14 @@ const store = mockStore({
     comments: [
         {
             id: 1,
-            newsid: 1,
-            userid: 1,
+            newsId: 1,
+            userId: 1,
             content: 'Test Comment 1'
         },
         {
             id: 2,
-            newsid: 1,
-            userid: 1,
+            newsId: 1,
+            userId: 1,
             content: 'Test Comment 2'
         }
     ]
@@ -58,7 +58,7 @@ describe('RenderComments', () => {
     it('allows commenting', async () => {
 
         http.postRequest = jest.fn()
-        http.postRequest.mockResolvedValue({ data: { id: 3, newsid: 1, userid: null, content: 'Test Comment 3' } })
+        http.postRequest.mockResolvedValue({ data: { id: 3, newsId: 1, userId: null, content: 'Test Comment 3' } })
 
         let wrapper
 
@@ -78,7 +78,7 @@ describe('RenderComments', () => {
             wrapper.find('Button').at(0).props().onClick()
         })
 
-        expect(http.postRequest).toHaveBeenCalledWith('comments', { content: 'Test Comment 3', newsid: 1 })
+        expect(http.postRequest).toHaveBeenCalledWith('comments', { content: 'Test Comment 3', newsId: 1 })
     })
 
     it('handles likes correctly', async () => {

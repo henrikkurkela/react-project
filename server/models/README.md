@@ -8,36 +8,43 @@
 - avatar text
 - password text
 - type varchar
+- createdAt datetime
+- updatedAt datetime
 
 ## news
 
 - id int primary key
 - category int
-- likes int
 - headline text
+- likes int
 - content text
-- author int foreign key
-- time datetime
+- userId int foreign key
+- createdAt datetime
+- updatedAt datetime
 
 ## comments
 
 - id int primary key
-- newsid int foreign key
-- userid int foreign key
+- newsId int foreign key
+- userId int foreign key
 - content text
+- createdAt datetime
+- updatedAt datetime
 
 ## ads
 
 - id int primary key
 - picture text
 - href text
+- createdAt datetime
+- updatedAt datetime
 
 # DB Table Creation Queries
 
-- CREATE TABLE ads (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, href TEXT NOT NULL, picture TEXT NOT NULL);
+- CREATE TABLE IF NOT EXISTS `users` (`id` INTEGER auto_increment , `email` VARCHAR(255) UNIQUE, `username` VARCHAR(255) UNIQUE, `avatar` VARCHAR(255), `password` VARCHAR(255), `type` VARCHAR(255), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
 
-- CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(255) NOT NULL UNIQUE, avatar TEXT NOT NULL, password TEXT NOT NULL, type VARCHAR(255) DEFAULT 'user');
+- CREATE TABLE IF NOT EXISTS `news` (`id` INTEGER auto_increment , `category` INTEGER, `headline` TEXT, `likes` INTEGER, `content` TEXT, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `userId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
 
-- CREATE TABLE news (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, category INT NOT NULL, likes INT NOT NULL DEFAULT 0, headline TEXT NOT NULL, content TEXT NOT NULL, author INT, time DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (author) REFERENCES users(id) ON DELETE CASCADE);
+- CREATE TABLE IF NOT EXISTS `comments` (`id` INTEGER auto_increment , `content` TEXT, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `userId` INTEGER, `newsId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY (`newsId`) REFERENCES `news` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
 
-- CREATE TABLE comments (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, newsid INT NOT NULL, userid INT, content TEXT NOT NULL, FOREIGN KEY (newsid) REFERENCES news(id) ON DELETE CASCADE, FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE);
+- CREATE TABLE IF NOT EXISTS `ads` (`id` INTEGER auto_increment , `picture` TEXT, `href` TEXT, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;

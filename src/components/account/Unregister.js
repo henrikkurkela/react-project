@@ -32,7 +32,7 @@ const Unregister = () => {
         deleteRequest(`users/${auth.id}`).then(() => {
             
             comments
-                .filter((item) => item.userid === auth.id)
+                .filter((item) => item.userId === auth.id)
                 .map((item) => removeComment(item))
 
             users

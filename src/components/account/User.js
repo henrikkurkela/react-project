@@ -11,8 +11,8 @@ const User = () => {
     const comments = useSelector(state => state.comments)
     const { user } = useParams()
 
-    const commenterDetails = (userid = null) => {
-        let user = users.find(item => item.id === userid)
+    const commenterDetails = (userId = null) => {
+        let user = users.find(item => item.id === userId)
         if (user) {
             return user
         } else {
@@ -44,11 +44,11 @@ const User = () => {
                     </div>
                     <Header as='h3'>Comments</Header>
                     <Comment.Group style={{ minWidth: '100%' }}>
-                        {comments.filter(item => item.userid === Number(user)).map((comment, key) =>
+                        {comments.filter(item => item.userId === Number(user)).map((comment, key) =>
                             <Comment key={key}>
-                                <Comment.Avatar src={commenterDetails(comment.userid).avatar} />
+                                <Comment.Avatar src={commenterDetails(comment.userId).avatar} />
                                 <Comment.Content>
-                                    <Comment.Author>{commenterDetails(comment.userid).username}</Comment.Author>
+                                    <Comment.Author>{commenterDetails(comment.userId).username}</Comment.Author>
                                     <Comment.Text>{comment.content}</Comment.Text>
                                 </Comment.Content>
                             </Comment>

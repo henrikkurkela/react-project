@@ -21,8 +21,8 @@ const ModerateComments = () => {
         })
     }
 
-    const commenterDetails = (userid = null) => {
-        const user = users.find(item => item.id === userid)
+    const commenterDetails = (userId = null) => {
+        const user = users.find(item => item.id === userId)
         if (user) {
             return user
         } else {
@@ -36,13 +36,13 @@ const ModerateComments = () => {
             <Comment.Group style={{ minWidth: '100%' }}>
                 {comments.map((comment, key) =>
                     <Comment key={key}>
-                        <Comment.Avatar src={commenterDetails(comment.userid).avatar} />
+                        <Comment.Avatar src={commenterDetails(comment.userId).avatar} />
                         <Comment.Content>
                             <Icon style={{ float: 'right', display: 'inline-block', cursor: 'pointer' }} name='delete' onClick={() => {
                                 setOpenComment(true)
                                 setSelectedComment(comment)
                             }} />
-                            <Comment.Author>{commenterDetails(comment.userid).username}</Comment.Author>
+                            <Comment.Author>{commenterDetails(comment.userId).username}</Comment.Author>
                             <Comment.Text>{comment.content}</Comment.Text>
                         </Comment.Content>
                     </Comment>

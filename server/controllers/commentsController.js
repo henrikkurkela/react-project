@@ -20,7 +20,7 @@ commentsRouter.delete('/:id', auth, (request, response) => {
 
     if (request.auth) {
         Comments.getAll().then((result) => {
-            if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userid || request.auth.type === 'admin') {
+            if (request.auth.id === result.find(item => item.id === Number(request.params.id)).userId || request.auth.type === 'admin') {
                 Comments.deleteById(request.params.id).then(() => {
                     response.status(204).end()
                 }).catch((error) => {
@@ -41,7 +41,7 @@ commentsRouter.delete('/:id', auth, (request, response) => {
 
 commentsRouter.post('/', auth, (request, response) => {
 
-    const newComment = { ...request.body, userid: request.auth ? request.auth.id : null }
+    const newComment = { ...request.body, userId: request.auth ? request.auth.id : null }
 
     Comments.addComment(newComment).then((result) => {
         response.status(201).json(result)

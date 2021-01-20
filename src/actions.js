@@ -24,8 +24,8 @@ const addNews = (news) => {
             content: news.content,
             likes: Number(news.likes),
             category: Number(news.category),
-            author: Number(news.author),
-            time: Date(news.time).toString()
+            userId: Number(news.userId),
+            createdAt: news.createdAt
         }
     })
 }
@@ -60,8 +60,8 @@ const addComment = (comment) => {
         type: 'NEW_COMMENT',
         data: {
             id: Number(comment.id),
-            newsid: Number(comment.newsid),
-            userid: comment.userid,
+            newsId: Number(comment.newsId),
+            userId: comment.userId,
             content: comment.content
         }
     })

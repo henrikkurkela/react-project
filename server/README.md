@@ -47,6 +47,8 @@ Responds 200 [ARRAY]:
 - username
 - avatar
 - type
+- createdAt
+- updatedAt
 
 ## /api/users/:id
 
@@ -78,6 +80,8 @@ Responds 200 [ARRAY]:
 - id
 - picture
 - href
+- createdAt
+- updatedAt
 
 Accepts POST:
 
@@ -111,8 +115,9 @@ Responds 200 [ARRAY]:
 - likes
 - headline
 - content
-- author
-- time
+- userId
+- createdAt
+- updatedAt
 
 Accepts POST:
 
@@ -120,7 +125,7 @@ Accepts POST:
 - likes
 - headline
 - content
-- author
+- userId
 
 Responds 201:
 
@@ -129,8 +134,9 @@ Responds 201:
 - likes
 - headline
 - content
-- author
-- time
+- userId
+- createdAt
+- updatedAt
 
 ## /api/news/:id
 
@@ -147,8 +153,9 @@ Responds 200:
 - likes
 - headline
 - content
-- author
-- time
+- userId
+- createdAt
+- updatedAt
 
 Accepts DELETE:
 
@@ -163,20 +170,20 @@ Accepts GET:
 Responds 200 [ARRAY]:
 
 - id
-- newsid
-- userid
+- newsId
+- userId
 - content
 
 Accepts POST:
 
-- newsid
+- newsId
 - content
 
 Responds 201:
 
 - id
-- newsid
-- userid
+- newsId
+- userId
 - content
 
 ## /api/comments/:id

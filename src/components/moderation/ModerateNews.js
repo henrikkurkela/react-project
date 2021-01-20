@@ -21,7 +21,7 @@ const ModerateNews = () => {
         deleteRequest(`news/${news.id}`).then(() => {
 
             comments
-                .filter((comment) => comment.newsid === news.id)
+                .filter((comment) => comment.newsId === news.id)
                 .map((comment) => removeComment(comment))
 
             removeNews(news)

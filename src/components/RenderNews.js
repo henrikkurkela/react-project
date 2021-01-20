@@ -108,9 +108,9 @@ const ParseArticle = ({ item, showComments = true }) => {
 		)
 	}
 
-	if (item.time) {
+	if (item.createdAt) {
 		parsedArticle.push(
-			<p key='time' style={{ color: 'gray' }}><Icon name='clock outline'></Icon>{item.time}</p>
+			<p key='time' style={{ color: 'gray' }}><Icon name='clock outline'></Icon>{item.createdAt}</p>
 		)
 	}
 
@@ -118,8 +118,8 @@ const ParseArticle = ({ item, showComments = true }) => {
 		parsedArticle.push(<ParseContent key='content' content={item.content} />)
 	}
 
-	if (item.author) {
-		const author = users.find(user => user.id === item.author)
+	if (item.userId) {
+		const author = users.find(user => user.id === item.userId)
 		if (author) {
 			parsedArticle.push(
 				<div key='author'>

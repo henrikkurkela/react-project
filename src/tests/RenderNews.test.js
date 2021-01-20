@@ -38,14 +38,14 @@ const store = mockStore({
     comments: [
         {
             id: 1,
-            newsid: 1,
-            userid: 1,
+            newsId: 1,
+            userId: 1,
             content: 'Test Comment 1'
         },
         {
             id: 2,
-            newsid: 1,
-            userid: 1,
+            newsId: 1,
+            userId: 1,
             content: 'Test Comment 2'
         }
     ]

@@ -41,7 +41,7 @@ const RenderComments = ({ id }) => {
 		if (newComment.trim() === null || newComment.trim() === "") {
 			setNewComment('')
 		} else {
-			postRequest("comments", { content: newComment.trim(), newsid: id })
+			postRequest("comments", { content: newComment.trim(), newsId: id })
 				.then((response) => {
 					addComment(response.data)
 					setNewComment('')
@@ -72,8 +72,8 @@ const RenderComments = ({ id }) => {
 		navigator.clipboard.writeText(window.location.href)
 	}
 
-	const commenterDetails = (userid = null) => {
-		let user = users.find(item => item.id === userid)
+	const commenterDetails = (userId = null) => {
+		let user = users.find(item => item.id === userId)
 		if (user) {
 			return user
 		} else {
@@ -87,12 +87,12 @@ const RenderComments = ({ id }) => {
 				Comments
     		</Header>
 			<Divider />
-			{comments.filter(item => item.newsid === id).length > 0 ?
-				comments.filter(item => item.newsid === id).map((comment, key) =>
+			{comments.filter(item => item.newsId === id).length > 0 ?
+				comments.filter(item => item.newsId === id).map((comment, key) =>
 					<Comment key={key}>
-						<Comment.Avatar src={commenterDetails(comment.userid).avatar} />
+						<Comment.Avatar src={commenterDetails(comment.userId).avatar} />
 						<Comment.Content>
-							<Comment.Author style={{ cursor: 'pointer' }} onClick={() => history.push(`/users/${comment.userid}`)}>{commenterDetails(comment.userid).username}</Comment.Author>
+							<Comment.Author style={{ cursor: 'pointer' }} onClick={() => history.push(`/users/${comment.userId}`)}>{commenterDetails(comment.userId).username}</Comment.Author>
 							<Comment.Text>{comment.content}</Comment.Text>
 						</Comment.Content>
 					</Comment>

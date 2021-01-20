@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 
 const connection = require('./database')
 
-const Ads = connection.define('ads',
+const Ad = connection.define('ad',
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,29 +11,25 @@ const Ads = connection.define('ads',
         },
         picture: DataTypes.TEXT,
         href: DataTypes.TEXT
-    },
-    {
-        timestamps: false,
-        freezeTableName: true
     }
 )
 
 class AdsModel {
 
     getAll = () => {
-        return Ads.findAll()
+        return Ad.findAll()
     }
 
     addAd = (ad) => {
-        return Ads.create(ad)
+        return Ad.create(ad)
     }
 
     deleteById = (id) => {
-        return Ads.destroy({ where: { id } })
+        return Ad.destroy({ where: { id } })
     }
 
     deleteAll = () => {
-        return Ads.destroy({ where: {} })
+        return Ad.destroy({ where: {} })
     }
 }
 

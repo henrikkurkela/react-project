@@ -45,20 +45,20 @@ describe('Account', () => {
             comments: [
                 {
                     id: 1,
-                    newsid: 1,
-                    userid: 1,
+                    newsId: 1,
+                    userId: 1,
                     content: 'Test Comment 1'
                 },
                 {
                     id: 2,
-                    newsid: 1,
-                    userid: 1,
+                    newsId: 1,
+                    userId: 1,
                     content: 'Test Comment 2'
                 },
                 {
                     id: 3,
-                    newsid: 1,
-                    userid: 2,
+                    newsId: 1,
+                    userId: 2,
                     content: 'Test Comment 3'
                 }
             ]

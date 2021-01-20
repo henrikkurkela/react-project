@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 
 const connection = require('./database')
 
-const Users = connection.define('users',
+const User = connection.define('user',
     {
         id: {
             type: DataTypes.INTEGER,
@@ -10,21 +10,21 @@ const Users = connection.define('users',
             primaryKey: true,
         },
         email: {
-            type: DataTypes.CHAR(255)
+            type: DataTypes.STRING,
+            unique: true
         },
         username: {
-            type: DataTypes.CHAR(255)
+            type: DataTypes.STRING,
+            unique: true
         },
-        avatar: DataTypes.TEXT,
-        password: DataTypes.TEXT,
-        type: DataTypes.CHAR(255)
+        avatar: DataTypes.STRING,
+        password: DataTypes.STRING,
+        type: DataTypes.STRING
     },
     {
-        timestamps: false,
-        freezeTableName: true,
         indexes: [
-            {unique: true, fields: ['email']},
-            {unique: true, fields: ['username']}
+            { unique: true, fields: ['email'] },
+            { unique: true, fields: ['username'] }
         ]
     }
 )
@@ -32,28 +32,30 @@ const Users = connection.define('users',
 class UsersModel {
 
     getAll = () => {
-        return Users.findAll()
+        return User.findAll()
     }
 
     getOne = (user) => {
-        return Users.findOne({ where: { ...user } })
+        return User.findOne({ where: { ...user } })
     }
 
     addUser = (newUser) => {
-        return Users.create({ ...newUser })
+        return User.create({ ...newUser })
     }
 
     updateUserById = (user) => {
-        return Users.update({ ...user }, { where: { id: user.id } })
+        return User.update({ ...user }, { where: { id: user.id } })
     }
 
     deleteById = (id) => {
-        return Users.destroy({ where: { id } })
+        return User.destroy({ where: { id } })
     }
 
     deleteAll = () => {
-        return Users.destroy({ where: {} })
+        return User.destroy({ where: {} })
     }
 }
 
 module.exports = UsersModel
+
+module.exports.User = User

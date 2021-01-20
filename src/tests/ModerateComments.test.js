@@ -36,14 +36,14 @@ const store = mockStore({
     comments: [
         {
             id: 1,
-            newsid: 1,
-            userid: 1,
+            newsId: 1,
+            userId: 1,
             content: 'Test Comment 1'
         },
         {
             id: 2,
-            newsid: 1,
-            userid: 1,
+            newsId: 1,
+            userId: 1,
             content: 'Test Comment 2'
         }
     ]
@@ -77,8 +77,8 @@ describe('ModerateComments', () => {
         expect(http.deleteRequest).toHaveBeenCalledWith('comments/1')
         expect(actions.removeComment).toHaveBeenCalledWith({
             id: 1,
-            newsid: 1,
-            userid: 1,
+            newsId: 1,
+            userId: 1,
             content: 'Test Comment 1'
         })
     })

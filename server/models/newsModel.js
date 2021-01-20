@@ -11,21 +11,8 @@ const News = connection.define('news',
         },
         category: DataTypes.INTEGER,
         headline: DataTypes.TEXT,
-        author: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'users',
-                referencesKey: 'id'
-            },
-            onDelete: 'CASCADE'
-        },
-        time: DataTypes.DATE,
         likes: DataTypes.INTEGER,
         content: DataTypes.TEXT
-    },
-    {
-        timestamps: false,
-        freezeTableName: true
     }
 )
 
@@ -61,3 +48,5 @@ class NewsModel {
 }
 
 module.exports = NewsModel
+
+module.exports.News = News

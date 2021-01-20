@@ -5,6 +5,28 @@ const cors = require('cors')
 
 const connection = require('./models/database')
 
+const User = require('./models/usersModel').User
+const News = require('./models/newsModel').News
+const Comment = require('./models/commentsModel').Comment
+
+User.hasMany(News)
+News.belongsTo(User, {
+    onDelete: 'CASCADE',
+    foreignKey: { allowNull: true }
+})
+
+User.hasMany(Comment)
+Comment.belongsTo(User, {
+    onDelete: 'CASCADE',
+    foreignKey: { allowNull: true }
+})
+
+News.hasMany(Comment)
+Comment.belongsTo(News, {
+    onDelete: 'CASCADE',
+    foreignKey: { allowNull: false }
+})
+
 const newsController = require('./controllers/newsController')
 const adsController = require('./controllers/adsController')
 const commentsController = require('./controllers/commentsController')

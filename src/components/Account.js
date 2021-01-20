@@ -53,8 +53,8 @@ const Account = () => {
                 />
                 <Header as='h3'>Recent Activity</Header>
                 <Comment.Group style={{ minWidth: '100%' }}>
-                    {comments.filter(item => item.userid === auth.id).length > 0 ?
-                        comments.filter(item => item.userid === auth.id).map((comment, key) =>
+                    {comments.filter(item => item.userId === auth.id).length > 0 ?
+                        comments.filter(item => item.userId === auth.id).map((comment, key) =>
                             <Comment key={key}>
                                 <Comment.Avatar src={auth.avatar} />
                                 <Comment.Content>
