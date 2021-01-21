@@ -29,7 +29,7 @@ Functionality:
 
 Backend:
 
-- Backend unit tests
+- Backend route tests
 - Sequelize hasMany-belongsTo relations for DB tables
 - Sequelize createdAt and updatedAt timestamps for DB tables
 
@@ -327,4 +327,6 @@ Implement simple tests:
 
 2021-01-19: Absolute File Paths for Avatars and Pictures 1h (Total 155h)
 
-2021-01-20: Unit tests for ModerateAds, ModeratePictures, Bug Fixes, DB Relations With Sequelize hasMany-belongsTo, Sequelize Default Timestamps 3h (Total 158h)
+2021-01-20: Unit Tests for ModerateAds, ModeratePictures, Bug Fixes, DB Relations With Sequelize hasMany-belongsTo, Sequelize Default Timestamps 3h (Total 158h)
+
+2021-01-21: Start Working on Backend Tests (Basic GET for all controllers) 2h (Total 160h)

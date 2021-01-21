@@ -23,7 +23,7 @@ const ModeratePictures = () => {
 
         getRequest('pictures').then((response) => {
             if (mounted) {
-                setPictures(response.data.pictures)
+                setPictures(response.data)
             }
         }).catch((error) => {
             console.log(error.response?.status)

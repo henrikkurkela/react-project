@@ -73,7 +73,7 @@ describe('ModerateAds', () => {
         http.postRequest.mockResolvedValue({ status: 201, data: { id: 1, picture: '/assets/img/photo1.jpg', href: 'http://www.yahoo.com' } })
 
         http.getRequest = jest.fn()
-        http.getRequest.mockResolvedValue({ status: 200, data: { pictures: ['/assets/img/photo1.jpg'] } })
+        http.getRequest.mockResolvedValue({ status: 200, data: ['/assets/img/photo1.jpg'] })
 
         const wrapper = mount(
             <Provider store={store}>

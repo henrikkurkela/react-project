@@ -12,7 +12,7 @@ describe('ModeratePictures', () => {
     it('renders the current pictures correctly', async () => {
 
         http.getRequest = jest.fn()
-        http.getRequest.mockResolvedValue({ status: 200, data: { pictures: ['/assets/img/photo1.jpg', '/assets/img/photo2.jpg', '/assets/img/photo3.jpg'] } })
+        http.getRequest.mockResolvedValue({ status: 200, data: ['/assets/img/photo1.jpg', '/assets/img/photo2.jpg', '/assets/img/photo3.jpg'] })
 
         let wrapper
 

@@ -62,3 +62,5 @@ app.use('*', express.static('build'))
 app.listen(process.env.BACKEND_PORT)
 
 connection.sync()
+
+module.exports = app

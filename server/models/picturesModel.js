@@ -7,7 +7,7 @@ class PicturesModel {
     getAll = async () => {
         const files = fs.readdirSync(`./public/${imgFolder}`)
         const pictures = files.map((file) => `/${imgFolder}/${file}`)
-        return { pictures }
+        return pictures
     }
 
     deleteByName = async (name) => {

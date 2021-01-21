@@ -15,7 +15,7 @@ const Avatar = () => {
 
     useEffect(() => {
         getRequest('avatars').then((response) => {
-            setAvatars(response.data.avatars)
+            setAvatars(response.data)
         })
     }, [])
 

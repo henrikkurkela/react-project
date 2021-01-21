@@ -200,7 +200,7 @@ Accepts GET
 
 Responds 200:
 
-- avatars [ARRAY]
+- [ARRAY]
 
 ## /api/pictures
 
@@ -208,7 +208,7 @@ Accepts GET
 
 Responds 200:
 
-- pictures [ARRAY]
+- [ARRAY]
 
 ## /api/upload
 
