@@ -319,14 +319,16 @@ Implement simple tests:
 
 2021-01-12: Update REST API Documentation 1h (Total 149h)
 
-2021-01-14: Change Status Codes 200->201 For Requests That Create New Resources, Automatically Delete Orphaned Comments From Redux 1h (150h)
+2021-01-14: Change Status Codes 200->201 For Requests That Create New Resources, Automatically Delete Orphaned Comments From Redux 1h (Total 150h)
 
-2021-01-15: Refactor React Components to components Subfolder, Use Absolute Imports 2h (152h)
+2021-01-15: Refactor React Components to components Subfolder, Use Absolute Imports 2h (Total 152h)
 
-2021-01-16: Improve Front End Unit Test Coverage, Thirteenth Iteration Goals Met 2h (154h)
+2021-01-16: Improve Front End Unit Test Coverage, Thirteenth Iteration Goals Met 2h (Total 154h)
 
 2021-01-19: Absolute File Paths for Avatars and Pictures 1h (Total 155h)
 
 2021-01-20: Unit Tests for ModerateAds, ModeratePictures, Bug Fixes, DB Relations With Sequelize hasMany-belongsTo, Sequelize Default Timestamps 3h (Total 158h)
 
 2021-01-21: Start Working on Backend Tests (Basic GET for all controllers) 2h (Total 160h)
+
+2021-01-26: Continue Working on Backend Tests 2h (Total 162h)
