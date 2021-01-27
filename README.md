@@ -331,4 +331,6 @@ Implement simple tests:
 
 2021-01-21: Start Working on Backend Tests (Basic GET for all controllers) 2h (Total 160h)
 
-2021-01-26: Continue Working on Backend Tests 2h (Total 162h)
+2021-01-26: Continue Working on Backend Tests (Start Working on Authorization Tests) 2h (Total 162h)
+
+2021-01-27: Continue Working on Backend Tests (More Authorization Tests) 2h (Total 164h)
