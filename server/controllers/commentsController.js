@@ -12,7 +12,7 @@ commentsRouter.get('/', (request, response) => {
         response.json(result)
     }).catch((error) => {
         console.log(error)
-        response.status(500).end()
+        response.status(500).send('Internal server error.')
     })
 })
 
@@ -25,17 +25,17 @@ commentsRouter.delete('/:id', auth, (request, response) => {
                     response.status(204).end()
                 }).catch((error) => {
                     console.log(error)
-                    response.status(500).end()
+                    response.status(500).send('Internal server error.')
                 })
             } else {
-                response.status(401).end()
+                response.status(401).send('Unauthorized.')
             }
         }).catch((error) => {
             console.log(error)
-            response.status(500).end()
+            response.status(500).send('Internal server error.')
         })
     } else {
-        response.status(401).end()
+        response.status(401).send('Unauthorized.')
     }
 })
 
@@ -47,7 +47,7 @@ commentsRouter.post('/', auth, (request, response) => {
         response.status(201).json(result)
     }).catch((error) => {
         console.log(error)
-        response.status(500).end()
+        response.status(500).send('Internal server error.')
     })
 })
 

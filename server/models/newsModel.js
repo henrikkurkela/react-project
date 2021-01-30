@@ -11,7 +11,10 @@ const News = connection.define('news',
         },
         category: DataTypes.INTEGER,
         headline: DataTypes.TEXT,
-        likes: DataTypes.INTEGER,
+        likes: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
         content: DataTypes.TEXT
     }
 )

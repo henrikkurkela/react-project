@@ -1,3 +1,4 @@
+const { should } = require('chai')
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const app = require('../server')
@@ -14,6 +15,7 @@ describe('Comments', () => {
 			.end((error, response) => {
 				response.should.have.status(200)
 				response.body.should.be.a('array')
+				response.body[0].should.have.all.keys('id', 'content', 'newsId', 'userId', 'createdAt', 'updatedAt')
 				done()
 			})
 	})
@@ -32,6 +34,8 @@ describe('Comments', () => {
 					.send({ content: testComment, newsId })
 					.end((error, response) => {
 						response.should.have.status(201)
+						response.body.should.have.all.keys('id', 'content', 'newsId', 'userId', 'createdAt', 'updatedAt')
+						should().equal(response.body.userId, null)
 						done()
 					})
 			})
@@ -53,6 +57,7 @@ describe('Comments', () => {
 						response.should.have.status(200)
 
 						const token = response.body.auth
+						const userId = response.body.id
 
 						chai.request(app)
 							.get('/api/news')
@@ -68,6 +73,8 @@ describe('Comments', () => {
 									.send({ content: testComment, newsId })
 									.end((error, response) => {
 										response.should.have.status(201)
+										response.body.should.have.all.keys('id', 'content', 'newsId', 'userId', 'createdAt', 'updatedAt')
+										should().equal(response.body.userId, userId)
 
 										const commentId = response.body.id
 

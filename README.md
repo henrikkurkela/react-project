@@ -334,3 +334,5 @@ Implement simple tests:
 2021-01-26: Continue Working on Backend Tests (Start Working on Authorization Tests) 2h (Total 162h)
 
 2021-01-27: Continue Working on Backend Tests (More Authorization Tests) 2h (Total 164h)
+
+2021-01-30: Continue Working on Backend Tests (Confirm Response JSON Structures, Messages) 3h (Total 167h)

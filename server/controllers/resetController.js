@@ -107,7 +107,7 @@ resetRouter.post('/', async (request, response) => {
 
 	} catch (error) {
 		console.log(error)
-		response.status(500).end()
+		response.status(500).send('Internal server error.')
 	}
 
 	response.status(204).end()

@@ -34,6 +34,7 @@ describe('Upload', () => {
                     .attach('picture', './public/assets/img/photo1.jpg')
                     .end((error, response) => {
                         response.should.have.status(201)
+                        response.body.should.have.all.keys('filename')
                         done()
                     })
             })

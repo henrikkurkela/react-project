@@ -16,6 +16,17 @@ describe('Pictures', () => {
 			})
 	})
 
+	it('DELETE /api/pictures/:id should not allow unauthorized deletions', (done) => {
+		chai.request(app)
+			.delete('/api/pictures/asd.jpg')
+			.set('Authorization', `Bearer FakedToken`)
+			.end((error, response) => {
+				response.should.have.status(401)
+				response.text.should.equal('Unauthorized.')
+				done()
+			})
+	})
+
 	it('DELETE /api/pictures/:id should not allow deletion of .jpg files', (done) => {
 		chai.request(app)
 			.post('/api/login')
@@ -31,6 +42,7 @@ describe('Pictures', () => {
 					.set('Authorization', `Bearer ${token}`)
 					.end((error, response) => {
 						response.should.have.status(403)
+						response.text.should.equal('This picture can not be removed.')
 						done()
 					})
 			})

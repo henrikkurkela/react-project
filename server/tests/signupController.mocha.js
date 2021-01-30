@@ -21,6 +21,7 @@ describe('Signup', () => {
             .send({ username: 'demouser', email: 'demo@user.com', password: 'demouser' })
             .end((error, response) => {
                 response.should.have.status(400)
+                response.text.should.equal('User already exists.')
                 done()
             })
     })

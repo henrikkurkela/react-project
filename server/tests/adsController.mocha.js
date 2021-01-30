@@ -12,6 +12,7 @@ describe('Ads', () => {
 			.end((error, response) => {
 				response.should.have.status(200)
 				response.body.should.be.a('array')
+				response.body[0].should.have.all.keys('id', 'picture', 'href', 'createdAt', 'updatedAt')
 				done()
 			})
 	})
@@ -23,6 +24,7 @@ describe('Ads', () => {
 			.send({ picture: '/assets/img/photo4.jpg', href: 'http://www.google.com' })
 			.end((error, response) => {
 				response.should.have.status(401)
+				response.text.should.equal('Unauthorized.')
 				done()
 			})
 	})
@@ -32,6 +34,7 @@ describe('Ads', () => {
 			.delete('/api/ads/1')
 			.end((error, response) => {
 				response.should.have.status(401)
+				response.text.should.equal('Unauthorized.')
 				done()
 			})
 	})
@@ -53,6 +56,7 @@ describe('Ads', () => {
 					.send({ picture: '/assets/img/photo4.jpg', href: 'http://www.google.com' })
 					.end((error, response) => {
 						response.should.have.status(201)
+						response.body.should.have.all.keys('id', 'picture', 'href', 'createdAt', 'updatedAt')
 
 						const id = response.body.id
 

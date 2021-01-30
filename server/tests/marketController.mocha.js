@@ -12,6 +12,7 @@ describe('Market', () => {
 			.end((error, response) => {
 				response.should.have.status(200)
 				response.body.should.be.a('array')
+				response.body[0].should.have.all.keys('x', 'y')
 				done()
 			})
 	})

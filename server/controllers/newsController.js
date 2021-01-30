@@ -12,16 +12,16 @@ newsRouter.get('/', (request, response) => {
 		response.json(result)
 	}).catch((error) => {
 		console.log(error)
-		response.status(500).end()
+		response.status(500).send('Internal server error.')
 	})
 })
 
 newsRouter.post('/', auth, (request, response) => {
 
 	if (request.auth === null) {
-		response.status(401).end()
+		response.status(401).send('Unauthorized.')
 	} else if (request.auth.type !== 'admin') {
-		response.status(401).end()
+		response.status(401).send('Unauthorized.')
 	} else if (request.body.headline === "" || request.body.content === "" || !Number.isFinite(request.body.category)) {
 		response.status(400).end()
 	} else {
@@ -29,7 +29,7 @@ newsRouter.post('/', auth, (request, response) => {
 			response.status(201).json(result)
 		}).catch((error) => {
 			console.log(error)
-			response.status(500).end()
+			response.status(500).send('Internal server error.')
 		})
 	}
 })
@@ -37,16 +37,16 @@ newsRouter.post('/', auth, (request, response) => {
 newsRouter.delete('/:id', auth, (request, response) => {
 
 	if (request.auth === null) {
-		response.status(401).end()
+		response.status(401).send('Unauthorized.')
 	} else if (request.auth.type === 'admin') {
 		News.deleteById(request.params.id).then(() => {
 			response.status(204).end()
 		}).catch((error) => {
 			console.log(error)
-			response.status(500).end()
+			response.status(500).send('Internal server error.')
 		})
 	} else {
-		response.status(401).end()
+		response.status(401).send('Unauthorized.')
 	}
 })
 
@@ -62,10 +62,10 @@ newsRouter.patch('/:id', auth, async (request, response) => {
 				break
 			default:
 				if (request.auth === null) {
-					response.status(401).send('Unauthorized')
+					response.status(401).send('Unauthorized.')
 					return
 				} else if (request.auth.type !== 'admin') {
-					response.status(401).send('Unauthorized')
+					response.status(401).send('Unauthorized.')
 					return
 				} else {
 					await News.patchStory(request.body)
@@ -76,7 +76,7 @@ newsRouter.patch('/:id', auth, async (request, response) => {
 		response.json(result.find((item) => item.id === Number(request.params.id)))
 	} catch (error) {
 		console.log(error)
-		response.status(500).end()
+		response.status(500).send('Internal server error.')
 	}
 })
 

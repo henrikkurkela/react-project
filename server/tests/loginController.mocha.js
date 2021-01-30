@@ -13,6 +13,7 @@ describe('Login', () => {
             .send({ email: 'fake@user.com', password: 'wrongpassword' })
             .end((error, response) => {
                 response.should.have.status(401)
+                response.text.should.equal('Incorrect email or password.')
                 done()
             })
     })
@@ -33,6 +34,7 @@ describe('Login', () => {
                     .end((error, response) => {
                         response.should.have.status(200)
                         response.body.should.be.a('object')
+                        response.body.should.have.all.keys('id', 'username', 'auth', 'avatar', 'createdAt', 'email', 'type', 'updatedAt')
                         done()
                     })
             })

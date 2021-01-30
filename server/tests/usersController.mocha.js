@@ -12,6 +12,7 @@ describe('Users', () => {
 			.end((error, response) => {
 				response.should.have.status(200)
 				response.body.should.be.a('array')
+				response.body[0].should.have.all.keys('id', 'username', 'avatar', 'createdAt', 'email', 'type', 'updatedAt')
 				done()
 			})
 	})
@@ -51,6 +52,7 @@ describe('Users', () => {
 							.send({ action: 'avatar', avatar: '/assets/avatar/default.jpg' })
 							.end((error, response) => {
 								response.should.have.status(200)
+								response.body.should.have.all.keys('id', 'username', 'avatar', 'createdAt', 'email', 'type', 'updatedAt')
 								done()
 							})
 					})

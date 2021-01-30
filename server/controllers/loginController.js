@@ -12,21 +12,25 @@ loginRouter.post('/', async (request, response) => {
 
     if (user) {
         try {
-            const correctpassword = await bcrypt.compare(request.body.password, user.password)
-            if (correctpassword) {
+            const correctPassword = await bcrypt.compare(request.body.password, user.password)
+            if (correctPassword) {
                 const token = jwt.sign(user.get({ plain: true }), process.env.BACKEND_SECRET)
+
+                const userJson = { auth: token, ...user.get({ plain: true }) }
+                delete userJson.password
+
                 response
                     .status(200)
-                    .send({ auth: token, ...user.get({ plain: true }), password: null })
+                    .send(userJson)
             } else {
-                response.status(401).send('Incorrect email or password')
+                response.status(401).send('Incorrect email or password.')
             }
         } catch (error) {
             console.log(error)
-            response.status(500).send('Internal server error')
+            response.status(500).send('Internal server error.')
         }
     } else {
-        response.status(401).send('Incorrect email or password')
+        response.status(401).send('Incorrect email or password.')
     }
 })
 
