@@ -34,7 +34,7 @@ describe('ModeratePictures', () => {
     it('deletes files correctly', async () => {
 
         http.getRequest = jest.fn()
-        http.getRequest.mockResolvedValue({ status: 200, data: { pictures: ['/assets/img/photo1.jpg', '/assets/img/photo2.jpg', '/assets/img/xxyyzz'] } })
+        http.getRequest.mockResolvedValue({ status: 200, data: ['/assets/img/photo1.jpg', '/assets/img/photo2.jpg', '/assets/img/xxyyzz'] })
 
         http.deleteRequest = jest.fn()
         http.deleteRequest.mockResolvedValue({ status: 204 })
@@ -67,7 +67,7 @@ describe('ModeratePictures', () => {
     it('uploads files correctly', async () => {
 
         http.getRequest = jest.fn()
-        http.getRequest.mockResolvedValue({ status: 200, data: { pictures: ['/assets/img/photo1.jpg', '/assets/img/photo2.jpg', '/assets/img/xxyyzz'] } })
+        http.getRequest.mockResolvedValue({ status: 200, data: ['/assets/img/photo1.jpg', '/assets/img/photo2.jpg', '/assets/img/xxyyzz'] })
 
         http.postForm = jest.fn()
         http.postForm.mockResolvedValue({ status: 201, data: { filename: '/assets/img/xxyyzz' } })
