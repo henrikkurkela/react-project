@@ -9,17 +9,6 @@ chai.should()
 const testComment = '[Mocha] Test comment string'
 
 describe('Comments', () => {
-	it('GET /api/comments should return all comments', (done) => {
-		chai.request(app)
-			.get('/api/comments')
-			.end((error, response) => {
-				response.should.have.status(200)
-				response.body.should.be.a('array')
-				response.body[0].should.have.all.keys('id', 'content', 'newsId', 'userId', 'createdAt', 'updatedAt')
-				done()
-			})
-	})
-
 	it('POST /api/comments should allow anonymous commenting', (done) => {
 		chai.request(app)
 			.get('/api/news')
@@ -38,6 +27,17 @@ describe('Comments', () => {
 						should().equal(response.body.userId, null)
 						done()
 					})
+			})
+	})
+
+	it('GET /api/comments should return all comments', (done) => {
+		chai.request(app)
+			.get('/api/comments')
+			.end((error, response) => {
+				response.should.have.status(200)
+				response.body.should.be.a('array')
+				response.body[0].should.have.all.keys('id', 'content', 'newsId', 'userId', 'createdAt', 'updatedAt')
+				done()
 			})
 	})
 
