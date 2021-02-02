@@ -9,9 +9,9 @@ const User = require('./models/usersModel').User
 const News = require('./models/newsModel').News
 const Comment = require('./models/commentsModel').Comment
 
-User.hasMany(News, { onDelete: 'CASCADE', foreignKey: { allowNull: true } })
-User.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: { allowNull: true } })
-News.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: { allowNull: false } })
+User.hasMany(News, { onDelete: 'CASCADE', foreignKey: { name: 'userId', allowNull: true } })
+User.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: { name: 'userId', allowNull: true } })
+News.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: { name: 'newsId', allowNull: false } })
 
 const newsController = require('./controllers/newsController')
 const adsController = require('./controllers/adsController')
@@ -45,7 +45,7 @@ app.use('/api/signup', signupController)
 app.use('/api/upload', uploadController)
 
 app.use('*', express.static('build'))
-app.listen(process.env.BACKEND_PORT)
+app.listen(process.env.BACKEND_PORT || process.env.PORT)
 
 connection.sync()
 

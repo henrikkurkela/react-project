@@ -337,4 +337,4 @@ Implement simple tests:
 
 2021-01-30: Continue Working on Backend Tests (Confirm Response JSON Structures, Messages) 3h (Total 167h)
 
-2021-02-02: Finish Work on Backend Mocha Tests 2h (Total 169h)
+2021-02-02: Finish Work on Backend Mocha Tests, First Heroku Deployment 3h (Total 170h)

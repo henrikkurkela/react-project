@@ -4,6 +4,6 @@ const categories = [
     { key: 3, value: 3, text: "Business" }
 ]
 
-const backendUrl = 'http://localhost:3001/api'
+const backendUrl = '/api/'
 
 export { categories, backendUrl }

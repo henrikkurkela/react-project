@@ -22,7 +22,7 @@ const RenderMarket = () => {
                 const market = response.data
                 updateMarket(market)
             })
-        }, 1000)
+        }, 10000)
 
         return () => clearInterval(interval)
     }, [])
