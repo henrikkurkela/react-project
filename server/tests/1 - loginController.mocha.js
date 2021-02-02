@@ -19,24 +19,15 @@ describe('Login', () => {
     })
 
     it('POST /api/login should accept correct credentials', (done) => {
-
         chai.request(app)
-            .post('/api/signup')
-            .set('Content-Type', 'application/json')
-            .send({ username: 'demouser', email: 'demo@user.com', password: 'demouser' })
+            .post('/api/login')
+            .set('content-type', 'application/json')
+            .send({ email: 'demo@user.com', password: 'demouser' })
             .end((error, response) => {
-                response.status.should.be.oneOf([201, 400])
-
-                chai.request(app)
-                    .post('/api/login')
-                    .set('content-type', 'application/json')
-                    .send({ email: 'demo@user.com', password: 'demouser' })
-                    .end((error, response) => {
-                        response.should.have.status(200)
-                        response.body.should.be.a('object')
-                        response.body.should.have.all.keys('id', 'username', 'auth', 'avatar', 'createdAt', 'email', 'type', 'updatedAt')
-                        done()
-                    })
+                response.should.have.status(200)
+                response.body.should.be.a('object')
+                response.body.should.have.all.keys('id', 'username', 'auth', 'avatar', 'createdAt', 'email', 'type', 'updatedAt')
+                done()
             })
     })
 })

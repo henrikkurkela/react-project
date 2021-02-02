@@ -43,48 +43,40 @@ describe('Comments', () => {
 
 	it('POST /api/comments, DELETE /api/comments/:id should allow registered users to post and delete their comments', (done) => {
 		chai.request(app)
-			.post('/api/signup')
+			.post('/api/login')
 			.set('content-type', 'application/json')
-			.send({ username: 'demouser', email: 'demo@user.com', password: 'demouser' })
+			.send({ email: 'demo@user.com', password: 'demouser' })
 			.end((error, response) => {
-				response.status.should.be.oneOf([201, 400])
+				response.should.have.status(200)
+
+				const token = response.body.auth
+				const userId = response.body.id
 
 				chai.request(app)
-					.post('/api/login')
-					.set('content-type', 'application/json')
-					.send({ email: 'demo@user.com', password: 'demouser' })
+					.get('/api/news')
 					.end((error, response) => {
 						response.should.have.status(200)
+						response.body.should.be.a('array')
 
-						const token = response.body.auth
-						const userId = response.body.id
+						const newsId = response.body[0].id
 
 						chai.request(app)
-							.get('/api/news')
+							.post('/api/comments')
+							.set('Authorization', `Bearer ${token}`)
+							.send({ content: testComment, newsId })
 							.end((error, response) => {
-								response.should.have.status(200)
-								response.body.should.be.a('array')
+								response.should.have.status(201)
+								response.body.should.have.all.keys('id', 'content', 'newsId', 'userId', 'createdAt', 'updatedAt')
+								should().equal(response.body.userId, userId)
 
-								const newsId = response.body[0].id
+								const commentId = response.body.id
 
 								chai.request(app)
-									.post('/api/comments')
+									.delete(`/api/comments/${commentId}`)
 									.set('Authorization', `Bearer ${token}`)
-									.send({ content: testComment, newsId })
 									.end((error, response) => {
-										response.should.have.status(201)
-										response.body.should.have.all.keys('id', 'content', 'newsId', 'userId', 'createdAt', 'updatedAt')
-										should().equal(response.body.userId, userId)
-
-										const commentId = response.body.id
-
-										chai.request(app)
-											.delete(`/api/comments/${commentId}`)
-											.set('Authorization', `Bearer ${token}`)
-											.end((error, response) => {
-												response.should.have.status(204)
-												done()
-											})
+										response.should.have.status(204)
+										done()
 									})
 							})
 					})
