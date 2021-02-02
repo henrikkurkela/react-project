@@ -17,7 +17,8 @@ signupRouter.post('/', async (request, response) => {
                 email: request.body.email,
                 username: request.body.username,
                 avatar: '/assets/avatar/default.jpg',
-                password: await bcrypt.hash(request.body.password, 10)
+                password: await bcrypt.hash(request.body.password, 10),
+                type: 'user'
             })
 
             const userJson = newuser.get({ plain: true })

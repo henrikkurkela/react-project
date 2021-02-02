@@ -68,7 +68,7 @@ newsRouter.patch('/:id', auth, async (request, response) => {
 					response.status(401).send('Unauthorized.')
 					return
 				} else {
-					await News.patchStory(request.body)
+					await News.patchStory({ id: request.params.id, ...request.body })
 				}
 		}
 

@@ -13,15 +13,11 @@ describe('Signup', () => {
             .send({ username: 'demouser', email: 'demo@user.com', password: 'demouser' })
             .end((error, response) => {
                 response.status.should.be.oneOf([201, 400])
-            })
-
-        chai.request(app)
-            .post('/api/signup')
-            .set('content-type', 'application/json')
-            .send({ username: 'demouser', email: 'demo@user.com', password: 'demouser' })
-            .end((error, response) => {
-                response.should.have.status(400)
-                response.text.should.equal('User already exists.')
+                if (response.status === 201) {
+                    response.body.should.have.all.keys('id', 'username', 'email', 'avatar', 'type', 'createdAt', 'updatedAt')
+                } else if (response.status === 400) {
+                    response.text.should.equal('User already exists.')
+                }
                 done()
             })
     })

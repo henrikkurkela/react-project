@@ -10,6 +10,9 @@ const testHeadline = '[Mocha] Test Headline string'
 const testContent = '[Mocha] Test content string'
 
 describe('News', () => {
+
+	let newsId = null
+
 	it('GET /api/news should return all news', (done) => {
 		chai.request(app)
 			.get('/api/news')
@@ -70,38 +73,7 @@ describe('News', () => {
 			})
 	})
 
-	it('PATCH /api/news/:id should allow authorized requests', (done) => {
-		chai.request(app)
-			.post('/api/login')
-			.set('content-type', 'application/json')
-			.send({ email: 'admin@localhost.com', password: process.env.BACKEND_PASSWORD })
-			.end((error, response) => {
-				response.should.have.status(200)
-
-				const token = response.body.auth
-
-				chai.request(app)
-					.get('/api/news')
-					.end((error, response) => {
-						response.should.have.status(200)
-						response.body.should.be.a('array')
-
-						const newsId = response.body[0].id
-						const oldNews = response.body[0]
-
-						chai.request(app)
-							.patch(`/api/news/${newsId}`)
-							.set('Authorization', `Bearer ${token}`)
-							.end((error, response) => {
-								response.should.have.status(200)
-								response.body.should.deep.equal(oldNews)
-								done()
-							})
-					})
-			})
-	})
-
-	it('POST /api/news, DELETE /api/news/:id should allow administrators to post and delete news stories', (done) => {
+	it('POST /api/news should allow administrators to post news stories', (done) => {
 		chai.request(app)
 			.post('/api/login')
 			.set('content-type', 'application/json')
@@ -120,16 +92,54 @@ describe('News', () => {
 						response.should.have.status(201)
 						response.body.should.have.all.keys('id', 'headline', 'content', 'category', 'likes', 'userId', 'createdAt', 'updatedAt')
 
-						const newsId = response.body.id
+						newsId = response.body.id
 
-						chai.request(app)
-							.delete(`/api/news/${newsId}`)
-							.set('Authorization', `Bearer ${token}`)
-							.end((error, response) => {
-								response.should.have.status(204)
-								done()
-							})
+						done()
 					})
 			})
 	})
+
+	it('PATCH /api/news/:id should allow authorized requests', (done) => {
+		chai.request(app)
+			.post('/api/login')
+			.set('content-type', 'application/json')
+			.send({ email: 'admin@localhost.com', password: process.env.BACKEND_PASSWORD })
+			.end((error, response) => {
+				response.should.have.status(200)
+
+				const token = response.body.auth
+
+				chai.request(app)
+					.patch(`/api/news/${newsId}`)
+					.set('Authorization', `Bearer ${token}`)
+					.send({ headline: `${testHeadline} - REVISITED` })
+					.end((error, response) => {
+						response.should.have.status(200)
+						response.body.headline.should.equal(`${testHeadline} - REVISITED`)
+
+						done()
+					})
+			})
+	})
+
+	it('DELETE /api/news/:id should allow administrators to delete news stories', (done) => {
+		chai.request(app)
+			.post('/api/login')
+			.set('content-type', 'application/json')
+			.send({ email: 'admin@localhost.com', password: process.env.BACKEND_PASSWORD })
+			.end((error, response) => {
+				response.should.have.status(200)
+
+				const token = response.body.auth
+
+				chai.request(app)
+					.delete(`/api/news/${newsId}`)
+					.set('Authorization', `Bearer ${token}`)
+					.end((error, response) => {
+						response.should.have.status(204)
+						done()
+					})
+			})
+	})
+
 })

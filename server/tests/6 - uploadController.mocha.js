@@ -35,7 +35,16 @@ describe('Upload', () => {
                     .end((error, response) => {
                         response.should.have.status(201)
                         response.body.should.have.all.keys('filename')
-                        done()
+
+                        const id = response.body.filename.split('/').pop()
+
+                        chai.request(app)
+                            .delete(`/api/pictures/${id}`)
+                            .set('Authorization', `Bearer ${token}`)
+                            .end((error, response) => {
+                                response.should.have.status(204)
+                                done()
+                            })
                     })
             })
     })
