@@ -33,6 +33,11 @@ Backend:
 - Sequelize hasMany-belongsTo relations for DB tables
 - Sequelize createdAt and updatedAt timestamps for DB tables
 
+Documentation:
+
+- OpenAPI documentation for backend REST API
+- Frontend user manual
+
 ## DONE
 
 Thirteenth Iteration (16h):
@@ -338,3 +343,5 @@ Implement simple tests:
 2021-01-30: Continue Working on Backend Tests (Confirm Response JSON Structures, Messages) 3h (Total 167h)
 
 2021-02-02: Finish Work on Backend Mocha Tests, First Heroku Deployment 3h (Total 170h)
+
+2021-02-03: Begin Work on Backend OpenAPI Documentation 1h (Total 171h)
