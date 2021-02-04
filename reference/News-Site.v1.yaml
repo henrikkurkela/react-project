@@ -13,12 +13,11 @@ paths:
   /api/users:
     parameters: []
     get:
-      summary: Get User Info
-      tags:
-        - news
+      summary: ''
+      operationId: get-api-users
       responses:
         '200':
-          description: User Found
+          description: OK
           content:
             application/json:
               schema:
@@ -28,6 +27,14 @@ paths:
                 uniqueItems: true
                 items:
                   type: object
+                  required:
+                    - id
+                    - email
+                    - username
+                    - avatar
+                    - type
+                    - createdAt
+                    - updatedAt
                   properties:
                     id:
                       type: number
@@ -49,21 +56,14 @@ paths:
                     updatedAt:
                       type: string
                       minLength: 1
-                  required:
-                    - id
-                    - email
-                    - username
-                    - avatar
-                    - type
-                    - createdAt
-                    - updatedAt
-              examples: {}
-      operationId: get-users-userId
-      description: Get all user's information.
+      description: Get all users.
+      tags:
+        - user
   /api/news:
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - news
       responses:
         '200':
           description: OK
@@ -109,10 +109,96 @@ paths:
       operationId: get-api-news
       description: Get all news articles.
     parameters: []
+    post:
+      summary: ''
+      operationId: post-api-news
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  likes:
+                    type: number
+                  id:
+                    type: number
+                  headline:
+                    type: string
+                    minLength: 1
+                  content:
+                    type: string
+                    minLength: 1
+                  userId:
+                    type: number
+                  category:
+                    type: number
+                  updatedAt:
+                    type: string
+                    minLength: 1
+                  createdAt:
+                    type: string
+                    minLength: 1
+                required:
+                  - likes
+                  - id
+                  - headline
+                  - content
+                  - userId
+                  - category
+                  - updatedAt
+                  - createdAt
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+      description: Post a news story.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Admin token
+          required: true
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          description: application/json
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                headline:
+                  type: string
+                content:
+                  type: string
+                userId:
+                  type: number
+                category:
+                  type: number
+              required:
+                - headline
+                - content
+                - userId
+                - category
+      tags:
+        - news
   /api/comments:
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - comment
+        - news
+        - user
       responses:
         '200':
           description: OK
@@ -149,10 +235,42 @@ paths:
       operationId: get-api-comments
       description: Get all comments for all articles.
     parameters: []
+    post:
+      summary: ''
+      operationId: post-api-comments
+      responses:
+        '200':
+          description: OK
+      description: Post a comment.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newsId:
+                  type: integer
+                comment:
+                  type: string
+              required:
+                - newsId
+                - comment
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
+          required: true
+      tags:
+        - comment
+        - news
+        - user
   /api/market:
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - market
       responses:
         '200':
           description: OK
@@ -179,7 +297,6 @@ paths:
   /api/ads:
     get:
       summary: Your GET endpoint
-      tags: []
       responses:
         '200':
           description: OK
@@ -215,8 +332,560 @@ paths:
                       minLength: 1
       operationId: get-api-ads
       description: Get all advertisements.
+      tags:
+        - ads
     parameters: []
+    post:
+      summary: ''
+      operationId: post-api-ads
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: number
+                  picture:
+                    type: string
+                    minLength: 1
+                  href:
+                    type: string
+                    minLength: 1
+                  updatedAt:
+                    type: string
+                    minLength: 1
+                  createdAt:
+                    type: string
+                    minLength: 1
+                required:
+                  - id
+                  - picture
+                  - href
+                  - updatedAt
+                  - createdAt
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+      description: Create a new advertisement.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Admin token
+          required: true
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                picture:
+                  type: string
+                href:
+                  type: string
+      tags:
+        - ads
+  /api/signup:
+    post:
+      summary: ''
+      operationId: post-api-signup
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: number
+                  email:
+                    type: string
+                    minLength: 1
+                  username:
+                    type: string
+                    minLength: 1
+                  avatar:
+                    type: string
+                    minLength: 1
+                  type:
+                    type: string
+                    minLength: 1
+                  updatedAt:
+                    type: string
+                    minLength: 1
+                  createdAt:
+                    type: string
+                    minLength: 1
+                required:
+                  - id
+                  - email
+                  - username
+                  - avatar
+                  - type
+                  - updatedAt
+                  - createdAt
+        '400':
+          description: Bad Request
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                Invalid email:
+                  value: Invalid email.
+      description: Create a user account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - username
+                - password
+            examples:
+              Signup Example:
+                value:
+                  email: new@user.com
+                  username: newuser1
+                  password: newpassword
+        description: ''
+      tags:
+        - user
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
+          required: true
+  /api/login:
+    post:
+      summary: ''
+      operationId: post-api-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  auth:
+                    type: string
+                    minLength: 1
+                  id:
+                    type: number
+                  email:
+                    type: string
+                    minLength: 1
+                  username:
+                    type: string
+                    minLength: 1
+                  avatar:
+                    type: string
+                    minLength: 1
+                  type:
+                    type: string
+                    minLength: 1
+                  createdAt:
+                    type: string
+                    minLength: 1
+                  updatedAt:
+                    type: string
+                    minLength: 1
+                required:
+                  - auth
+                  - id
+                  - email
+                  - username
+                  - avatar
+                  - type
+                  - createdAt
+                  - updatedAt
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+            examples:
+              Login example:
+                value:
+                  email: new@user.com
+                  password: newpassword
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
+          required: true
+      description: Log in.
+      tags:
+        - user
+  '/api/ads/{id}':
+    parameters:
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+        description: advertisement id
+    delete:
+      summary: ''
+      operationId: delete-api-ads-id
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+      description: Delete an advertisement.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          required: true
+          description: Admin token
+      tags:
+        - ads
+  /api/avatars:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: ''
+                minItems: 1
+                uniqueItems: true
+                items:
+                  type: string
+      operationId: get-api-avatars
+      description: Get all avatar images.
+  /api/pictures:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - news
+        - pictures
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: ''
+                minItems: 1
+                uniqueItems: true
+                items:
+                  type: string
+      operationId: get-api-pictures
+      description: Get all pictures currently on the server.
+  '/api/pictures/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: delete-api-pictures-id
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Admin token.
+          required: true
+      tags:
+        - pictures
+      description: Delete a picture.
+  /api/upload:
+    post:
+      summary: ''
+      operationId: post-api-upload
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filename:
+                    type: string
+        '401':
+          description: Unauthorized
+      description: Upload a file.
+      tags:
+        - pictures
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Admin token
+          required: true
+        - schema:
+            type: string
+            default: form/multipart-data
+          in: header
+          name: Content-Type
+          required: true
+          description: form/multipart-data
+  '/api/news/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    patch:
+      summary: ''
+      operationId: patch-api-news-id
+      description: Patch a news story. Only likes and dislikes are allowed for non-admin users. Administrators may patch any fields in the news object.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Admin token
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          description: application/json
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: number
+                  category:
+                    type: number
+                  headline:
+                    type: string
+                    minLength: 1
+                  likes:
+                    type: number
+                  content:
+                    type: string
+                    minLength: 1
+                  createdAt:
+                    type: string
+                    minLength: 1
+                  updatedAt:
+                    type: string
+                    minLength: 1
+                  userId:
+                    type: number
+                required:
+                  - id
+                  - category
+                  - headline
+                  - likes
+                  - content
+                  - createdAt
+                  - updatedAt
+                  - userId
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+      tags:
+        - news
+  /api/reset:
+    post:
+      summary: ''
+      operationId: post-api-reset
+      responses:
+        '204':
+          description: No Content
+      description: Reset the backend database to default demo values.
+      tags:
+        - news
+        - user
+        - pictures
+        - comment
+        - market
+        - ads
+  '/api/users/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    patch:
+      summary: ''
+      operationId: patch-api-users-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: number
+                  email:
+                    type: string
+                    minLength: 1
+                  username:
+                    type: string
+                    minLength: 1
+                  avatar:
+                    type: string
+                    minLength: 1
+                  type:
+                    type: string
+                    minLength: 1
+                  createdAt:
+                    type: string
+                    minLength: 1
+                  updatedAt:
+                    type: string
+                    minLength: 1
+                required:
+                  - id
+                  - email
+                  - username
+                  - avatar
+                  - type
+                  - createdAt
+                  - updatedAt
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+      description: Users can change their own avatars with a PATCH request.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: User token
+          required: true
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          description: application/json
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                avatar:
+                  type: string
+      tags:
+        - user
+    delete:
+      summary: ''
+      operationId: delete-api-users-id
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+      description: Users may delete their own user accounts.
+      tags:
+        - user
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          required: true
+          description: User token
 components:
   schemas: {}
 tags:
   - name: news
+  - name: user
+  - name: comment
+  - name: ads
+  - name: market
+  - name: pictures

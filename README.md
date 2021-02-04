@@ -345,3 +345,5 @@ Implement simple tests:
 2021-02-02: Finish Work on Backend Mocha Tests, First Heroku Deployment 3h (Total 170h)
 
 2021-02-03: Begin Work on Backend OpenAPI Documentation 1h (Total 171h)
+
+2021-02-04: Finish Work on Backend OpenAPI Documentation 2h (Total 173h)

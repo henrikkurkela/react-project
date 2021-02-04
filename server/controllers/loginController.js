@@ -8,7 +8,14 @@ const Users = new UsersModel()
 
 loginRouter.post('/', async (request, response) => {
 
-    const user = await Users.getOne({ email: request.body.email })
+    let user = null
+
+    try {
+        user = await Users.getOne({ email: request.body.email })
+    } catch (error) {
+        console.log(error)
+        user = null
+    }
 
     if (user) {
         try {
