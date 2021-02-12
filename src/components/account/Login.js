@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Header, Form, Message, Button } from 'semantic-ui-react'
+import { Header, Form, Message } from 'semantic-ui-react'
 
 import { postRequest } from 'services/http'
-import { loginToken, addUser } from 'actions'
+import { loginToken } from 'actions'
 
 const Login = () => {
 
@@ -35,17 +35,6 @@ const Login = () => {
         }
     }
 
-    async function demoLogin() {
-        try {
-            const response = await postRequest("signup", { email: "demo@user.com", username: 'DemoUser', password: "demouser" })
-            addUser(response.data)
-        } catch (error) {
-            console.log(error.response?.status)
-        } finally {
-            await login("demo@user.com", "demouser")
-        }
-    }
-
     return (auth ?
         <div style={{ margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Header as='h3'>Welcome!</Header>
@@ -59,8 +48,6 @@ const Login = () => {
                 <Form.Button content='Login' onClick={() => login(user, password)} />
             </Form>
             <p style={{ paddingTop: '1em' }}>No account yet? Sign up <a href="/signup">here</a>.</p>
-            <Header as='h3'>Demo User</Header>
-            <Button onClick={demoLogin}>Login</Button>
         </div>
     )
 }

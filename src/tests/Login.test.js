@@ -77,27 +77,4 @@ describe('Login', () => {
 
         expect(http.postRequest).toHaveBeenCalledWith('login', { email: 'demo@user.com', password: 'demouser' })
     })
-
-    it('provides the demouser functionality', async () => {
-
-        store = mockStore({})
-
-        http.postRequest = jest.fn()
-        http.postRequest.mockResolvedValueOnce({ data: { email: 'demo@user.com', id: 1, username: 'DemoUser', avatar: 'default.jpg' }, status: 201 })
-        http.postRequest.mockResolvedValueOnce({ data: { auth: '123', email: 'demo@user.com', id: 1, username: 'DemoUser', avatar: 'default.jpg' }, status: 200 })
-
-        let wrapper
-
-        await act(async () => {
-            wrapper = mount(
-                <Provider store={store}>
-                    <Login />
-                </Provider>
-            )
-            wrapper.find('Button').at(1).props().onClick()
-        })
-
-        expect(http.postRequest).toHaveBeenCalledWith('signup', { email: 'demo@user.com', username: 'DemoUser', password: 'demouser' })
-        expect(http.postRequest).toHaveBeenCalledWith('login', { email: 'demo@user.com', password: 'demouser' })
-    })
 })
