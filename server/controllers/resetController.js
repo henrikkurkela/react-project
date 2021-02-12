@@ -12,7 +12,9 @@ const Users = new UsersModel()
 const News = new NewsModel()
 const Ads = new AdsModel()
 
-resetRouter.post('/', async (request, response) => {
+const auth = require('../middlewares/authMiddleware')
+
+resetRouter.post('/', auth, async (request, response) => {
 
 	const ads = [
 		{
@@ -82,35 +84,38 @@ resetRouter.post('/', async (request, response) => {
 		type: 'admin'
 	}
 
-	try {
-		await Comments.deleteAll()
-		await News.deleteAll()
-		await Users.deleteAll()
-		const admin = await Users.addUser(adminUser)
-		await Promise.all(
-			news.map((item) =>
-				News.addStory({ ...item, userId: admin.id })
+	if (request.auth.type === 'admin') {
+		try {
+			await Comments.deleteAll()
+			await News.deleteAll()
+			await Users.deleteAll()
+			const admin = await Users.addUser(adminUser)
+			await Promise.all(
+				news.map((item) =>
+					News.addStory({ ...item, userId: admin.id })
+				)
 			)
-		)
 
-		await Ads.deleteAll()
-		await Promise.all(
-			ads.map((item) =>
-				Ads.addAd(item)
+			await Ads.deleteAll()
+			await Promise.all(
+				ads.map((item) =>
+					Ads.addAd(item)
+				)
 			)
-		)
 
-		const files = fs.readdirSync('public/assets/img')
-		files
-			.filter((item) => !RegExp('[a-zA-Z0-9].jpg').test(item))
-			.map((item) => fs.unlinkSync(`public/assets/img/${item}`))
+			const files = fs.readdirSync('public/assets/img')
+			files
+				.filter((item) => !RegExp('[a-zA-Z0-9].jpg').test(item))
+				.map((item) => fs.unlinkSync(`public/assets/img/${item}`))
 
-	} catch (error) {
-		console.log(error)
-		response.status(500).send('Internal server error.')
+			response.status(204).end()
+		} catch (error) {
+			console.log(error)
+			response.status(500).send('Internal server error.')
+		}
+	} else {
+		response.status(401).send('Unauthorized.')
 	}
-
-	response.status(204).end()
 
 })
 

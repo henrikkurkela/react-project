@@ -347,3 +347,5 @@ Implement simple tests:
 2021-02-03: Begin Work on Backend OpenAPI Documentation 1h (Total 171h)
 
 2021-02-04: Finish Work on Backend OpenAPI Documentation 2h (Total 173h)
+
+2021-02-12: Moderation Routes Visible Only for Admin Users, Reset Route Authentication Checks 1h (Total 174h)

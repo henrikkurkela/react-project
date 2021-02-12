@@ -43,10 +43,12 @@ const SiteHeader = () => {
                     }
                 </>
         }
-        <HeaderLink to='/moderation' text='Moderation' floated='right' />
         {
             auth ?
                 <>
+                    {
+                        auth.type === 'admin' ? <HeaderLink to='/moderation' text='Moderation' floated='right' /> : null
+                    }
                     <HeaderLink to='/logout' text='Logout' floated='right' />
                     <HeaderLink to='/account' text='Account' floated='right' />
                 </> :

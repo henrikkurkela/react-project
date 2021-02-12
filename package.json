@@ -2,6 +2,7 @@
 	"name": "react-project",
 	"version": "0.1.0",
 	"private": true,
+	"proxy": "http://localhost:3001",
 	"dependencies": {
 		"@testing-library/user-event": "^7.2.1",
 		"axios": ">=0.21.1",
