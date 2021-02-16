@@ -2,6 +2,8 @@
 
 A simple news site for a press company. Developed for Helsinki University course Full Stack Web Development Project.
 
+Demo available on Heroku: fullstacknewssite.herokuapp.com
+
 To start the application, type:
 ```
 npm run dev
