@@ -2,7 +2,7 @@ const uploadRouter = require('express').Router()
 const fs = require('fs')
 
 const multer = require('multer')
-const upload = multer({ dest: 'public/assets/upload' })
+const upload = multer({ dest: 'public/assets/upload/' })
 
 const auth = require('../middlewares/authMiddleware')
 
