@@ -1,8 +1,9 @@
 const uploadRouter = require('express').Router()
 const fs = require('fs')
+const path = require('path')
 
 const multer = require('multer')
-const upload = multer({ dest: 'public/assets/upload/' })
+const upload = multer({ dest: path.join(__dirname, '../../public/assets/img') })
 
 const auth = require('../middlewares/authMiddleware')
 
@@ -15,8 +16,7 @@ uploadRouter.post('/', [upload.single('picture'), auth], (request, response) => 
         fs.unlinkSync(request.file.path)
         response.status(401).send('Unauthorized.')
     } else {
-        //fs.renameSync(`public/assets/upload/${request.file.filename}`, `public/assets/img/${request.file.filename}`)
-        response.status(201).json({ filename: `/assets/upload/${request.file.filename}` })
+        response.status(201).json({ filename: `/assets/img/${request.file.filename}` })
     }
 })
 

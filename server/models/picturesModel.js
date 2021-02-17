@@ -11,7 +11,13 @@ class PicturesModel {
     }
 
     deleteByName = async (name) => {
-        return fs.unlinkSync(`./public/${imgFolder}/${name}`)
+        try {
+            fs.unlinkSync(`./public/${imgFolder}/${name}`)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            return
+        }
     }
 }
 
