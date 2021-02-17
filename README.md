@@ -353,3 +353,5 @@ Implement simple tests:
 2021-02-12: Moderation Routes Visible Only for Admin Users, Reset Route Authentication Checks 1h (Total 174h)
 
 2021-02-16: Begin Work on Project Documentation, User Manual 2h (Total 176h)
+
+2021-02-17: Continue Work on Project Documentation, User Manual 2h (Total 178h)

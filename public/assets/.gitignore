@@ -1,4 +1,2 @@
-# Uploaded images, but keep stock images
-upload/
 img/
 !img/*.jpg
