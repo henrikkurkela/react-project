@@ -1,7 +1,10 @@
+const axios = require('axios')
 const marketRouter = require('express').Router()
 
-const marketValues = []
 let newValue = Math.floor(Math.random() * 100)
+let apiBias = 0
+
+const marketValues = []
 
 for (let i = 0; i < 100; i++) {
     marketValues.push({ x: i, y: newValue })
@@ -11,6 +14,20 @@ for (let i = 0; i < 100; i++) {
     } else if (newValue < 0) {
         newValue = 0
     }
+}
+
+if (process.env.MARKET_API) {
+    setInterval(() => {
+        axios.get(process.env.MARKET_API)
+            .then((response) => {
+                apiBias = response.data.main.temp - 273
+                console.log(`[Market] applying bias: ${apiBias}`)
+                newValue = newValue + apiBias
+            }).catch((error) => {
+                apiBias = 0
+                console.log('[Market] network error')
+            })
+    }, 300000)
 }
 
 setInterval(() => {

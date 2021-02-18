@@ -61,7 +61,7 @@ paths:
         - user
   /api/news:
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags:
         - news
       responses:
@@ -194,7 +194,7 @@ paths:
         - news
   /api/comments:
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags:
         - comment
         - news
@@ -262,13 +262,18 @@ paths:
           name: Content-Type
           description: application/json
           required: true
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Optional user token
       tags:
         - comment
         - news
         - user
   /api/market:
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags:
         - market
       responses:
@@ -296,7 +301,7 @@ paths:
     parameters: []
   /api/ads:
     get:
-      summary: Your GET endpoint
+      summary: ''
       responses:
         '200':
           description: OK
@@ -387,6 +392,7 @@ paths:
           in: header
           name: Content-Type
           required: true
+          description: application/json
       requestBody:
         content:
           application/json:
@@ -590,7 +596,7 @@ paths:
         - ads
   /api/avatars:
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags:
         - user
       responses:
@@ -609,7 +615,7 @@ paths:
       description: Get all avatar images.
   /api/pictures:
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags:
         - news
         - pictures
@@ -647,7 +653,7 @@ paths:
             type: string
           in: header
           name: Authorization
-          description: Admin token.
+          description: Admin token
           required: true
       tags:
         - pictures
@@ -701,7 +707,7 @@ paths:
             type: string
           in: header
           name: Authorization
-          description: Admin token
+          description: Optional admin token
         - schema:
             type: string
             default: application/json
@@ -778,6 +784,13 @@ paths:
         - comment
         - market
         - ads
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Admin token
+          required: true
   '/api/users/{id}':
     parameters:
       - schema:

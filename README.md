@@ -2,7 +2,11 @@
 
 A simple news site for a press company. Developed for Helsinki University course Full Stack Web Development Project.
 
-Demo available on Heroku: fullstacknewssite.herokuapp.com
+Heroku demo: fullstacknewssite.herokuapp.com
+
+API reference: fullstacknewssite.herokuapp.com/api.html
+
+User manual: [News Site](News%20Site.pdf)
 
 To start the application, type:
 ```
@@ -16,13 +20,22 @@ npm run build
 npm run server
 ```
 
-The backend requires a MySQL server to function. Table creation queries can be found in the [server readme](/server/models/README.md) file. Database details should be added to the [example.env](example.env) file, which should then be renamed to .env
+The backend requires a SQL server to function. Database details should be added to the [example.env](example.env) file, which should then be renamed to .env
 
 Stock photos downloaded from unsplash.com
 
 ## TODO
 
-Fourteenth Iteration:
+Fifteenth Iteration:
+
+Documentation:
+
+- OpenAPI documentation for backend REST API
+- User manual
+
+## DONE
+
+Fourteenth Iteration (16h):
 
 Functionality:
 
@@ -34,13 +47,6 @@ Backend:
 - Backend route tests
 - Sequelize hasMany-belongsTo relations for DB tables
 - Sequelize createdAt and updatedAt timestamps for DB tables
-
-Documentation:
-
-- OpenAPI documentation for backend REST API
-- Frontend user manual
-
-## DONE
 
 Thirteenth Iteration (16h):
 
@@ -344,7 +350,7 @@ Implement simple tests:
 
 2021-01-30: Continue Working on Backend Tests (Confirm Response JSON Structures, Messages) 3h (Total 167h)
 
-2021-02-02: Finish Work on Backend Mocha Tests, First Heroku Deployment 3h (Total 170h)
+2021-02-02: Finish Work on Backend Mocha Tests, First Heroku Deployment, Fourteenth Iteration Goals Met 3h (Total 170h)
 
 2021-02-03: Begin Work on Backend OpenAPI Documentation 1h (Total 171h)
 
@@ -355,3 +361,5 @@ Implement simple tests:
 2021-02-16: Begin Work on Project Documentation, User Manual 2h (Total 176h)
 
 2021-02-17: Continue Work on Project Documentation, User Manual 2h (Total 178h)
+
+2021-02-18: Continue Work on Project Documentation, User Manual, Bias Market Controller Values With Open Weather Map Temperature Data 2h (Total 180h)
