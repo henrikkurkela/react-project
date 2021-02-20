@@ -26,14 +26,16 @@ Stock photos downloaded from unsplash.com
 
 ## TODO
 
-Fifteenth Iteration:
+Project Complete
+
+## DONE
+
+Fifteenth Iteration (10h):
 
 Documentation:
 
 - OpenAPI documentation for backend REST API
 - User manual
-
-## DONE
 
 Fourteenth Iteration (16h):
 
@@ -363,3 +365,5 @@ Implement simple tests:
 2021-02-17: Continue Work on Project Documentation, User Manual 2h (Total 178h)
 
 2021-02-18: Continue Work on Project Documentation, User Manual, Bias Market Controller Values With Open Weather Map Temperature Data 2h (Total 180h)
+
+2021-02-20: Review and Accept Documentation, Fifteenth Iteration Goals Met, End of Project (Total 180h)
